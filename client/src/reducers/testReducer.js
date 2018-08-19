@@ -1,7 +1,8 @@
-import { FETCH_DATA } from '../actions/types'
+import { FETCH_DATA, FETCH_THREADS } from '../actions/types'
 
 const initialState = {
-  data: []
+  data: [],
+  threads: []
 }
 
 export default (state = initialState, action) => {
@@ -10,6 +11,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         data: action.payload
+      }
+    case FETCH_THREADS:
+      return {
+        ...state,
+        threads: action.payload
       }
     default:
       return state

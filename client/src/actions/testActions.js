@@ -1,4 +1,4 @@
-import { FETCH_DATA } from './types'
+import { FETCH_DATA, FETCH_THREADS } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users')
@@ -7,6 +7,17 @@ export const fetchData = () => dispatch => {
       dispatch({
         type: FETCH_DATA,
         payload: json
+      })
+    })
+}
+
+export const fetchThreads = () => dispatch => {
+  fetch('/api/threads')
+    .then(res => res.json())
+    .then(threads => {
+      dispatch({
+        type: FETCH_THREADS,
+        payload: threads
       })
     })
 }

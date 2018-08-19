@@ -22,10 +22,6 @@ const Button = styled.button`
 `
 
 class App extends Component {
-  state = {
-    response: [],
-    username: ''
-  }
 
   addUserTest = () => {
     fetch('/api/threads', {

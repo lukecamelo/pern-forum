@@ -35,6 +35,10 @@ app.post('/api/threads', (req, res) => {
     )
 })
 
+app.get('/api/threads', (req, res) => {
+  Thread.findAll().then(threads => res.json(threads))
+})
+
 app.get('/api/users', (req, res) => {
   User.findAll().then(users => res.json(users))
 })
