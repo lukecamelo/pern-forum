@@ -1,11 +1,11 @@
-const Sequelize = require ('sequelize')
+const Sequelize = require('sequelize')
 const UserModel = require('./models/user')
 const ThreadModel = require('./models/thread')
 
 const sequelize = new Sequelize('pern_forum', 'rediscover', 'thegreatbeyond', {
   host: 'localhost',
   dialect: 'postgres',
-  pool : {
+  pool: {
     max: 10,
     min: 0,
     acquire: 30000,
@@ -19,12 +19,16 @@ const Thread = ThreadModel(sequelize, Sequelize)
 Thread.belongsTo(User)
 User.hasMany(Thread)
 
-sequelize.sync({ force: true})
+sequelize
+  .sync({ force: true })
   .then(() => {
     console.log(`Database & tables created!`)
   })
+  .then(() => {
+    User.create({ username: 'rediscover', password: 'testpassword' })
+  })
 
-  module.exports = {
-    User,
-    Thread
-  }
+module.exports = {
+  User,
+  Thread
+}
