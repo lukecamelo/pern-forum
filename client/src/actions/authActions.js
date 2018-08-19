@@ -1,0 +1,26 @@
+import { USER_LOGIN, USER_LOGOUT } from './types'
+
+export const userLogin = () => dispatch => {
+  fetch('/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username: 'rediscover', password: 'testpassword' })
+  })
+    .then(res => res.json())
+    .then(res => {
+      localStorage.Authorization = res.token
+      dispatch({
+        type: USER_LOGIN,
+        payload: res.user.username
+      })
+    })
+}
+
+export const userLogout = () => dispatch => {
+  localStorage.clear('Authorization')
+  dispatch({
+    type: USER_LOGOUT
+  })
+}

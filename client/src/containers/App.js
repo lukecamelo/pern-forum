@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import store from '../store'
 
 import Thread from './Thread'
+import Login from '../components/Login'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -18,7 +19,7 @@ const Header = styled.div`
 class App extends Component {
   state = {
     user: null,
-    loggedIn: false
+    isLoggedIn: false
   }
 
   componentDidMount = () => {
@@ -38,6 +39,9 @@ class App extends Component {
       .then(res => res.json())
       .then(res => {
         localStorage.Authorization = res.token
+        this.setState({
+          isLoggedIn: true
+        })
       })
   }
 
@@ -58,6 +62,7 @@ class App extends Component {
 
   logout = () => {
     localStorage.removeItem('Authorization')
+    this.setState({ isLoggedIn: false })
   }
 
   render() {
@@ -65,9 +70,7 @@ class App extends Component {
       <Provider store={store}>
         <Wrapper>
           <Header>
-            <h1>Greetings, {this.state.user}</h1>
-            <button onClick={this.mockLogin}>Login Test</button>
-            <button onClick={this.logout}>Logout Test</button>
+            <Login />
           </Header>
           <Thread />
         </Wrapper>
