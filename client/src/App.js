@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Provider } from 'react-redux'
+
+import store from './store'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -53,12 +56,14 @@ class App extends Component {
   render() {
     if (this.state.response.length) {
       return (
-        <Wrapper>
-          <Header>
-            {this.state.response[0].username}
-            <Button onClick={this.addUserTest}>click</Button>
-          </Header>
-        </Wrapper>
+        <Provider store={store}>
+          <Wrapper>
+            <Header>
+              {this.state.response[0].username}
+              <Button onClick={this.addUserTest}>click</Button>
+            </Header>
+          </Wrapper>
+        </Provider>
       )
     } else {
       return (
