@@ -17,7 +17,7 @@ const StyledThread = styled.div`
 
 class Thread extends Component {
   componentDidMount = () => {
-    this.props.fetchThreads()
+    // this.props.fetchThreads()
   }
 
   render() {

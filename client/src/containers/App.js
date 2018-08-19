@@ -16,8 +16,13 @@ const Header = styled.div`
 `
 
 class App extends Component {
+  state = {
+    token: null
+  }
+  
+
   mockLogin = () => {
-    fetch('/login', {
+    fetch('/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,14 +30,26 @@ class App extends Component {
       body: JSON.stringify({ username: 'rediscover', password: 'testpassword' })
     })
       .then(res => res.json())
-      .then(json => console.log(json))
+      .then(res => {
+        this.setState({
+          token: res.token
+        })
+        console.log(res.token)
+      })
   }
 
   mockProfile = () => {
-    fetch('/profile')
+    fetch('/user/profile', {
+      method: 'GET',
+      headers: {
+        "Authorization": "Bearer " + this.state.token
+      }
+    })
       .then(res => res.json())
       .then(json => console.log(json))
+      .catch(err => console.error(err))
   }
+
   render() {
     return (
       <Provider store={store}>
