@@ -17,6 +17,7 @@ const User = UserModel(sequelize, Sequelize)
 const Thread = ThreadModel(sequelize, Sequelize)
 
 Thread.belongsTo(User)
+User.hasMany(Thread)
 
 sequelize.sync({ force: true})
   .then(() => {
