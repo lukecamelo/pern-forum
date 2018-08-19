@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Provider } from 'react-redux'
-
 import store from './store'
+
+import User from './components/User'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -26,23 +27,6 @@ class App extends Component {
     username: ''
   }
 
-  componentDidMount = () => {
-    this.apiCall()
-      .then(response => {
-        this.setState({ response })
-      })
-      .catch(err => console.log(err))
-  }
-
-  apiCall = async () => {
-    const response = await fetch('/api/users', { method: 'GET' })
-    const data = await response.json()
-
-    if (response.status !== 200) throw Error(data.message)
-
-    return data
-  }
-
   addUserTest = () => {
     fetch('/api/threads', {
       method: 'POST',
@@ -54,24 +38,16 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.response.length) {
-      return (
-        <Provider store={store}>
-          <Wrapper>
-            <Header>
-              {this.state.response[0].username}
-              <Button onClick={this.addUserTest}>click</Button>
-            </Header>
-          </Wrapper>
-        </Provider>
-      )
-    } else {
-      return (
-        <Header>
-          <h1>nothing here</h1>
-        </Header>
-      )
-    }
+    return (
+      <Provider store={store}>
+        <Wrapper>
+          <Header>
+            <User />
+            <Button onClick={this.addUserTest}>click</Button>
+          </Header>
+        </Wrapper>
+      </Provider>
+    )
   }
 }
 
