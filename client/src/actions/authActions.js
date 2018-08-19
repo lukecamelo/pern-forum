@@ -1,12 +1,12 @@
 import { USER_LOGIN, USER_LOGOUT } from './types'
 
-export const userLogin = () => dispatch => {
+export const userLogin = (username, password) => dispatch => {
   fetch('/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username: 'rediscover', password: 'testpassword' })
+    body: JSON.stringify({ username, password})
   })
     .then(res => res.json())
     .then(res => {

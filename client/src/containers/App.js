@@ -10,7 +10,6 @@ const Wrapper = styled.div`
   text-align: center;
 `
 const Header = styled.div`
-  background-color: #e0cba8;
   height: 150px;
   padding: 20px;
   color: #564154;
@@ -72,7 +71,6 @@ class App extends Component {
           <Header>
             <Login />
           </Header>
-          <Thread />
         </Wrapper>
       </Provider>
     )
