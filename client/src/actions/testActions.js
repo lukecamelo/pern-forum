@@ -20,4 +20,5 @@ export const fetchThreads = () => dispatch => {
         payload: threads
       })
     })
+    .catch(err => console.log(err))
 }
