@@ -17,9 +17,15 @@ const Header = styled.div`
 
 class App extends Component {
   state = {
-    token: null
+    user: null,
+    loggedIn: false
   }
-  
+
+  componentDidMount = () => {
+    if (localStorage.Authorization) {
+      this.getUser()
+    }
+  }
 
   mockLogin = () => {
     fetch('/auth/login', {
@@ -31,23 +37,27 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState({
-          token: res.token
-        })
-        console.log(res.token)
+        localStorage.Authorization = res.token
       })
   }
 
-  mockProfile = () => {
+  getUser = () => {
     fetch('/user/profile', {
       method: 'GET',
       headers: {
-        "Authorization": "Bearer " + this.state.token
+        Authorization: 'Bearer ' + localStorage.Authorization
       }
     })
       .then(res => res.json())
-      .then(json => console.log(json))
-      .catch(err => console.error(err))
+      .then(res => {
+        this.setState({
+          user: res.username
+        })
+      })
+  }
+
+  logout = () => {
+    localStorage.removeItem('Authorization')
   }
 
   render() {
@@ -55,9 +65,9 @@ class App extends Component {
       <Provider store={store}>
         <Wrapper>
           <Header>
-            <h1>Greetings from imp.zone!</h1>
-            <button onClick={this.mockLogin}>Test</button>
-            <button onClick={this.mockProfile}>Test 2</button>
+            <h1>Greetings, {this.state.user}</h1>
+            <button onClick={this.mockLogin}>Login Test</button>
+            <button onClick={this.logout}>Logout Test</button>
           </Header>
           <Thread />
         </Wrapper>
