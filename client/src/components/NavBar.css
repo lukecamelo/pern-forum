@@ -1,0 +1,15 @@
+.link {
+  color: palevioletred;
+  background-color: #fff;
+  text-decoration: none;
+  margin-right: 1em;
+  padding: 12px;
+  border: 2px solid palevioletred;
+  transition: .2s;
+  border-radius: 5px;
+}
+
+.link:hover {
+  color: white;
+  background-color: palevioletred;
+}

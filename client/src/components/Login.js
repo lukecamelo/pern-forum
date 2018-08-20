@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import { userLogin, userLogout } from '../actions/authActions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import NavBar from './NavBar'
 
+export const Container = styled.div`
+  text-align: center;
+`
 export const FormWrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -32,16 +36,17 @@ export const Input = styled.input.attrs({
   }
 `
 export const Button = styled.button`
-  color: palevioletred;
+  color: ${props => props.theme.primary};
+  background-color: #fff;
   font-size: 1em;
   margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
+  padding: 0.5em 1.5em;
   border-radius: 3px;
-  transition: .2s;
+  border: 2px solid palevioletred;
+  transition: 0.2s;
   &:hover {
     background-color: palevioletred;
-    color: white;
+    color: #fff;
     cursor: pointer;
   }
 `
@@ -63,7 +68,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <Container>
+        <NavBar />
         {this.props.auth.isLoggedIn ? (
           <H1>greetings, {this.props.auth.username}</H1>
         ) : (
@@ -102,7 +108,7 @@ class Login extends Component {
             )}
           </ButtonWrapper>
         </FormWrapper>
-      </div>
+      </Container>
     )
   }
 }

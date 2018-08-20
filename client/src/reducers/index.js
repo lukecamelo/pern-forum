@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import testReducer from './testReducer'
+import threadReducer from './threadReducer'
 import authReducer from './authReducer'
 
 export default combineReducers({
-  test: testReducer,
+  threadData: threadReducer,
   auth: authReducer
 })

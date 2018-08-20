@@ -2,6 +2,7 @@ import React from 'react'
 import { FormWrapper, Button, Input, H1 } from './Login'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
+import NavBar from './NavBar'
 
 class Signup extends React.Component {
   state = {
@@ -17,24 +18,36 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <FormWrapper>
+      <div>
+        <NavBar />
         <H1>{this.props.message}</H1>
-        <Input
-          name="usernameInput"
-          type="text"
-          value={this.state.usernameInput}
-          onChange={this.changeHandler}
-          placeholder="enter your username"
-        />
-        <Input
-          name="passwordInput"
-          type="password"
-          value={this.state.passwordInput}
-          onChange={this.changeHandler}
-          placeholder="enter your password"
-        />
-        <Button onClick={() => this.props.userSignup(this.state.usernameInput, this.state.passwordInput)}>Signup</Button>
-      </FormWrapper>
+        <FormWrapper>
+          <Input
+            name="usernameInput"
+            type="text"
+            value={this.state.usernameInput}
+            onChange={this.changeHandler}
+            placeholder="enter your username"
+          />
+          <Input
+            name="passwordInput"
+            type="password"
+            value={this.state.passwordInput}
+            onChange={this.changeHandler}
+            placeholder="enter your password"
+          />
+          <Button
+            onClick={() =>
+              this.props.userSignup(
+                this.state.usernameInput,
+                this.state.passwordInput
+              )
+            }
+          >
+            Signup
+          </Button>
+        </FormWrapper>
+      </div>
     )
   }
 }

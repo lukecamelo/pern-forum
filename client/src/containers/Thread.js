@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchThreads } from '../actions/testActions'
+import { fetchThreads } from '../actions/threadActions'
 
 import styled from 'styled-components'
 
@@ -17,7 +17,7 @@ const StyledThread = styled.div`
 
 class Thread extends Component {
   componentDidMount = () => {
-    // this.props.fetchThreads()
+    this.props.fetchThreads()
   }
 
   render() {
@@ -39,7 +39,7 @@ class Thread extends Component {
 }
 
 const mapStateToProps = state => ({
-  threads: state.test.threads
+  threads: state.threadData.threads
 })
 
 export default connect(
