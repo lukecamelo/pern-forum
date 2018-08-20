@@ -38,6 +38,12 @@ const Button = styled.button`
   padding: 0.25em 1em;
   border: 2px solid palevioletred;
   border-radius: 3px;
+  transition: .2s;
+  &:hover {
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+  }
 `
 const H1 = styled.h1`
   color: palevioletred;
@@ -58,7 +64,11 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <H1>greetings, {this.props.auth.username}</H1>
+        {this.props.auth.isLoggedIn ? (
+          <H1>greetings, {this.props.auth.username}</H1>
+        ) : (
+          <H1>Nobody logged in</H1>
+        )}
 
         <FormWrapper>
           <Input

@@ -6,16 +6,19 @@ export const userLogin = (username, password) => dispatch => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username, password})
+    body: JSON.stringify({ username, password })
   })
     .then(res => res.json())
     .then(res => {
-      localStorage.Authorization = res.token
-      dispatch({
-        type: USER_LOGIN,
-        payload: res.user.username
-      })
+      if (res.token) {
+        localStorage.Authorization = res.token
+        dispatch({
+          type: USER_LOGIN,
+          payload: res.user.username
+        })
+      }
     })
+    .catch(err => console.log(err))
 }
 
 export const userLogout = () => dispatch => {

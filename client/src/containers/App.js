@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { Provider } from 'react-redux'
 import store from '../store'
 
-import Thread from './Thread'
 import Login from '../components/Login'
 
 const Wrapper = styled.div`
@@ -21,11 +20,11 @@ class App extends Component {
     isLoggedIn: false
   }
 
-  componentDidMount = () => {
-    if (localStorage.Authorization) {
-      this.getUser()
-    }
-  }
+  // componentDidMount = () => {
+  //   if (localStorage.Authorization) {
+  //     this.getUser()
+  //   }
+  // }
 
   mockLogin = () => {
     fetch('/auth/login', {
@@ -57,11 +56,6 @@ class App extends Component {
           user: res.username
         })
       })
-  }
-
-  logout = () => {
-    localStorage.removeItem('Authorization')
-    this.setState({ isLoggedIn: false })
   }
 
   render() {

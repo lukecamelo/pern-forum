@@ -4,6 +4,7 @@ const { User } = require('./sequelize')
 const passportJWT = require('passport-jwt')
 const JWTStrategy = passportJWT.Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
+const bcrypt = require('bcrypt-nodejs')
 
 passport.use(
   new LocalStrategy(
@@ -12,17 +13,28 @@ passport.use(
       passwordField: 'password'
     },
     function(username, password, cb) {
-      User.findOne({ where: { username, password } }).then(user => {
+
+      const isValidPassword = function(userpass, password) {
+        return bcrypt.compareSync(password, userpass)
+      }
+
+      User.findOne({ where: { username } }).then(user => {
         if (!user) {
           return cb(null, false, { message: 'Incorrect username or password.' })
         }
 
+        if(!isValidPassword(user.password, password)) {
+          return cb(null, false, {
+            message: 'Incorrect password.'
+          })
+        }
         return cb(null, user, { message: 'Logged in successfully' })
       })
     }
   )
 )
 
+// Creates jwt token for stateless authorization
 passport.use(
   new JWTStrategy(
     {
