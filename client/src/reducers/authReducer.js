@@ -1,4 +1,9 @@
-import { USER_LOGIN, USER_LOGOUT, USER_SIGNUP } from '../actions/types'
+import {
+  USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
+  USER_SIGNUP,
+  USER_LOGIN_FAIL
+} from '../actions/types'
 
 const initialState = {
   username: 'not logged in',
@@ -8,11 +13,18 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case USER_LOGIN:
+    case USER_LOGIN_SUCCESS:
       return {
         ...state,
-        username: action.payload,
-        isLoggedIn: true
+        username: action.payload.user.username,
+        isLoggedIn: true,
+        message: action.payload.message
+      }
+    case USER_LOGIN_FAIL:
+      return {
+        ...state,
+        isLoggedIn: false,
+        message: action.payload
       }
     case USER_LOGOUT:
       return {

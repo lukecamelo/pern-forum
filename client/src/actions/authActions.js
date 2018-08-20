@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT, USER_SIGNUP } from './types'
+import { USER_LOGIN_SUCCESS, USER_LOGOUT, USER_SIGNUP, USER_LOGIN_FAIL } from './types'
 
 export const userLogin = (username, password) => dispatch => {
   fetch('/auth/login', {
@@ -13,8 +13,13 @@ export const userLogin = (username, password) => dispatch => {
       if (res.token) {
         localStorage.Authorization = res.token
         dispatch({
-          type: USER_LOGIN,
-          payload: res.user.username
+          type: USER_LOGIN_SUCCESS,
+          payload: res
+        })
+      } else {
+        dispatch({
+          type: USER_LOGIN_FAIL,
+          payload: res.message
         })
       }
     })

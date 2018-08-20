@@ -11,7 +11,7 @@ router.post('/login', (req, res, next) => {
     (err, user, info) => {
       if (err || !user) {
         return res.status(400).json({
-          message: 'Something borked up',
+          message: 'Incorrect username or password.',
           user
         })
       }
@@ -21,7 +21,7 @@ router.post('/login', (req, res, next) => {
           res.send(err)
         }
         const token = jwt.sign(user.toJSON(), 'your_jwt_secret')
-        return res.json({ user, token })
+        return res.json({ user, token, message: 'Success!' })
       })
     }
   )(req, res)
