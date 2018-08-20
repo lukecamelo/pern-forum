@@ -21,7 +21,6 @@ const Thread = ThreadModel(sequelize, Sequelize)
 Thread.belongsTo(User)
 User.hasMany(Thread)
 
-
 // Adding instance methods used for hashing/salting passwords
 User.prototype.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
@@ -37,6 +36,14 @@ sequelize
   .then(() => {
     // test user
     User.create({ username: 'rediscover', password: userPassword })
+  })
+  .then(() => {
+    Thread.create({
+      title: 'My favorite retard',
+      content:
+        'Once upon a time there was a retard, my favorite retard, and I killed him.',
+      userId: 1
+    })
   })
 
 module.exports = {
