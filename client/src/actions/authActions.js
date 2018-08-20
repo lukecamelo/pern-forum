@@ -18,6 +18,7 @@ export const userLogin = (username, password) => dispatch => {
         })
       }
     })
+    .then(res => console.log(res))
     .catch(err => console.log(err))
 }
 

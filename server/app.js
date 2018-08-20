@@ -19,6 +19,8 @@ const user = require('./routes/user')
 const auth = require('./routes/auth')
 const index = require('./routes/routes')
 
+// app.use(passport.initialize())
+
 app.use('/', index)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
