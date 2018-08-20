@@ -48,6 +48,7 @@ router.post('/signup', (req, res) => {
   } else {
     const userPassword = User.prototype.generateHash(req.body.password)
     User.create({ username: req.body.username, password: userPassword })
+    return res.json({ success: true, message: 'User created!' })
   }
 })
 

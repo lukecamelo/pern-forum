@@ -3,19 +3,19 @@ import { userLogin, userLogout } from '../actions/authActions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-const FormWrapper = styled.section`
+export const FormWrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 250px;
   margin: 0 auto;
 `
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 `
-const Input = styled.input.attrs({
+export const Input = styled.input.attrs({
   type: 'text'
 })`
   background: palevioletred;
@@ -31,7 +31,7 @@ const Input = styled.input.attrs({
     color: papayawhip;
   }
 `
-const Button = styled.button`
+export const Button = styled.button`
   color: palevioletred;
   font-size: 1em;
   margin: 1em;
@@ -45,7 +45,7 @@ const Button = styled.button`
     cursor: pointer;
   }
 `
-const H1 = styled.h1`
+export const H1 = styled.h1`
   color: palevioletred;
 `
 

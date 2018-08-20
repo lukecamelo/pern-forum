@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_LOGOUT } from './types'
+import { USER_LOGIN, USER_LOGOUT, USER_SIGNUP } from './types'
 
 export const userLogin = (username, password) => dispatch => {
   fetch('/auth/login', {
@@ -27,4 +27,22 @@ export const userLogout = () => dispatch => {
   dispatch({
     type: USER_LOGOUT
   })
+}
+
+export const userSignup = (username, password) => dispatch => {
+  fetch('/auth/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ username, password })
+  })
+    .then(res => res.json())
+    .then(res => {
+      dispatch({
+        type: USER_SIGNUP,
+        payload: res.message
+      })
+    })
+    .catch(err => console.log(err))
 }
