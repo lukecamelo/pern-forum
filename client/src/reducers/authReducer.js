@@ -39,7 +39,8 @@ export default (state = initialState, action) => {
       return {
         ...state,
         username: 'not logged in',
-        isLoggedIn: false
+        isLoggedIn: false,
+        message: ''
       }
     case USER_SIGNUP:
       return {

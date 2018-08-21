@@ -8,7 +8,25 @@
   border-radius: 5px;
 }
 
+.logout {
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  margin-right: 1em;
+  padding: 14px;
+  transition: .2s;
+  border-radius: 5px;
+  border: 2px solid #0266c8;
+}
+
+.logout:hover {
+  color: white;
+  background-color: #f195ac;
+  cursor: pointer;
+}
+
 .link:hover {
   color: white;
   background-color: #f195ac;
+  cursor: pointer;
 }

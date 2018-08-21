@@ -77,23 +77,23 @@ class Login extends Component {
           <H1>Please enter your username and password.</H1>
         )}
 
-        <FormWrapper>
-          <Input
-            name="usernameInput"
-            type="text"
-            value={this.state.usernameInput}
-            onChange={this.changeHandler}
-            placeholder="enter your username"
-          />
-          <Input
-            name="passwordInput"
-            type="password"
-            value={this.state.passwordInput}
-            onChange={this.changeHandler}
-            placeholder="enter your password"
-          />
-          <ButtonWrapper>
-            {!this.props.auth.isLoggedIn ? (
+        {!this.props.auth.isLoggedIn ? (
+          <FormWrapper>
+            <Input
+              name="usernameInput"
+              type="text"
+              value={this.state.usernameInput}
+              onChange={this.changeHandler}
+              placeholder="enter your username"
+            />
+            <Input
+              name="passwordInput"
+              type="password"
+              value={this.state.passwordInput}
+              onChange={this.changeHandler}
+              placeholder="enter your password"
+            />
+            <ButtonWrapper>
               <Button
                 onClick={() =>
                   this.props.userLogin(
@@ -104,11 +104,9 @@ class Login extends Component {
               >
                 Login
               </Button>
-            ) : (
-              <Button onClick={this.props.userLogout}>Logout</Button>
-            )}
-          </ButtonWrapper>
-        </FormWrapper>
+            </ButtonWrapper>
+          </FormWrapper>
+        ) : null}
       </Container>
     )
   }

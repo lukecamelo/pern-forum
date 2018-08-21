@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import './NavBar.css'
+import { userLogout } from '../actions/authActions';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -11,14 +13,39 @@ const StyledNav = styled.nav`
   background-color: ${props => props.theme.primary};
 `
 
-const NavBar = () => {
-  return(
+const NavBar = ({ isLoggedIn, ...props }) => {
+
+  if (isLoggedIn) {
+    return(
+      <StyledNav>
+        <Link to="/" className="link">
+        Home
+      </Link>
+      <a className='logout' onClick={() => props.userLogout()}>
+        Logout
+      </a>
+      </StyledNav>
+    )
+  }
+  return (
     <StyledNav>
-      <Link to='/' className='link'>Home</Link>
-      <Link to='/login' className='link'>Login</Link>
-      <Link to='/signup' className='link'>Signup</Link>
+      <Link to="/" className="link">
+        Home
+      </Link>
+
+      <Link to="/login" className="link">
+        Login
+      </Link>
+
+      <Link to="/signup" className="link">
+        Signup
+      </Link>
     </StyledNav>
   )
 }
 
-export default NavBar
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.isLoggedIn
+})
+
+export default connect(mapStateToProps, { userLogout })(NavBar)
