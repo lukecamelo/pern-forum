@@ -2,7 +2,7 @@ import { FETCH_DATA, FETCH_THREADS } from '../actions/types'
 
 const initialState = {
   data: [],
-  threads: []
+  threads: [],
 }
 
 export default (state = initialState, action) => {

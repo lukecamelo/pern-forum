@@ -70,10 +70,11 @@ class Login extends Component {
     return (
       <Container>
         <NavBar />
+        <H1>{this.props.auth.message}</H1>
         {this.props.auth.isLoggedIn ? (
           <H1>greetings, {this.props.auth.username}</H1>
         ) : (
-          <H1>Nobody logged in</H1>
+          <H1>Please enter your username and password.</H1>
         )}
 
         <FormWrapper>

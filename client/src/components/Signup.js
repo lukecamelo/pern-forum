@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormWrapper, Button, Input, H1 } from './Login'
+import { FormWrapper, Button, Input, H1, Container } from './Login'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
 import NavBar from './NavBar'
@@ -18,9 +18,9 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container>
         <NavBar />
-        <H1>{this.props.message}</H1>
+        <H1>Enter a username and a password to register.</H1>
         <FormWrapper>
           <Input
             name="usernameInput"
@@ -47,7 +47,7 @@ class Signup extends React.Component {
             Signup
           </Button>
         </FormWrapper>
-      </div>
+      </Container>
     )
   }
 }

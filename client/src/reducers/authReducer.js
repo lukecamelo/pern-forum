@@ -6,14 +6,16 @@ import {
 } from '../actions/types'
 
 let isToken
+let username
 if (localStorage.Authorization) {
   isToken = true
+  username = localStorage.User
 } else {
   isToken = false
 }
 
 const initialState = {
-  username: 'not logged in',
+  username,
   isLoggedIn: isToken,
   message: ''
 }
