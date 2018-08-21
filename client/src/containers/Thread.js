@@ -5,14 +5,14 @@ import { fetchThreads } from '../actions/threadActions'
 import styled from 'styled-components'
 
 const ThreadWrapper = styled.section`
-  background-color: #779fa1;
+  background-color: ${props => props.theme.secondary};
   color: #564154;
   padding: 2em;
 `
 
 const StyledThread = styled.div`
-  color: palevioletred;
-  background-color: papayawhip;
+  color: ${props => props.theme.primary};
+  background-color: ${props => props.theme.secondary};
 `
 
 class Thread extends Component {

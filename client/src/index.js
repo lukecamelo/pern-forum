@@ -11,7 +11,8 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 
 const theme = {
-  primary: 'palevioletred'
+  primary: '#00a8ff',
+  secondary: '#C5E7E2'
 }
 
 ReactDOM.render(

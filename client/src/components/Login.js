@@ -22,7 +22,7 @@ export const ButtonWrapper = styled.div`
 export const Input = styled.input.attrs({
   type: 'text'
 })`
-  background: palevioletred;
+  background: ${props => props.theme.primary};
   border-radius: 3px;
   border: none;
   color: white;
@@ -32,7 +32,7 @@ export const Input = styled.input.attrs({
   font-size: 18px;
 
   &::placeholder {
-    color: papayawhip;
+    color: white;
   }
 `
 export const Button = styled.button`
@@ -42,16 +42,16 @@ export const Button = styled.button`
   margin: 1em;
   padding: 0.5em 1.5em;
   border-radius: 3px;
-  border: 2px solid palevioletred;
+  border: 2px solid ${props => props.theme.primary};
   transition: 0.2s;
   &:hover {
-    background-color: palevioletred;
+    background-color: ${props => props.theme.primary};
     color: #fff;
     cursor: pointer;
   }
 `
 export const H1 = styled.h1`
-  color: palevioletred;
+  color: ${props => props.theme.primary};
 `
 
 class Login extends Component {

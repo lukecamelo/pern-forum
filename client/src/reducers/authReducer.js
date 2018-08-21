@@ -5,9 +5,16 @@ import {
   USER_LOGIN_FAIL
 } from '../actions/types'
 
+let isToken
+if (localStorage.Authorization) {
+  isToken = true
+} else {
+  isToken = false
+}
+
 const initialState = {
   username: 'not logged in',
-  isLoggedIn: false,
+  isLoggedIn: isToken,
   message: ''
 }
 

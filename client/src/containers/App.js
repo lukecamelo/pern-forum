@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import NavBar from '../components/NavBar'
 import Thread from './Thread'
+import { H1 } from '../components/Login'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -17,7 +18,7 @@ class App extends Component {
         {this.props.isLoggedIn ? (
           <Thread />
         ) : (
-          <h1>Please log in to view threads.</h1>
+          <H1>Please log in to view threads.</H1>
         )}
       </Wrapper>
     )

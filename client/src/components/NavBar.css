@@ -1,15 +1,14 @@
 .link {
-  color: palevioletred;
-  background-color: #fff;
+  color: white;
+  background-color: #0266c8;
   text-decoration: none;
   margin-right: 1em;
-  padding: 12px;
-  border: 2px solid palevioletred;
+  padding: 14px;
   transition: .2s;
   border-radius: 5px;
 }
 
 .link:hover {
   color: white;
-  background-color: palevioletred;
+  background-color: #f195ac;
 }

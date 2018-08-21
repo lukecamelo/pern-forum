@@ -8,7 +8,7 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: flex-end;
   padding: 15px;
-  background-color: #e5d7bf;
+  background-color: ${props => props.theme.primary};
 `
 
 const NavBar = () => {
