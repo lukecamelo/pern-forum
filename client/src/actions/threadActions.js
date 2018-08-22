@@ -1,4 +1,4 @@
-import { FETCH_DATA, FETCH_THREADS, FETCH_AUTHOR } from './types'
+import { FETCH_DATA, FETCH_THREADS, FETCH_AUTHOR, FETCH_SINGLE_THREAD } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users')

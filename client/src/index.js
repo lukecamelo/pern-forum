@@ -9,6 +9,7 @@ import App from './containers/App'
 import registerServiceWorker from './registerServiceWorker'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Thread from './containers/Thread';
 
 const theme = {
   primary: '#00a8ff',
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
+          <Route path="/thread/:id" component={Thread} />
         </Switch>
       </BrowserRouter>
     </Provider>

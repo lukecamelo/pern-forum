@@ -1,7 +1,7 @@
 import { FETCH_DATA, FETCH_THREADS } from '../actions/types'
 
 const initialState = {
-  data: [],
+  users: [],
   threads: [],
 }
 
@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case FETCH_DATA:
       return {
         ...state,
-        data: action.payload
+        users: action.payload
       }
     case FETCH_THREADS:
       return {

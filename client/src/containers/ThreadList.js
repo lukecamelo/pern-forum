@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { fetchThreads, fetchData } from '../actions/threadActions'
 import Thread from './Thread'
 import styled from 'styled-components'
@@ -16,17 +17,14 @@ class ThreadList extends Component {
 
   render() {
     if (this.props.threads.length && this.props.users.length) {
-      const threads = this.props.threads.map(thread => {
+      const threadLinks = this.props.threads.map(thread => {
         return (
-          <Thread
-            key={thread.id}
-            creatorId={this.fetchThreadAuthor(thread.userId)[0].username}
-            title={thread.title}
-            content={thread.content}
-          />
+          <Link key={thread.id} to={`/thread/${thread.id}`}>{thread.title}</Link>
         )
       })
-      return <div>{threads}</div>
+      return (
+        <div>{threadLinks}</div>  
+      )
     } else {
       return <h1>Loading threads...</h1>
     }
@@ -35,10 +33,22 @@ class ThreadList extends Component {
 
 const mapStateToProps = state => ({
   threads: state.threadData.threads,
-  users: state.threadData.data
+  users: state.threadData.users
 })
 
 export default connect(
   mapStateToProps,
   { fetchThreads, fetchData }
 )(ThreadList)
+
+/* ------- STUFF WE DON'T NEED RIGHT NOW ------- */
+// const threads = this.props.threads.map(thread => {
+//   return (
+//     <Thread
+//       key={thread.id}
+//       creatorId={this.fetchThreadAuthor(thread.userId)[0].username}
+//       title={thread.title}
+//       content={thread.content}
+//     />
+//   )
+// })
