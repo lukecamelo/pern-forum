@@ -22,6 +22,7 @@
 .logout:hover {
   color: white;
   background-color: #f195ac;
+  border: 2px solid #f195ac;
   cursor: pointer;
 }
 

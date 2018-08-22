@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { userLogin, userLogout } from '../actions/authActions'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from './NavBar'
+import './NavBar.css'
 
 export const Container = styled.div`
   text-align: center;
@@ -94,7 +96,9 @@ class Login extends Component {
               placeholder="enter your password"
             />
             <ButtonWrapper>
-              <Button
+              <Link
+                to="/"
+                className="logout"
                 onClick={() =>
                   this.props.userLogin(
                     this.state.usernameInput,
@@ -103,7 +107,7 @@ class Login extends Component {
                 }
               >
                 Login
-              </Button>
+              </Link>
             </ButtonWrapper>
           </FormWrapper>
         ) : null}

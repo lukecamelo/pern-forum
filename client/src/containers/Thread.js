@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchThreads, fetchData } from '../actions/threadActions'
 
 import styled from 'styled-components'
+import { H1 } from '../components/Login'
 
 const ThreadWrapper = styled.section`
   background-color: #dff4ff;
@@ -27,46 +28,17 @@ const ThreadContent = styled.p`
   padding-right: 10px;
 `
 
-class Thread extends Component {
-  componentDidMount = () => {
-    this.props.fetchThreads()
-    this.props.fetchData()
-  }
-
-  setThreadAuthor = userId => {
-    return this.props.data.filter(user => user.id === userId)
-  }
-
-  render() {
-    if (this.props.threads.length && this.props.data.length ) {
-       
-      let posts = this.props.threads.map(thread => {
-        return (
-          <StyledThread key={thread.id}>
-            <ThreadHeader>
-              {thread.title}, posted by {this.setThreadAuthor(thread.userId)[0].username}
-            </ThreadHeader>
-            <ThreadContent>{thread.content}</ThreadContent>
-          </StyledThread>
-        )
-      })
-      return (
-        <div>
-          <ThreadWrapper>{posts}</ThreadWrapper>
-        </div>
-      )
-    } else {
-      return <div>loading.</div>
-    }
-  }
+const Thread = ({ title, creatorId, content }) => {
+  return (
+    <ThreadWrapper>
+      <StyledThread>
+        <ThreadHeader>
+          {title}, posted by {creatorId}
+        </ThreadHeader>
+        <ThreadContent>{content}</ThreadContent>
+      </StyledThread>
+    </ThreadWrapper>
+  )
 }
 
-const mapStateToProps = state => ({
-  threads: state.threadData.threads,
-  data: state.threadData.data
-})
-
-export default connect(
-  mapStateToProps,
-  { fetchThreads, fetchData }
-)(Thread)
+export default connect(null)(Thread)
