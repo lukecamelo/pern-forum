@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 
 import NavBar from '../components/NavBar'
-import Thread from './Thread'
 import { H1 } from '../components/Login'
 import ThreadList from './ThreadList';
 

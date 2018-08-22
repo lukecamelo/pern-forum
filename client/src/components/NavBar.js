@@ -18,7 +18,7 @@ const NavBar = ({ isLoggedIn, ...props }) => {
   if (isLoggedIn) {
     return(
       <StyledNav>
-        <Link to="/" className="link">
+        <Link to="/" className="navlink">
         Home
       </Link>
       <a className='logout' onClick={() => props.userLogout()}>
@@ -29,15 +29,15 @@ const NavBar = ({ isLoggedIn, ...props }) => {
   }
   return (
     <StyledNav>
-      <Link to="/" className="link">
+      <Link to="/" className="navlink">
         Home
       </Link>
 
-      <Link to="/login" className="link">
+      <Link to="/login" className="navlink">
         Login
       </Link>
 
-      <Link to="/signup" className="link">
+      <Link to="/signup" className="navlink">
         Signup
       </Link>
     </StyledNav>

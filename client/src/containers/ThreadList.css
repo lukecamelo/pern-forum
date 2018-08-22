@@ -1,0 +1,15 @@
+.link {
+  box-sizing: border-box;
+  color: #2e262e;
+  text-decoration: none;
+  padding: 1em 2em;
+  font-size: 2em;
+  border-bottom: 2px solid #0266c8;
+  width: 100%;
+  text-align: left;
+}
+
+.link:hover {
+  color: white;
+  background-color: #b28bc0;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchThreads, fetchData, fetch } from '../actions/threadActions'
+import { fetchThreads, fetchData } from '../actions/threadActions'
 
 import styled from 'styled-components'
 import NavBar from '../components/NavBar'

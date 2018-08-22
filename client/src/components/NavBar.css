@@ -1,4 +1,4 @@
-.link {
+.navlink {
   color: white;
   background-color: #0266c8;
   text-decoration: none;
@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.link:hover {
+.navlink:hover {
   color: white;
   background-color: #f195ac;
   cursor: pointer;

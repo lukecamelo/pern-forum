@@ -2,8 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchThreads, fetchData } from '../actions/threadActions'
-import Thread from './Thread'
 import styled from 'styled-components'
+import './ThreadList.css'
+
+const ListWrapper = styled.main`
+  background-color: #f4afc2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 75%;
+  margin: 0 auto;
+`
 
 class ThreadList extends Component {
   componentDidMount = () => {
@@ -12,19 +21,19 @@ class ThreadList extends Component {
   }
 
   fetchThreadAuthor = userId => {
-    return this.props.users.filter(user => user.id === userId)
+    return this.props.users.find(user => user.id === userId).username
   }
 
   render() {
     if (this.props.threads.length && this.props.users.length) {
       const threadLinks = this.props.threads.map(thread => {
         return (
-          <Link key={thread.id} to={`/thread/${thread.id}`}>{thread.title}</Link>
+          <Link className='link' key={thread.id} to={`/thread/${thread.id}`}>
+            {thread.title} - <strong>{this.fetchThreadAuthor(thread.userId)}</strong>
+          </Link>
         )
       })
-      return (
-        <div>{threadLinks}</div>  
-      )
+      return <ListWrapper>{threadLinks}</ListWrapper>
     } else {
       return <h1>Loading threads...</h1>
     }
