@@ -25,3 +25,7 @@ app.use(express.static(path.join(__dirname, '/../client/build')))
 app.use('/', index)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+})
