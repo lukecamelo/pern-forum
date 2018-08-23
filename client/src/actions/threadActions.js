@@ -2,7 +2,7 @@ import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users')
-    .then(res => console.log(res))
+    .then(res => res.json())
     .then(json => {
       dispatch({
         type: FETCH_DATA,

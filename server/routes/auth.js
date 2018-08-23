@@ -47,6 +47,7 @@ router.post('/login', (req, res, next) => {
 function generateHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
+
 router.post('/signup', (req, res) => {
   if (!req.body.username || !req.body.password) {
     res.json({ success: false, message: 'Please enter username and password.' })
