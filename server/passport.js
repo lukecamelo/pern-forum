@@ -40,39 +40,39 @@ function generateHash(password) {
 }
 
 // Potentially unnecessary?
-passport.use(
-  'local-signup',
-  new LocalStrategy(
-    {
-      usernameField: 'username',
-      passwordField: 'password'
-    },
-    function(username, password, cb) {
-      models.user.findOne({ where: { username } }).then(user => {
-        if (user) {
-          console.log('first if statement', user)
-          return cb(null, false, {
-            message: 'That username is already taken'
-          })
-        } else {
-          const userPassword = generateHash(password)
-          const data = {
-            username,
-            password: userPassword
-          }
-          models.user.create(data).then((newUser, created) => {
-            if (!newUser) {
-              return cb(null, false)
-            }
-            if (newUser) {
-              return cb(null, newUser)
-            }
-          })
-        }
-      })
-    }
-  )
-)
+// passport.use(
+//   'local-signup',
+//   new LocalStrategy(
+//     {
+//       usernameField: 'username',
+//       passwordField: 'password'
+//     },
+//     function(username, password, cb) {
+//       models.user.findOne({ where: { username } }).then(user => {
+//         if (user) {
+//           console.log('first if statement', user)
+//           return cb(null, false, {
+//             message: 'That username is already taken'
+//           })
+//         } else {
+//           const userPassword = generateHash(password)
+//           const data = {
+//             username,
+//             password: userPassword
+//           }
+//           models.user.create(data).then((newUser, created) => {
+//             if (!newUser) {
+//               return cb(null, false)
+//             }
+//             if (newUser) {
+//               return cb(null, newUser)
+//             }
+//           })
+//         }
+//       })
+//     }
+//   )
+// )
 
 // Creates jwt token for stateless authorization
 passport.use(
