@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { User, Thread } = require('../sequelize')
+const models = require('../models')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
@@ -11,22 +12,22 @@ router.get('/api/hello', (req, res) => {
 
 // Creates new user
 router.post('/api/users', (req, res) => {
-  User.create(req.body).then(user => res.json(user))
+  models.User.create(req.body).then(user => res.json(user))
 })
 
 // Creates thread
 router.post('/api/threads', (req, res) => {
   const body = req.body
-  User.findById(body.userId)
+  models.User.findById(body.userId)
     .then(() =>
-      Thread.create({
+      models.Thread.create({
         title: body.title,
         content: body.content,
         userId: body.userId
       })
     )
     .then(thread =>
-      Thread.findOne({ where: { id: thread.id }, include: [User] })
+      models.Thread.findOne({ where: { id: thread.id }, include: [User] })
     )
     .then(threadWithAssociations => res.json(threadWithAssociations))
     .catch(err =>
@@ -38,12 +39,12 @@ router.post('/api/threads', (req, res) => {
 
 // Returns all threads
 router.get('/api/threads', (req, res) => {
-  Thread.findAll().then(threads => res.json(threads))
+  models.thread.findAll().then(threads => res.json(threads))
 })
 
 // Returns all users
 router.get('/api/users', (req, res) => {
-  User.findAll().then(users => res.json(users))
+  models.user.findAll().then(users => res.json(users))
 })
 
 module.exports = router
