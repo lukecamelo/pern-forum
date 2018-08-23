@@ -18,7 +18,13 @@ router.post('/api/users', (req, res) => {
 router.post('/api/threads', (req, res) => {
   const body = req.body
   User.findById(body.userId)
-    .then(() => Thread.create(body))
+    .then(() =>
+      Thread.create({
+        title: body.title,
+        content: body.content,
+        userId: body.userId
+      })
+    )
     .then(thread =>
       Thread.findOne({ where: { id: thread.id }, include: [User] })
     )

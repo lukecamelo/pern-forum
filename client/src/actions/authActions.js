@@ -13,6 +13,7 @@ export const userLogin = (username, password) => dispatch => {
       if (res.token) {
         localStorage.Authorization = res.token
         localStorage.User = res.user.username
+        localStorage.UserId = res.user.id
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res

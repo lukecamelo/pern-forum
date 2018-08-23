@@ -43,7 +43,7 @@ sequelize
       content:
         'Once upon a time there was a retard, my favorite retard, and I killed him.',
       userId: 1
-    })
+    }, { include: [User] })
   })
 
 module.exports = {

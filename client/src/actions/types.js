@@ -3,6 +3,7 @@ export const FETCH_DATA = 'FETCH_DATA'
 export const FETCH_THREADS = 'FETCH_THREADS'
 export const FETCH_AUTHOR = 'FETCH_AUTHOR'
 export const FETCH_SINGLE_THREAD = 'FETCH_SINGLE_THREAD'
+export const POST_NEW_THREAD = 'POST_NEW_THREAD'
 
 // Authorization actions
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'

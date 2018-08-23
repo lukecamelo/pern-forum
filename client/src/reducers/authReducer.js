@@ -7,15 +7,18 @@ import {
 
 let isToken
 let username
+let userId
 if (localStorage.Authorization) {
   isToken = true
   username = localStorage.User
+  userId = localStorage.UserId
 } else {
   isToken = false
 }
 
 const initialState = {
   username,
+  userId,
   isLoggedIn: isToken,
   message: ''
 }
@@ -26,6 +29,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         username: action.payload.user.username,
+        userId: action.payload.user.id,
         isLoggedIn: true,
         message: action.payload.message
       }

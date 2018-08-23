@@ -1,4 +1,4 @@
-import { FETCH_DATA, FETCH_THREADS, FETCH_AUTHOR } from './types'
+import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users')
@@ -23,15 +23,20 @@ export const fetchThreads = () => dispatch => {
     .catch(err => console.log(err))
 }
 
-// probably unnecessary?
-export const fetchThreadAuthor = (userId) => dispatch => {
-  fetch('/api/users')
-    .then(res => res.json())
-    .then(res => {
-      dispatch({
-        type: FETCH_AUTHOR,
-        payload: res.filter(user => user.id === userId)
-      })
+export const postNewThread = (title, content, userId) => dispatch => {
+  fetch('/api/threads', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, content, userId })
+  })
+  .then(res => res.json())
+  .then(thread => {
+    dispatch({
+      type: POST_NEW_THREAD,
+      payload: thread
     })
-    .catch(err => console.log('fetch author failed: ', err))
+  })
+  .catch(err => console.log(err))
 }
