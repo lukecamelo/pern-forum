@@ -31,7 +31,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
-// i will eventually be using this and the heroku db exclusively
 models.sequelize
   .sync({ force: true })
   .then(() => {
