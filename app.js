@@ -32,7 +32,7 @@ app.get('*', (req, res) => {
 })
 
 models.sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     // test user
     models.user.create({ username: 'rediscover', password: 'userPassword' })
