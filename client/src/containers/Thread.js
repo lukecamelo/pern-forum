@@ -33,8 +33,8 @@ class Thread extends Component {
     const {
       match: { params }
     } = this.props
-    this.props.fetchThreads()
-    this.props.fetchData()
+    // this.props.fetchThreads()
+    // this.props.fetchData()
     console.log(this.props.threads)
   }
 

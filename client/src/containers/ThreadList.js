@@ -16,8 +16,10 @@ const ListWrapper = styled.main`
 
 class ThreadList extends Component {
   componentDidMount = () => {
-    this.props.fetchThreads()
-    this.props.fetchData()
+    if (!this.props.threads.length || !this.props.users.length) {
+      this.props.fetchThreads()
+      this.props.fetchData()
+    }
   }
 
   fetchThreadAuthor = userId => {
@@ -28,8 +30,9 @@ class ThreadList extends Component {
     if (this.props.threads.length && this.props.users.length) {
       const threadLinks = this.props.threads.map(thread => {
         return (
-          <Link className='link' key={thread.id} to={`/thread/${thread.id}`}>
-            {thread.title} - <strong>{this.fetchThreadAuthor(thread.userId)}</strong>
+          <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
+            {thread.title} -{' '}
+            <strong>{this.fetchThreadAuthor(thread.userId)}</strong>
           </Link>
         )
       })
