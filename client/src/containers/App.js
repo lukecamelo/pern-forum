@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { fetchData } from '../actions/threadActions'
 
 import NavBar from '../components/NavBar'
 import { H1 } from '../components/Login'
@@ -11,6 +12,10 @@ const Wrapper = styled.div`
 `
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchData()
+  }
+
   render() {
     return (
       <Wrapper>
@@ -29,4 +34,4 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
 })
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, { fetchData })(App)
