@@ -35,10 +35,6 @@ passport.use(
   )
 )
 
-function generateHash(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-}
-
 // Potentially unnecessary?
 // passport.use(
 //   'local-signup',
