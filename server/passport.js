@@ -5,6 +5,7 @@ const passportJWT = require('passport-jwt')
 const JWTStrategy = passportJWT.Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const bcrypt = require('bcrypt-nodejs')
+const models = require('./models')
 
 passport.use(
   'local-login',
@@ -18,7 +19,7 @@ passport.use(
         return bcrypt.compareSync(password, userpass)
       }
 
-      User.findOne({ where: { username } }).then(user => {
+      models.user.findOne({ where: { username } }).then(user => {
         if (!user) {
           return cb(null, false, { message: 'Incorrect username or password.' })
         }
@@ -34,6 +35,10 @@ passport.use(
   )
 )
 
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+}
+
 // Potentially unnecessary?
 passport.use(
   'local-signup',
@@ -43,19 +48,19 @@ passport.use(
       passwordField: 'password'
     },
     function(username, password, cb) {
-      User.findOne({ where: { username } }).then(user => {
+      models.user.findOne({ where: { username } }).then(user => {
         if (user) {
           console.log('first if statement', user)
           return cb(null, false, {
             message: 'That username is already taken'
           })
         } else {
-          const userPassword = User.prototype.generateHash(password)
+          const userPassword = generateHash(password)
           const data = {
             username,
             password: userPassword
           }
-          User.create(data).then((newUser, created) => {
+          models.user.create(data).then((newUser, created) => {
             if (!newUser) {
               return cb(null, false)
             }
@@ -77,7 +82,7 @@ passport.use(
       secretOrKey: 'your_jwt_secret'
     },
     function(jwtPayload, cb) {
-      return User.findById(jwtPayload.id)
+      return models.user.findById(jwtPayload.id)
         .then(user => {
           return cb(null, user)
         })

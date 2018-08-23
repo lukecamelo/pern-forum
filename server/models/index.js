@@ -50,9 +50,9 @@ var path = require('path')
 var Sequelize = require('sequelize')
 var basename = path.basename(module.filename)
 var db = {}
-
+const url = 'postgres://ixokdhlskmpphx:c9ad01e9c20556fc75242e5b2b6e600539b805dde77ab33b3a14d670bd61c9d7@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcbbl2rbe22bj6'
 // Initialize sequelize with heroku postgres - the actuall address comes from the DATABASE_URL environment variable
-var sequelize = new Sequelize(process.env.PROD_DB_URL, {
+var sequelize = new Sequelize(url, {
   dialect: 'postgres',
   protocol: 'postgres',
   dialectOptions: {
