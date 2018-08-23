@@ -1,7 +1,12 @@
 import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD } from './types'
 
 export const fetchData = () => dispatch => {
-  fetch('/api/users')
+  fetch('/api/users', {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    }
+  })
     .then(res => res.json())
     .then(json => {
       dispatch({
@@ -9,6 +14,7 @@ export const fetchData = () => dispatch => {
         payload: json
       })
     })
+    .catch(err => console.log('FETCH_USERS ERROR: ', err))
 }
 
 export const fetchThreads = () => dispatch => {
@@ -20,7 +26,7 @@ export const fetchThreads = () => dispatch => {
         payload: threads
       })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log('FETCH_THREADS ERROR: ', err))
 }
 
 export const postNewThread = (title, content, userId) => dispatch => {
@@ -31,12 +37,12 @@ export const postNewThread = (title, content, userId) => dispatch => {
     },
     body: JSON.stringify({ title, content, userId })
   })
-  .then(res => res.json())
-  .then(thread => {
-    dispatch({
-      type: POST_NEW_THREAD,
-      payload: thread
+    .then(res => res.json())
+    .then(thread => {
+      dispatch({
+        type: POST_NEW_THREAD,
+        payload: thread
+      })
     })
-  })
-  .catch(err => console.log(err))
+    .catch(err => console.log(err))
 }

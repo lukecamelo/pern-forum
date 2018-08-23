@@ -52,15 +52,3 @@ export default connect(
   mapStateToProps,
   { fetchThreads, fetchData }
 )(ThreadList)
-
-/* ------- STUFF WE DON'T NEED RIGHT NOW ------- */
-// const threads = this.props.threads.map(thread => {
-//   return (
-//     <Thread
-//       key={thread.id}
-//       creatorId={this.fetchThreadAuthor(thread.userId)[0].username}
-//       title={thread.title}
-//       content={thread.content}
-//     />
-//   )
-// })
