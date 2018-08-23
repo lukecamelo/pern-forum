@@ -12,7 +12,7 @@ router.get('/api/hello', (req, res) => {
 
 // Creates new user
 router.post('/api/users', (req, res) => {
-  models.User.create(req.body).then(user => res.json(user))
+  models.user.create(req.body).then(user => res.json(user))
 })
 
 // Creates thread
