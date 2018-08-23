@@ -28,11 +28,11 @@ app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+  res.sendFile(path.join(__dirname + './client/build/index.html'))
 })
 
 models.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     // test user
     models.user.create({ username: 'rediscover', password: 'userPassword' })
