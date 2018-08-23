@@ -4,6 +4,7 @@ const { User, Thread } = require('./sequelize')
 require('./passport')
 const passport = require('passport')
 const cors = require('cors')
+const path = require('path')
 
 const app = express()
 app.use(bodyParser.json())
@@ -20,7 +21,7 @@ const auth = require('./routes/auth')
 const index = require('./routes/routes')
 
 // app.use(passport.initialize())
-
+app.use(express.static(path.join(__dirname, '/../client/build')))
 app.use('/', index)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
