@@ -1,5 +1,5 @@
 module.exports = (sequelize, type) => {
-  return sequelize.define('thread', {
+  const Thread = sequelize.define('thread', {
     id: {
       type: type.INTEGER,
       primaryKey: true,
@@ -7,5 +7,12 @@ module.exports = (sequelize, type) => {
     },
     title: type.STRING,
     content: type.TEXT
+  }, {
+    classMethods: {
+      associate: function(models) {
+        Thread.belongsTo(models.User)
+      }
+    }
   })
+  return Thread
 }

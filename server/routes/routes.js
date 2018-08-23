@@ -18,16 +18,16 @@ router.post('/api/users', (req, res) => {
 // Creates thread
 router.post('/api/threads', (req, res) => {
   const body = req.body
-  models.User.findById(body.userId)
+  models.user.findById(body.userId)
     .then(() =>
-      models.Thread.create({
+      models.thread.create({
         title: body.title,
         content: body.content,
         userId: body.userId
       })
     )
     .then(thread =>
-      models.Thread.findOne({ where: { id: thread.id }, include: [User] })
+      models.thread.findOne({ where: { id: thread.id }, include: [User] })
     )
     .then(threadWithAssociations => res.json(threadWithAssociations))
     .catch(err =>

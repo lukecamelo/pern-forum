@@ -3,6 +3,8 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const { User } = require('../sequelize')
+const models = require('../models')
+const bcrypt = require('bcrypt-nodejs')
 
 router.post('/login', (req, res, next) => {
   passport.authenticate(
@@ -42,12 +44,15 @@ router.post('/login', (req, res, next) => {
 //   )
 // )
 
+function generateHash(password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+}
 router.post('/signup', (req, res) => {
   if (!req.body.username || !req.body.password) {
     res.json({ success: false, message: 'Please enter username and password.' })
   } else {
-    const userPassword = User.prototype.generateHash(req.body.password)
-    User.create({ username: req.body.username, password: userPassword })
+    const userPassword = generateHash(req.body.password)
+    models.user.create({ username: req.body.username, password: userPassword })
     return res.json({ success: true, message: 'User created!' })
   }
 })
