@@ -56,6 +56,7 @@ passport.use(
           })
         } else {
           const userPassword = generateHash(password)
+          console.log('in local-signup else statement', userPassword)
           const data = {
             username,
             password: userPassword
@@ -65,6 +66,7 @@ passport.use(
               return cb(null, false)
             }
             if (newUser) {
+              console.log('in passport local-signup', newUser)
               return cb(null, newUser)
             }
           })
@@ -79,7 +81,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'your_jwt_secret'
+      secretOrKey: 'this_is_my_big_fantastic_jwt_secret'
     },
     function(jwtPayload, cb) {
       return models.user.findById(jwtPayload.id)

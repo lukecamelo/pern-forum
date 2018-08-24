@@ -38,7 +38,7 @@ router.post('/login', (req, res, next) => {
 //     (req, res, next) => {
 //       res.json({
 //         message: 'signup successful!',
-//         // user: req.user
+//         user: req.user
 //       })
 //     }
 //   )
@@ -49,13 +49,21 @@ function generateHash(password) {
 }
 
 router.post('/signup', (req, res) => {
-  if (!req.body.username || !req.body.password) {
-    res.json({ success: false, message: 'Please enter username and password.' })
-  } else {
-    const userPassword = generateHash(req.body.password)
-    models.user.create({ username: req.body.username, password: userPassword })
-    return res.json({ success: true, message: 'User created!' })
-  }
+  models.user.findOne({ where: { username: req.body.username } }).then(user => {
+    if(user) {
+      console.log('user already exists?')
+      return res.json({ success: false, message: 'That user already exists' })
+    } else {
+      const userPass = generateHash(req.body.password)
+      models.user.create({ username: req.body.username, password: userPass }).then(newUser => {
+        if(!newUser) {
+          return false
+        } else {
+          return res.json({ success: true, message: 'User created!' })
+        }
+      })
+    }
+  })
 })
 
 module.exports = router

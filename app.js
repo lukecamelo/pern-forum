@@ -32,11 +32,11 @@ app.get('*', (req, res) => {
 })
 
 models.sequelize
-  .sync({ force: true })
-  .then(() => {
+  .sync()
+  // .then(() => {
     // test user
-    models.user.create({ username: 'rediscover', password: 'userPassword' })
-  })
+    // models.user.create({ username: 'rediscover', password: 'userPassword' })
+  // })
   .then(() => {
     app.listen(port, () => {
       console.log(`Running on http://localhost:${port}`)

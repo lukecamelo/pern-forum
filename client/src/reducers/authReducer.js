@@ -44,6 +44,7 @@ export default (state = initialState, action) => {
         ...state,
         username: 'not logged in',
         isLoggedIn: false,
+        userId: null,
         message: ''
       }
     case USER_SIGNUP:

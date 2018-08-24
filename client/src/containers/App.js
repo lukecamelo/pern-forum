@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { fetchData } from '../actions/threadActions'
+import { Link } from 'react-router-dom'
 
 import NavBar from '../components/NavBar'
 import { H1 } from '../components/Login'
-import ThreadList from './ThreadList';
+import ThreadList from './ThreadList'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -21,7 +22,10 @@ class App extends Component {
       <Wrapper>
         <NavBar />
         {this.props.isLoggedIn ? (
-          <ThreadList />
+          <Wrapper>
+            <ThreadList />
+            <Link className='logout' to="/newthread">Post Thread</Link>
+          </Wrapper>
         ) : (
           <H1>Please log in to view threads.</H1>
         )}
@@ -34,4 +38,7 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
 })
 
-export default connect(mapStateToProps, { fetchData })(App)
+export default connect(
+  mapStateToProps,
+  { fetchData }
+)(App)
