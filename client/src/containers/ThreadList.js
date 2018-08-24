@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchThreads, fetchData } from '../actions/threadActions'
 import styled from 'styled-components'
+import { Container } from '../components/Login'
 import './ThreadList.css'
 
 const ListWrapper = styled.main`
@@ -36,7 +37,14 @@ class ThreadList extends Component {
           </Link>
         )
       })
-      return <ListWrapper>{threadLinks}</ListWrapper>
+      return (
+        <Container>
+          <ListWrapper>{threadLinks}</ListWrapper>
+          <Link className="logout" to="/newthread">
+            Post Thread
+          </Link>
+        </Container>
+      )
     } else {
       return <h1>Loading threads...</h1>
     }
