@@ -24,7 +24,7 @@ class App extends Component {
         {this.props.isLoggedIn ? (
           <Wrapper>
             <ThreadList />
-            <Link className='logout' to="/newthread">Post Thread</Link>
+            {/* <Link className='logout' to="/newthread">Post Thread</Link> */}
           </Wrapper>
         ) : (
           <H1>Please log in to view threads.</H1>

@@ -33,9 +33,6 @@ class Thread extends Component {
     const {
       match: { params }
     } = this.props
-    // this.props.fetchThreads()
-    // this.props.fetchData()
-    console.log(this.props.threads)
   }
 
   render() {
@@ -58,7 +55,7 @@ class Thread extends Component {
         </div>
       )
     } else {
-      return <h1>hi</h1>
+      return <h1>Loading thread...</h1>
     }
   }
 }
