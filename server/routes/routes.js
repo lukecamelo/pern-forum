@@ -27,7 +27,7 @@ router.post('/api/threads', (req, res) => {
       })
     )
     .then(thread =>
-      models.thread.findOne({ where: { id: thread.id }, include: [User] })
+      models.thread.findOne({ where: { id: thread.id }, include: [models.user] })
     )
     .then(threadWithAssociations => res.json(threadWithAssociations))
     .catch(err =>

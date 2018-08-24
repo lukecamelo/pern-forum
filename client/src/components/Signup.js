@@ -7,7 +7,8 @@ import NavBar from './NavBar'
 class Signup extends React.Component {
   state = {
     usernameInput: '',
-    passwordInput: ''
+    passwordInput: '',
+    hasSignedUp: false
   }
 
   changeHandler = e => {
@@ -17,43 +18,54 @@ class Signup extends React.Component {
   }
 
   render() {
-    return (
-      <Container>
-        <NavBar />
-        <H1>Enter a username and a password to register.</H1>
-        <FormWrapper>
-          <Input
-            name="usernameInput"
-            type="text"
-            value={this.state.usernameInput}
-            onChange={this.changeHandler}
-            placeholder="enter your username"
-          />
-          <Input
-            name="passwordInput"
-            type="password"
-            value={this.state.passwordInput}
-            onChange={this.changeHandler}
-            placeholder="enter your password"
-          />
-          <Button
-            onClick={() =>
-              this.props.userSignup(
-                this.state.usernameInput,
-                this.state.passwordInput
-              )
-            }
-          >
-            Signup
-          </Button>
-        </FormWrapper>
-      </Container>
-    )
+    if (this.props.message !== 'User created!') {
+      return (
+        <Container>
+          <NavBar />
+          <H1>Enter a username and a password to register.</H1>
+          <H1>{this.props.message}</H1>
+          <FormWrapper>
+            <Input
+              name="usernameInput"
+              type="text"
+              value={this.state.usernameInput}
+              onChange={this.changeHandler}
+              placeholder="enter your username"
+            />
+            <Input
+              name="passwordInput"
+              type="password"
+              value={this.state.passwordInput}
+              onChange={this.changeHandler}
+              placeholder="enter your password"
+            />
+            <Button
+              onClick={() =>
+                this.props.userSignup(
+                  this.state.usernameInput,
+                  this.state.passwordInput
+                )
+              }
+            >
+              Signup
+            </Button>
+          </FormWrapper>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+          <NavBar />
+          <H1>{this.props.message}</H1>
+        </Container>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  message: state.auth.message
+  message: state.auth.message,
+  isLoggedIn: state.auth.isLoggedIn
 })
 
 export default connect(
