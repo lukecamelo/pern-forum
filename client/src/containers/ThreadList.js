@@ -40,9 +40,9 @@ class ThreadList extends Component {
       return (
         <Container>
           <ListWrapper>{threadLinks}</ListWrapper>
-          <Link className="logout" to="/newthread">
+          {/* <Link className="logout" to="/newthread">
             Post Thread
-          </Link>
+          </Link> */}
         </Container>
       )
     } else {
