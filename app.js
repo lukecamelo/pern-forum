@@ -33,6 +33,10 @@ app.get('*', (req, res) => {
 
 models.user.hasMany(models.thread)
 models.thread.belongsTo(models.user)
+// models.post.belongsTo(models.thread)
+// models.thread.hasMany(models.post)
+// models.user.hasMany(models.post)
+// models.post.belongsTo(models.user)
 
 models.sequelize
   .sync({ force: true })

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchThreads, fetchData } from '../actions/threadActions'
 
 import styled from 'styled-components'
+import { Container } from '../components/Login'
 import NavBar from '../components/NavBar'
 
 const ThreadWrapper = styled.section`
@@ -42,7 +43,7 @@ class Thread extends Component {
       )
       const author = this.props.users.find(user => user.id == thread.userId)
       return (
-        <div>
+        <Container>
           <NavBar />
           <ThreadWrapper>
             <StyledThread>
@@ -52,10 +53,15 @@ class Thread extends Component {
               <ThreadContent>{thread.content}</ThreadContent>
             </StyledThread>
           </ThreadWrapper>
-        </div>
+        </Container>
       )
     } else {
-      return <h1>Loading thread...</h1>
+      return (
+        <Container>
+          <NavBar />
+          <h1>Loading thread...</h1>
+        </Container>
+      )
     }
   }
 }
