@@ -1,12 +1,19 @@
-import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD } from '../actions/types'
+import {
+  FETCH_DATA,
+  FETCH_THREADS,
+  POST_NEW_THREAD,
+  MAKE_NEW_POST,
+  FETCH_POSTS
+} from '../actions/types'
 
 const initialState = {
   users: [],
   threads: [],
+  posts: []
 }
 
 export default (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_DATA:
       return {
         ...state,
@@ -20,7 +27,17 @@ export default (state = initialState, action) => {
     case POST_NEW_THREAD:
       return {
         ...state,
-        threads: [ ...state.threads, action.payload ]
+        threads: [...state.threads, action.payload]
+      }
+    case MAKE_NEW_POST:
+      return {
+        ...state,
+        posts: [...state.posts, action.payload]
+      }
+    case FETCH_POSTS: 
+      return {
+        ...state,
+        posts: action.payload
       }
     default:
       return state

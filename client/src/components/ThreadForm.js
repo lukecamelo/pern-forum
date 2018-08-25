@@ -7,7 +7,7 @@ import styled from 'styled-components'
 import NavBar from './NavBar'
 import './NavBar.css'
 
-const ThreadContentInput = styled.textarea`
+export const ThreadContentInput = styled.textarea`
   background: ${props => props.theme.primary};
   border-radius: 3px;
   border: none;

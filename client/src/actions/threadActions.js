@@ -1,4 +1,4 @@
-import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD, MAKE_NEW_POST } from './types'
+import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD, MAKE_NEW_POST, FETCH_POSTS } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users', {
@@ -47,12 +47,31 @@ export const postNewThread = (title, content, userId) => dispatch => {
     .catch(err => console.log(err))
 }
 
-export const makeNewPost = (content, userId, threadId) => dispatch => {
+export const makeNewPost = (content, username, userId, threadId) => dispatch => {
   fetch(`/api/threads/${threadId}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ content, userId, threadId })
+    body: JSON.stringify({ content, username, userId, threadId })
   })
+  .then(res => res.json())
+  .then(post => {
+    dispatch({
+      type: MAKE_NEW_POST,
+      payload: post
+    })
+  })
+  .catch(err => console.log('error making post: ', err))
+}
+
+export const fetchPosts = threadId => dispatch => {
+  fetch(`/api/threads/${threadId}/posts`)
+    .then(res => res.json())
+    .then(posts => {
+      dispatch({
+        type: FETCH_POSTS,
+        payload: posts
+      })
+    })
 }
