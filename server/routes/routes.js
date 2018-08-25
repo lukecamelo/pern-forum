@@ -30,11 +30,12 @@ router.post('/api/threads', (req, res) => {
       models.thread.findOne({ where: { id: thread.id }, include: [models.user] })
     )
     .then(threadWithAssociations => res.json(threadWithAssociations))
-    .catch(err =>
-      res.status(400).json({
-        err: `User with id = [${body.userId}] doesn't exist in the database`
-      })
-    )
+    // .catch(err =>
+    //   res.status(400).json({
+    //     err: `User with id = [${body.userId}] doesn't exist in the database`
+    //   })
+    // )
+    .catch(err => console.log(err))
 })
 
 // Returns all threads
