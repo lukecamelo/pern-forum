@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
 import { Container, FormWrapper, Input, Button } from './Login'
 import styled from 'styled-components'
 import NavBar from './NavBar'
+import './NavBar.css'
 
 const ThreadContentInput = styled.textarea`
   background: ${props => props.theme.primary};
@@ -30,7 +32,7 @@ class ThreadForm extends Component {
     this.props.fetchThreads()
     console.log(localStorage.UserId)
   }
-  
+
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -57,7 +59,9 @@ class ThreadForm extends Component {
             rows="10"
             placeholder="thread content"
           />
-          <Button
+          <Link
+            to="/"
+            className="logout"
             onClick={() =>
               this.props.postNewThread(
                 this.state.title,
@@ -67,7 +71,7 @@ class ThreadForm extends Component {
             }
           >
             Submit Thread
-          </Button>
+          </Link>
         </FormWrapper>
       </Container>
     )

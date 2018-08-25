@@ -1,4 +1,4 @@
-import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD } from './types'
+import { FETCH_DATA, FETCH_THREADS, POST_NEW_THREAD, MAKE_NEW_POST } from './types'
 
 export const fetchData = () => dispatch => {
   fetch('/api/users', {
@@ -45,4 +45,14 @@ export const postNewThread = (title, content, userId) => dispatch => {
       })
     })
     .catch(err => console.log(err))
+}
+
+export const makeNewPost = (content, userId, threadId) => dispatch => {
+  fetch(`/api/threads/${threadId}/posts`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ content, userId, threadId })
+  })
 }
