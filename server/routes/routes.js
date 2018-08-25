@@ -63,6 +63,7 @@ router.post('/api/threads/:id/posts', (req, res) => {
     .findById(req.body.userId)
     .then(() =>
       models.post.create({
+        author: req.body.username,
         content: req.body.content,
         userId: req.body.userId,
         threadId: req.params.id
