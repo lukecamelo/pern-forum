@@ -19,7 +19,17 @@
   border: 2px solid #0266c8;
 }
 
-.logout:hover {
+.thread-button {
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  padding: 14px;
+  transition: .2s;
+  border-radius: 5px;
+  border: 2px solid #0266c8;
+}
+
+.logout:hover, .thread-button:hover {
   color: white;
   background-color: #f195ac;
   border: 2px solid #f195ac;

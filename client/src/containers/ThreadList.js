@@ -17,10 +17,8 @@ const ListWrapper = styled.main`
 
 class ThreadList extends Component {
   componentDidMount = () => {
-    if (!this.props.threads.length || !this.props.users.length) {
-      this.props.fetchThreads()
-      this.props.fetchData()
-    }
+    this.props.fetchThreads()
+    this.props.fetchData()
   }
 
   fetchThreadAuthor = userId => {
@@ -28,8 +26,9 @@ class ThreadList extends Component {
   }
 
   render() {
+    const threads = this.props.data
     if (this.props.threads.length && this.props.users.length) {
-      const threadLinks = this.props.threads.map(thread => {
+      const threadLinks = threads.map(thread => {
         return (
           <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
             {thread.title} -{' '}
@@ -40,9 +39,6 @@ class ThreadList extends Component {
       return (
         <Container>
           <ListWrapper>{threadLinks}</ListWrapper>
-          {/* <Link className="logout" to="/newthread">
-            Post Thread
-          </Link> */}
         </Container>
       )
     } else {
