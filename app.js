@@ -39,7 +39,7 @@ models.thread.belongsTo(models.user)
 // models.post.belongsTo(models.user)
 
 models.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     app.listen(port, () => {
       console.log(`Running on http://localhost:${port}`)
