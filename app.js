@@ -14,9 +14,6 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const port = process.env.PORT || 8080
-// app.listen(port, () => {
-//   console.log(`Running on http://localhost:${port}`)
-// })
 
 const user = require('./server/routes/user')
 const auth = require('./server/routes/auth')
@@ -40,6 +37,7 @@ models.thread.belongsTo(models.user)
 
 models.sequelize
   .sync({ force: true })
+  // .sync()
   .then(() => {
     app.listen(port, () => {
       console.log(`Running on http://localhost:${port}`)

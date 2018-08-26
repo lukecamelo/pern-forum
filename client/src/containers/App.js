@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
-import { fetchData } from '../actions/threadActions'
+import { fetchData, fetchThreads } from '../actions/threadActions'
 import { Link } from 'react-router-dom'
 
 import NavBar from '../components/NavBar'
 import { H1 } from '../components/Login'
 import ThreadList from './ThreadList'
+import Pagination from '../components/Pagination'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -15,30 +16,39 @@ const Wrapper = styled.div`
 class App extends Component {
   componentDidMount() {
     this.props.fetchData()
+    this.props.fetchThreads()
   }
 
   render() {
-    return (
-      <Wrapper>
-        <NavBar />
-        {this.props.isLoggedIn ? (
-          <Wrapper>
+    if (this.props.isLoggedIn && this.props.threads.length) {
+      return (
+        <Wrapper>
+          <NavBar/>
+          <Pagination data={this.props.threads}>
             <ThreadList />
-            <Link className='logout' to="/newthread">Post Thread</Link>
-          </Wrapper>
-        ) : (
+          </Pagination>
+          <Link className="thread-button" to="/newthread">
+            Post Thread
+          </Link>
+        </Wrapper>
+      )
+    } else {
+      return (
+        <Wrapper>
+          <NavBar />
           <H1>Please log in to view threads.</H1>
-        )}
-      </Wrapper>
-    )
+        </Wrapper>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn
+  isLoggedIn: state.auth.isLoggedIn,
+  threads: state.threadData.threads
 })
 
 export default connect(
   mapStateToProps,
-  { fetchData }
+  { fetchData, fetchThreads }
 )(App)
