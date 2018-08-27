@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import { Container } from '../components/Login'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
+import Pagination from '../components/Pagination'
+import PostList from '../components/PostList'
 
 const ThreadWrapper = styled.section`
   background-color: #dff4ff;
@@ -31,10 +33,6 @@ const ThreadContent = styled.p`
 `
 
 class Thread extends Component {
-  state = {
-    posts: []
-  }
-
   componentDidMount = () => {
     const {
       match: { params }
@@ -42,11 +40,7 @@ class Thread extends Component {
     this.props.fetchPosts(this.props.match.params.id)
     this.props.fetchData()
     this.props.fetchThreads()
-    this.setState({
-      posts: this.props.posts
-    })
   }
-
 
   render() {
     if (this.props.threads.length && this.props.users.length) {
@@ -54,14 +48,7 @@ class Thread extends Component {
         thread => thread.id == this.props.match.params.id
       )
       const author = this.props.users.find(user => user.id == thread.userId)
-      const posts = this.props.posts.map(post => {
-        return (
-          <div key={post.id}>
-            <h1>{post.author}</h1>
-            <p>{post.content}</p>
-          </div>
-        )
-      })
+
       return (
         <Container>
           <NavBar />
@@ -72,7 +59,9 @@ class Thread extends Component {
               </ThreadHeader>
               <ThreadContent>{thread.content}</ThreadContent>
             </StyledThread>
-            {posts}
+            <Pagination data={this.props.posts}>
+              <PostList />
+            </Pagination>
           </ThreadWrapper>
           <PostForm threadId={this.props.match.params.id} />
         </Container>

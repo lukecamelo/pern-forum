@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.props.isLoggedIn && this.props.threads.length) {
+    if (this.props.isLoggedIn) {
       return (
         <Wrapper>
           <NavBar/>
