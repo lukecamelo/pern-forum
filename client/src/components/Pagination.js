@@ -55,7 +55,6 @@ class Pagination extends Component {
   render() {
     return (
       <div className="pagination">
-        <div className="pagination-controls">{this.createControls()}</div>
         <div className="pagination-results">
           {React.cloneElement(this.props.children, {
             data: this.createPaginatedData()
