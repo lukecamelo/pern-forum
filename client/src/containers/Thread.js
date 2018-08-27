@@ -8,6 +8,7 @@ import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import PostList from '../components/PostList'
+import { Author, PostWrapper, PostContent } from '../components/PostList'
 
 const ThreadWrapper = styled.section`
   background-color: #dff4ff;
@@ -49,6 +50,13 @@ class Thread extends Component {
       )
       const author = this.props.users.find(user => user.id == thread.userId)
 
+      const posts = this.props.posts.map(post => (
+        <PostWrapper key={post.id}>
+          <Author>{post.author}</Author>
+          <PostContent>{post.content}</PostContent>
+        </PostWrapper>
+      ))
+      
       return (
         <Container>
           <NavBar />
@@ -59,9 +67,13 @@ class Thread extends Component {
               </ThreadHeader>
               <ThreadContent>{thread.content}</ThreadContent>
             </StyledThread>
-            <Pagination data={this.props.posts}>
-              <PostList />
-            </Pagination>
+            {posts.length ? (
+              <Pagination data={posts}>
+                <PostList />
+              </Pagination>
+            ) : (
+              <h1>make the first post!</h1>
+            )}
           </ThreadWrapper>
           <PostForm threadId={this.props.match.params.id} />
         </Container>

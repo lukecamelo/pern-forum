@@ -4,7 +4,12 @@ import { ThreadContentInput } from './ThreadForm'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+
+const PostFormContainer = styled(Container)`
+  margin-top: 2em;
+  margin-bottom: 2em;
+`
 
 class PostForm extends Component {
   state = {
@@ -17,22 +22,9 @@ class PostForm extends Component {
     })
   }
 
-  // handleSubmit = async e => {
-  //   try {
-  //     await this.props.makeNewPost(
-  //       this.state.content,
-  //       localStorage.User,
-  //       localStorage.UserId,
-  //       this.props.threadId
-  //     )
-  //   } catch (e) {
-  //     alert(e.message)
-  //   }
-  // }
-
   render() {
     return (
-      <Container>
+      <PostFormContainer>
         <FormWrapper>
           <ThreadContentInput
             name="content"
@@ -55,7 +47,7 @@ class PostForm extends Component {
             Submit Post
           </Button>
         </FormWrapper>
-      </Container>
+      </PostFormContainer>
     )
   }
 }
