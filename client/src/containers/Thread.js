@@ -40,7 +40,7 @@ class Thread extends Component {
     } = this.props
     this.props.fetchPosts(this.props.match.params.id)
     this.props.fetchData()
-    this.props.fetchThreads()
+    // this.props.fetchThreads()
   }
 
   render() {
@@ -56,7 +56,7 @@ class Thread extends Component {
           <PostContent>{post.content}</PostContent>
         </PostWrapper>
       ))
-      
+
       return (
         <Container>
           <NavBar />

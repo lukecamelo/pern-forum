@@ -27,7 +27,7 @@ class ThreadList extends Component {
 
   render() {
     const threads = this.props.data
-    if (this.props.threads.length && this.props.users.length) {
+    if (threads.length && this.props.users.length) {
       const threadLinks = threads.map(thread => {
         return (
           <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
