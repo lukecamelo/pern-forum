@@ -35,11 +35,8 @@ models.thread.belongsTo(models.user)
 // models.user.hasMany(models.post)
 // models.post.belongsTo(models.user)
 
-models.sequelize
-  // .sync({ force: true })
-  .sync()
-  .then(() => {
+// models.sequelize.sync().then(() => {
+// })
     app.listen(port, () => {
       console.log(`Running on http://localhost:${port}`)
     })
-  })

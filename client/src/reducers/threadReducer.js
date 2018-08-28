@@ -3,7 +3,8 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
-  FETCH_POSTS
+  FETCH_POSTS,
+  RESET_POSTS,
 } from '../actions/types'
 
 const initialState = {
@@ -22,7 +23,8 @@ export default (state = initialState, action) => {
     case FETCH_THREADS:
       return {
         ...state,
-        threads: action.payload
+        threads: action.payload,
+        posts: []
       }
     case POST_NEW_THREAD:
       return {
@@ -39,6 +41,8 @@ export default (state = initialState, action) => {
         ...state,
         posts: action.payload
       }
+    case RESET_POSTS:
+      return
     default:
       return state
   }
