@@ -1,5 +1,4 @@
 import React from 'react'
-import { Container } from './Login'
 import styled from 'styled-components'
 
 export const PostWrapper = styled.div`

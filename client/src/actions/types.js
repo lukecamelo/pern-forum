@@ -6,7 +6,6 @@ export const FETCH_SINGLE_THREAD = 'FETCH_SINGLE_THREAD'
 export const POST_NEW_THREAD = 'POST_NEW_THREAD'
 export const MAKE_NEW_POST = 'MAKE_NEW_POST'
 export const FETCH_POSTS = 'FETCH_POSTS'
-export const RESET_POSTS = 'RESET_POSTS'
 
 // Authorization actions
 export const USER_LOGIN_SUCCESS = 'USER_LOGIN_SUCCESS'
