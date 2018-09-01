@@ -24,7 +24,7 @@ export const fetchData = () => dispatch => {
 }
 
 export const fetchThreads = () => dispatch => {
-  fetch('/api/threads')
+  fetch('/api/allposts')
     .then(res => res.json())
     .then(threads => {
       dispatch({
