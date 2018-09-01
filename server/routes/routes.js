@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const { User, Thread } = require('../sequelize')
 const models = require('../models')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
@@ -71,7 +70,25 @@ router.get('/api/threads/:id/posts', (req, res) => {
 })
 
 router.get('/api/allposts', (req, res) => {
-  models.thread.findAll()
+  const compareDateCreated = (a, b) => {
+    if (a.Post.createdAt > b.Post.createdAt) {
+      return -1
+    }
+    if (a.Post.createdAt < b.Post.createdAt) {
+      return 1
+    }
+    return 0
+  }
+  models.thread
+    .findAll({
+      include: [
+        {
+          model: models.post,
+          as: 'Post'
+        }
+      ],
+      order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
+    })
     .then(posts => res.json(posts))
     .catch(err => console.log('error at /api/allposts: ', err))
 })
