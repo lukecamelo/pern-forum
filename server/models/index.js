@@ -59,7 +59,8 @@ db.user.hasMany(db.thread)
 db.user.hasMany(db.post)
 db.post.belongsTo(db.user)
 db.post.belongsTo(db.thread)
-db.thread.hasMany(db.post)
+db.thread.hasMany(db.post, { as: 'Post' })
+
 
 // aliases
 db.sequelize = sequelize

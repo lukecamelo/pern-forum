@@ -28,15 +28,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
-models.user.hasMany(models.thread)
-models.thread.belongsTo(models.user)
-// models.post.belongsTo(models.thread)
-// models.thread.hasMany(models.post)
-// models.user.hasMany(models.post)
-// models.post.belongsTo(models.user)
-
-// models.sequelize.sync().then(() => {
-// })
-app.listen(port, () => {
-  console.log(`Running on http://localhost:${port}`)
+models.sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`Running on http://localhost:${port}`)
+  })
 })

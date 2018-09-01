@@ -45,7 +45,6 @@ class Thread extends Component {
 
   render() {
     if (this.props.threads.length && this.props.users.length) {
-      console.log('in Thread, this.props.users: ', this.props.users)
       const thread = this.props.threads.find(
         thread => thread.id == this.props.match.params.id
       )

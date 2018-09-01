@@ -47,12 +47,13 @@ router.get('/api/threads', (req, res) => {
     if (a.createdAt > b.createdAt) {
       return -1
     }
-    if(a.createdAt < b.createdAt) {
+    if (a.createdAt < b.createdAt) {
       return 1
     }
     return 0
   }
-  models.thread.findAll()
+  models.thread
+    .findAll()
     .then(threads => threads.sort(compareDateCreated))
     .then(threads => res.json(threads))
 })
@@ -67,6 +68,12 @@ router.get('/api/threads/:id/posts', (req, res) => {
   models.post
     .findAll({ where: { threadId: req.params.id } })
     .then(posts => res.json(posts))
+})
+
+router.get('/api/allposts', (req, res) => {
+  models.thread.findAll()
+    .then(posts => res.json(posts))
+    .catch(err => console.log('error at /api/allposts: ', err))
 })
 
 router.post('/api/threads/:id/posts', (req, res) => {
