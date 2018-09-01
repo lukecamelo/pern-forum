@@ -37,6 +37,6 @@ models.thread.belongsTo(models.user)
 
 // models.sequelize.sync().then(() => {
 // })
-    app.listen(port, () => {
-      console.log(`Running on http://localhost:${port}`)
-    })
+app.listen(port, () => {
+  console.log(`Running on http://localhost:${port}`)
+})

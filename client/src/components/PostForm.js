@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, FormWrapper, Input, Button } from './Login'
+import { Container, FormWrapper, Button } from './Login'
 import { ThreadContentInput } from './ThreadForm'
 
 import { connect } from 'react-redux'
@@ -52,9 +52,9 @@ class PostForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.auth.username
-})
+// const mapStateToProps = state => ({
+//   user: state.auth.username
+// })
 
 export default connect(
   null,

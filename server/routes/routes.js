@@ -43,7 +43,18 @@ router.post('/api/threads', (req, res) => {
 
 // Returns all threads
 router.get('/api/threads', (req, res) => {
-  models.thread.findAll().then(threads => res.json(threads))
+  const compareDateCreated = (a, b) => {
+    if (a.createdAt > b.createdAt) {
+      return -1
+    }
+    if(a.createdAt < b.createdAt) {
+      return 1
+    }
+    return 0
+  }
+  models.thread.findAll()
+    .then(threads => threads.sort(compareDateCreated))
+    .then(threads => res.json(threads))
 })
 
 // Returns all users
