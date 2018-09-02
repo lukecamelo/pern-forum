@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { fetchData, fetchThreads } from '../actions/threadActions'
 import { Link } from 'react-router-dom'
 
-import NavBar from '../components/NavBar'
 import { H1 } from '../components/Login'
+import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 
@@ -13,16 +13,17 @@ const Wrapper = styled.div`
   text-align: center;
 `
 
-class App extends Component {
+export class App extends Component {
   componentDidMount() {
     this.props.fetchData()
     this.props.fetchThreads()
   }
-
+  
   render() {
     if (this.props.isLoggedIn && this.props.threads.length) {
       return (
         <Wrapper>
+          <h1>howdy</h1>
           <NavBar/>
           <Pagination data={this.props.threads}>
             <ThreadList />
