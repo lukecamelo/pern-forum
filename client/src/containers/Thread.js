@@ -61,12 +61,14 @@ class Thread extends Component {
         <Container>
           <NavBar />
           <ThreadWrapper>
+
             <StyledThread>
               <ThreadHeader>
                 {thread.title}, posted by {author.username}
               </ThreadHeader>
               <ThreadContent>{thread.content}</ThreadContent>
             </StyledThread>
+
             {posts.length ? (
               <Pagination data={posts}>
                 <PostList />
@@ -74,6 +76,7 @@ class Thread extends Component {
             ) : (
               <h1>make the first post!</h1>
             )}
+            
           </ThreadWrapper>
           <PostForm threadId={this.props.match.params.id} />
         </Container>

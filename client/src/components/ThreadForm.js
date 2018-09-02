@@ -30,7 +30,6 @@ class ThreadForm extends Component {
 
   componentDidMount = () => {
     this.props.fetchThreads()
-    console.log(localStorage.UserId)
   }
 
   changeHandler = e => {

@@ -13,7 +13,7 @@ const StyledNav = styled.nav`
   background-color: ${props => props.theme.primary};
 `
 
-const NavBar = ({ isLoggedIn, ...props }) => {
+export const NavBar = ({ isLoggedIn, ...props }) => {
 
   if (isLoggedIn) {
     return(
