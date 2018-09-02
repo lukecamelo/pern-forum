@@ -70,15 +70,6 @@ router.get('/api/threads/:id/posts', (req, res) => {
 })
 
 router.get('/api/allposts', (req, res) => {
-  const compareDateCreated = (a, b) => {
-    if (a.Post.createdAt > b.Post.createdAt) {
-      return -1
-    }
-    if (a.Post.createdAt < b.Post.createdAt) {
-      return 1
-    }
-    return 0
-  }
   models.thread
     .findAll({
       include: [
