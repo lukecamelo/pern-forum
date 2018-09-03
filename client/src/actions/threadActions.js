@@ -4,6 +4,7 @@ import {
   POST_NEW_THREAD,
   MAKE_NEW_POST,
   FETCH_POSTS,
+  FETCH_SINGLE_THREAD,
 } from './types'
 
 export const fetchData = () => dispatch => {
@@ -33,6 +34,19 @@ export const fetchThreads = () => dispatch => {
       })
     })
     .catch(err => console.log('FETCH_THREADS ERROR: ', err))
+}
+
+// PROBABLY NOT NECESSARY
+export const fetchSingleThread = threadId => dispatch => {
+  fetch(`/api/threads/${threadId}`)
+    .then(res => res.json())
+    .then(thread => {
+      dispatch({
+        type: FETCH_SINGLE_THREAD,
+        payload: thread
+      })
+    })
+    .catch(err => console.log('FETCH_SINGLE_THREAD ERROR: ', err))
 }
 
 export const postNewThread = (title, content, userId) => dispatch => {

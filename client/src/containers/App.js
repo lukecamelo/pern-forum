@@ -23,7 +23,6 @@ export class App extends Component {
     if (this.props.isLoggedIn && this.props.threads.length) {
       return (
         <Wrapper>
-          <h1>howdy</h1>
           <NavBar/>
           <Pagination data={this.props.threads}>
             <ThreadList />

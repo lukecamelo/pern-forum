@@ -18,15 +18,6 @@ export const PostContent = styled.p`
   padding: 0 15px 15px 15px;
 `
 
-const PostList = ({ data }) => {
-  // const posts = data.map(post => (
-  //   <PostWrapper key={post.id}>
-  //     <Author>{post.author}</Author>
-  //     <PostContent>{post.content}</PostContent>
-  //   </PostWrapper>
-  // ))
-
-  return data
-}
+const PostList = ({ data }) => data
 
 export default PostList
