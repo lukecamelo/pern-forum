@@ -15,7 +15,6 @@ const Wrapper = styled.div`
 
 export class App extends Component {
   componentDidMount() {
-    this.props.fetchData()
     this.props.fetchThreads()
   }
   

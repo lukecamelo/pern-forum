@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
-const { User } = require('../sequelize')
 const models = require('../models')
 const bcrypt = require('bcrypt-nodejs')
 
@@ -28,21 +27,6 @@ router.post('/login', (req, res, next) => {
     }
   )(req, res)
 })
-
-// passport version
-// router.post(
-//   '/signup',
-//   passport.authenticate(
-//     'local-signup',
-//     { session: false },
-//     (req, res, next) => {
-//       res.json({
-//         message: 'signup successful!',
-//         user: req.user
-//       })
-//     }
-//   )
-// )
 
 function generateHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
