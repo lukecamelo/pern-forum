@@ -57,9 +57,22 @@ router.get('/api/threads', (req, res) => {
     .then(threads => res.json(threads))
 })
 
+// get single thread
+router.get('/api/threads/:id', (req, res) => {
+  models.thread
+    .findOne({ where: { id: req.params.id } })
+    .then(thread => res.json(thread))
+})
+
 // Returns all users
 router.get('/api/users', (req, res) => {
   models.user.findAll().then(users => res.json(users))
+})
+
+router.get('/api/users/:id', (req, res) => {
+  models.user
+    .findOne({ where: { id: req.params.id } })
+    .then(user => res.json(user))
 })
 
 // Returns all posts in a thread

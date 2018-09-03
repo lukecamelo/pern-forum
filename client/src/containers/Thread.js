@@ -23,33 +23,60 @@ const StyledThread = styled.div`
   background-color: white;
   border: 2px solid ${props => props.theme.primary};
 `
-const ThreadHeader = styled.h2`
+export const ThreadHeader = styled.h2`
   margin-left: 1em;
   border-bottom: 2px solid ${props => props.theme.secondary}
   text-align: left;
 `
-const ThreadContent = styled.p`
+const content = styled.p`
   padding-left: 10px;
   padding-right: 10px;
 `
 
-class Thread extends Component {
+export class Thread extends Component {
+  state = {
+    title: '',
+    content: '',
+    author: '',
+    userId: null,
+    threadHasLoaded: false
+  }
+
   componentDidMount = () => {
     const {
       match: { params }
     } = this.props
-    this.props.fetchPosts(this.props.match.params.id)
-    this.props.fetchData()
-    // this.props.fetchThreads()
+    this.props.fetchPosts(params.id)
+    this.fetchSingleThread(params.id)
+      .then(thread =>
+        this.setState({
+          title: thread.title,
+          content: thread.content,
+          userId: thread.userId
+        })
+      )
+      .then(() => {
+        this.fetchThreadAuthor(this.state.userId).then(author =>
+          this.setState({ author: author.username, threadHasLoaded: true })
+        )
+      })
+  }
+
+  fetchSingleThread = async threadId => {
+    const result = await fetch(`/api/threads/${threadId}`)
+    const thread = result.json()
+    return thread
+  }
+
+  fetchThreadAuthor = async userId => {
+    const result = await fetch(`/api/users/${userId}`)
+    const author = result.json()
+    return author
   }
 
   render() {
-    if (this.props.threads.length && this.props.users.length) {
-      const thread = this.props.threads.find(
-        thread => thread.id == this.props.match.params.id
-      )
-      const author = this.props.users.find(user => user.id == thread.userId)
-
+    const { title, content, author, threadHasLoaded } = this.state
+    if (threadHasLoaded) {
       const posts = this.props.posts.map(post => (
         <PostWrapper key={post.id}>
           <Author>{post.author}</Author>
@@ -61,12 +88,11 @@ class Thread extends Component {
         <Container>
           <NavBar />
           <ThreadWrapper>
-
             <StyledThread>
               <ThreadHeader>
-                {thread.title}, posted by {author.username}
+                {title}, posted by {author}
               </ThreadHeader>
-              <ThreadContent>{thread.content}</ThreadContent>
+              <content>{content}</content>
             </StyledThread>
 
             {posts.length ? (
@@ -76,7 +102,6 @@ class Thread extends Component {
             ) : (
               <h1>make the first post!</h1>
             )}
-            
           </ThreadWrapper>
           <PostForm threadId={this.props.match.params.id} />
         </Container>
