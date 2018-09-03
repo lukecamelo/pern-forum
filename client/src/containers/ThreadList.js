@@ -15,7 +15,7 @@ const ListWrapper = styled.main`
   margin: 0 auto;
 `
 
-class ThreadList extends Component {
+export class ThreadList extends Component {
   componentDidMount = () => {
     this.props.fetchThreads()
     this.props.fetchData()

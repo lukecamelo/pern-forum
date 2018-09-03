@@ -12,8 +12,6 @@ class Pagination extends Component {
     const data = this.props.data
     const pageSize = this.props.pageSize
     let pageCount = parseInt(data.length / pageSize)
-    console.log('in Pagination, passed data: ', data)
-    console.log('in Pagination, page count: ', pageCount)
     if (data.length % pageSize > 0) {
       pageCount++
     }
