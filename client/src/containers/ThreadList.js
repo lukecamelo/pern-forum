@@ -17,7 +17,6 @@ const ListWrapper = styled.main`
 
 export class ThreadList extends Component {
   componentDidMount = () => {
-    this.props.fetchThreads()
     this.props.fetchData()
   }
 
@@ -48,11 +47,10 @@ export class ThreadList extends Component {
 }
 
 const mapStateToProps = state => ({
-  threads: state.threadData.threads,
   users: state.threadData.users
 })
 
 export default connect(
   mapStateToProps,
-  { fetchThreads, fetchData }
+  { fetchData }
 )(ThreadList)

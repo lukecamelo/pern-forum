@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { fetchThreads, fetchData, fetchPosts } from '../actions/threadActions'
-
 import styled from 'styled-components'
 import { Container } from '../components/Login'
 import NavBar from '../components/NavBar'
@@ -28,7 +25,7 @@ export const ThreadHeader = styled.h2`
   border-bottom: 2px solid ${props => props.theme.secondary}
   text-align: left;
 `
-const content = styled.p`
+const ThreadContent = styled.p`
   padding-left: 10px;
   padding-right: 10px;
 `
@@ -38,6 +35,7 @@ export class Thread extends Component {
     title: '',
     content: '',
     author: '',
+    threadPosts: [],
     userId: null,
     threadHasLoaded: false
   }
@@ -46,12 +44,12 @@ export class Thread extends Component {
     const {
       match: { params }
     } = this.props
-    this.props.fetchPosts(params.id)
     this.fetchSingleThread(params.id)
       .then(thread =>
         this.setState({
           title: thread.title,
           content: thread.content,
+          threadPosts: thread.Post,
           userId: thread.userId
         })
       )
@@ -75,9 +73,9 @@ export class Thread extends Component {
   }
 
   render() {
-    const { title, content, author, threadHasLoaded } = this.state
+    const { title, content, author, threadHasLoaded, threadPosts } = this.state
     if (threadHasLoaded) {
-      const posts = this.props.posts.map(post => (
+      const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
           <Author>{post.author}</Author>
           <PostContent>{post.content}</PostContent>
@@ -92,7 +90,7 @@ export class Thread extends Component {
               <ThreadHeader>
                 {title}, posted by {author}
               </ThreadHeader>
-              <content>{content}</content>
+              <ThreadContent>{content}</ThreadContent>
             </StyledThread>
 
             {posts.length ? (
@@ -117,13 +115,4 @@ export class Thread extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  threads: state.threadData.threads,
-  users: state.threadData.users,
-  posts: state.threadData.posts
-})
-
-export default connect(
-  mapStateToProps,
-  { fetchThreads, fetchData, fetchPosts }
-)(Thread)
+export default Thread
