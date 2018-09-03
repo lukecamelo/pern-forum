@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { fetchData, fetchThreads } from '../actions/threadActions'
+import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../components/Login'
@@ -16,6 +17,7 @@ const Wrapper = styled.div`
 export class App extends Component {
   componentDidMount() {
     this.props.fetchThreads()
+    // this.props.checkUserLoggedIn()
   }
   
   render() {
@@ -49,5 +51,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchThreads }
+  { fetchData, fetchThreads, checkUserLoggedIn }
 )(App)

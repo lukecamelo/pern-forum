@@ -1,4 +1,4 @@
-import { USER_LOGIN_SUCCESS, USER_LOGOUT, USER_SIGNUP, USER_LOGIN_FAIL } from './types'
+import { USER_LOGIN_SUCCESS, USER_LOGOUT, USER_SIGNUP, USER_LOGIN_FAIL, CHECK_USER_LOGGEDIN } from './types'
 
 export const userLogin = (username, password) => dispatch => {
   fetch('/auth/login', {
@@ -52,4 +52,17 @@ export const userSignup = (username, password) => dispatch => {
       })
     })
     .catch(err => console.log(err))
+}
+
+export const checkUserLoggedIn = () => dispatch => {
+  fetch('/user/profile', {
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.Authorization
+    }
+  })
+    .then(res => res.json())
+    .then(res => dispatch({
+      type: CHECK_USER_LOGGEDIN,
+      payload: res
+    }))
 }

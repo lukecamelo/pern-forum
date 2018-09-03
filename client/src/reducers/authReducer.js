@@ -2,7 +2,8 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGOUT,
   USER_SIGNUP,
-  USER_LOGIN_FAIL
+  USER_LOGIN_FAIL,
+  CHECK_USER_LOGGEDIN
 } from '../actions/types'
 
 let isToken
@@ -51,6 +52,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         message: action.payload
+      }
+    case CHECK_USER_LOGGEDIN:
+      return {
+        ...state,
+        username: action.payload.username,
+        isLoggedIn: true,
+        userId: action.payload.id
       }
     default: {
       return state
