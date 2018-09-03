@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import './NavBar.css'
-import { userLogout } from '../actions/authActions';
+import { userLogout } from '../actions/authActions'
 
 const StyledNav = styled.nav`
   display: flex;
@@ -14,16 +14,15 @@ const StyledNav = styled.nav`
 `
 
 export const NavBar = ({ isLoggedIn, ...props }) => {
-
   if (isLoggedIn) {
-    return(
+    return (
       <StyledNav>
         <Link to="/" className="navlink">
-        Home
-      </Link>
-      <a className='logout' onClick={() => props.userLogout()}>
-        Logout
-      </a>
+          Home
+        </Link>
+        <a className="logout" onClick={() => props.userLogout()}>
+          Logout
+        </a>
       </StyledNav>
     )
   }
@@ -48,4 +47,7 @@ const mapStateToProps = state => ({
   isLoggedIn: state.auth.isLoggedIn
 })
 
-export default connect(mapStateToProps, { userLogout })(NavBar)
+export default connect(
+  mapStateToProps,
+  { userLogout }
+)(NavBar)

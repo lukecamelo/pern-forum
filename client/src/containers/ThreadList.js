@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchThreads, fetchData } from '../actions/threadActions'
+import { fetchData } from '../actions/threadActions'
 import styled from 'styled-components'
 import { Container } from '../components/Login'
 import './ThreadList.css'
 
-const ListWrapper = styled.main`
+export const ListWrapper = styled.main`
   background-color: #f4afc2;
   display: flex;
   flex-direction: column;
