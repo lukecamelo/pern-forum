@@ -9,6 +9,7 @@ import { H1 } from '../components/Login'
 import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
+import Avatar from 'react-avatar'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -25,6 +26,7 @@ export class App extends Component {
       return (
         <Wrapper>
           <NavBar/>
+          <Avatar size='100' src='https://i.imgur.com/F6JK5tM.jpg' />
           <Pagination data={this.props.threads}>
             <ThreadList />
           </Pagination>

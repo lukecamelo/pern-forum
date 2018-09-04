@@ -8,13 +8,25 @@ class Signup extends React.Component {
   state = {
     usernameInput: '',
     passwordInput: '',
+    avatarUrlInput: '',
     hasSignedUp: false
+  }
+
+  componentDidMount = () => {
+    this.checkUrlExists('https://i.imgur.com/F6JK5tM.jpg').then(res =>
+      console.log(res)
+    )
   }
 
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  checkUrlExists = async testUrl => {
+    const request = await fetch(testUrl, { mode: 'cors' })
+    return request.status
   }
 
   render() {
@@ -39,11 +51,19 @@ class Signup extends React.Component {
               onChange={this.changeHandler}
               placeholder="enter your password"
             />
+            <Input
+              name="avatarUrlInput"
+              type="text"
+              value={this.state.avatarUrlInput}
+              onChange={this.changeHandler}
+              placeholder="please enter imgur link for avatar"
+            />
             <Button
               onClick={() =>
                 this.props.userSignup(
                   this.state.usernameInput,
-                  this.state.passwordInput
+                  this.state.passwordInput,
+                  this.state.avatarUrlInput
                 )
               }
             >

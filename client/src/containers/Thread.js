@@ -5,6 +5,7 @@ import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import PostList from '../components/PostList'
+import Avatar from 'react-avatar'
 import { Author, PostWrapper, PostContent } from '../components/PostList'
 
 const ThreadWrapper = styled.section`
@@ -77,6 +78,7 @@ export class Thread extends Component {
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
+        <Avatar size='150' src={post.user.avatarUrl} />
           <Author>{post.author}</Author>
           <PostContent>{post.content}</PostContent>
         </PostWrapper>
