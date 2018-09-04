@@ -34,18 +34,20 @@ function generateHash(password) {
 
 router.post('/signup', (req, res) => {
   models.user.findOne({ where: { username: req.body.username } }).then(user => {
-    if(user) {
+    if (user) {
       console.log('user already exists?')
       return res.json({ success: false, message: 'That user already exists' })
     } else {
       const userPass = generateHash(req.body.password)
-      models.user.create({ username: req.body.username, password: userPass }).then(newUser => {
-        if(!newUser) {
-          return false
-        } else {
-          return res.json({ success: true, message: 'User created!' })
-        }
-      })
+      models.user
+        .create({ username: req.body.username, password: userPass, avatarUrl: req.body.avatarUrl })
+        .then(newUser => {
+          if (!newUser) {
+            return false
+          } else {
+            return res.json({ success: true, message: 'User created!' })
+          }
+        })
     }
   })
 })

@@ -60,7 +60,16 @@ router.get('/api/threads', (req, res) => {
 // get single thread
 router.get('/api/threads/:id', (req, res) => {
   models.thread
-    .findOne({ where: { id: req.params.id }, include: [{ model: models.post, as: 'Post' }] })
+    .findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: models.post,
+          as: 'Post',
+          include: [{ model: models.user }]
+        }
+      ]
+    })
     .then(thread => res.json(thread))
 })
 

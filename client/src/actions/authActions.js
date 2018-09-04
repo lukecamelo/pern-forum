@@ -36,13 +36,13 @@ export const userLogout = () => dispatch => {
   })
 }
 
-export const userSignup = (username, password) => dispatch => {
+export const userSignup = (username, password, avatarUrl) => dispatch => {
   fetch('/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password, avatarUrl })
   })
     .then(res => res.json())
     .then(res => {

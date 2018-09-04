@@ -31,10 +31,8 @@ describe('<ThreadList />', () => {
   })
 
   it('renders the correct thread authors', () => {
-    expect(
-      wrapper.find('strong').forEach((child, i) => {
-        expect(child.text()).toEqual('user' + props.data[i].userId)
-      })
-    )
+    wrapper.find('strong').forEach((child, i) => {
+      expect(child.text()).toEqual('user' + props.data[i].userId)
+    })
   })
 })
