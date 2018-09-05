@@ -14,33 +14,38 @@ router.post('/api/users', (req, res) => {
   models.user.create(req.body).then(user => res.json(user))
 })
 
-// Creates thread
-router.post('/api/threads', (req, res) => {
+// WORK IN PROGRESS, PROBABLY WONT WORK
+const makeThreadAndOp = async (req, res, next) => {
   const body = req.body
-  models.user
-    .findById(body.userId)
-    .then(() =>
-      models.thread.create({
-        title: body.title,
-        content: body.content,
-        userId: body.userId
-      })
-    )
-    .then(thread =>
-      models.thread.findOne({
-        where: { id: thread.id },
-        include: [models.user]
-      })
-    )
-    .then(threadWithAssociations => res.json(threadWithAssociations))
-    .catch(err =>
-      res.status(400).json({
-        err: `User with id = [${body.userId}] doesn't exist in the database`
-      })
-    )
+  // const thread = await models.thread.findById(req.body.threadId)
+
+  let post = {
+    author: body.author,
+    content: body.content,
+    userId: body.userId,
+    thread: {
+      title: body.title,
+      content: body.content,
+      userId: body.userId
+    }
+  }
+
+  post = await models.post.create(post, { include: [models.thread] })
+  post = await models.post.findOne({
+    where: { id: post.id },
+    include: [models.user, models.thread]
+  })
+  req.data = post
+  next()
+}
+
+// Creates thread
+router.post('/api/threads', makeThreadAndOp, (req, res) => {
+  return req.data
 })
 
 // Returns all threads
+// NOT BEING USED. /api/allposts is currently being used for thread list
 router.get('/api/threads', (req, res) => {
   const compareDateCreated = (a, b) => {
     if (a.createdAt > b.createdAt) {
@@ -67,7 +72,8 @@ router.get('/api/threads/:id', (req, res) => {
           model: models.post,
           as: 'Post',
           include: [{ model: models.user }]
-        }
+        },
+        { model: models.user }
       ]
     })
     .then(thread => res.json(thread))

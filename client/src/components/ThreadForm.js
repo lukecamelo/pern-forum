@@ -65,7 +65,8 @@ class ThreadForm extends Component {
               this.props.postNewThread(
                 this.state.title,
                 this.state.content,
-                this.props.loggedInUserId
+                this.props.loggedInUserId,
+                this.props.username
               )
             }
           >
@@ -79,7 +80,8 @@ class ThreadForm extends Component {
 
 const mapStateToProps = state => ({
   users: state.threadData.users,
-  loggedInUserId: state.auth.userId
+  loggedInUserId: state.auth.userId,
+  username: state.auth.username
 })
 
 export default connect(
