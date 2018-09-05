@@ -49,13 +49,13 @@ export const fetchSingleThread = threadId => dispatch => {
     .catch(err => console.log('FETCH_SINGLE_THREAD ERROR: ', err))
 }
 
-export const postNewThread = (title, content, userId) => dispatch => {
+export const postNewThread = (title, content, userId, author) => dispatch => {
   fetch('/api/threads', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ title, content, userId })
+    body: JSON.stringify({ title, content, userId, author })
   })
     .then(res => res.json())
     .then(thread => {
@@ -64,7 +64,7 @@ export const postNewThread = (title, content, userId) => dispatch => {
         payload: thread
       })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log('this is an error?: ', err))
 }
 
 export const makeNewPost = (
