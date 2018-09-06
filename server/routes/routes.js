@@ -14,10 +14,9 @@ router.post('/api/users', (req, res) => {
   models.user.create(req.body).then(user => res.json(user))
 })
 
-// WORK IN PROGRESS, PROBABLY WONT WORK
+// WORK IN PROGRESS, SOMEHOW ACTUALLY DOES WORK
 const makeThreadAndOp = async (req, res, next) => {
   const body = req.body
-  // const thread = await models.thread.findById(req.body.threadId)
 
   let post = {
     author: body.author,
