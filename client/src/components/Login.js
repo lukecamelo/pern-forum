@@ -71,7 +71,7 @@ export const StyledLink = styled(Link)`
   }
 `
 
-class Login extends Component {
+export class Login extends Component {
   state = {
     usernameInput: '',
     passwordInput: ''
