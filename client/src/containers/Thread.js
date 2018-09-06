@@ -80,6 +80,7 @@ export class Thread extends Component {
 
   fetchThreadAndAuthor = async () => {
     const thread = await this.fetchSingleThread(this.props.match.params.id)
+    console.log(thread)
     const author = await this.fetchThreadAuthor(thread.userId)
     this.setState({
       title: thread.title,
@@ -102,6 +103,7 @@ export class Thread extends Component {
           <PostContent>{post.content}</PostContent>
         </PostWrapper>
       ))
+      const op = posts.shift()
 
       return (
         <Container>
@@ -110,7 +112,7 @@ export class Thread extends Component {
             <ThreadHeader>
               {title}, posted by {author}
             </ThreadHeader>
-            <StyledThread>{posts[0]}</StyledThread>
+            <StyledThread>{op}</StyledThread>
 
             {posts.length ? (
               <Pagination data={posts}>
