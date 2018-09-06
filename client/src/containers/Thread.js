@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import axios from 'axios'
 import { Container } from '../components/Login'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
-import { Author, PostWrapper, PostContent } from '../components/PostList'
+// import { Author, PostWrapper, PostContent } from '../components/PostList'
 
 const ThreadWrapper = styled.section`
   background-color: #dff4ff;
@@ -30,6 +31,23 @@ const ThreadContent = styled.p`
   padding-left: 10px;
   padding-right: 10px;
 `
+const PostWrapper = styled.div`
+  // border: 1px solid ${props => props.theme.secondary};
+  display: flex;
+  background-color: white;
+  text-align: left;
+  margin: 1em;
+`
+const User = styled.div``
+const Author = styled.h2`
+  color: ${props => props.theme.primary}
+  font-size: 18px;
+`
+const PostContent = styled.p`
+  color: black;
+  font-size: 16px;
+  padding: 0 15px 15px 15px;
+`
 
 export class Thread extends Component {
   state = {
@@ -41,45 +59,46 @@ export class Thread extends Component {
     threadHasLoaded: false
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     const {
       match: { params }
     } = this.props
-    this.fetchSingleThread(params.id)
-      .then(thread =>
-        this.setState({
-          title: thread.title,
-          content: thread.content,
-          threadPosts: thread.Post,
-          userId: thread.userId
-        })
-      )
-      .then(() => {
-        this.fetchThreadAuthor(this.state.userId).then(author =>
-          this.setState({ author: author.username, threadHasLoaded: true })
-        )
-      })
+    
+    this.fetchThreadAndAuthor()
   }
 
   fetchSingleThread = async threadId => {
-    const result = await fetch(`/api/threads/${threadId}`)
-    const thread = result.json()
-    return thread
+    const thread = await axios.get(`/api/threads/${threadId}`)
+    console.log(thread.data)
+    return thread.data
   }
 
   fetchThreadAuthor = async userId => {
-    const result = await fetch(`/api/users/${userId}`)
-    const author = result.json()
-    return author
+    const author = await axios.get(`/api/users/${userId}`)
+    return author.data
   }
 
+  fetchThreadAndAuthor = async () => {
+    const thread = await this.fetchSingleThread(this.props.match.params.id)
+    const author = await this.fetchThreadAuthor(thread.userId)
+    this.setState({
+      title: thread.title,
+      content: thread.content,
+      threadPosts: thread.Post,
+      userId: thread.userId,
+      author: author.username,
+      threadHasLoaded: true
+    })
+  }
   render() {
     const { title, content, author, threadHasLoaded, threadPosts } = this.state
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
-        <Avatar size='150' src={post.user.avatarUrl} />
-          <Author>{post.author}</Author>
+          <User>
+            <Author>{post.author}</Author>
+            <Avatar size="150" src={post.user.avatarUrl} />
+          </User>
           <PostContent>{post.content}</PostContent>
         </PostWrapper>
       ))
@@ -88,12 +107,10 @@ export class Thread extends Component {
         <Container>
           <NavBar />
           <ThreadWrapper>
-            <StyledThread>
-              <ThreadHeader>
-                {title}, posted by {author}
-              </ThreadHeader>
-              <ThreadContent>{content}</ThreadContent>
-            </StyledThread>
+            <ThreadHeader>
+              {title}, posted by {author}
+            </ThreadHeader>
+            <StyledThread>{posts[0]}</StyledThread>
 
             {posts.length ? (
               <Pagination data={posts}>
