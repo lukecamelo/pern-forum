@@ -20,6 +20,7 @@ const StyledThread = styled.div`
   align-items: flex-start;
   color: #32343b;
   background-color: white;
+  margin-bottom: 1em;
   border: 2px solid ${props => props.theme.primary};
 `
 export const ThreadHeader = styled.h2`
@@ -36,7 +37,7 @@ const PostWrapper = styled.div`
   display: flex;
   background-color: white;
   text-align: left;
-  margin: 1em;
+  padding: 0 1em 1em 1em;
 `
 const User = styled.div``
 const Author = styled.h2`
@@ -63,7 +64,7 @@ export class Thread extends Component {
     const {
       match: { params }
     } = this.props
-    
+
     this.fetchThreadAndAuthor()
   }
 
