@@ -39,8 +39,11 @@ const PostWrapper = styled.div`
   background-color: white;
   text-align: left;
   padding: 0 1em 1em 1em;
+  margin-bottom: 1em;
 `
-const User = styled.div``
+const User = styled.div`
+  margin-right: 1em;
+`
 const Author = styled.h2`
   color: ${props => props.theme.primary}
   font-size: 18px;

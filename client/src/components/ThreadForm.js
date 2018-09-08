@@ -59,6 +59,7 @@ class ThreadForm extends Component {
   handleValueChange = mdeState => {
     this.setState({ mdeState })
   }
+  
   render() {
     return (
       <Container>
