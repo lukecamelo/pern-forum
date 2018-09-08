@@ -5,7 +5,10 @@ import { postNewThread, fetchThreads } from '../actions/threadActions'
 import { Container, FormWrapper, Input } from './Login'
 import styled from 'styled-components'
 import NavBar from './NavBar'
+import ReactMde, { ReactMdeTypes } from 'react-mde'
+import Showdown from 'showdown'
 import './NavBar.css'
+import 'react-mde/lib/styles/css/react-mde-all.css'
 
 export const ThreadContentInput = styled.textarea`
   background: ${props => props.theme.primary};
@@ -21,11 +24,25 @@ export const ThreadContentInput = styled.textarea`
     color: white;
   }
 `
+const ThreadFormWrapper = styled(FormWrapper)`
+  width: 75%;
+`
+const ThreadTitleInput = styled(Input)`
+  width: 250px;
+`
 
 class ThreadForm extends Component {
-  state = {
-    title: '',
-    content: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      title: '',
+      content: '',
+      mdeState: null
+    }
+    this.converter = new Showdown.Converter({
+      tables: true,
+      simplifiedAutoLink: true
+    })
   }
 
   componentDidMount = () => {
@@ -38,26 +55,38 @@ class ThreadForm extends Component {
     })
   }
 
+  handleValueChange = mdeState => {
+    this.setState({ mdeState })
+  }
   render() {
     return (
       <Container>
         <NavBar />
         <h1>Post new thread</h1>
-        <FormWrapper>
+        <ThreadFormWrapper>
           <Input
             name="title"
             value={this.state.title}
             onChange={this.changeHandler}
             placeholder="thread title"
           />
-          <ThreadContentInput
+          {/* <ThreadContentInput
             name="content"
             value={this.state.content}
             onChange={this.changeHandler}
             cols="10"
             rows="10"
             placeholder="thread content"
-          />
+          /> */}
+            <ReactMde
+              layout={'tabbed'}
+              style={{textAlign: 'left'}}
+              onChange={this.handleValueChange}
+              editorState={this.state.mdeState}
+              generateMarkdownPreview={markdown =>
+                Promise.resolve(this.converter.makeHtml(markdown))
+              }
+            />
           <Link
             to="/"
             className="logout"
@@ -72,7 +101,8 @@ class ThreadForm extends Component {
           >
             Submit Thread
           </Link>
-        </FormWrapper>
+
+        </ThreadFormWrapper>
       </Container>
     )
   }
