@@ -7,6 +7,7 @@ import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
+import marked from 'marked'
 // import { Author, PostWrapper, PostContent } from '../components/PostList'
 
 const ThreadWrapper = styled.section`
@@ -70,7 +71,6 @@ export class Thread extends Component {
 
   fetchSingleThread = async threadId => {
     const thread = await axios.get(`/api/threads/${threadId}`)
-    console.log(thread.data)
     return thread.data
   }
 
@@ -81,7 +81,6 @@ export class Thread extends Component {
 
   fetchThreadAndAuthor = async () => {
     const thread = await this.fetchSingleThread(this.props.match.params.id)
-    console.log(thread)
     const author = await this.fetchThreadAuthor(thread.userId)
     this.setState({
       title: thread.title,
@@ -92,16 +91,25 @@ export class Thread extends Component {
       threadHasLoaded: true
     })
   }
+
+  getMarkdownText = markdown => {
+    const rawMarkup = marked(markdown, { sanitize: false })
+    return { __html: rawMarkup }
+  }
+
   render() {
     const { title, content, author, threadHasLoaded, threadPosts } = this.state
     if (threadHasLoaded) {
+      console.log(this.getMarkdownText(this.state.content).__html)
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
           <User>
             <Author>{post.author}</Author>
             <Avatar size="150" src={post.user.avatarUrl} />
           </User>
-          <PostContent>{post.content}</PostContent>
+          {/* <PostContent> */}
+            <div dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
+          {/* </PostContent> */}
         </PostWrapper>
       ))
       const op = posts.shift()

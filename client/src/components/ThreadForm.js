@@ -41,7 +41,8 @@ class ThreadForm extends Component {
     }
     this.converter = new Showdown.Converter({
       tables: true,
-      simplifiedAutoLink: true
+      simplifiedAutoLink: true,
+      // extensions: ['xssfilter']
     })
   }
 
@@ -93,7 +94,7 @@ class ThreadForm extends Component {
             onClick={() =>
               this.props.postNewThread(
                 this.state.title,
-                this.state.content,
+                this.state.mdeState.html,
                 this.props.loggedInUserId,
                 this.props.username
               )
