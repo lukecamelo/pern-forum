@@ -5,7 +5,7 @@ import { postNewThread, fetchThreads } from '../actions/threadActions'
 import { Container, FormWrapper, Input } from './Login'
 import styled from 'styled-components'
 import NavBar from './NavBar'
-import ReactMde, { ReactMdeTypes } from 'react-mde'
+import ReactMde from 'react-mde'
 import Showdown from 'showdown'
 import './NavBar.css'
 import 'react-mde/lib/styles/css/react-mde-all.css'
@@ -28,7 +28,7 @@ const ThreadFormWrapper = styled(FormWrapper)`
   width: 75%;
 `
 const ThreadTitleInput = styled(Input)`
-  width: 250px;
+  width: 400px;
 `
 
 class ThreadForm extends Component {
@@ -66,7 +66,7 @@ class ThreadForm extends Component {
         <NavBar />
         <h1>Post new thread</h1>
         <ThreadFormWrapper>
-          <Input
+          <ThreadTitleInput
             name="title"
             value={this.state.title}
             onChange={this.changeHandler}
@@ -82,7 +82,6 @@ class ThreadForm extends Component {
           /> */}
             <ReactMde
               layout={'tabbed'}
-              style={{textAlign: 'left'}}
               onChange={this.handleValueChange}
               editorState={this.state.mdeState}
               generateMarkdownPreview={markdown =>
