@@ -28,7 +28,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
 
-models.sequelize.sync().then(() => {
+models.sequelize.sync({force: true}).then(() => {
   app.listen(port, () => {
     console.log(`Running on http://localhost:${port}`)
   })
