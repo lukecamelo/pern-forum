@@ -103,7 +103,6 @@ export class Thread extends Component {
   render() {
     const { title, content, author, threadHasLoaded, threadPosts } = this.state
     if (threadHasLoaded) {
-      console.log(this.getMarkdownText(this.state.content).__html)
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
           <User>
