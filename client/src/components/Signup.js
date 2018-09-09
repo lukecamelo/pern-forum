@@ -3,12 +3,15 @@ import { FormWrapper, Button, Input, H1, Container } from './Login'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
 import NavBar from './NavBar'
+import axios from 'axios';
 
-class Signup extends React.Component {
+export class Signup extends React.Component {
   state = {
     usernameInput: '',
     passwordInput: '',
     avatarUrlInput: '',
+    urlIsValid: false,
+    validationMessage: '',
     hasSignedUp: false
   }
 
@@ -24,8 +27,27 @@ class Signup extends React.Component {
     })
   }
 
+  avatarChangeHandler = e => {
+    this.setState({
+      avatarUrlInput: e.target.value
+    })
+    this.checkUrlExists(this.state.avatarUrlInput).then(res => {
+      if (res === 200) {
+        this.setState({
+          urlIsValid: true,
+          validationMessage: 'that image exists :)'
+        })
+      } else {
+        this.setState({
+          urlIsValid: false,
+          validationMessage: 'not a valid url :('
+        })
+      }
+    })
+  }
+
   checkUrlExists = async testUrl => {
-    const request = await fetch(testUrl, { mode: 'cors' })
+    const request = await axios.get(testUrl, { mode: 'cors' })
     return request.status
   }
 
@@ -55,9 +77,10 @@ class Signup extends React.Component {
               name="avatarUrlInput"
               type="text"
               value={this.state.avatarUrlInput}
-              onChange={this.changeHandler}
+              onChange={this.avatarChangeHandler}
               placeholder="please enter imgur link for avatar"
             />
+            <H1>{this.state.validationMessage}</H1>
             <Button
               onClick={() =>
                 this.props.userSignup(
