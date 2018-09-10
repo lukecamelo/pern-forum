@@ -56,19 +56,6 @@ class PostForm extends Component {
   render() {
     return (
       <PostFormContainer>
-        {/* <form onSubmit={this.handleSubmit}>
-          <FormWrapper>
-            <ThreadContentInput
-              name="content"
-              value={this.state.content}
-              onChange={this.changeHandler}
-              cols="10"
-              rows="10"
-              placeholder="post content"
-            />
-            <Button type="submit">Submit Post</Button>
-          </FormWrapper>
-        </form> */}
         <form onSubmit={this.handleSubmit}>
           <ReactMde
             layout={'tabbed'}
@@ -79,7 +66,7 @@ class PostForm extends Component {
               Promise.resolve(this.converter.makeHtml(markdown))
             }
           />
-          <Button type='submit'>Submit Post</Button>
+          <Button type="submit">Submit Post</Button>
         </form>
       </PostFormContainer>
     )

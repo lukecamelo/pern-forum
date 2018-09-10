@@ -16,7 +16,7 @@ export const ListWrapper = styled.main`
 `
 
 export class ThreadList extends Component {
-  componentDidMount = () => {
+  componentDidMount () {
     this.props.fetchData()
   }
 
@@ -41,7 +41,7 @@ export class ThreadList extends Component {
         </Container>
       )
     } else {
-      return <h1>Loading threads...</h1>
+      return <h1 id='loading-header'>Loading threads...</h1>
     }
   }
 }
