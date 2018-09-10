@@ -46,7 +46,7 @@ export class Signup extends React.Component {
     })
   }
 
-  checkUrlExists = async testUrl => {
+  async checkUrlExists (testUrl) {
     const request = await axios.get(testUrl, { mode: 'cors' })
     return request.status
   }

@@ -31,7 +31,7 @@ const ThreadTitleInput = styled(Input)`
   width: 400px;
 `
 
-class ThreadForm extends Component {
+export class ThreadForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -41,7 +41,7 @@ class ThreadForm extends Component {
     }
     this.converter = new Showdown.Converter({
       tables: true,
-      simplifiedAutoLink: true,
+      simplifiedAutoLink: true
       // extensions: ['xssfilter']
     })
   }
@@ -59,7 +59,7 @@ class ThreadForm extends Component {
   handleValueChange = mdeState => {
     this.setState({ mdeState })
   }
-  
+
   render() {
     return (
       <Container>
@@ -72,22 +72,14 @@ class ThreadForm extends Component {
             onChange={this.changeHandler}
             placeholder="thread title"
           />
-          {/* <ThreadContentInput
-            name="content"
-            value={this.state.content}
-            onChange={this.changeHandler}
-            cols="10"
-            rows="10"
-            placeholder="thread content"
-          /> */}
-            <ReactMde
-              layout={'tabbed'}
-              onChange={this.handleValueChange}
-              editorState={this.state.mdeState}
-              generateMarkdownPreview={markdown =>
-                Promise.resolve(this.converter.makeHtml(markdown))
-              }
-            />
+          <ReactMde
+            layout={'tabbed'}
+            onChange={this.handleValueChange}
+            editorState={this.state.mdeState}
+            generateMarkdownPreview={markdown =>
+              Promise.resolve(this.converter.makeHtml(markdown))
+            }
+          />
           <Link
             to="/"
             className="logout"
@@ -102,7 +94,6 @@ class ThreadForm extends Component {
           >
             Submit Thread
           </Link>
-
         </ThreadFormWrapper>
       </Container>
     )
