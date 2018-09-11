@@ -31,7 +31,7 @@ export class ThreadList extends Component {
         return (
           <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
             {thread.title} -{' '}
-            <strong>{this.fetchThreadAuthor(thread.userId)}</strong>
+            <strong>{this.fetchThreadAuthor(thread.userId)} posts: {thread.Post.length}</strong>
           </Link>
         )
       })
