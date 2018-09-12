@@ -89,6 +89,17 @@ router.get('/api/users/:id', (req, res) => {
     .then(user => res.json(user))
 })
 
+const editAvatarUrl = async (req, res, next) => {
+  const body = req.body
+  const user = await models.user.findOne({ where: { id: body.userId } })
+  await user.updateAttributes({ avatarUrl: body.newAvatarUrl })
+  next()
+}
+
+router.post('/api/users/:id/avatar', editAvatarUrl, (req, res) => {
+  return req.data
+})
+
 // Returns all posts in a thread
 router.get('/api/threads/:id/posts', (req, res) => {
   models.post

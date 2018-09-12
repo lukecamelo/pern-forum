@@ -11,6 +11,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Thread from './containers/Thread';
 import ThreadForm from './components/ThreadForm';
+import UserControlPanel from './components/UserControlPanel';
 
 const theme = {
   primary: '#00a8ff',
@@ -27,6 +28,7 @@ ReactDOM.render(
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id" component={Thread} />
           <Route exact path='/newthread' component={ThreadForm} />
+          <Route exact path='/usercontrolpanel' component={UserControlPanel} />
         </Switch>
       </BrowserRouter>
     </Provider>
