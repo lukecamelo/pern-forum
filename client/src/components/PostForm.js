@@ -56,7 +56,7 @@ class PostForm extends Component {
   render() {
     return (
       <PostFormContainer>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}> */}
           <ReactMde
             layout={'tabbed'}
             style={{ textAlign: 'left' }}
@@ -66,8 +66,8 @@ class PostForm extends Component {
               Promise.resolve(this.converter.makeHtml(markdown))
             }
           />
-          <Button type="submit">Submit Post</Button>
-        </form>
+          <Button onClick={this.handleSubmit}>Submit Post</Button>
+        {/* </form> */}
       </PostFormContainer>
     )
   }

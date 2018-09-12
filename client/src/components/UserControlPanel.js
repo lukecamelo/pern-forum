@@ -1,16 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Input } from './Login'
+import { Container, Input, Button } from './Login'
 import axios from 'axios'
 import styled from 'styled-components'
+import { NavBar } from './NavBar'
 
 const Card = styled.section`
   display: flex;
   justify-content: center;
   justify-self: center;
+  flex-direction: column;
   background-color: #fff;
   box-shadow: 1px 1px 1px ${props => props.theme.secondary};
-  margin: 0 25% 0 25%;
+  margin: 1em 25% 0 25%;
+`
+const AvatarEdit = styled.div`
+  margin: 0 3em 0 3em;
 `
 
 class UserControlPanel extends React.Component {
@@ -35,27 +40,37 @@ class UserControlPanel extends React.Component {
 
   editAvatar = (userId, newAvatarUrl) => {
     axios({
-        method: 'post',
-        url: `/api/users/${userId}/avatar`,
-        data: {
-          userId,
-          newAvatarUrl
-        }
+      method: 'post',
+      url: `/api/users/${userId}/avatar`,
+      data: {
+        userId,
+        newAvatarUrl
+      }
     })
   }
 
   render() {
     return (
       <Container>
+        <NavBar />
         <Card>
           <h1>Welcome, {this.props.user.username}</h1>
           <h1>Change avatar: </h1>
-          <Input
-            name="avatarUrl"
-            value={this.state.avatarUrl}
-            onChange={this.handleChange}
-          />
-          <button onClick={this.editAvatar(this.props.user.userId, this.state.avatarUrl)}>Edit Avatar</button>
+          <AvatarEdit>
+            <Input
+              name="avatarUrl"
+              value={this.state.avatarUrl}
+              onChange={this.handleChange}
+            />
+            <Button
+              onClick={this.editAvatar(
+                this.props.user.userId,
+                this.state.avatarUrl
+              )}
+            >
+              Edit Avatar
+            </Button>
+          </AvatarEdit>
         </Card>
       </Container>
     )
