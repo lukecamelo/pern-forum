@@ -29,10 +29,6 @@ export const ThreadHeader = styled.h2`
   border-bottom: 2px solid ${props => props.theme.secondary}
   text-align: left;
 `
-const ThreadContent = styled.p`
-  padding-left: 10px;
-  padding-right: 10px;
-`
 const PostWrapper = styled.div`
   // border: 1px solid ${props => props.theme.secondary};
   display: flex;
@@ -48,11 +44,11 @@ const Author = styled.h2`
   color: ${props => props.theme.primary}
   font-size: 18px;
 `
-const PostContent = styled.p`
-  color: black;
-  font-size: 16px;
-  padding: 0 15px 15px 15px;
-`
+// const PostContent = styled.p`
+//   color: black;
+//   font-size: 16px;
+//   padding: 0 15px 15px 15px;
+// `
 
 export class Thread extends Component {
   state = {
@@ -65,10 +61,6 @@ export class Thread extends Component {
   }
 
   componentDidMount = async () => {
-    const {
-      match: { params }
-    } = this.props
-
     this.fetchThreadAndAuthor()
   }
 
@@ -101,7 +93,7 @@ export class Thread extends Component {
   }
 
   render() {
-    const { title, content, author, threadHasLoaded, threadPosts } = this.state
+    const { title, author, threadHasLoaded, threadPosts } = this.state
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
@@ -109,9 +101,7 @@ export class Thread extends Component {
             <Author>{post.author}</Author>
             <Avatar size="150" src={post.user.avatarUrl} />
           </User>
-          {/* <PostContent> */}
-            <div dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
-          {/* </PostContent> */}
+          <div dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
         </PostWrapper>
       ))
       const op = posts.shift()

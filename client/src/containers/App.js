@@ -26,7 +26,6 @@ export class App extends Component {
       return (
         <Wrapper>
           <NavBar/>
-          <Avatar size='100' src='https://i.imgur.com/F6JK5tM.jpg' />
           <Pagination data={this.props.threads}>
             <ThreadList />
           </Pagination>

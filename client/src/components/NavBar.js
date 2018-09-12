@@ -20,6 +20,9 @@ export const NavBar = ({ isLoggedIn, ...props }) => {
         <Link to="/" className="navlink">
           Home
         </Link>
+        <Link to="/usercontrolpanel" className="navlink">
+          Control Panel
+        </Link>
         <a className="logout" onClick={() => props.userLogout()}>
           Logout
         </a>
