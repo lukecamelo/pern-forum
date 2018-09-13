@@ -46,15 +46,6 @@ router.post('/api/threads', makeThreadAndOp, (req, res) => {
 // Returns all threads
 // NOT BEING USED. /api/allposts is currently being used for thread list
 router.get('/api/threads', (req, res) => {
-  const compareDateCreated = (a, b) => {
-    if (a.createdAt > b.createdAt) {
-      return -1
-    }
-    if (a.createdAt < b.createdAt) {
-      return 1
-    }
-    return 0
-  }
   models.thread
     .findAll()
     .then(threads => threads.sort(compareDateCreated))
@@ -89,8 +80,10 @@ router.get('/api/users/:id', (req, res) => {
     .then(user => res.json(user))
 })
 
+// Get all posts by user
 router.get('/api/users/:id/posts', (req, res) => {
-  models.post.findAll({ where: { userId: req.params.id } })
+  models.post
+    .findAll({ where: { userId: req.params.id } })
     .then(posts => res.json(posts))
 })
 
@@ -108,7 +101,7 @@ router.post('/api/users/:id/avatar', editAvatarUrl, (req, res) => {
 // Returns all posts in a thread
 router.get('/api/threads/:id/posts', (req, res) => {
   models.post
-    .findAll({ where: { threadId: req.params.id } })
+    .findAll({ where: { threadId: req.params.id }, include: [models.user] })
     .then(posts => res.json(posts))
 })
 
@@ -127,25 +120,47 @@ router.get('/api/allposts', (req, res) => {
     .catch(err => console.log('error at /api/allposts: ', err))
 })
 
-router.post('/api/threads/:id/posts', (req, res) => {
-  models.user
-    .findById(req.body.userId)
-    .then(() =>
-      models.post.create({
-        author: req.body.username,
-        content: req.body.content,
-        userId: req.body.userId,
-        threadId: req.params.id
-      })
-    )
-    .then(post =>
-      models.post.findOne({
-        where: { id: post.id },
-        include: [{ model: models.user }, { model: models.thread }]
-      })
-    )
-    .then(postWithAssociations => res.json(postWithAssociations))
-    .catch(err => console.log(err))
+const makePost = async (req, res, next) => {
+  const body = req.body
+
+  let post = {
+    author: body.username,
+    content: body.content,
+    userId: body.userId,
+    threadId: body.threadId
+  }
+
+  post = await models.post.create(post)
+  post = await models.post.findOne({
+    where: { id: post.id },
+    include: [models.user, models.thread]
+  })
+  let user = await models.user.findOne({ where: { id: body.userId } })
+  await user.updateAttributes({ postCount: user.postCount + 1 })
+  req.data = post
+  next()
+}
+
+router.post('/api/threads/:id/posts', makePost, (req, res) => {
+  // models.user
+  //   .findById(req.body.userId)
+  //   .then(() =>
+  //     models.post.create({
+  //       author: req.body.username,
+  //       content: req.body.content,
+  //       userId: req.body.userId,
+  //       threadId: req.params.id
+  //     })
+  //   )
+  //   .then(post =>
+  //     models.post.findOne({
+  //       where: { id: post.id },
+  //       include: [{ model: models.user }, { model: models.thread }]
+  //     })
+  //   )
+  //   .then(postWithAssociations => res.json(postWithAssociations))
+  //   .catch(err => console.log(err))
+  return req.data
 })
 
 module.exports = router
