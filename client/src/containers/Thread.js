@@ -74,6 +74,12 @@ export class Thread extends Component {
     return author.data
   }
 
+  fetchPostAuthor = async userId => {
+    const posts = await axios.get(`/api/users/${userId}/posts`)
+    const postCount = posts.data.length
+    return postCount
+  }
+
   fetchThreadAndAuthor = async () => {
     const thread = await this.fetchSingleThread(this.props.match.params.id)
     const author = await this.fetchThreadAuthor(thread.userId)
@@ -99,6 +105,7 @@ export class Thread extends Component {
         <PostWrapper key={post.id}>
           <User>
             <Author>{post.author}</Author>
+            <p>post count: ?</p> 
             <Avatar size="150" src={post.user.avatarUrl} />
           </User>
           <div dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
