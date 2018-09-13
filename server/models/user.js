@@ -21,6 +21,10 @@ module.exports = (sequelize, type) => {
       avatarUrl: {
         type: type.STRING,
         allowNull: true
+      },
+      postCount: {
+        type: type.INTEGER,
+        allowNull: false
       }
     },
     {

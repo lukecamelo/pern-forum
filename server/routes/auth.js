@@ -40,7 +40,12 @@ router.post('/signup', (req, res) => {
     } else {
       const userPass = generateHash(req.body.password)
       models.user
-        .create({ username: req.body.username, password: userPass, avatarUrl: req.body.avatarUrl })
+        .create({
+          username: req.body.username,
+          password: userPass,
+          avatarUrl: req.body.avatarUrl,
+          postCount: 0
+        })
         .then(newUser => {
           if (!newUser) {
             return false
