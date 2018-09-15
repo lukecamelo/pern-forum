@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Input, Button } from './Login'
 import axios from 'axios'
 import styled from 'styled-components'
-import { NavBar } from './NavBar'
+import NavBar from './NavBar'
 
 const Card = styled.section`
   display: flex;
