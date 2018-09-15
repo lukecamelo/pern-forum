@@ -20,7 +20,8 @@ const AvatarEdit = styled.div`
 
 class UserControlPanel extends React.Component {
   state = {
-    avatarUrl: ''
+    avatarUrl: '',
+    message: ''
   }
 
   componentDidMount = () => {
@@ -56,6 +57,7 @@ class UserControlPanel extends React.Component {
         <Card>
           <h1>Welcome, {this.props.user.username}</h1>
           <h1>Change avatar: </h1>
+          {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
           <AvatarEdit>
             <Input
               name="avatarUrl"
@@ -63,10 +65,9 @@ class UserControlPanel extends React.Component {
               onChange={this.handleChange}
             />
             <Button
-              onClick={this.editAvatar(
-                this.props.user.userId,
-                this.state.avatarUrl
-              )}
+              onClick={() =>
+                this.editAvatar(this.props.user.userId, this.state.avatarUrl)
+              }
             >
               Edit Avatar
             </Button>
