@@ -18,7 +18,7 @@ const AvatarEdit = styled.div`
   margin: 0 3em 0 3em;
 `
 
-class UserControlPanel extends React.Component {
+export class UserControlPanel extends React.Component {
   state = {
     avatarUrl: '',
     message: ''
