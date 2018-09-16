@@ -60,6 +60,7 @@ export class UserControlPanel extends React.Component {
           {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
           <AvatarEdit>
             <Input
+              id='avatar-url-input'
               name="avatarUrl"
               value={this.state.avatarUrl}
               onChange={this.handleChange}

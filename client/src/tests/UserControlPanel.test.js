@@ -1,6 +1,6 @@
 import React from 'react'
 import { UserControlPanel } from '../components/UserControlPanel'
-import { Button } from '../components/Login'
+import { Button, Input } from '../components/Login'
 import { shallow } from 'enzyme'
 
 describe('<UserControlPanel />', () => {
@@ -17,5 +17,16 @@ describe('<UserControlPanel />', () => {
 
   it('renders without crashing', () => {
     expect(wrapper.find(Button).length).toEqual(1)
+  })
+
+  it('calls editAvatar function on button click', () => {
+    wrapper.instance().editAvatar = jest.fn()
+    wrapper.find(Button).simulate('click')
+    expect(wrapper.instance().editAvatar).toBeCalled()
+  })
+
+  it('instantiates with the proper avatar URL', () => {
+    wrapper.setState({ avatarUrl: 'https://m.imgur.com/rereavatar.png' })
+    expect(wrapper.find(Input).props().value).toEqual(wrapper.state('avatarUrl'))
   })
 })
