@@ -60,6 +60,22 @@ export class ThreadForm extends Component {
     this.setState({ mdeState })
   }
 
+  handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      await this.props.postNewThread(
+        this.state.title,
+        this.state.mdeState.html,
+        this.props.loggedInUserId,
+        this.props.username
+      )
+      this.props.history.push('/')
+    } catch (e) {
+      alert(e.message)
+    }
+  }
+
   render() {
     return (
       <Container>

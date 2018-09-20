@@ -14,9 +14,15 @@ export const ListWrapper = styled.main`
   width: 75%;
   margin: 0 auto;
 `
+const ThreadLink = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`
 
 export class ThreadList extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchData()
   }
 
@@ -29,10 +35,19 @@ export class ThreadList extends Component {
     if (threads.length && users.length) {
       const threadLinks = threads.map(thread => {
         return (
-          <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
-            {thread.title} -{' '}
-            <strong>{this.fetchThreadAuthor(thread.userId)} posts: {thread.Post.length}</strong>
-          </Link>
+          // <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
+          //   {thread.title}
+          //   {this.fetchThreadAuthor(thread.userId)} posts: {thread.Post.length}
+          // </Link>
+          <ThreadLink key={thread.id}>
+            <Link className="title" to={`/thread/${thread.id}`}>
+              {thread.title}
+            </Link>
+            <div className="author">
+              <p>Author</p>
+              {this.fetchThreadAuthor(thread.userId)}
+            </div>
+          </ThreadLink>
         )
       })
       return (
@@ -41,7 +56,7 @@ export class ThreadList extends Component {
         </Container>
       )
     } else {
-      return <h1 id='loading-header'>Loading threads...</h1>
+      return <h1 id="loading-header">Loading threads...</h1>
     }
   }
 }
