@@ -1,4 +1,9 @@
+p {
+  margin: 0;
+}
+
 .link {
+  display: flex;
   box-sizing: border-box;
   color: #2e262e;
   text-decoration: none;
@@ -12,4 +17,32 @@
 .link:hover {
   color: white;
   background-color: #b28bc0;
+}
+
+.title {
+  display: flex;
+  text-decoration: none;
+  color: #2e262e;
+  padding: .5em 1em;
+  font-size: 1.5em;
+  justify-self: flex-start;
+}
+
+.title:hover {
+  color: white;
+}
+
+.author {
+  display: flex;
+  flex-direction: column;
+  padding: .5em 1em;
+}
+
+@media screen and (max-width: 968px) {
+  .link {
+    font-size: 1em;
+  }
+  .title {
+    font-size: 1em;
+  }
 }
