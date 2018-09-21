@@ -30,7 +30,11 @@ const ThreadFormWrapper = styled(FormWrapper)`
 const ThreadTitleInput = styled(Input)`
   width: 400px;
 `
-
+export const MarkdownWrapper = styled.div`
+  background-color: white;
+  margin: 0;
+  padding: 0;
+`
 export class ThreadForm extends Component {
   constructor(props) {
     super(props)
@@ -88,14 +92,16 @@ export class ThreadForm extends Component {
             onChange={this.changeHandler}
             placeholder="thread title"
           />
-          <ReactMde
-            layout={'tabbed'}
-            onChange={this.handleValueChange}
-            editorState={this.state.mdeState}
-            generateMarkdownPreview={markdown =>
-              Promise.resolve(this.converter.makeHtml(markdown))
-            }
-          />
+          <MarkdownWrapper>
+            <ReactMde
+              layout={'tabbed'}
+              onChange={this.handleValueChange}
+              editorState={this.state.mdeState}
+              generateMarkdownPreview={markdown =>
+                Promise.resolve(this.converter.makeHtml(markdown))
+              }
+            />
+          </MarkdownWrapper>
           <Link
             to="/"
             className="logout"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, FormWrapper, Button } from './Login'
-import { ThreadContentInput } from './ThreadForm'
+import { MarkdownWrapper } from './ThreadForm'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
@@ -56,6 +56,7 @@ class PostForm extends Component {
   render() {
     return (
       <PostFormContainer>
+        <MarkdownWrapper>
           <ReactMde
             layout={'tabbed'}
             style={{ textAlign: 'left' }}
@@ -65,8 +66,9 @@ class PostForm extends Component {
               Promise.resolve(this.converter.makeHtml(markdown))
             }
           />
+        </MarkdownWrapper>
         <form onSubmit={this.handleSubmit}>
-          <Button type='submit'>Submit Post</Button>
+          <Button type="submit">Submit Post</Button>
         </form>
       </PostFormContainer>
     )
