@@ -46,7 +46,7 @@ export class ThreadList extends Component {
             </Link>
             <div className="author">
 
-              <div className="item">
+              <div className="item thread-author">
                 <p>Author</p>
                 {this.fetchThreadAuthor(thread.userId)}
               </div>

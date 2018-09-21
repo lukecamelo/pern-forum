@@ -91,7 +91,7 @@ export const makeNewPost = (
 }
 
 export const fetchPosts = threadId => dispatch => {
-  fetch(`/api/threads/${threadId}/posts`)
+  return fetch(`/api/threads/${threadId}/posts`)
     .then(res => res.json())
     .then(posts => {
       dispatch({
