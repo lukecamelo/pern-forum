@@ -26,7 +26,7 @@ const StyledThread = styled.div`
 `
 export const ThreadHeader = styled.h2`
   margin-left: 1em;
-  border-bottom: 2px solid ${props => props.theme.secondary}
+  // border-bottom: 2px solid white;
   text-align: left;
 `
 const PostWrapper = styled.div`
@@ -113,7 +113,7 @@ export class Thread extends Component {
           <NavBar />
           <ThreadWrapper>
             <ThreadHeader>
-              {title}, posted by {author}
+              {title} / {author}
             </ThreadHeader>
             <StyledThread>{op}</StyledThread>
 

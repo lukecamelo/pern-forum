@@ -19,6 +19,7 @@ const ThreadLink = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  border-bottom: 1px solid #2e262e;
 `
 
 export class ThreadList extends Component {
@@ -44,8 +45,17 @@ export class ThreadList extends Component {
               {thread.title}
             </Link>
             <div className="author">
-              <p>Author</p>
-              {this.fetchThreadAuthor(thread.userId)}
+
+              <div className="item">
+                <p>Author</p>
+                {this.fetchThreadAuthor(thread.userId)}
+              </div>
+
+              <div className="item">
+                <p>Posts</p>
+                {thread.Post.length}
+              </div>
+
             </div>
           </ThreadLink>
         )

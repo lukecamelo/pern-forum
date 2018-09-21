@@ -1,6 +1,6 @@
-p {
+/* p {
   margin: 0;
-}
+} */
 
 .link {
   display: flex;
@@ -34,8 +34,22 @@ p {
 
 .author {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: .5em 1em;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  padding: 0 .5em 0 .5em;
+  color: #fff;
+}
+
+.item p {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  color: #2e262e;
 }
 
 @media screen and (max-width: 968px) {
