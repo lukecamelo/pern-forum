@@ -56,6 +56,11 @@ export class ThreadList extends Component {
                 {thread.Post.length}
               </div>
 
+              <div className='item'>
+                <p>Killed by</p>
+                {thread.Post[0].author}
+              </div>
+
             </div>
           </ThreadLink>
         )

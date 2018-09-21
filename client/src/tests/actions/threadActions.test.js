@@ -6,14 +6,8 @@ import fetchMock from 'fetch-mock'
 
 const middleware = [thunk]
 const mockStore = configureStore(middleware)
-const initialState = {}
-// const store = mockStore(initialState)
 
 describe('thread actions', () => {
-  beforeEach(() => {
-    // store.clearActions()
-  })
-
   afterEach(() => {
     fetchMock.reset()
     fetchMock.restore()

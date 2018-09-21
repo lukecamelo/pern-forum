@@ -66,4 +66,16 @@ describe('auth reducer', () => {
       message: 'epic fail!'
     })
   })
+
+  it('should handle USER_SIGNUP', () => {
+    const signupAction = {
+      type: types.USER_SIGNUP,
+      payload: 'user created!'
+    }
+
+    expect(reducer(initialState, signupAction)).toEqual({
+      ...initialState,
+      message: 'user created!'
+    })
+  })
 })
