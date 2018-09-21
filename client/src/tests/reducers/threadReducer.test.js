@@ -30,11 +30,37 @@ describe('thread reducer', () => {
         }
       ]
     }
-  
+
     expect(reducer(initialState, fetchAction)).toEqual({
       ...initialState,
       posts: [
         { author: 'rediscover', content: 'derp', userId: 1, id: 1, threadId: 1 }
+      ]
+    })
+  })
+
+  it('should handle FETCH_THREADS', () => {
+    const fetchThreadAction = {
+      type: types.FETCH_THREADS,
+      payload: [
+        {
+          id: 1,
+          userId: 1,
+          title: 'i love big beer',
+          content: 'hop stoopid w00t!'
+        }
+      ]
+    }
+
+    expect(reducer(initialState, fetchThreadAction)).toEqual({
+      ...initialState,
+      threads: [
+        {
+          id: 1,
+          userId: 1,
+          title: 'i love big beer',
+          content: 'hop stoopid w00t!'
+        }
       ]
     })
   })
