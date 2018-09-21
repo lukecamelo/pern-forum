@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 export class App extends Component {
   componentDidMount() {
     this.props.fetchThreads()
-    // this.props.checkUserLoggedIn()
+    this.props.checkUserLoggedIn()
   }
   
   render() {

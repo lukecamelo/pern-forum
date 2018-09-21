@@ -15,6 +15,7 @@ describe('renders without crashing', () => {
       ],
       fetchThreads: () => [],
       fetchData: () => [],
+      checkUserLoggedIn: () => null,
       isLoggedIn: true
     }
     wrapper = shallow(<App {...props} />)
