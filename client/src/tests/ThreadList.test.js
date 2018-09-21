@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { ThreadList, ListWrapper } from '../containers/ThreadList'
+import { ThreadList } from '../containers/ThreadList'
+import { MemoryRouter } from 'react-router-dom'
 import { shallow, mount } from 'enzyme'
-import sinon, { spy } from 'sinon'
+import sinon from 'sinon'
 
 describe('<ThreadList />', () => {
-  let props, wrapper, fetchData, spy
+  let props, wrapper, fetchData
+
   beforeEach(() => {
     props = {
       users: [
@@ -16,12 +18,12 @@ describe('<ThreadList />', () => {
         { username: 'user5', password: 'passqqq', id: 5 }
       ],
       data: [
-        { title: 'ohaio', content: 'moshi moshi', id: 1, userId: 1 },
-        { title: 'i am a pirate', content: 'arrrr', id: 2, userId: 3 },
-        { title: 'ftw', content: 'motorcycle man', id: 3, userId: 4 },
-        { title: 'rainbow', content: 'pencil shavings', id: 4, userId: 5 },
-        { title: 'carrot stick', content: 'i am a monster', id: 5, userId: 4 },
-        { title: 'i eat gravy', content: 'its really bad for me', id: 6, userId: 3 }
+        { title: 'ohaio', content: 'moshi moshi', id: 1, userId: 1, Post: [{}] },
+        { title: 'i am a pirate', content: 'arrrr', id: 2, userId: 3, Post: [{}] },
+        { title: 'ftw', content: 'motorcycle man', id: 3, userId: 4, Post: [{}] },
+        { title: 'rainbow', content: 'pencil shavings', id: 4, userId: 5, Post: [{}] },
+        { title: 'carrot stick', content: 'i am a monster', id: 5, userId: 4, Post: [{}] },
+        { title: 'i eat gravy', content: 'its really bad for me', id: 6, userId: 3, Post: [{}] }
       ],
       fetchData: () => []
     }
@@ -53,8 +55,9 @@ describe('<ThreadList />', () => {
   })
 
   it('renders the correct thread authors', () => {
-    wrapper.find('strong').forEach((child, i) => {
-      expect(child.text()).toEqual('user' + props.data[i].userId)
+    wrapper.find('div.thread-author').forEach((child, i) => {
+      // not sure how to select the second p tag so Authoruser is a lil hack to get around it
+      expect(child.text()).toEqual('Authoruser' + props.data[i].userId)
     })
   })
 

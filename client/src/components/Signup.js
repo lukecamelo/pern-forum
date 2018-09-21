@@ -16,9 +16,9 @@ export class Signup extends React.Component {
   }
 
   componentDidMount = () => {
-    this.checkUrlExists('https://i.imgur.com/F6JK5tM.jpg').then(res =>
-      console.log(res)
-    )
+    // this.checkUrlExists('https://i.imgur.com/F6JK5tM.jpg').then(res =>
+    //   console.log(res)
+    // )
   }
 
   changeHandler = e => {
