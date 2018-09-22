@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, FormWrapper, Button } from './Login'
+import { Container, Button } from '../styled/index'
 import { MarkdownWrapper } from './ThreadForm'
 
 import { connect } from 'react-redux'

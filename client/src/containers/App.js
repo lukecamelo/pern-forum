@@ -1,30 +1,25 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { fetchData, fetchThreads } from '../actions/threadActions'
 import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../components/Login'
+import { Container } from '../styled/index'
 import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
-import Avatar from 'react-avatar'
-
-const Wrapper = styled.div`
-  text-align: center;
-`
 
 export class App extends Component {
   componentDidMount() {
     this.props.fetchThreads()
-    this.props.checkUserLoggedIn()
+    // this.props.checkUserLoggedIn()
   }
   
   render() {
     if (this.props.isLoggedIn && this.props.threads.length) {
       return (
-        <Wrapper>
+        <Container>
           <NavBar/>
           <Pagination data={this.props.threads}>
             <ThreadList />
@@ -32,14 +27,14 @@ export class App extends Component {
           <Link className="thread-button" to="/newthread">
             Post Thread
           </Link>
-        </Wrapper>
+        </Container>
       )
     } else {
       return (
-        <Wrapper>
+        <Container>
           <NavBar />
           <H1>Please log in to view threads.</H1>
-        </Wrapper>
+        </Container>
       )
     }
   }

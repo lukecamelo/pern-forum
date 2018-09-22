@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchData } from '../actions/threadActions'
 import styled from 'styled-components'
-import { Container } from '../components/Login'
 import './ThreadList.css'
+
+import { Container } from '../styled/index'
 
 export const ListWrapper = styled.main`
   background-color: #f4afc2;
@@ -36,10 +37,6 @@ export class ThreadList extends Component {
     if (threads.length && users.length) {
       const threadLinks = threads.map(thread => {
         return (
-          // <Link className="link" key={thread.id} to={`/thread/${thread.id}`}>
-          //   {thread.title}
-          //   {this.fetchThreadAuthor(thread.userId)} posts: {thread.Post.length}
-          // </Link>
           <ThreadLink key={thread.id}>
             <Link className="title" to={`/thread/${thread.id}`}>
               {thread.title}

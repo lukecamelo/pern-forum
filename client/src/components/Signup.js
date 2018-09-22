@@ -1,9 +1,11 @@
 import React from 'react'
-import { FormWrapper, Button, Input, H1, Container } from './Login'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
 import NavBar from './NavBar'
 import axios from 'axios';
+
+import { FormWrapper, H1 } from './Login'
+import { Container, Input, Button } from '../styled/index'
 
 export class Signup extends React.Component {
   state = {

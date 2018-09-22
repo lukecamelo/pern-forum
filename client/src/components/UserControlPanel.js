@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Input, Button } from './Login'
+// import { Input, Button } from './Login'
+import { Container, Input, Button } from '../styled/index'
 import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
