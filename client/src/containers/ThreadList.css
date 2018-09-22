@@ -59,4 +59,10 @@
   .title {
     font-size: 1em;
   }
+  .item {
+    display: none;
+  }
+  .thread-author {
+    display: flex;
+  }
 }
