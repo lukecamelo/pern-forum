@@ -18,8 +18,8 @@ if (localStorage.Authorization) {
 }
 
 const initialState = {
-  username: '',
-  userId: null,
+  username: username,
+  userId: userId,
   isLoggedIn: isToken,
   message: ''
 }

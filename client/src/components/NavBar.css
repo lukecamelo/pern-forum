@@ -6,6 +6,7 @@
   padding: 14px;
   transition: .2s;
   border-radius: 5px;
+  font-family: 'Lato', sans-serif;
 }
 
 .logout {
@@ -17,6 +18,7 @@
   transition: .2s;
   border-radius: 5px;
   border: 2px solid #0266c8;
+  font-family: 'Lato', sans-serif;
 }
 
 .thread-button {
@@ -27,6 +29,7 @@
   transition: .2s;
   border-radius: 5px;
   border: 2px solid #0266c8;
+  font-family: 'Roboto', sans-serif;
 }
 
 .logout:hover, .thread-button:hover {
