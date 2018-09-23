@@ -5,28 +5,7 @@ import rootReducer from './reducers'
 const initialState = {}
 const middleware = [thunk]
 
-// const loadState = () => {
-//   try {
-//     const serializedState = localStorage.getItem('User')
-//     if (serializedState === null) {
-//       return undefined
-//     }
-//     return JSON.parse(serializedState)
-//   } catch (err) {
-//     return undefined
-//   }
-// }
-
-// const saveState = state => {
-//   try {
-//     const serializedState = JSON.stringify(state)
-//     localStorage.setItem('User', serializedState)
-//   } catch (err) {
-//     // nothing
-//   }
-// }
-
-const persistedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : {}
+const persistedState = localStorage.getItem('state') ? JSON.parse(localStorage.getItem('state')) : initialState
 
 const store = createStore(
   rootReducer,

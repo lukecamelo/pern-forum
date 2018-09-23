@@ -35,7 +35,7 @@ const slideInRight = keyframes`
 export const ThreadHeader = styled.h2`
   margin-left: 1em;
   text-align: left;
-  animation: ${slideInRight} .9s cubic-bezier(.28,1,.14,.99);
+  animation: ${slideInRight} .4s cubic-bezier(.28,1,.14,.99);
 `
 const PostWrapper = styled.div`
   // border: 1px solid ${props => props.theme.secondary};
@@ -50,7 +50,7 @@ const PostWrapper = styled.div`
 `
 const User = styled.div`
   margin-right: 1em;
-  animation: ${slideInLeft} .7s cubic-bezier(.28,1,.14,.99);
+  animation: ${slideInLeft} .4s cubic-bezier(.28,1,.14,.99);
 `
 const Author = styled.h2`
   color: ${props => props.theme.primary}
@@ -61,7 +61,7 @@ const fadeIn = keyframes`
   100% { opacity: 1; }
 `
 const AnimationContainer = styled.div`
-  animation: 1s ${fadeIn} cubic-bezier(.52,.79,.3,.98);
+  animation: .6s ${fadeIn} cubic-bezier(.52,.79,.3,.98);
 `
 
 export class Thread extends Component {

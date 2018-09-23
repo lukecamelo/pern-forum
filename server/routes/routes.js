@@ -4,20 +4,20 @@ const models = require('../models')
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 
-// Test route
-router.get('/api/hello', (req, res) => {
-  res.send({ message: 'greetings from api' })
-})
+// // Test route
+// router.get('/api/hello', (req, res) => {
+//   res.send({ message: 'greetings from api' })
+// })
 
-// Creates new user
-router.post('/api/users', (req, res) => {
-  models.user.create(req.body).then(user => res.json(user))
-})
+// // Creates new user
+// router.post('/api/users', (req, res) => {
+//   models.user.create(req.body).then(user => res.json(user))
+// })
 
 // WORK IN PROGRESS, SOMEHOW ACTUALLY DOES WORK
 const makeThreadAndOp = async (req, res, next) => {
   const body = req.body
-
+  console.log('SERVERSIDE MAKING THE THREAD, AUTHOR NAME:', body.author)
   let post = {
     author: body.author,
     content: body.content,
@@ -105,6 +105,7 @@ router.get('/api/threads/:id/posts', (req, res) => {
     .then(posts => res.json(posts))
 })
 
+// Returns all threads
 router.get('/api/allposts', (req, res) => {
   models.thread
     .findAll({
@@ -142,24 +143,6 @@ const makePost = async (req, res, next) => {
 }
 
 router.post('/api/threads/:id/posts', makePost, (req, res) => {
-  // models.user
-  //   .findById(req.body.userId)
-  //   .then(() =>
-  //     models.post.create({
-  //       author: req.body.username,
-  //       content: req.body.content,
-  //       userId: req.body.userId,
-  //       threadId: req.params.id
-  //     })
-  //   )
-  //   .then(post =>
-  //     models.post.findOne({
-  //       where: { id: post.id },
-  //       include: [{ model: models.user }, { model: models.thread }]
-  //     })
-  //   )
-  //   .then(postWithAssociations => res.json(postWithAssociations))
-  //   .catch(err => console.log(err))
   return req.data
 })
 
