@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { userLogin, userLogout } from '../actions/authActions'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
@@ -23,22 +22,6 @@ const ButtonWrapper = styled.div`
 export const H1 = styled.h1`
   color: ${props => props.theme.primary};
 `
-// export const StyledLink = styled(Link)`
-//   color: #0266c8;
-//   background-color: white;
-//   text-decoration: none;
-//   margin-right: 1em;
-//   padding: 14px;
-//   transition: 0.2s;
-//   border-radius: 5px;
-//   border: 2px solid #0266c8;
-//   &:hover {
-//     color: white;
-//     background-color: #f195ac;
-//     border: 2px solid #f195ac;
-//     cursor: pointer;
-//   }
-// `
 
 export class Login extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchData } from '../actions/threadActions'
+import { fetchData, fetchThreads } from '../actions/threadActions'
 import styled from 'styled-components'
 import './ThreadList.css'
 
@@ -26,15 +26,30 @@ const ThreadLink = styled.div`
 export class ThreadList extends Component {
   componentDidMount() {
     this.props.fetchData()
+    this.props.fetchThreads()
   }
 
   fetchThreadAuthor = userId => {
     return this.props.users.find(user => user.id === userId).username
   }
 
+  checkForPosts = () => {
+    const { data: threads } = this.props
+    let increment = 0
+    // const allGood = false
+    threads.forEach(thread => {
+      if (thread.Post.length > 0) {
+        increment++
+      }
+    })
+    if (increment === threads.length) {
+      return true
+    }
+    return false
+  }
   render() {
     const { data: threads, users } = this.props
-    if (threads.length && users.length) {
+    if (threads.length && users.length && this.checkForPosts()) {
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>
@@ -42,7 +57,6 @@ export class ThreadList extends Component {
               {thread.title}
             </Link>
             <div className="author">
-
               <div className="item thread-author">
                 <p>Author</p>
                 {this.fetchThreadAuthor(thread.userId)}
@@ -53,11 +67,10 @@ export class ThreadList extends Component {
                 {thread.Post.length}
               </div>
 
-              <div className='item'>
+              <div className="item">
                 <p>Killed by</p>
                 {thread.Post[0].author}
               </div>
-
             </div>
           </ThreadLink>
         )
@@ -79,5 +92,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData }
+  { fetchData, fetchThreads }
 )(ThreadList)

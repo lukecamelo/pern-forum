@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   text-align: center;
@@ -31,6 +32,22 @@ export const Button = styled.button`
   &:hover {
     background-color: ${props => props.theme.primary};
     color: #fff;
+    cursor: pointer;
+  }
+`
+export const StyledLink = styled(Link)`
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  margin-right: 1em;
+  padding: 14px;
+  transition: 0.2s;
+  border-radius: 5px;
+  border: 2px solid #0266c8;
+  &:hover {
+    color: white;
+    background-color: #f195ac;
+    border: 2px solid #f195ac;
     cursor: pointer;
   }
 `

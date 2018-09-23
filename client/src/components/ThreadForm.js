@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
 import { FormWrapper } from './Login'
-import { Container, Input } from '../styled/index'
+import { Container, Input, Button } from '../styled/index'
 
 import styled from 'styled-components'
 import NavBar from './NavBar'
@@ -118,6 +118,9 @@ export class ThreadForm extends Component {
           >
             Submit Thread
           </Link>
+          <form onSubmit={this.handleSubmit}>
+            <Button type="submit">Submit Post</Button>
+          </form>
         </ThreadFormWrapper>
       </Container>
     )

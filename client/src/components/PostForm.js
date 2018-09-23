@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 import styled from 'styled-components'
 
-import ReactMde, { ReactMdeTypes } from 'react-mde'
+import ReactMde from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
@@ -44,8 +44,8 @@ class PostForm extends Component {
     try {
       await this.props.makeNewPost(
         this.state.mdeState.html,
-        localStorage.User,
-        localStorage.UserId,
+        this.props.auth.username,
+        this.props.auth.userId,
         this.props.threadId
       )
     } catch (e) {
@@ -75,7 +75,11 @@ class PostForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  auth: state.auth
+})
+
 export default connect(
-  null,
+  mapStateToProps,
   { makeNewPost }
 )(PostForm)
