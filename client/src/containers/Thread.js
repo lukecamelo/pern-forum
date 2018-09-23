@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import axios from 'axios'
 import { Container } from '../styled/index'
 import NavBar from '../components/NavBar'
@@ -24,10 +24,18 @@ const StyledThread = styled.div`
   margin-bottom: 1em;
   border: 2px solid ${props => props.theme.primary};
 `
+const slideInLeft = keyframes`
+  0% { transform: translateX(-25px); }
+  100% { transform: translateX(0px); }
+`
+const slideInRight = keyframes`
+  0% { transform: translateX(25px); }
+  100% { transform: translateX(0px); }
+`
 export const ThreadHeader = styled.h2`
   margin-left: 1em;
-  // border-bottom: 2px solid white;
   text-align: left;
+  animation: ${slideInRight} .9s cubic-bezier(.28,1,.14,.99);
 `
 const PostWrapper = styled.div`
   // border: 1px solid ${props => props.theme.secondary};
@@ -36,19 +44,25 @@ const PostWrapper = styled.div`
   text-align: left;
   padding: 0 1em 1em 1em;
   margin-bottom: 1em;
+  blockquote {
+    border-left: 4px solid ${props => props.theme.primary};
+  }
 `
 const User = styled.div`
   margin-right: 1em;
+  animation: ${slideInLeft} .7s cubic-bezier(.28,1,.14,.99);
 `
 const Author = styled.h2`
   color: ${props => props.theme.primary}
   font-size: 18px;
 `
-// const PostContent = styled.p`
-//   color: black;
-//   font-size: 16px;
-//   padding: 0 15px 15px 15px;
-// `
+const fadeIn = keyframes`
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+`
+const AnimationContainer = styled.div`
+  animation: 1s ${fadeIn} cubic-bezier(.52,.79,.3,.98);
+`
 
 export class Thread extends Component {
   state = {
@@ -98,12 +112,12 @@ export class Thread extends Component {
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <PostWrapper key={post.id}>
-          <User>
+          <User className='usah'>
             <Author>{post.author}</Author>
-            <p>post count: {post.user.postCount}</p> 
+            <p>post count: {post.user.postCount}</p>
             <Avatar size="150" src={post.user.avatarUrl} />
           </User>
-          <div dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
+          <div className='markdown-shiz' dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
         </PostWrapper>
       ))
       const op = posts.shift()
@@ -111,20 +125,21 @@ export class Thread extends Component {
       return (
         <Container>
           <NavBar />
-          <ThreadWrapper>
-            <ThreadHeader>
-              {title} / {author}
-            </ThreadHeader>
-            <StyledThread>{op}</StyledThread>
-
-            {posts.length ? (
-              <Pagination data={posts}>
-                <PostList />
-              </Pagination>
-            ) : (
-              <h1>make the first post!</h1>
-            )}
-          </ThreadWrapper>
+          <AnimationContainer>
+            <ThreadWrapper>
+              <ThreadHeader>
+                {title} / {author}
+              </ThreadHeader>
+              <StyledThread>{op}</StyledThread>
+              {posts.length ? (
+                <Pagination data={posts}>
+                  <PostList />
+                </Pagination>
+              ) : (
+                <h1>make the first post!</h1>
+              )}
+            </ThreadWrapper>
+          </AnimationContainer>
           <PostForm threadId={this.props.match.params.id} />
         </Container>
       )

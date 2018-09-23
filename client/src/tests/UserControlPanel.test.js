@@ -1,6 +1,6 @@
 import React from 'react'
 import { UserControlPanel } from '../components/UserControlPanel'
-import { Button, Input } from '../components/Login'
+import { Button, Input } from '../styled/index'
 import { shallow } from 'enzyme'
 
 describe('<UserControlPanel />', () => {
