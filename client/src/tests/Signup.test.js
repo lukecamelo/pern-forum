@@ -1,7 +1,7 @@
 import React from 'react'
 import { Signup } from '../components/Signup'
-import { Input, FormWrapper, Button } from '../components/Login'
-import { shallow, mount } from 'enzyme'
+import { Input, Button } from '../styled/index'
+import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 describe('<Signup />', () => {

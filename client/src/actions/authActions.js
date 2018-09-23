@@ -11,9 +11,13 @@ export const userLogin = (username, password) => dispatch => {
     .then(res => res.json())
     .then(res => {
       if (res.token) {
-        localStorage.Authorization = res.token
-        localStorage.User = res.user.username
-        localStorage.UserId = res.user.id
+        // localStorage.Authorization = res.token
+        localStorage.setItem('Authorization', JSON.stringify(res.token))
+        localStorage.setItem('User', JSON.stringify(res.user))
+        // localStorage.User = res.user.username
+        // localStorage.UserId = res.user.id
+        // localStorage.UserObject = res.user
+        // console.log(localStorage.UserObject.username)
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res

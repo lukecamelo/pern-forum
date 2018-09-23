@@ -6,21 +6,39 @@ import {
   CHECK_USER_LOGGEDIN
 } from '../actions/types'
 
-let isToken
-let username
-let userId
-if (localStorage.Authorization) {
-  isToken = true
-  username = localStorage.User
-  userId = localStorage.UserId
-} else {
-  isToken = false
-}
+// import store from '../store'
+
+// let isToken
+// let username
+// let userId
+// if (localStorage.Authorization) {
+//   isToken = true
+//   username = localStorage.User
+//   userId = localStorage.UserId
+// } else {
+//   isToken = false
+// }
+
+// let user = JSON.parse(localStorage.getItem('UserObject'))
+// let user = JSON.parse(localStorage.User)
+
+// const initialState = store.getState(). ? {
+//   username: user.username,
+//   userId: user.id,
+//   isLoggedIn: true,
+//   message: ''
+// } : {
+//   username: '',
+//   userId: null,
+//   isLoggedIn: false,
+//   message: ''
+// }
+// console.log(store.getState())
 
 const initialState = {
-  username: username,
-  userId: userId,
-  isLoggedIn: isToken,
+  username: '',
+  userId: null,
+  isLoggedIn: false,
   message: ''
 }
 

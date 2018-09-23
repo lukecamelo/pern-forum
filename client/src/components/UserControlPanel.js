@@ -56,7 +56,7 @@ export class UserControlPanel extends React.Component {
       <Container>
         <NavBar />
         <Card>
-          <h1>Welcome, {localStorage.User}</h1>
+          <h1>Welcome, {this.props.user.username}</h1>
           <h1>Change avatar: </h1>
           {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
           <AvatarEdit>

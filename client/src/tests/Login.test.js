@@ -1,5 +1,6 @@
 import React from 'react'
-import { Login, Input, Button } from '../components/Login'
+import { Login } from '../components/Login'
+import { Input, Button } from '../styled/index'
 import { shallow } from 'enzyme'
 
 describe('<Login />', () => {

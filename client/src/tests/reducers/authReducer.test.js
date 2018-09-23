@@ -9,6 +9,7 @@ const initialState = {
 }
 
 describe('auth reducer', () => {
+
   it('should return initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState)
   })
