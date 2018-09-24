@@ -6,7 +6,7 @@ import { shallow, mount } from 'enzyme'
 import sinon from 'sinon'
 
 describe('<ThreadList />', () => {
-  let props, wrapper, fetchData
+  let props, wrapper, fetchData, fetchThreads
 
   beforeEach(() => {
     props = {
@@ -25,10 +25,12 @@ describe('<ThreadList />', () => {
         { title: 'carrot stick', content: 'i am a monster', id: 5, userId: 4, Post: [{}] },
         { title: 'i eat gravy', content: 'its really bad for me', id: 6, userId: 3, Post: [{}] }
       ],
-      fetchData: () => []
+      fetchData: () => [],
+      fetchThreads: () => []
     }
 
     fetchData = sinon.stub(props, 'fetchData')
+    fetchThreads = sinon.stub(props, 'fetchThreads')
 
     wrapper = mount(<ThreadList {...props} />, {
       context: {
@@ -70,7 +72,12 @@ describe('<ThreadList />', () => {
   it('fetches data on componentDidMount', () => {
     const componentDidMountSpy = sinon.spy(ThreadList.prototype, 'componentDidMount')
     expect(fetchData.calledOnce).toBe(true)
-    // expect(ThreadList.prototype.componentDidMount.calledOnce)
+    componentDidMountSpy.restore()
+  })
+
+  it('fetches threads on componentDidMount', () => {
+    const componentDidMountSpy = sinon.spy(ThreadList.prototype, 'componentDidMount')
+    expect(fetchThreads.calledOnce).toBe(true)
     componentDidMountSpy.restore()
   })
 })
