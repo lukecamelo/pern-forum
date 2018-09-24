@@ -24,7 +24,7 @@ const StyledThread = styled.div`
   margin-bottom: 1em;
   border: 2px solid ${props => props.theme.primary};
 `
-const slideInLeft = keyframes`
+export const slideInLeft = keyframes`
   0% { transform: translateX(-25px); }
   100% { transform: translateX(0px); }
 `
@@ -32,10 +32,10 @@ const slideInRight = keyframes`
   0% { transform: translateX(25px); }
   100% { transform: translateX(0px); }
 `
-export const ThreadHeader = styled.h2`
+const ThreadHeader = styled.h2`
   margin-left: 1em;
   text-align: left;
-  animation: ${slideInRight} .4s cubic-bezier(.28,1,.14,.99);
+  animation: ${slideInRight} 0.4s cubic-bezier(0.28, 1, 0.14, 0.99);
 `
 const PostWrapper = styled.div`
   // border: 1px solid ${props => props.theme.secondary};
@@ -50,7 +50,7 @@ const PostWrapper = styled.div`
 `
 const User = styled.div`
   margin-right: 1em;
-  animation: ${slideInLeft} .4s cubic-bezier(.28,1,.14,.99);
+  animation: ${slideInLeft} 0.4s cubic-bezier(0.28, 1, 0.14, 0.99);
 `
 const Author = styled.h2`
   color: ${props => props.theme.primary}
@@ -61,9 +61,11 @@ const fadeIn = keyframes`
   100% { opacity: 1; }
 `
 const AnimationContainer = styled.div`
-  animation: .6s ${fadeIn} cubic-bezier(.52,.79,.3,.98);
+  animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
 `
-
+const OpAnimation = styled.div`
+  animation: 0.6s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
+`
 export class Thread extends Component {
   state = {
     title: '',
@@ -111,14 +113,19 @@ export class Thread extends Component {
 
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
-        <PostWrapper key={post.id}>
-          <User className='usah'>
-            <Author>{post.author}</Author>
-            <p>post count: {post.user.postCount}</p>
-            <Avatar size="150" src={post.user.avatarUrl} />
-          </User>
-          <div className='markdown-shiz' dangerouslySetInnerHTML={this.getMarkdownText(post.content)} />
-        </PostWrapper>
+        <OpAnimation key={post.id}>
+          <PostWrapper>
+            <User className="usah">
+              <Author>{post.author}</Author>
+              <p>post count: {post.user.postCount}</p>
+              <Avatar size="150" src={post.user.avatarUrl} />
+            </User>
+            <div
+              className="markdown-shiz"
+              dangerouslySetInnerHTML={this.getMarkdownText(post.content)}
+            />
+          </PostWrapper>
+        </OpAnimation>
       ))
       const op = posts.shift()
 
@@ -130,7 +137,9 @@ export class Thread extends Component {
               <ThreadHeader>
                 {title} / {author}
               </ThreadHeader>
-              <StyledThread>{op}</StyledThread>
+              <OpAnimation>
+                <StyledThread>{op}</StyledThread>
+              </OpAnimation>
               {posts.length ? (
                 <Pagination data={posts}>
                   <PostList />
