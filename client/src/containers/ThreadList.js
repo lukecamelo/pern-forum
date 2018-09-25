@@ -33,6 +33,7 @@ export class ThreadList extends Component {
     return this.props.users.find(user => user.id === userId).username
   }
 
+  // most likely extremely naïve and inefficient 
   checkForPosts = () => {
     const { data: threads } = this.props
     let increment = 0
