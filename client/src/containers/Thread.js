@@ -1,65 +1,20 @@
 import React, { Component } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import axios from 'axios'
-import { Container } from '../styled/index'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
 import marked from 'marked'
-// import { Author, PostWrapper, PostContent } from '../components/PostList'
 
-const ThreadWrapper = styled.section`
-  background-color: #dff4ff;
-  color: #564154;
-  padding: 2em;
-`
-const StyledThread = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: #32343b;
-  background-color: white;
-  margin-bottom: 1em;
-  border: 2px solid ${props => props.theme.primary};
-`
-export const slideInLeft = keyframes`
-  0% { transform: translateX(-25px); }
-  100% { transform: translateX(0px); }
-`
-const slideInRight = keyframes`
-  0% { transform: translateX(25px); }
-  100% { transform: translateX(0px); }
-`
-const ThreadHeader = styled.h2`
-  margin-left: 1em;
-  text-align: left;
-  animation: ${slideInRight} 0.4s cubic-bezier(0.28, 1, 0.14, 0.99);
-`
-const PostWrapper = styled.div`
-  // border: 1px solid ${props => props.theme.secondary};
-  display: flex;
-  background-color: white;
-  text-align: left;
-  padding: 0 1em 1em 1em;
-  margin-bottom: 1em;
-  blockquote {
-    border-left: 4px solid ${props => props.theme.primary};
-  }
-`
-const User = styled.div`
-  margin-right: 1em;
-  animation: ${slideInLeft} 0.4s cubic-bezier(0.28, 1, 0.14, 0.99);
-`
-const Author = styled.h2`
-  color: ${props => props.theme.primary}
-  font-size: 18px;
-`
-const fadeIn = keyframes`
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-`
+import { Container } from '../styled/index'
+import Post from '../styled/Post'
+import StyledThread from '../styled/StyledThread'
+import { fadeIn, slideInLeft } from '../styled/keyframes/index'
+
+import { fetchSingleThread, fetchThreadAuthor, fetchThreadAndAuthor } from '../utils/threadHelpers'
+
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
 `
@@ -76,31 +31,18 @@ export class Thread extends Component {
     threadHasLoaded: false
   }
 
-  componentDidMount = async () => {
-    this.fetchThreadAndAuthor()
-  }
-
-  fetchSingleThread = async threadId => {
-    const thread = await axios.get(`/api/threads/${threadId}`)
-    return thread.data
-  }
-
-  fetchThreadAuthor = async userId => {
-    const author = await axios.get(`/api/users/${userId}`)
-    return author.data
-  }
-
-  fetchThreadAndAuthor = async () => {
-    const thread = await this.fetchSingleThread(this.props.match.params.id)
-    const author = await this.fetchThreadAuthor(thread.userId)
-    await this.setState({
-      title: thread.title,
-      content: thread.content,
-      threadPosts: thread.Post,
-      userId: thread.userId,
-      author: author.username,
-      threadHasLoaded: true
-    })
+  componentDidMount = () => {
+    fetchThreadAndAuthor(this.props.match.params.id)
+      .then(res => {
+        this.setState({
+          title: res.title,
+          content: res.content,
+          author: res.author,
+          threadPosts: res.threadPosts,
+          userId: res.userId,
+          threadHasLoaded: res.threadHasLoaded
+        })
+      })
   }
 
   getMarkdownText = markdown => {
@@ -114,17 +56,17 @@ export class Thread extends Component {
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
-          <PostWrapper>
-            <User className="usah">
-              <Author>{post.author}</Author>
+          <Post>
+            <Post.User>
+              <Post.Author>{post.author}</Post.Author>
               <p>post count: {post.user.postCount}</p>
               <Avatar size="150" src={post.user.avatarUrl} />
-            </User>
+            </Post.User>
             <div
               className="markdown-shiz"
               dangerouslySetInnerHTML={this.getMarkdownText(post.content)}
             />
-          </PostWrapper>
+          </Post>
         </OpAnimation>
       ))
       const op = posts.shift()
@@ -133,12 +75,12 @@ export class Thread extends Component {
         <Container>
           <NavBar />
           <AnimationContainer>
-            <ThreadWrapper>
-              <ThreadHeader>
+            <StyledThread>
+              <StyledThread.Header>
                 {title} / {author}
-              </ThreadHeader>
+              </StyledThread.Header>
               <OpAnimation>
-                <StyledThread>{op}</StyledThread>
+                <StyledThread.Body>{op}</StyledThread.Body>
               </OpAnimation>
               {posts.length ? (
                 <Pagination data={posts}>
@@ -147,7 +89,7 @@ export class Thread extends Component {
               ) : (
                 <h1>make the first post!</h1>
               )}
-            </ThreadWrapper>
+            </StyledThread>
           </AnimationContainer>
           <PostForm threadId={this.props.match.params.id} />
         </Container>
