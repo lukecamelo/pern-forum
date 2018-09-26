@@ -22,8 +22,9 @@ const url =
 //   }
 // })
 
+console.log('process.env.DBUSER: ', process.env.DBUSER)
 const sequelize = new Sequelize(
-  process.env.DBNAME,
+  'pern_forum',
   process.env.DBUSER,
   process.env.DBPASS,
   {
@@ -50,7 +51,6 @@ Object.keys(db).forEach(function(modelName) {
     console.log(db[modelName])
     db[modelName].associate(db)
   }
-  console.log(modelName)
 })
 
 db.thread.belongsTo(db.user)

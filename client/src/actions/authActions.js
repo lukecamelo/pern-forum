@@ -11,13 +11,8 @@ export const userLogin = (username, password) => dispatch => {
     .then(res => res.json())
     .then(res => {
       if (res.token) {
-        // localStorage.Authorization = res.token
         localStorage.setItem('Authorization', JSON.stringify(res.token))
         localStorage.setItem('User', JSON.stringify(res.user))
-        // localStorage.User = res.user.username
-        // localStorage.UserId = res.user.id
-        // localStorage.UserObject = res.user
-        // console.log(localStorage.UserObject.username)
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res
@@ -59,9 +54,10 @@ export const userSignup = (username, password, avatarUrl) => dispatch => {
 }
 
 export const checkUserLoggedIn = () => dispatch => {
+  console.log(localStorage.Authorization)
   fetch('/user/profile', {
     headers: {
-      'Authorization': 'Bearer ' + localStorage.Authorization
+      'Authorization': "Bearer " + JSON.parse(localStorage.Authorization)
     }
   })
     .then(res => res.json())

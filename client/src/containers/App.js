@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchData, fetchThreads } from '../actions/threadActions'
+import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../components/Login'
@@ -11,6 +12,7 @@ import Pagination from '../components/Pagination'
 
 export class App extends Component {
   componentDidMount() {
+    this.props.fetchData()
     this.props.fetchThreads()
   }
 
@@ -49,5 +51,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchThreads }
+  { fetchData, fetchThreads, checkUserLoggedIn }
 )(App)

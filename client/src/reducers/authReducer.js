@@ -10,6 +10,7 @@ const initialState = {
   username: '',
   userId: null,
   isLoggedIn: false,
+  token: '',
   message: ''
 }
 
@@ -21,7 +22,8 @@ export default (state = initialState, action) => {
         username: action.payload.user.username,
         userId: action.payload.user.id,
         isLoggedIn: true,
-        message: action.payload.message
+        message: action.payload.message,
+        token: action.payload.token
       }
     case USER_LOGIN_FAIL:
       return {
@@ -47,7 +49,8 @@ export default (state = initialState, action) => {
         ...state,
         username: action.payload.username,
         isLoggedIn: true,
-        userId: action.payload.id
+        userId: action.payload.id,
+        message: 'user still logged in'
       }
     default: {
       return state

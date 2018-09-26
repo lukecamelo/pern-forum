@@ -27,7 +27,7 @@ export const ThreadContentInput = styled.textarea`
   }
 `
 const ThreadFormWrapper = styled(FormWrapper)`
-  width: 75%;
+  width: 100%;
 `
 const ThreadTitleInput = styled(Input)`
   width: 400px;
@@ -76,7 +76,7 @@ export class ThreadForm extends Component {
         this.props.loggedInUserId,
         this.props.username
       )
-      this.props.history.push('/')
+      this.props.history.push('/threads/1')
     } catch (e) {
       alert(e.message)
     }
@@ -104,7 +104,7 @@ export class ThreadForm extends Component {
               }
             />
           </MarkdownWrapper>
-          <Link
+          {/* <Link
             to="/"
             className="logout"
             onClick={() =>
@@ -117,7 +117,7 @@ export class ThreadForm extends Component {
             }
           >
             Submit Thread
-          </Link>
+          </Link> */}
           <form onSubmit={this.handleSubmit}>
             <Button type="submit">Submit Post</Button>
           </form>

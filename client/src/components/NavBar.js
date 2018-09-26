@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { userLogout } from '../actions/authActions'
 
 import './NavBar.css'
-import { userLogout } from '../actions/authActions'
 
 const StyledNav = styled.nav`
   display: flex;
