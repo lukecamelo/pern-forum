@@ -31,17 +31,16 @@ export class Thread extends Component {
   }
 
   componentDidMount = () => {
-    fetchThreadAndAuthor(this.props.match.params.id)
-      .then(res => {
-        this.setState({
-          title: res.title,
-          content: res.content,
-          author: res.author,
-          threadPosts: res.threadPosts,
-          userId: res.userId,
-          threadHasLoaded: res.threadHasLoaded
-        })
+    fetchThreadAndAuthor(this.props.match.params.id).then(res => {
+      this.setState({
+        title: res.title,
+        content: res.content,
+        author: res.author,
+        threadPosts: res.threadPosts,
+        userId: res.userId,
+        threadHasLoaded: res.threadHasLoaded
       })
+    })
   }
 
   getMarkdownText = markdown => {
@@ -75,7 +74,6 @@ export class Thread extends Component {
           <NavBar />
           <AnimationContainer>
             <StyledThread>
-
               <StyledThread.Header>
                 {title} / {author}
               </StyledThread.Header>
@@ -85,13 +83,17 @@ export class Thread extends Component {
               </OpAnimation>
 
               {posts.length ? (
-                <Pagination data={posts}>
-                  <PostList />
+                <Pagination
+                  data={posts}
+                  currentPage={this.props.match.params.page}
+                  threadId={this.props.match.params.id}
+                  context='posts'
+                >
+                  {data => <PostList data={data} />}
                 </Pagination>
               ) : (
                 <h1>make the first post!</h1>
               )}
-
             </StyledThread>
           </AnimationContainer>
           <PostForm threadId={this.props.match.params.id} />

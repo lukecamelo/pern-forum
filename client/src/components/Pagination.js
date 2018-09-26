@@ -34,7 +34,11 @@ class Pagination extends Component {
         i === this.state.currentPage ? `${baseClassName}--active` : ''
       controls.push(
         <Link
-          to={`/threads/${i}`}
+          to={
+            this.props.context === 'threads'
+              ? `/threads/${i}`
+              : `/thread/${this.props.threadId}/page/${i}`
+          }
           className={`${baseClassName} ${activeClassName}`}
           key={i}
           onClick={() => this.setCurrentPage(i)}
@@ -48,6 +52,7 @@ class Pagination extends Component {
 
   createPaginatedData = () => {
     const { data, pageSize } = this.props
+    // this.props.currentPage is needed for thread pagination but posts do not take that prop yet
     const currentPage = this.props.currentPage
     const upperLimit = currentPage * pageSize
     const dataSlice = data.slice(upperLimit - pageSize, upperLimit)
@@ -58,9 +63,6 @@ class Pagination extends Component {
     return (
       <div className="pagination">
         <div className="pagination-results">
-          {/* {React.cloneElement(this.props.children, {
-            data: this.createPaginatedData()
-          })} */}
           {this.props.children(this.createPaginatedData())}
         </div>
         <div className="pagination-controls">{this.createControls()}</div>
