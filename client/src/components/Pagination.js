@@ -12,6 +12,7 @@ class Pagination extends Component {
     const startingPage = this.props.startingPage ? this.props.startingPage : 1
     const data = this.props.data
     const pageSize = this.props.pageSize
+    console.log(data)
     let pageCount = parseInt(data.length / pageSize, 10)
     if (data.length % pageSize > 0) {
       pageCount++
@@ -47,7 +48,7 @@ class Pagination extends Component {
 
   createPaginatedData = () => {
     const { data, pageSize } = this.props
-    const currentPage = this.state.currentPage
+    const currentPage = this.props.currentPage
     const upperLimit = currentPage * pageSize
     const dataSlice = data.slice(upperLimit - pageSize, upperLimit)
     return dataSlice
@@ -57,9 +58,10 @@ class Pagination extends Component {
     return (
       <div className="pagination">
         <div className="pagination-results">
-          {React.cloneElement(this.props.children, {
+          {/* {React.cloneElement(this.props.children, {
             data: this.createPaginatedData()
-          })}
+          })} */}
+          {this.props.children(this.createPaginatedData())}
         </div>
         <div className="pagination-controls">{this.createControls()}</div>
       </div>

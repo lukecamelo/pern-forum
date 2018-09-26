@@ -13,14 +13,17 @@ export class App extends Component {
   componentDidMount() {
     this.props.fetchThreads()
   }
-  
+
   render() {
     if (this.props.isLoggedIn && this.props.threads.length) {
       return (
         <Container>
-          <NavBar/>
-          <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
+          <NavBar />
+          {/* <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
             <ThreadList />
+          </Pagination> */}
+          <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
+            {data => <ThreadList data={data} />}
           </Pagination>
           <Link className="thread-button" to="/newthread">
             Post Thread
