@@ -14,7 +14,6 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const port = process.env.PORT || 8090
-console.log('process.env.DBUSER: ', process.env.DBUSER)
 
 const user = require('./server/routes/user')
 const auth = require('./server/routes/auth')
