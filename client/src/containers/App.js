@@ -19,10 +19,11 @@ export class App extends Component {
       return (
         <Container>
           <NavBar />
-          {/* <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
-            <ThreadList />
-          </Pagination> */}
-          <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
+          <Pagination
+            data={this.props.threads}
+            currentPage={this.props.match.params.page}
+            context='threads'
+          >
             {data => <ThreadList data={data} />}
           </Pagination>
           <Link className="thread-button" to="/newthread">

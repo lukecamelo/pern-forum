@@ -51,7 +51,7 @@ export class ThreadList extends Component {
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>
-            <Link className="title" to={`/thread/${thread.id}`}>
+            <Link className="title" to={`/thread/${thread.id}/page/1`}>
               {thread.title}
             </Link>
             <div className="author">

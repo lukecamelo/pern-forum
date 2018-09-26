@@ -26,7 +26,8 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
-          <Route path="/thread/:id" component={Thread} />
+          <Route path="/thread/:id/page/:page" component={Thread} />
+          {/* <Route path="/thread/:id" component={Thread} /> */}
           <Route exact path='/newthread' component={ThreadForm} />
           <Route exact path='/usercontrolpanel' component={UserControlPanel} />
           <Route path='/threads/:page' component={App} />
