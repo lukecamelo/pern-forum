@@ -29,6 +29,7 @@ ReactDOM.render(
           <Route path="/thread/:id" component={Thread} />
           <Route exact path='/newthread' component={ThreadForm} />
           <Route exact path='/usercontrolpanel' component={UserControlPanel} />
+          <Route path='/threads/:page' component={App} />
         </Switch>
       </BrowserRouter>
     </Provider>

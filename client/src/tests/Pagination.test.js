@@ -1,6 +1,7 @@
 import React from 'react'
 import Pagination from '../components/Pagination'
 import { ThreadList } from '../containers/ThreadList'
+import { Link } from 'react-router-dom'
 import { shallow } from 'enzyme'
 
 describe('<Pagination />', () => {
@@ -20,7 +21,12 @@ describe('<Pagination />', () => {
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 }
-      ]
+      ],
+      match: {
+        params: {
+          page: 1
+        }
+      },
     }
     wrapper = shallow(
       <Pagination {...props}>
@@ -45,13 +51,13 @@ describe('<Pagination />', () => {
 
   it('changes active page on click', () => {
     wrapper
-      .find('div.pagination-controls__button')
+      .find(Link)
       .last()
       .simulate('click')
 
     expect(
       wrapper
-        .find('div.pagination-controls__button')
+        .find(Link)
         .last()
         .hasClass('pagination-controls__button--active')
     ).toEqual(true)

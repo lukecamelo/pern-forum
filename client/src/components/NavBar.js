@@ -17,7 +17,7 @@ export const NavBar = ({ isLoggedIn, ...props }) => {
   if (isLoggedIn) {
     return (
       <StyledNav>
-        <Link to="/" className="navlink">
+        <Link to="/threads/1" className="navlink">
           Home
         </Link>
         <Link to="/usercontrolpanel" className="navlink">

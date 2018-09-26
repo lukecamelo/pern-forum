@@ -13,14 +13,6 @@ export const fetchThreadAuthor = async userId => {
 export const fetchThreadAndAuthor = async threadId => {
   const thread = await fetchSingleThread(threadId)
   const author = await fetchThreadAuthor(thread.userId)
-  // this.setState({
-  //   title: thread.title,
-  //   content: thread.content,
-  //   threadPosts: thread.Post,
-  //   userId: thread.userId,
-  //   author: author.username,
-  //   threadHasLoaded: true
-  // })
   return {
     title: thread.title,
     content: thread.content,
@@ -29,4 +21,8 @@ export const fetchThreadAndAuthor = async threadId => {
     author: author.username,
     threadHasLoaded: true
   }
+}
+
+export const filterAuthor = (threadArray, userId) => {
+  return threadArray.find(user => user.id === userId).username
 }

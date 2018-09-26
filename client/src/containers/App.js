@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchData, fetchThreads } from '../actions/threadActions'
-import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../components/Login'
@@ -13,7 +12,6 @@ import Pagination from '../components/Pagination'
 export class App extends Component {
   componentDidMount() {
     this.props.fetchThreads()
-    // this.props.checkUserLoggedIn()
   }
   
   render() {
@@ -21,7 +19,7 @@ export class App extends Component {
       return (
         <Container>
           <NavBar/>
-          <Pagination data={this.props.threads}>
+          <Pagination data={this.props.threads} currentPage={this.props.match.params.page}>
             <ThreadList />
           </Pagination>
           <Link className="thread-button" to="/newthread">
@@ -47,5 +45,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchThreads, checkUserLoggedIn }
+  { fetchData, fetchThreads }
 )(App)
