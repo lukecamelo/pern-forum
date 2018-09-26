@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const port = process.env.PORT || 8090
+console.log('process.env.DBUSER: ', process.env.DBUSER)
 
 const user = require('./server/routes/user')
 const auth = require('./server/routes/auth')
@@ -21,8 +22,8 @@ const index = require('./server/routes/routes')
 const thread = require('./server/routes/thread')
 
 app.use(express.static(path.join(__dirname, 'client/public')))
-app.use('/thread', thread)
 app.use('/', index)
+app.use('/thread', thread)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
 
@@ -30,7 +31,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/public/index.html'))
 })
 
-// models.sequelize.sync().then(() => {
+// models.sequelize.sync({ force: true }).then(() => {
 app.listen(port, () => {
   console.log(`Running on http://localhost:${port}`)
 })

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const fetchSingleThread = async threadId => {
-  const thread = await axios.get(`/api/threads/${threadId}`)
+  const thread = await axios.get(`/thread/${threadId}`)
   return thread.data
 }
 

@@ -67,6 +67,18 @@ router.get('/threads', (req, res) => {
     .catch(err => console.log('error at /api/allposts: ', err))
 })
 
+// Returns all posts in a thread
+router.get('/:id/posts', (req, res) => {
+  models.post
+    .findAll({ where: { threadId: req.params.id }, include: [models.user] })
+    .then(posts => res.json(posts))
+})
+
+// Makes post in thread
+router.post('/:id/posts', makePost, (req, res) => {
+  return req.data
+})
+
 // Get single thread
 router.get('/:id', (req, res) => {
   models.thread
@@ -84,17 +96,6 @@ router.get('/:id', (req, res) => {
     .then(thread => res.json(thread))
 })
 
-// Returns all posts in a thread
-router.get('/:id/posts', (req, res) => {
-  models.post
-    .findAll({ where: { threadId: req.params.id }, include: [models.user] })
-    .then(posts => res.json(posts))
-})
 
-
-
-router.post('/:id/posts', makePost, (req, res) => {
-  return req.data
-})
 
 module.exports = router

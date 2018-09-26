@@ -52,7 +52,6 @@ class Pagination extends Component {
 
   createPaginatedData = () => {
     const { data, pageSize } = this.props
-    // this.props.currentPage is needed for thread pagination but posts do not take that prop yet
     const currentPage = this.props.currentPage
     const upperLimit = currentPage * pageSize
     const dataSlice = data.slice(upperLimit - pageSize, upperLimit)
