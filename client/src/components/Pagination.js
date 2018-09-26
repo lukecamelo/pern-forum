@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './Pagination.css'
 
 class Pagination extends Component {
@@ -31,21 +32,21 @@ class Pagination extends Component {
       const activeClassName =
         i === this.state.currentPage ? `${baseClassName}--active` : ''
       controls.push(
-        <div
+        <Link
+          to={`/threads/${i}`}
           className={`${baseClassName} ${activeClassName}`}
-          onClick={() => this.setCurrentPage(i)}
           key={i}
+          onClick={() => this.setCurrentPage(i)}
         >
           {i}
-        </div>
+        </Link>
       )
     }
     return controls
   }
 
   createPaginatedData = () => {
-    const data = this.props.data
-    const pageSize = this.props.pageSize
+    const { data, pageSize } = this.props
     const currentPage = this.state.currentPage
     const upperLimit = currentPage * pageSize
     const dataSlice = data.slice(upperLimit - pageSize, upperLimit)

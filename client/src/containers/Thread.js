@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
@@ -13,7 +12,7 @@ import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
 
-import { fetchSingleThread, fetchThreadAuthor, fetchThreadAndAuthor } from '../utils/threadHelpers'
+import { fetchThreadAndAuthor } from '../utils/threadHelpers'
 
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
@@ -76,12 +75,15 @@ export class Thread extends Component {
           <NavBar />
           <AnimationContainer>
             <StyledThread>
+
               <StyledThread.Header>
                 {title} / {author}
               </StyledThread.Header>
+
               <OpAnimation>
                 <StyledThread.Body>{op}</StyledThread.Body>
               </OpAnimation>
+
               {posts.length ? (
                 <Pagination data={posts}>
                   <PostList />
@@ -89,6 +91,7 @@ export class Thread extends Component {
               ) : (
                 <h1>make the first post!</h1>
               )}
+
             </StyledThread>
           </AnimationContainer>
           <PostForm threadId={this.props.match.params.id} />

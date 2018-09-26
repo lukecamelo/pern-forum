@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchData, fetchThreads } from '../actions/threadActions'
+import { filterAuthor } from '../utils/threadHelpers'
 import styled from 'styled-components'
 import './ThreadList.css'
 
@@ -29,15 +30,10 @@ export class ThreadList extends Component {
     this.props.fetchThreads()
   }
 
-  fetchThreadAuthor = userId => {
-    return this.props.users.find(user => user.id === userId).username
-  }
-
   // most likely extremely naïve and inefficient 
   checkForPosts = () => {
     const { data: threads } = this.props
     let increment = 0
-    // const allGood = false
     threads.forEach(thread => {
       if (thread.Post.length > 0) {
         increment++
@@ -48,6 +44,7 @@ export class ThreadList extends Component {
     }
     return false
   }
+
   render() {
     const { data: threads, users } = this.props
     if (threads.length && users.length && this.checkForPosts()) {
@@ -60,7 +57,7 @@ export class ThreadList extends Component {
             <div className="author">
               <div className="item thread-author">
                 <p>Author</p>
-                {this.fetchThreadAuthor(thread.userId)}
+                {filterAuthor(this.props.users, thread.userId)}
               </div>
 
               <div className="item">
