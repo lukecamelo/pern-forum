@@ -3,7 +3,7 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
-  FETCH_POSTS,
+  FETCH_POSTS
 } from './types'
 
 export const fetchData = () => dispatch => {
@@ -36,7 +36,7 @@ export const fetchThreads = () => dispatch => {
 }
 
 export const postNewThread = (title, content, userId, author) => dispatch => {
-  fetch('/thread/threads', {
+  return fetch('/thread/threads', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export const makeNewPost = (
   userId,
   threadId
 ) => dispatch => {
-  fetch(`/thread/${threadId}/posts`, {
+  return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

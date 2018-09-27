@@ -16,25 +16,122 @@ describe('thread actions', () => {
   it('fetches the threads', () => {
     const store = mockStore({})
     fetchMock.getOnce('/thread/1/posts', {
-      // payload: {
-      //   threadPosts: [
-      //     {
-      //       author: 'rediscover',
-      //       content: 'whats up',
-      //       userId: 1,
-      //       id: 1,
-      //       threadId: 1
-      //     }
-      //   ]
-      // },
-      // headers: { 'content-type': 'application/json' }
+      threadPosts: [
+        {
+          author: 'rediscover',
+          content: 'whats up',
+          userId: 1,
+          id: 1,
+          threadId: 1
+        }
+      ]
     })
-    
-    // I DO NOT KNOW IF THIS IS ACTUALLY TESTING ANYTHING USEFUL LUL
+
     return store.dispatch(threadActions.fetchPosts(1)).then(() => {
       const actions = store.getActions()
-      const expectedActions = { type: 'FETCH_POSTS', payload: {} }
+      const expectedActions = {
+        type: types.FETCH_POSTS,
+        payload: {
+          threadPosts: [
+            {
+              author: 'rediscover',
+              content: 'whats up',
+              userId: 1,
+              id: 1,
+              threadId: 1
+            }
+          ]
+        }
+      }
       expect(actions).toEqual([expectedActions])
     })
+  })
+
+  it('posts new threads', () => {
+    const store = mockStore({})
+    const reqBody = {
+      thread: {
+        title: 'brand new thread',
+        content: 'what a good thread',
+        id: 1,
+        userId: 1,
+        Post: [
+          {
+            author: 'rediscover',
+            content: 'what a good thread',
+            userId: 1,
+            id: 1,
+            threadId: 1
+          }
+        ]
+      }
+    }
+    const threadData = {
+      title: 'brand new thread',
+      content: 'what a good thread',
+      userId: 1,
+      author: 'rediscover'
+    }
+
+    fetchMock.post('/thread/threads', {
+      status: 200,
+      body: reqBody,
+      headers: { 'Content-Type': 'application/json' }
+    })
+
+    return store.dispatch(threadActions.postNewThread(threadData)).then(() => {
+      const actions = store.getActions()
+      const expectedActions = {
+        type: types.POST_NEW_THREAD,
+        payload: {
+          thread: {
+            title: 'brand new thread',
+            content: 'what a good thread',
+            id: 1,
+            userId: 1,
+            Post: [
+              {
+                author: 'rediscover',
+                content: 'what a good thread',
+                userId: 1,
+                id: 1,
+                threadId: 1
+              }
+            ]
+          }
+        }
+      }
+      expect(actions).toEqual([expectedActions])
+    })
+  })
+
+  it('makes a new post', () => {
+    const store = mockStore({})
+    const body = {
+      content: 'hello',
+      username: 'rediscover',
+      userId: 1,
+      threadId: 1
+    }
+    fetchMock.post('/thread/1/posts', {
+      status: 200,
+      body
+    })
+
+    return store
+      .dispatch(threadActions.makeNewPost('content', 'username', 1, 1))
+      .then(() => {
+        const actions = store.getActions()
+        const expectedActions = {
+          type: types.MAKE_NEW_POST,
+          payload: {
+            content: 'hello',
+            username: 'rediscover',
+            userId: 1,
+            threadId: 1
+          }
+        }
+        expect(actions).toEqual([expectedActions])
+      })
   })
 })

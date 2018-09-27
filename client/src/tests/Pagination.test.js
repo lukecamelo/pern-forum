@@ -65,11 +65,23 @@ describe('<Pagination />', () => {
         .last()
         .hasClass('pagination-controls__button--active')
     ).toEqual(true)
+  })
 
-    /* ----- Optimized version that does not work ----- */
-    // wrapper.find('div.pagination-controls').children().forEach(node => {
-    //   node.simulate('click')
-    //   expect(node.hasClass('pagination-controls__button--active')).toEqual(true)
-    // })
+  it('renders post links for Threads and thread links for ThreadList', () => {
+    wrapper.setProps({ threadId: 1, context: 'posts' })
+    expect(
+      wrapper
+        .find(Link)
+        .at(0)
+        .props().to
+    ).toEqual('/thread/1/page/1')
+    
+    wrapper.setProps({ context: 'threads', currentPage: 1 })
+    expect(
+      wrapper
+        .find(Link)
+        .at(0)
+        .props().to
+    ).toEqual('/threads/1')
   })
 })

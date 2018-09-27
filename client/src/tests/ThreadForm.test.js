@@ -30,7 +30,7 @@ describe('<ThreadForm />', () => {
 
   it('posts thread on button click', () => {
     wrapper.instance().handleSubmit = jest.fn()
-    wrapper.instance().setState({ mdeState: { html: '<p>fuck me</p>' } })
+    wrapper.instance().setState({ mdeState: { html: '<p>this is a test</p>' } })
     wrapper.find('form').simulate('submit', { preventDefault: () => {} })
     expect(wrapper.instance().handleSubmit).toBeCalled()
   })
