@@ -26,11 +26,15 @@ describe('<Pagination />', () => {
         params: {
           page: 1
         }
-      },
+      }
     }
     wrapper = shallow(
-      <Pagination {...props}>
-        <ThreadList />
+      <Pagination
+        data={props.data}
+        currentPage={props.match.params.page}
+        context="threads"
+      >
+        {data => <ThreadList data={data} />}
       </Pagination>
     )
   })
