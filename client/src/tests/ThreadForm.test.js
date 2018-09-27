@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
+import { Button } from '../styled/index'
 import ReactMde from 'react-mde'
-import { Link } from 'react-router-dom'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
@@ -29,9 +29,10 @@ describe('<ThreadForm />', () => {
   })
 
   it('posts thread on button click', () => {
+    wrapper.instance().handleSubmit = jest.fn()
     wrapper.instance().setState({ mdeState: { html: '<p>fuck me</p>' } })
-    wrapper.find(Link).simulate('click')
-    expect(postNewThread.calledOnce).toBe(true)
+    wrapper.find('form').simulate('submit', { preventDefault: () => {} })
+    expect(wrapper.instance().handleSubmit).toBeCalled()
   })
 
   it('changes state onChange', () => {

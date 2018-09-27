@@ -15,7 +15,7 @@ describe('thread actions', () => {
 
   it('fetches the threads', () => {
     const store = mockStore({})
-    fetchMock.getOnce('/api/threads/1/posts', {
+    fetchMock.getOnce('/thread/1/posts', {
       // payload: {
       //   threadPosts: [
       //     {
