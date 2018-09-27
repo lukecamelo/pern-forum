@@ -119,7 +119,7 @@ describe('thread actions', () => {
     })
 
     return store
-      .dispatch(threadActions.makeNewPost('content', 'username', 1, 1))
+      .dispatch(threadActions.makeNewPost('hello', 'rediscover', 1, 1))
       .then(() => {
         const actions = store.getActions()
         const expectedActions = {

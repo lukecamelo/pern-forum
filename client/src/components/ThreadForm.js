@@ -1,41 +1,17 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { postNewThread, fetchThreads } from '../actions/threadActions'
-import { FormWrapper } from './Login'
-import { Container, Input, Button } from '../styled/index'
-
-import styled from 'styled-components'
-import NavBar from './NavBar'
 import ReactMde from 'react-mde'
 import Showdown from 'showdown'
-import './NavBar.css'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
-export const ThreadContentInput = styled.textarea`
-  background: ${props => props.theme.primary};
-  border-radius: 3px;
-  border: none;
-  color: white;
-  padding: 10px 1em;
-  margin-bottom: 5px;
-  width: 100%;
-  font-size: 18px;
+import { connect } from 'react-redux'
+import { postNewThread, fetchThreads } from '../actions/threadActions'
 
-  &::placeholder {
-    color: white;
-  }
-`
-const ThreadFormWrapper = styled(FormWrapper)`
-  width: 100%;
-`
-const ThreadTitleInput = styled(Input)`
-  width: 400px;
-`
-export const MarkdownWrapper = styled.div`
-  background-color: white;
-  margin: 0;
-  padding: 0;
-`
+import NavBar from './NavBar'
+import Form from '../styled/Form'
+import { Container, Button } from '../styled/index'
+
+
+
 export class ThreadForm extends Component {
   constructor(props) {
     super(props)
@@ -47,7 +23,6 @@ export class ThreadForm extends Component {
     this.converter = new Showdown.Converter({
       tables: true,
       simplifiedAutoLink: true
-      // extensions: ['xssfilter']
     })
   }
 
@@ -86,14 +61,15 @@ export class ThreadForm extends Component {
       <Container>
         <NavBar />
         <h1>Post new thread</h1>
-        <ThreadFormWrapper>
-          <ThreadTitleInput
+        <Form style={{ width: '100%' }}>
+          <Form.Input
+            style={{ width: '400px' }}
             name="title"
             value={this.state.title}
             onChange={this.changeHandler}
             placeholder="thread title"
           />
-          <MarkdownWrapper>
+          <Form.Markdown>
             <ReactMde
               layout={'tabbed'}
               onChange={this.handleValueChange}
@@ -102,25 +78,11 @@ export class ThreadForm extends Component {
                 Promise.resolve(this.converter.makeHtml(markdown))
               }
             />
-          </MarkdownWrapper>
-          {/* <Link
-            to="/"
-            className="logout"
-            onClick={() =>
-              this.props.postNewThread(
-                this.state.title,
-                this.state.mdeState.html,
-                this.props.loggedInUserId,
-                this.props.username
-              )
-            }
-          >
-            Submit Thread
-          </Link> */}
+          </Form.Markdown>
           <form onSubmit={this.handleSubmit}>
             <Button type="submit">Submit Post</Button>
           </form>
-        </ThreadFormWrapper>
+        </Form>
       </Container>
     )
   }

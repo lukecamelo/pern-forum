@@ -34,6 +34,7 @@ export class Signup extends React.Component {
       avatarUrlInput: e.target.value
     })
     this.checkUrlExists(this.state.avatarUrlInput).then(res => {
+      console.log('interval check')
       if (res === 200) {
         this.setState({
           urlIsValid: true,

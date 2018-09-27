@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Container, Button } from '../styled/index'
-import { MarkdownWrapper } from './ThreadForm'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 import styled from 'styled-components'
+
+import Form from '../styled/Form'
 
 import ReactMde from 'react-mde'
 import Showdown from 'showdown'
@@ -54,9 +55,15 @@ class PostForm extends Component {
   }
 
   render() {
+    const style = {
+      margin: '2em 4em 2em 4em',
+      width: '100%',
+      textAlign: 'center'
+    }
+
     return (
       <PostFormContainer>
-        <MarkdownWrapper>
+        <Form.Markdown>
           <ReactMde
             layout={'tabbed'}
             style={{ textAlign: 'left' }}
@@ -66,7 +73,7 @@ class PostForm extends Component {
               Promise.resolve(this.converter.makeHtml(markdown))
             }
           />
-        </MarkdownWrapper>
+        </Form.Markdown>
         <form onSubmit={this.handleSubmit}>
           <Button type="submit">Submit Post</Button>
         </form>

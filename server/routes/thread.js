@@ -48,6 +48,20 @@ const makePost = async (req, res, next) => {
   next()
 }
 
+const getThreads = async (req, res, next) => {
+  let threads = models.thread.findAll({
+    include: [
+      {
+        model: models.post,
+        as: 'Post'
+      }
+    ],
+    order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
+  })
+  req.data = threads
+  next()
+}
+
 // Creates thread
 router.post('/threads', makeThreadAndOp, (req, res) => {
   return req.data
@@ -55,25 +69,35 @@ router.post('/threads', makeThreadAndOp, (req, res) => {
 
 // Returns all threads
 router.get('/threads', (req, res) => {
-  models.thread
-    .findAll({
-      include: [
-        {
-          model: models.post,
-          as: 'Post'
-        }
-      ],
-      order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
-    })
-    .then(posts => res.json(posts))
-    .catch(err => console.log('error at /api/allposts: ', err))
+  models.thread.findAll({
+    include: [
+      {
+        model: models.post,
+        as: 'Post'
+      }
+    ],
+    order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
+  })
+  .then(posts => res.json(posts))
+  .catch(err => console.log(err))
+  // return req.data
 })
 
+const getThreadPosts = async (req, res, next) => {
+  let posts = models.post.findAll({
+    where: { threadId: req.params.id },
+    include: [models.user]
+  })
+  req.data = posts
+  next()
+}
+
 // Returns all posts in a thread
-router.get('/:id/posts', (req, res) => {
-  models.post
-    .findAll({ where: { threadId: req.params.id }, include: [models.user] })
-    .then(posts => res.json(posts))
+router.get('/:id/posts', getThreadPosts, (req, res) => {
+  // models.post
+  //   .findAll({ where: { threadId: req.params.id }, include: [models.user] })
+  //   .then(posts => res.json(posts))
+  return req.data
 })
 
 // Makes post in thread
@@ -97,7 +121,5 @@ router.get('/:id', (req, res) => {
     })
     .then(thread => res.json(thread))
 })
-
-
 
 module.exports = router

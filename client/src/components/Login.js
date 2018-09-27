@@ -43,7 +43,7 @@ export class Login extends Component {
         this.state.usernameInput,
         this.state.passwordInput
       )
-      this.props.history.push('/')
+      this.props.history.push('/threads/1')
     } catch (e) {
       alert(e.message)
     }
