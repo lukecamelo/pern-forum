@@ -5,7 +5,15 @@ const initialState = {
   username: '',
   userId: null,
   isLoggedIn: false,
-  message: ''
+  token: '',
+  message: '',
+}
+
+const persistedState = {
+  username: 'rediscover',
+  userId: 1,
+  isLoggedIn: true,
+  message: 'Success!'
 }
 
 describe('auth reducer', () => {
@@ -41,6 +49,7 @@ describe('auth reducer', () => {
           id: 1,
         },
         isLoggedIn: true,
+        token: 'asejr23jifjoawjerawe.afsjlkdfjoi3j2423.asljdfkjo23ir',
         message: 'user logged in successfully!'
       }
     }
@@ -50,6 +59,7 @@ describe('auth reducer', () => {
       username: 'rediscover',
       userId: 1,
       isLoggedIn: true,
+      token: 'asejr23jifjoawjerawe.afsjlkdfjoi3j2423.asljdfkjo23ir',
       message: 'user logged in successfully!'
     })
   })
