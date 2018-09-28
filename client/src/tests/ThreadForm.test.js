@@ -34,7 +34,7 @@ describe('<ThreadForm />', () => {
     wrapper.find('form').simulate('submit', { preventDefault: () => {} })
     expect(wrapper.instance().handleSubmit).toBeCalled()
   })
-
+  
   it('changes state onChange', () => {
     const newState = '<h1>no i mean it!</h1>'
     wrapper.find(ReactMde).simulate('change', newState)
