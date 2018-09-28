@@ -13,7 +13,7 @@ const StyledNav = styled.nav`
   background-color: ${props => props.theme.primary};
 `
 
-export const NavBar = ({ isLoggedIn, ...props }) => {
+export const NavBar = ({ isLoggedIn, user, ...props }) => {
   if (isLoggedIn) {
     return (
       <StyledNav>
@@ -24,14 +24,14 @@ export const NavBar = ({ isLoggedIn, ...props }) => {
           Control Panel
         </Link>
         <a className="logout" onClick={() => props.userLogout()}>
-          Logout
+          Logout ({user})
         </a>
       </StyledNav>
     )
   }
   return (
     <StyledNav>
-      <Link to="/" className="navlink">
+      <Link to="/threads/1" className="navlink">
         Home
       </Link>
 
@@ -47,7 +47,8 @@ export const NavBar = ({ isLoggedIn, ...props }) => {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn
+  isLoggedIn: state.auth.isLoggedIn,
+  user: state.auth.username
 })
 
 export default connect(

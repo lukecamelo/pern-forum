@@ -29,6 +29,7 @@ const makeThreadAndOp = async (req, res, next) => {
 
 const makePost = async (req, res, next) => {
   const body = req.body
+  console.log(res.json(body))
 
   let post = {
     author: body.username,

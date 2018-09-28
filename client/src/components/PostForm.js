@@ -55,12 +55,6 @@ class PostForm extends Component {
   }
 
   render() {
-    const style = {
-      margin: '2em 4em 2em 4em',
-      width: '100%',
-      textAlign: 'center'
-    }
-
     return (
       <PostFormContainer>
         <Form.Markdown>
