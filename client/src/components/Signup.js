@@ -81,7 +81,7 @@ export class Signup extends React.Component {
               type="text"
               value={this.state.avatarUrlInput}
               onChange={this.avatarChangeHandler}
-              placeholder="please enter imgur link for avatar"
+              placeholder="imgur image link"
             />
             <H1>{this.state.validationMessage}</H1>
             <Button
