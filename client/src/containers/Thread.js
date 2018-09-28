@@ -49,7 +49,7 @@ export class Thread extends Component {
   }
 
   render() {
-    const { title, author, threadHasLoaded, threadPosts } = this.state
+    const { title, author, threadHasLoaded, threadPosts = [] } = this.state
 
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (

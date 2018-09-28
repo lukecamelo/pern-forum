@@ -68,6 +68,8 @@ router.post('/threads', makeThreadAndOp, (req, res) => {
 })
 
 // Returns all threads
+// Using the async/await middleware causes threads not to sort properly
+// as well as not reporting their postcounts on the list ???
 router.get('/threads', (req, res) => {
   models.thread.findAll({
     include: [
