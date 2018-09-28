@@ -18,7 +18,7 @@ const PostFormContainer = styled(Container)`
   margin-right: 4em;
 `
 
-class PostForm extends Component {
+export class PostForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -41,9 +41,9 @@ class PostForm extends Component {
     this.setState({ mdeState })
   }
 
-  handleSubmit = async () => {
+  handleSubmit = () => {
     try {
-      await this.props.makeNewPost(
+      this.props.makeNewPost(
         this.state.mdeState.html,
         this.props.auth.username,
         this.props.auth.userId,
