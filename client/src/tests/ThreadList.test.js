@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ThreadList } from '../containers/ThreadList'
-import { MemoryRouter } from 'react-router-dom'
 import { shallow, mount } from 'enzyme'
 import sinon from 'sinon'
 

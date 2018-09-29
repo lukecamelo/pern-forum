@@ -68,6 +68,7 @@ export class Login extends Component {
               value={this.state.usernameInput}
               onChange={this.changeHandler}
               placeholder="enter your username"
+              data-testid="username-input"
             />
             <Input
               name="passwordInput"
@@ -75,6 +76,7 @@ export class Login extends Component {
               value={this.state.passwordInput}
               onChange={this.changeHandler}
               placeholder="enter your password"
+              data-testid="password-input"
             />
             <ButtonWrapper>
               <Button onClick={e => this.handleSubmit(e)}>Login</Button>
