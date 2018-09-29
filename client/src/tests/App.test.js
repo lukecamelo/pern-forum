@@ -50,4 +50,8 @@ describe('renders without crashing', () => {
     wrapper.setProps({ isLoggedIn: false })
     expect(wrapper.find(Pagination).length).toEqual(0)
   })
+
+  it('matches snapshot', () => {
+    expect(wrapper).toMatchSnapshot()
+  })
 })

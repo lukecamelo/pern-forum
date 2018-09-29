@@ -7,10 +7,28 @@ import { connect } from 'react-redux'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
 
 import NavBar from './NavBar'
+import styled from 'styled-components'
 import Form from '../styled/Form'
 import { Container, Button } from '../styled/index'
+import {
+  fadeIn,
+  slideInLeft,
+  slideInRight,
+  slideInBottom
+} from '../styled/keyframes/index'
 
-
+const FormFadeIn = styled.div`
+  animation: 1s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
+`
+const TitleSlide = styled.div`
+  animation: 0.8s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
+`
+const MarkdownSlide = styled.div`
+  animation: 0.8s ${slideInRight} cubic-bezier(0.28, 1, 0.14, 0.99);
+`
+const ButtonSlide = styled.div`
+  animation: 0.8s ${slideInBottom} cubic-bezier(0.28, 1, 0.14, 0.99);
+`
 
 export class ThreadForm extends Component {
   constructor(props) {
@@ -62,26 +80,34 @@ export class ThreadForm extends Component {
         <NavBar />
         <h1>Post new thread</h1>
         <Form style={{ width: '100%' }}>
-          <Form.Input
-            style={{ width: '400px' }}
-            name="title"
-            value={this.state.title}
-            onChange={this.changeHandler}
-            placeholder="thread title"
-          />
-          <Form.Markdown>
-            <ReactMde
-              layout={'tabbed'}
-              onChange={this.handleValueChange}
-              editorState={this.state.mdeState}
-              generateMarkdownPreview={markdown =>
-                Promise.resolve(this.converter.makeHtml(markdown))
-              }
-            />
-          </Form.Markdown>
-          <form onSubmit={this.handleSubmit}>
-            <Button type="submit">Submit Post</Button>
-          </form>
+          <FormFadeIn>
+            <TitleSlide>
+              <Form.Input
+                style={{ width: '400px' }}
+                name="title"
+                value={this.state.title}
+                onChange={this.changeHandler}
+                placeholder="thread title"
+              />
+            </TitleSlide>
+            <MarkdownSlide>
+              <Form.Markdown>
+                <ReactMde
+                  layout={'tabbed'}
+                  onChange={this.handleValueChange}
+                  editorState={this.state.mdeState}
+                  generateMarkdownPreview={markdown =>
+                    Promise.resolve(this.converter.makeHtml(markdown))
+                  }
+                />
+              </Form.Markdown>
+            </MarkdownSlide>
+            <form onSubmit={this.handleSubmit}>
+              <ButtonSlide>
+                <Button type="submit">Submit Post</Button>
+              </ButtonSlide>
+            </form>
+          </FormFadeIn>
         </Form>
       </Container>
     )

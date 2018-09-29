@@ -63,6 +63,7 @@ export class PostForm extends Component {
             style={{ textAlign: 'left' }}
             onChange={this.handleValueChange}
             editorState={this.state.mdeState}
+            placeholder='make a new post!'
             generateMarkdownPreview={markdown =>
               Promise.resolve(this.converter.makeHtml(markdown))
             }

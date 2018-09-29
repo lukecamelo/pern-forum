@@ -33,11 +33,21 @@ export class App extends Component {
           </Link>
         </Container>
       )
-    } else {
+    } else if (!this.props.isLoggedIn && this.props.threads.length) {
       return (
         <Container>
           <NavBar />
           <H1>Please log in to view threads.</H1>
+        </Container>
+      )
+    } else if (this.props.isLoggedIn && !this.props.threads.length) {
+      return (
+        <Container>
+          <NavBar />
+          <H1>Wow, there's nothing here. Make the first thread!</H1>
+          <Link className="thread-button" to="/newthread">
+            Post Thread
+          </Link>
         </Container>
       )
     }
