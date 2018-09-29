@@ -134,4 +134,59 @@ describe('thread actions', () => {
         expect(actions).toEqual([expectedActions])
       })
   })
+
+  it('fetches users', () => {
+    const store = mockStore({})
+    fetchMock.getOnce('/api/users', {
+      users: [
+        {
+          username: 'charlie',
+          id: 1,
+          avatarUrl: 'imgur.com/picture.png',
+          postCount: 4
+        },
+        {
+          username: 'louise',
+          id: 2,
+          avatarUrl: 'imgur.com/chair.png',
+          postCount: 3
+        },
+        {
+          username: 'bronson',
+          id: 3,
+          avatarUrl: 'imgur.com/candle.png',
+          postCount: 2
+        }
+      ]
+    })
+    return store.dispatch(threadActions.fetchData()).then(() => {
+      const actions = store.getActions()
+      const expectedActions = {
+        type: types.FETCH_DATA,
+        payload: {
+          users: [
+            {
+              username: 'charlie',
+              id: 1,
+              avatarUrl: 'imgur.com/picture.png',
+              postCount: 4
+            },
+            {
+              username: 'louise',
+              id: 2,
+              avatarUrl: 'imgur.com/chair.png',
+              postCount: 3
+            },
+            {
+              username: 'bronson',
+              id: 3,
+              avatarUrl: 'imgur.com/candle.png',
+              postCount: 2
+            }
+          ]
+        }
+      }
+      expect(actions).toEqual([expectedActions])
+    })
+  })
 })

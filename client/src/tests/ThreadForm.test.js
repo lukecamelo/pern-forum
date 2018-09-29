@@ -1,12 +1,10 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
-import { Button } from '../styled/index'
 import ReactMde from 'react-mde'
 import { shallow } from 'enzyme'
-import sinon from 'sinon'
 
 describe('<ThreadForm />', () => {
-  let props, wrapper, fetchThreads, postNewThread
+  let props, wrapper
   beforeEach(() => {
     props = {
       users: [
@@ -21,9 +19,6 @@ describe('<ThreadForm />', () => {
       postNewThread: (title, content, userId, author) => null,
       fetchThreads: () => null
     }
-
-    fetchThreads = sinon.stub(props, 'fetchThreads')
-    postNewThread = sinon.stub(props, 'postNewThread')
 
     wrapper = shallow(<ThreadForm {...props} />)
   })

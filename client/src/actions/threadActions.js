@@ -7,7 +7,7 @@ import {
 } from './types'
 
 export const fetchData = () => dispatch => {
-  fetch('/api/users', {
+  return fetch('/api/users', {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json'

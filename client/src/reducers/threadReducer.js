@@ -26,7 +26,6 @@ export default (state = initialState, action) => {
         posts: []
       }
     case POST_NEW_THREAD:
-      console.log('reducer POST_NEW_THREAD, payload: ', action.payload)
       return {
         ...state,
         threads: [...state.threads, action.payload]

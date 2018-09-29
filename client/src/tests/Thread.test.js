@@ -19,18 +19,21 @@ describe('<Thread />', () => {
     wrapper.setState({
       threadPosts: [
         {
+          id: 1,
           author: 'rediscover',
           content: 'hello',
           threadId: 1,
           user: { postCount: 2, avatarUrl: 'avatar.com' }
         },
         {
+          id: 2,
           author: 'bradley',
           content: 'arigato',
           threadId: 1,
           user: { postCount: 2, avatarUrl: 'avatar.com' }
         },
         {
+          id: 3,
           author: 'john',
           content: 'bye bye',
           threadId: 1,
