@@ -1,0 +1,300 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing matches snapshot 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <App
+    checkUserLoggedIn={[Function]}
+    fetchData={[Function]}
+    fetchThreads={[Function]}
+    isLoggedIn={true}
+    match={
+        Object {
+            "params": Object {
+              "page": 1,
+            },
+          }
+    }
+    threads={
+        Array [
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+          ]
+    }
+/>,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "class",
+    "props": Object {
+      "children": Array [
+        <Connect(NavBar) />,
+        <Pagination
+          context="threads"
+          currentPage={1}
+          data={
+                    Array [
+                              Object {
+                                "content": "hello hello",
+                                "id": 1,
+                                "title": "hello",
+                                "userId": 1,
+                              },
+                              Object {
+                                "content": "hello hello",
+                                "id": 1,
+                                "title": "hello",
+                                "userId": 1,
+                              },
+                              Object {
+                                "content": "hello hello",
+                                "id": 1,
+                                "title": "hello",
+                                "userId": 1,
+                              },
+                            ]
+          }
+          pageSize={10}
+          startingPage={1}
+>
+          [Function]
+</Pagination>,
+        <Link
+          className="thread-button"
+          replace={false}
+          to="/newthread"
+>
+          Post Thread
+</Link>,
+      ],
+    },
+    "ref": null,
+    "rendered": Array [
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": [Function],
+          "context": "threads",
+          "currentPage": 1,
+          "data": Array [
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+            Object {
+              "content": "hello hello",
+              "id": 1,
+              "title": "hello",
+              "userId": 1,
+            },
+          ],
+          "pageSize": 10,
+          "startingPage": 1,
+        },
+        "ref": null,
+        "rendered": [Function],
+        "type": [Function],
+      },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {
+          "children": "Post Thread",
+          "className": "thread-button",
+          "replace": false,
+          "to": "/newthread",
+        },
+        "ref": null,
+        "rendered": "Post Thread",
+        "type": [Function],
+      },
+    ],
+    "type": [Function],
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "class",
+      "props": Object {
+        "children": Array [
+          <Connect(NavBar) />,
+          <Pagination
+            context="threads"
+            currentPage={1}
+            data={
+                        Array [
+                                    Object {
+                                      "content": "hello hello",
+                                      "id": 1,
+                                      "title": "hello",
+                                      "userId": 1,
+                                    },
+                                    Object {
+                                      "content": "hello hello",
+                                      "id": 1,
+                                      "title": "hello",
+                                      "userId": 1,
+                                    },
+                                    Object {
+                                      "content": "hello hello",
+                                      "id": 1,
+                                      "title": "hello",
+                                      "userId": 1,
+                                    },
+                                  ]
+            }
+            pageSize={10}
+            startingPage={1}
+>
+            [Function]
+</Pagination>,
+          <Link
+            className="thread-button"
+            replace={false}
+            to="/newthread"
+>
+            Post Thread
+</Link>,
+        ],
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": [Function],
+            "context": "threads",
+            "currentPage": 1,
+            "data": Array [
+              Object {
+                "content": "hello hello",
+                "id": 1,
+                "title": "hello",
+                "userId": 1,
+              },
+              Object {
+                "content": "hello hello",
+                "id": 1,
+                "title": "hello",
+                "userId": 1,
+              },
+              Object {
+                "content": "hello hello",
+                "id": 1,
+                "title": "hello",
+                "userId": 1,
+              },
+            ],
+            "pageSize": 10,
+            "startingPage": 1,
+          },
+          "ref": null,
+          "rendered": [Function],
+          "type": [Function],
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {
+            "children": "Post Thread",
+            "className": "thread-button",
+            "replace": false,
+            "to": "/newthread",
+          },
+          "ref": null,
+          "rendered": "Post Thread",
+          "type": [Function],
+        },
+      ],
+      "type": [Function],
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+    "attachTo": undefined,
+    "childContextTypes": Object {
+      "router": [Function],
+    },
+    "context": Object {
+      "router": Object {
+        "history": Object {
+          "createHref": [Function],
+          "push": [Function],
+          "replace": [Function],
+        },
+      },
+    },
+    "hydrateIn": undefined,
+  },
+}
+`;

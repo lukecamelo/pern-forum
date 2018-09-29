@@ -30,13 +30,13 @@ describe('<PostForm />', () => {
     wrapper.find('form').simulate('submit', { preventDefault() {} })
     expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
   })
-  
+
   it('calls makeNewPost when handleSubmit is called', () => {
     wrapper.setState({ mdeState: { html: '<p>this is a test</p>' } })
     wrapper.instance().handleSubmit()
     expect(props.makeNewPost.mock.calls.length).toEqual(1)
   })
-  
+
   it('sends all necessary data via makeNewPost', () => {
     wrapper.setState({ mdeState: { html: '<p>this is a test</p>' } })
     wrapper.instance().handleSubmit()
@@ -47,5 +47,4 @@ describe('<PostForm />', () => {
       props.threadId
     )
   })
-
 })
