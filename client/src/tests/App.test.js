@@ -5,6 +5,8 @@ import { shallow } from 'enzyme'
 import NavBar from '../components/NavBar'
 import Pagination from '../components/Pagination'
 
+import renderAppWithState from './testUtils/utils'
+
 describe('renders without crashing', () => {
   let wrapper, props
   beforeEach(() => {
@@ -54,4 +56,5 @@ describe('renders without crashing', () => {
   it('matches snapshot', () => {
     expect(wrapper).toMatchSnapshot()
   })
+
 })
