@@ -6,7 +6,6 @@ import store from './store'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './index.css'
 import App from './containers/App'
-import registerServiceWorker from './registerServiceWorker'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Thread from './containers/Thread'
@@ -35,7 +34,6 @@ ReactDOM.render(
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id/page/:page" component={Thread} />
-          {/* <Route path="/thread/:id" component={Thread} /> */}
           <Route exact path="/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />
@@ -45,4 +43,3 @@ ReactDOM.render(
   </ThemeProvider>,
   document.getElementById('root')
 )
-registerServiceWorker()

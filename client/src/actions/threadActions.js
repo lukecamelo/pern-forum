@@ -6,6 +6,8 @@ import {
   FETCH_POSTS
 } from './types'
 
+import axios from 'axios'
+
 export const fetchData = () => dispatch => {
   return fetch('/api/users', {
     headers: {
@@ -24,7 +26,7 @@ export const fetchData = () => dispatch => {
 }
 
 export const fetchThreads = () => dispatch => {
-  fetch('/thread/threads')
+  return fetch('/thread/threads')
     .then(res => res.json())
     .then(threads => {
       dispatch({

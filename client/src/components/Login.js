@@ -62,7 +62,9 @@ export class Login extends Component {
 
         {!this.props.auth.isLoggedIn ? (
           <FormWrapper>
+            <label htmlFor='usernameInput'>Username</label>
             <Input
+              id='usernameInput'
               name="usernameInput"
               type="text"
               value={this.state.usernameInput}
@@ -70,7 +72,9 @@ export class Login extends Component {
               placeholder="enter your username"
               data-testid="username-input"
             />
+            <label htmlFor='passwordInput'>Password</label>
             <Input
+              id='passwordInput'
               name="passwordInput"
               type="password"
               value={this.state.passwordInput}
