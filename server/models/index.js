@@ -13,24 +13,24 @@ const post = require('./post')
 const url =
   'postgres://ixokdhlskmpphx:c9ad01e9c20556fc75242e5b2b6e600539b805dde77ab33b3a14d670bd61c9d7@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcbbl2rbe22bj6'
 
-// const sequelize = new Sequelize(url, {
-//   dialect: 'postgres',
-//   protocol: 'postgres',
-//   dialectOptions: {
-//     ssl: true
-//   }
-// })
+const sequelize = new Sequelize(url, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: true
+  }
+})
 
 // console.log('process.env.DBUSER: ', process.env.DBUSER)
-const sequelize = new Sequelize(
-  'pern_forum',
-  process.env.DBUSER,
-  process.env.DBPASS,
-  {
-    dialect: 'postgres',
-    host: 'localhost'
-  }
-)
+// const sequelize = new Sequelize(
+//   'pern_forum',
+//   process.env.DBUSER,
+//   process.env.DBPASS,
+//   {
+//     dialect: 'postgres',
+//     host: 'localhost'
+//   }
+// )
 
 // Read through this folder and join the contents (the models) into the db object
 fs.readdirSync(__dirname)
