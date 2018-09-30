@@ -50,7 +50,7 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
         payload: thread
       })
     })
-    .catch(err => console.log('this is an error?: ', err))
+    .catch(err => console.log('POST_NEW_THREAD ERROR: ', err))
 }
 
 export const makeNewPost = (

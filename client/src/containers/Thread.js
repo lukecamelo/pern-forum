@@ -27,7 +27,8 @@ export class Thread extends Component {
     author: '',
     threadPosts: [],
     userId: null,
-    threadHasLoaded: false
+    threadHasLoaded: false,
+    windowWidth: 0
   }
 
   componentDidMount = () => {
@@ -41,6 +42,16 @@ export class Thread extends Component {
         threadHasLoaded: res.threadHasLoaded
       })
     })
+    this.updateWindowDimensions()
+    window.addEventListener('resize', this.updateWindowDimensions)
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('resize', this.updateWindowDimensions)
+  }
+
+  updateWindowDimensions = () => {
+    this.setState({ windowWidth: window.innerWidth });
   }
 
   getMarkdownText = markdown => {
@@ -50,15 +61,17 @@ export class Thread extends Component {
 
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
-
+    const isMobile = this.state.windowWidth < 532 ? true : false
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
           <Post>
             <Post.User>
-              <Post.Author>{post.author}</Post.Author>
-              <p>post count: {post.user.postCount}</p>
-              <Avatar size="150" src={post.user.avatarUrl} />
+                <Post.Author>
+                  {post.author}
+                  <p>{post.user.postCount} posts</p>
+                </Post.Author>
+                <Avatar size={isMobile ? '75' : '150'} src={post.user.avatarUrl} />
             </Post.User>
             <div
               className="markdown-shiz"
@@ -79,7 +92,8 @@ export class Thread extends Component {
               </StyledThread.Header>
 
               <OpAnimation>
-                <StyledThread.Body>{op}</StyledThread.Body>
+                {/* <StyledThread.Body>{op}</StyledThread.Body> */}
+                {op}
               </OpAnimation>
 
               {posts.length ? (
@@ -96,7 +110,7 @@ export class Thread extends Component {
               )}
             </StyledThread>
           </AnimationContainer>
-          <PostForm threadId={this.props.match.params.id} />
+          <PostForm threadId={this.props.match.params.id} isMobile={isMobile} />
         </Container>
       )
     } else {

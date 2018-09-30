@@ -78,7 +78,7 @@ describe('<Thread />', () => {
       .childAt(0)
 
     expect(post.find('p').text()).toEqual(
-      'post count: ' + wrapper.state('threadPosts')[0].user.postCount
+      wrapper.state('threadPosts')[0].user.postCount + ' posts'
     )
   })
 })

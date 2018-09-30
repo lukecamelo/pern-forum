@@ -5,7 +5,7 @@ import Body from './Body';
 const StyledThread = styled.section`
   background-color: #dff4ff;
   color: #564154;
-  padding: 2em;
+  padding: 2em 2em 0 2em;
 `
 
 StyledThread.Header = Header

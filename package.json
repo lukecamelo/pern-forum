@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
@@ -20,9 +20,9 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "node app.js",
+    "start": "node server.js",
     "client": "cd client && npm start",
-    "server": "nodemon app.js",
+    "server": "nodemon server.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "jest": {

@@ -5,6 +5,7 @@ import 'react-mde/lib/styles/css/react-mde-all.css'
 
 import { connect } from 'react-redux'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
+import { Link } from 'react-router-dom'
 
 import NavBar from './NavBar'
 import styled from 'styled-components'
@@ -58,9 +59,10 @@ export class ThreadForm extends Component {
     this.setState({ mdeState })
   }
 
+  // THIS DOESN'T WORK NOW???? WHAT IS HAPPENING
   handleSubmit = async e => {
     e.preventDefault()
-
+    console.log('handleSubmit')
     try {
       await this.props.postNewThread(
         this.state.title,
@@ -104,7 +106,20 @@ export class ThreadForm extends Component {
             </MarkdownSlide>
             <form onSubmit={this.handleSubmit}>
               <ButtonSlide>
-                <Button type="submit">Submit Post</Button>
+                <Link
+                  to="/threads/1"
+                  type="submit"
+                  onClick={() =>
+                    this.props.postNewThread(
+                      this.state.title,
+                      this.state.mdeState.html,
+                      this.props.loggedInUserId,
+                      this.props.username
+                    )
+                  }
+                >
+                  Submit Post
+                </Link>
               </ButtonSlide>
             </form>
           </FormFadeIn>
