@@ -26,11 +26,14 @@
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "jest": {
-    "roots": ["server"]
+    "roots": [
+      "server"
+    ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "supertest": "^3.3.0"
   }
 }

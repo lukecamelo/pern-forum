@@ -1,3 +1,7 @@
-describe('does its thang', () => {
-  // ...
+describe('auth routes', () => {
+  
+  it('is a placeholder for future tests', () => {
+    console.log(':-)')
+  })
+
 })
