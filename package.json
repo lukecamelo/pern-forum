@@ -19,12 +19,18 @@
     "sequelize": "^4.38.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node app.js",
     "client": "cd client && npm start",
     "server": "nodemon app.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
+  "jest": {
+    "roots": ["server"]
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
