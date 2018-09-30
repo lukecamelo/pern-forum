@@ -14,8 +14,8 @@ import 'react-mde/lib/styles/css/react-mde-all.css'
 const PostFormContainer = styled(Container)`
   margin-top: 2em;
   margin-bottom: 2em;
-  margin-left: 4em;
-  margin-right: 4em;
+  margin-left: 2em;
+  margin-right: 2em;
 `
 
 export class PostForm extends Component {
@@ -59,7 +59,7 @@ export class PostForm extends Component {
       <PostFormContainer>
         <Form.Markdown>
           <ReactMde
-            layout={'tabbed'}
+            layout={this.props.isMobile ? 'vertical' : 'tabbed'}
             style={{ textAlign: 'left' }}
             onChange={this.handleValueChange}
             editorState={this.state.mdeState}

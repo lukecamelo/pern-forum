@@ -53,6 +53,14 @@
   color: #2e262e;
 }
 
+.markdown-shiz {
+  padding-top: 2em;
+}
+
+.markdown-shiz p {
+  margin: 0;
+}
+
 @media screen and (max-width: 968px) {
   .link {
     font-size: 1em;
@@ -65,5 +73,11 @@
   }
   .thread-author {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 532px) {
+  .markdown-shiz {
+    padding-top: 0em;
   }
 }

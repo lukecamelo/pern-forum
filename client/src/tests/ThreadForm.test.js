@@ -35,4 +35,5 @@ describe('<ThreadForm />', () => {
     wrapper.find(ReactMde).simulate('change', newState)
     expect(wrapper.instance().state.mdeState).toEqual(newState)
   })
+  
 })
