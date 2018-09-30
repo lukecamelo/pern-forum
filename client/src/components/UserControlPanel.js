@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-// import { Input, Button } from './Login'
 import { Container, Input, Button } from '../styled/index'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -12,7 +11,7 @@ const Card = styled.section`
   justify-self: center;
   flex-direction: column;
   background-color: #fff;
-  box-shadow: 1px 1px 1px ${props => props.theme.secondary};
+  box-shadow: ${props => props.theme.largeShadow};
   margin: 1em 25% 0 25%;
 `
 const AvatarEdit = styled.div`

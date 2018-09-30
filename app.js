@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { User, Thread } = require('./server/sequelize')
+// const { User, Thread } = require('./server/sequelize')
 require('./server/passport')
 require('dotenv').config()
 const passport = require('passport')
@@ -31,7 +31,9 @@ app.get('*', (req, res) => {
 })
 
 // models.sequelize.sync({ force: true }).then(() => {
-app.listen(port, () => {
-  console.log(`Running on http://localhost:${port}`)
-})
+  // app.listen(port, () => {
+  //   console.log(`Running on http://localhost:${port}`)
+  // })
 // })
+
+module.exports = app
