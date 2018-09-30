@@ -14,8 +14,7 @@ describe('auth actions', () => {
     store.clearActions()
   })
 
-
-  it('actually works', () => {
+  it('calls logout', () => {
     store.dispatch(authActions.userLogout())
     const actions = store.getActions()
     const expectedPayload = { type: 'USER_LOGOUT' }

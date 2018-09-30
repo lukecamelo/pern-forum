@@ -6,8 +6,6 @@ import {
   FETCH_POSTS
 } from './types'
 
-import axios from 'axios'
-
 export const fetchData = () => dispatch => {
   return fetch('/api/users', {
     headers: {

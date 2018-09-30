@@ -2,7 +2,7 @@
 
 describe('forum app', () => {
 
-  it('can visit the app', () => {
+  it('can log in', () => {
     cy
       .visit('/')
       .getByText('Login')
