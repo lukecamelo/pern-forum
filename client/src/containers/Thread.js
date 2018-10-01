@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
+import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
 import marked from 'marked'
@@ -31,7 +32,9 @@ export class Thread extends Component {
     threadPosts: [],
     userId: null,
     threadHasLoaded: false,
-    windowWidth: 0
+    windowWidth: 0,
+    openModal: false,
+    postBeingEdited: null
   }
 
   componentDidMount = () => {
@@ -69,9 +72,30 @@ export class Thread extends Component {
     })
   }
 
+  toggleModal = postId => {
+    this.setState(prevState => ({
+      openModal: !prevState.openModal,
+      postBeingEdited: postId
+    }))
+  }
+
+  handleSubmit = () => {
+    try {
+      this.props.makeNewPost(
+        this.state.mdeState.html,
+        this.props.auth.username,
+        this.props.auth.userId,
+        this.props.threadId
+      )
+    } catch (e) {
+      alert(e.message)
+    }
+  }
+
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
     const isMobile = this.state.windowWidth < 532 ? true : false
+    
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
@@ -86,10 +110,11 @@ export class Thread extends Component {
                 size={isMobile ? '75' : '150'}
                 src={post.user.avatarUrl}
               />
+
               {this.props.loggedInUserId === post.user.id ? (
                 <Button
                   style={{ marginBottom: '0' }}
-                  onClick={() => this.editPostContent(post.id)}
+                  onClick={() => this.toggleModal(post.id)}
                 >
                   Edit post
                 </Button>
@@ -129,6 +154,15 @@ export class Thread extends Component {
                 <h1>make the first post!</h1>
               )}
             </StyledThread>
+
+            {this.state.openModal ? (
+              <EditPostModal
+                isMobile={isMobile}
+                toggleModal={this.toggleModal}
+                postId={this.state.postBeingEdited}
+                threadId={this.props.match.params.id}
+              />
+            ) : null}
           </AnimationContainer>
           <PostForm threadId={this.props.match.params.id} isMobile={isMobile} />
         </Container>

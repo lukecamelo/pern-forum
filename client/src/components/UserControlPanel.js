@@ -5,6 +5,8 @@ import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
+import { editAvatar } from '../utils/userHelpers'
+
 const Card = styled.section`
   display: flex;
   justify-content: center;
@@ -39,17 +41,6 @@ export class UserControlPanel extends React.Component {
     await this.setState({ avatarUrl: user.data.avatarUrl })
   }
 
-  editAvatar = (userId, newAvatarUrl) => {
-    axios({
-      method: 'post',
-      url: `/api/users/${userId}/avatar`,
-      data: {
-        userId,
-        newAvatarUrl
-      }
-    })
-  }
-
   render() {
     return (
       <Container>
@@ -60,18 +51,20 @@ export class UserControlPanel extends React.Component {
           {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
           <AvatarEdit>
             <Input
-              id='avatar-url-input'
+              id="avatar-url-input"
               name="avatarUrl"
               value={this.state.avatarUrl}
               onChange={this.handleChange}
             />
-            <Button
-              onClick={() =>
-                this.editAvatar(this.props.user.userId, this.state.avatarUrl)
-              }
-            >
-              Edit Avatar
-            </Button>
+            <form>
+              <Button
+                onClick={() =>
+                  editAvatar(this.props.user.userId, this.state.avatarUrl)
+                }
+              >
+                Edit Avatar
+              </Button>
+            </form>
           </AvatarEdit>
         </Card>
       </Container>

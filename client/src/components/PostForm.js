@@ -22,7 +22,6 @@ export class PostForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      content: '',
       mdeState: null
     }
     this.converter = new Showdown.Converter({

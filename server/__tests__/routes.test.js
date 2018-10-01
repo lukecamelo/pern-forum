@@ -15,12 +15,20 @@ describe('index routes', () => {
       username: 'rediscover',
       password: '$2a$08$LeQX5AIWgIKuaWea/VqrROjPujGb6jvtr7BDOEbfMYiYQDkdGn6X2',
       avatarUrl: 'https://i.imgur.com/dfwIuH7.jpg',
-      postCount: 13,
+      postCount: 30,
       createdAt: '2018-09-26T21:23:52.762Z',
-      updatedAt: '2018-09-30T15:57:30.938Z'
+      updatedAt: '2018-10-01T03:22:38.576Z'
     }
     return request(app)
       .get('/api/users/1')
       .expect(200, user)
   })
+
+  it('GETs all posts by a user', () => {
+    return request(app)
+      .get('/api/users/1/posts')
+      .expect('Content-Type', /json/)
+      .expect(200)
+  })
+
 })
