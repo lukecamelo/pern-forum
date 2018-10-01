@@ -12,11 +12,25 @@ const StyledNav = styled.nav`
   padding: 15px;
   background-color: ${props => props.theme.primary};
 `
+const Logo = styled.div`
+  display: flex;
+  margin-right: auto;
+  align-self: center;
+  margin-left: 1em;
+  color: white;
+  font-size: 1.5rem;
+  font-family: "Lato", sans-serif;
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+`
 
 export const NavBar = ({ isLoggedIn, user, ...props }) => {
   if (isLoggedIn) {
     return (
       <StyledNav>
+        <Logo>imp.zone</Logo>
         <Link to="/threads/1" className="navlink">
           Home
         </Link>

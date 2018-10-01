@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 const Author = styled.h2`
   color: ${props => props.theme.primary}
+  font-family: "Roboto", sans-serif;
   font-size: 18px;
     > p {
       color: #555;
