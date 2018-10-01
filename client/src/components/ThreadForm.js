@@ -108,7 +108,6 @@ export class ThreadForm extends Component {
                 <StyledLink
                   to="/threads/1"
                   type="submit"
-                  // className="logout"
                   onClick={() =>
                     this.props.postNewThread(
                       this.state.title,

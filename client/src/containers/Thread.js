@@ -7,6 +7,8 @@ import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
 import marked from 'marked'
 
+import { connect } from 'react-redux'
+
 import { Container, Button } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
@@ -74,9 +76,7 @@ export class Thread extends Component {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
           <Post>
-
             <Post.User>
-
               <Post.Author>
                 {post.author}
                 <p>{post.user.postCount} posts</p>
@@ -86,18 +86,20 @@ export class Thread extends Component {
                 size={isMobile ? '75' : '150'}
                 src={post.user.avatarUrl}
               />
-
-              <Button style={{ marginBottom: '0' }} onClick={() => this.editPostContent(post.id)}>
-                Edit post
-              </Button>
-
+              {this.props.loggedInUserId === post.user.id ? (
+                <Button
+                  style={{ marginBottom: '0' }}
+                  onClick={() => this.editPostContent(post.id)}
+                >
+                  Edit post
+                </Button>
+              ) : null}
             </Post.User>
 
             <div
               className="markdown-shiz"
               dangerouslySetInnerHTML={this.getMarkdownText(post.content)}
             />
-
           </Post>
         </OpAnimation>
       ))
@@ -112,10 +114,7 @@ export class Thread extends Component {
                 {title} / {author}
               </StyledThread.Header>
 
-              <OpAnimation>
-                {/* <StyledThread.Body>{op}</StyledThread.Body> */}
-                {op}
-              </OpAnimation>
+              <OpAnimation>{op}</OpAnimation>
 
               {posts.length ? (
                 <Pagination
@@ -145,4 +144,11 @@ export class Thread extends Component {
   }
 }
 
-export default Thread
+const mapStateToProps = state => ({
+  loggedInUserId: state.auth.userId
+})
+
+export default connect(
+  mapStateToProps,
+  null
+)(Thread)

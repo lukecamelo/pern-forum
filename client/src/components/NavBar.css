@@ -5,7 +5,7 @@
   margin-right: 1em;
   padding: 14px;
   transition: .2s;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   font-family: 'Lato', sans-serif;
 }
 
@@ -16,7 +16,7 @@
   margin-right: 1em;
   padding: 14px;
   transition: .2s;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   border: 2px solid #0266c8;
   font-family: 'Lato', sans-serif;
 }
@@ -27,7 +27,7 @@
   text-decoration: none;
   padding: 14px;
   transition: .2s;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
 }
