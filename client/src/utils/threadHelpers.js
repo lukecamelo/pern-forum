@@ -1,4 +1,5 @@
 import axios from 'axios'
+import marked from 'marked'
 
 export const fetchSingleThread = async (threadId) => {
   const thread = await axios.get(`/thread/${threadId}`)
@@ -32,4 +33,9 @@ export const editPostContent = (threadId, id, content) => {
     content,
     id
   })
+}
+
+export const getMarkdownText = markdown => {
+  const rawMarkup = marked(markdown, { sanitize: false })
+  return { __html: rawMarkup }
 }

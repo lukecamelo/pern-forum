@@ -15,8 +15,7 @@ import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
 
-import { fetchThreadAndAuthor } from '../utils/threadHelpers'
-import axios from 'axios'
+import { fetchThreadAndAuthor, getMarkdownText } from '../utils/threadHelpers'
 
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
@@ -37,16 +36,15 @@ export class Thread extends Component {
     postBeingEdited: null
   }
 
-  componentDidMount = () => {
-    fetchThreadAndAuthor(this.props.match.params.id).then(res => {
-      this.setState({
-        title: res.title,
-        content: res.content,
-        author: res.author,
-        threadPosts: res.threadPosts,
-        userId: res.userId,
-        threadHasLoaded: res.threadHasLoaded
-      })
+  componentDidMount = async () => {
+    const result = await fetchThreadAndAuthor(this.props.match.params.id)
+    await this.setState({
+      title: result.title,
+      content: result.content,
+      author: result.author,
+      threadPosts: result.threadPosts,
+      userId: result.userId,
+      threadHasLoaded: result.threadHasLoaded
     })
     this.updateWindowDimensions()
     window.addEventListener('resize', this.updateWindowDimensions)
@@ -58,18 +56,6 @@ export class Thread extends Component {
 
   updateWindowDimensions = () => {
     this.setState({ windowWidth: window.innerWidth })
-  }
-
-  getMarkdownText = markdown => {
-    const rawMarkup = marked(markdown, { sanitize: false })
-    return { __html: rawMarkup }
-  }
-
-  editPostContent = id => {
-    axios.post(`/thread/${this.props.match.params.id}/editpost`, {
-      content: '<p>this is a test edit</p>',
-      id
-    })
   }
 
   toggleModal = postId => {
@@ -95,7 +81,12 @@ export class Thread extends Component {
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
     const isMobile = this.state.windowWidth < 532 ? true : false
-    
+    const mobileEditStyle = {
+      margin: '1em 4px 4px 4px',
+      padding: '2px 2px',
+      justifySelf: 'flex-end'
+    }
+
     if (threadHasLoaded) {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
@@ -110,21 +101,30 @@ export class Thread extends Component {
                 size={isMobile ? '75' : '150'}
                 src={post.user.avatarUrl}
               />
-
-              {this.props.loggedInUserId === post.user.id ? (
-                <Button
-                  style={{ marginBottom: '0' }}
-                  onClick={() => this.toggleModal(post.id)}
-                >
-                  Edit post
-                </Button>
-              ) : null}
             </Post.User>
-
-            <div
-              className="markdown-shiz"
-              dangerouslySetInnerHTML={this.getMarkdownText(post.content)}
-            />
+            <Post.Body>
+              <div
+                className="markdown-shiz"
+                dangerouslySetInnerHTML={getMarkdownText(post.content)}
+              />
+              <Post.Controls>
+                {this.props.loggedInUserId === post.user.id ? (
+                  <Button
+                    style={
+                      isMobile
+                        ? mobileEditStyle
+                        : {
+                            marginBottom: '0',
+                            marginLeft: '0'
+                          }
+                    }
+                    onClick={() => this.toggleModal(post.id)}
+                  >
+                    Edit post
+                  </Button>
+                ) : null}
+              </Post.Controls>
+            </Post.Body>
           </Post>
         </OpAnimation>
       ))
