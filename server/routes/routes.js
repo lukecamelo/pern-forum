@@ -32,3 +32,4 @@ router.post('/api/users/:id/avatar', editAvatarUrl, (req, res) => {
 })
 
 module.exports = router
+exports.editAvatarUrl = editAvatarUrl

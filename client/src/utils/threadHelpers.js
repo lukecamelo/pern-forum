@@ -26,3 +26,10 @@ export const fetchThreadAndAuthor = async (threadId) => {
 export const filterAuthor = (threadArray, userId) => {
   return threadArray.find(user => user.id === userId).username
 }
+
+export const editPostContent = (threadId, id, content) => {
+  axios.post(`/thread/${threadId}/editpost`, {
+    content,
+    id
+  })
+}

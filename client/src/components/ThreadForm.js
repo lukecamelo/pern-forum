@@ -5,7 +5,6 @@ import 'react-mde/lib/styles/css/react-mde-all.css'
 
 import { connect } from 'react-redux'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
-import { Link } from 'react-router-dom'
 
 import NavBar from './NavBar'
 import './NavBar.css'

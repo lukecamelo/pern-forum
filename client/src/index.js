@@ -11,6 +11,7 @@ import Signup from './components/Signup'
 import Thread from './containers/Thread'
 import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
+import EditPostModal from './components/EditPostModal';
 
 const theme = {
   primary: '#00a8ff',
@@ -34,6 +35,7 @@ ReactDOM.render(
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id/page/:page" component={Thread} />
+          <Route exact path="/editpost" component={EditPostModal}/>
           <Route exact path="/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />
