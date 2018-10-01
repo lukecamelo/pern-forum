@@ -1,16 +1,16 @@
 import axios from 'axios'
 
-export const fetchSingleThread = async threadId => {
+export const fetchSingleThread = async (threadId) => {
   const thread = await axios.get(`/thread/${threadId}`)
   return thread.data
 }
 
-export const fetchThreadAuthor = async userId => {
+export const fetchThreadAuthor = async (userId) => {
   const author = await axios.get(`/api/users/${userId}`)
   return author.data
 }
 
-export const fetchThreadAndAuthor = async threadId => {
+export const fetchThreadAndAuthor = async (threadId) => {
   const thread = await fetchSingleThread(threadId)
   const author = await fetchThreadAuthor(thread.userId)
   return {
