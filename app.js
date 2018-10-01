@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-// const { User, Thread } = require('./server/sequelize')
+const { User, Thread } = require('./server/sequelize')
 require('./server/passport')
 require('dotenv').config()
 const passport = require('passport')

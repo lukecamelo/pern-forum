@@ -36,18 +36,18 @@ export const Button = styled.button`
   }
 `
 export const StyledLink = styled(Link)`
-  color: #0266c8;
-  background-color: white;
+  color: ${props => props.theme.primary};
+  background-color: #fff;
+  font-size: 1em;
+  margin: 1em;
   text-decoration: none;
-  margin-right: 1em;
-  padding: 14px;
+  padding: 0.5em 1.5em;
+  border-radius: 3px;
+  border: 2px solid ${props => props.theme.primary};
   transition: 0.2s;
-  border-radius: 5px;
-  border: 2px solid #0266c8;
   &:hover {
-    color: white;
-    background-color: #f195ac;
-    border: 2px solid #f195ac;
+    background-color: ${props => props.theme.primary};
+    color: #fff;
     cursor: pointer;
   }
 `

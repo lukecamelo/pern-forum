@@ -7,12 +7,13 @@ import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
 import marked from 'marked'
 
-import { Container } from '../styled/index'
+import { Container, Button } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
 
 import { fetchThreadAndAuthor } from '../utils/threadHelpers'
+import axios from 'axios'
 
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
@@ -51,12 +52,19 @@ export class Thread extends Component {
   }
 
   updateWindowDimensions = () => {
-    this.setState({ windowWidth: window.innerWidth });
+    this.setState({ windowWidth: window.innerWidth })
   }
 
   getMarkdownText = markdown => {
     const rawMarkup = marked(markdown, { sanitize: false })
     return { __html: rawMarkup }
+  }
+
+  editPostContent = id => {
+    axios.post(`/thread/${this.props.match.params.id}/editpost`, {
+      content: '<p>this is a test edit</p>',
+      id
+    })
   }
 
   render() {
@@ -66,17 +74,30 @@ export class Thread extends Component {
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
           <Post>
+
             <Post.User>
-                <Post.Author>
-                  {post.author}
-                  <p>{post.user.postCount} posts</p>
-                </Post.Author>
-                <Avatar size={isMobile ? '75' : '150'} src={post.user.avatarUrl} />
+
+              <Post.Author>
+                {post.author}
+                <p>{post.user.postCount} posts</p>
+              </Post.Author>
+
+              <Avatar
+                size={isMobile ? '75' : '150'}
+                src={post.user.avatarUrl}
+              />
+
+              <Button style={{ marginBottom: '0' }} onClick={() => this.editPostContent(post.id)}>
+                Edit post
+              </Button>
+
             </Post.User>
+
             <div
               className="markdown-shiz"
               dangerouslySetInnerHTML={this.getMarkdownText(post.content)}
             />
+
           </Post>
         </OpAnimation>
       ))
@@ -101,7 +122,7 @@ export class Thread extends Component {
                   data={posts}
                   currentPage={this.props.match.params.page}
                   threadId={this.props.match.params.id}
-                  context='posts'
+                  context="posts"
                 >
                   {data => <PostList data={data} />}
                 </Pagination>

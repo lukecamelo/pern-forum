@@ -21,8 +21,8 @@ const makeThreadAndOp = async (req, res, next) => {
     where: { id: post.id },
     include: [models.user, models.thread]
   })
-  let user = await models.user.findOne({ where: { id: body.userId } })
-  await user.updateAttributes({ postCount: user.postCount + 1 })
+  // let user = await models.user.findOne({ where: { id: body.userId } })
+  // await user.updateAttributes({ postCount: user.postCount + 1 })
   req.data = post
   next()
 }
@@ -49,8 +49,17 @@ const makePost = async (req, res, next) => {
   next()
 }
 
+const getThreadPosts = async (req, res, next) => {
+  let posts = models.post.findAll({
+    where: { threadId: req.params.id },
+    include: [models.user]
+  })
+  req.data = posts
+  next()
+}
+
 const getThreads = async (req, res, next) => {
-  let threads = models.thread.findAll({
+  let threads = await models.thread.findAll({
     include: [
       {
         model: models.post,
@@ -72,40 +81,43 @@ router.post('/threads', makeThreadAndOp, (req, res) => {
 // Using the async/await middleware causes threads not to sort properly
 // as well as not reporting their postcounts on the list ???
 router.get('/threads', (req, res) => {
-  models.thread.findAll({
-    include: [
-      {
-        model: models.post,
-        as: 'Post'
-      }
-    ],
-    order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
-  })
-  .then(posts => res.json(posts))
-  .catch(err => console.log(err))
+  models.thread
+    .findAll({
+      include: [
+        {
+          model: models.post,
+          as: 'Post'
+        }
+      ],
+      order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
+    })
+    .then(posts => res.json(posts))
+    .catch(err => console.log(err))
   // return req.data
 })
 
-const getThreadPosts = async (req, res, next) => {
-  let posts = models.post.findAll({
-    where: { threadId: req.params.id },
-    include: [models.user]
-  })
-  req.data = posts
-  next()
-}
-
 // Returns all posts in a thread
-router.get('/:id/posts', getThreadPosts, (req, res) => {
-  // models.post
-  //   .findAll({ where: { threadId: req.params.id }, include: [models.user] })
-  //   .then(posts => res.json(posts))
-  return req.data
+router.get('/:id/posts', (req, res) => {
+  models.post
+    .findAll({
+      where: { threadId: req.params.id }
+    })
+    .then(post => res.json(post))
+  // return req.data
 })
 
 // Makes post in thread
 router.post('/:id/posts', makePost, (req, res) => {
   return req.data
+})
+
+// Edits a post
+router.post('/:id/editpost', (req, res) => {
+  models.post
+    .update({ content: req.body.content },{ where: { id: req.body.id, threadId: req.params.id } })
+    .then(post => {
+      return res.json(post)
+    })
 })
 
 // Get single thread
@@ -120,7 +132,8 @@ router.get('/:id', (req, res) => {
           include: [{ model: models.user }]
         },
         { model: models.user }
-      ]
+      ],
+      order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'ASC']]
     })
     .then(thread => res.json(thread))
 })

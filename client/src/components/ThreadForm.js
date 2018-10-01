@@ -8,9 +8,10 @@ import { postNewThread, fetchThreads } from '../actions/threadActions'
 import { Link } from 'react-router-dom'
 
 import NavBar from './NavBar'
+import './NavBar.css'
 import styled from 'styled-components'
 import Form from '../styled/Form'
-import { Container, Button } from '../styled/index'
+import { Container, StyledLink } from '../styled/index'
 import {
   fadeIn,
   slideInLeft,
@@ -59,10 +60,8 @@ export class ThreadForm extends Component {
     this.setState({ mdeState })
   }
 
-  // THIS DOESN'T WORK NOW???? WHAT IS HAPPENING
   handleSubmit = async e => {
     e.preventDefault()
-    console.log('handleSubmit')
     try {
       await this.props.postNewThread(
         this.state.title,
@@ -106,9 +105,10 @@ export class ThreadForm extends Component {
             </MarkdownSlide>
             <form onSubmit={this.handleSubmit}>
               <ButtonSlide>
-                <Link
+                <StyledLink
                   to="/threads/1"
                   type="submit"
+                  // className="logout"
                   onClick={() =>
                     this.props.postNewThread(
                       this.state.title,
@@ -118,8 +118,8 @@ export class ThreadForm extends Component {
                     )
                   }
                 >
-                  Submit Post
-                </Link>
+                  Submit Thread
+                </StyledLink>
               </ButtonSlide>
             </form>
           </FormFadeIn>
