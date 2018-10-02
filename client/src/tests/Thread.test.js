@@ -71,7 +71,7 @@ describe('<Thread />', () => {
       ],
       threadHasLoaded: true
     })
-    
+
     let post = wrapper
       .find(Post)
       .at(0)
@@ -81,4 +81,5 @@ describe('<Thread />', () => {
       wrapper.state('threadPosts')[0].user.postCount + ' posts'
     )
   })
+
 })

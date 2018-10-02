@@ -6,7 +6,6 @@ import Pagination from '../components/Pagination'
 import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
-import marked from 'marked'
 
 import { connect } from 'react-redux'
 
@@ -33,7 +32,10 @@ export class Thread extends Component {
     threadHasLoaded: false,
     windowWidth: 0,
     openModal: false,
-    postBeingEdited: null
+    postBeingEdited: null,
+    quotedPost: '',
+    quotedUser: '',
+    postContent: ''
   }
 
   componentDidMount = async () => {
@@ -58,10 +60,11 @@ export class Thread extends Component {
     this.setState({ windowWidth: window.innerWidth })
   }
 
-  toggleModal = postId => {
+  toggleModal = (postId, postContent) => {
     this.setState(prevState => ({
       openModal: !prevState.openModal,
-      postBeingEdited: postId
+      postBeingEdited: postId,
+      postContent
     }))
   }
 
@@ -76,6 +79,13 @@ export class Thread extends Component {
     } catch (e) {
       alert(e.message)
     }
+  }
+
+  quotePost = (postContent, quotedUser) => {
+    this.setState({
+      quotedPost: postContent,
+      quotedUser
+    })
   }
 
   render() {
@@ -107,6 +117,7 @@ export class Thread extends Component {
                 className="markdown-shiz"
                 dangerouslySetInnerHTML={getMarkdownText(post.content)}
               />
+
               <Post.Controls>
                 {this.props.loggedInUserId === post.user.id ? (
                   <Button
@@ -118,11 +129,26 @@ export class Thread extends Component {
                             marginLeft: '0'
                           }
                     }
-                    onClick={() => this.toggleModal(post.id)}
+                    onClick={() => this.toggleModal(post.id, post.content)}
                   >
-                    Edit post
+                    Edit
                   </Button>
                 ) : null}
+                <Button
+                  style={
+                    isMobile
+                      ? mobileEditStyle
+                      : {
+                          marginBottom: '0',
+                          marginLeft: '0'
+                        }
+                  }
+                  onClick={() =>
+                    this.quotePost(post.content, post.user.username)
+                  }
+                >
+                  Quote
+                </Button>
               </Post.Controls>
             </Post.Body>
           </Post>
@@ -161,10 +187,16 @@ export class Thread extends Component {
                 toggleModal={this.toggleModal}
                 postId={this.state.postBeingEdited}
                 threadId={this.props.match.params.id}
+                postContent={this.state.postContent}
               />
             ) : null}
           </AnimationContainer>
-          <PostForm threadId={this.props.match.params.id} isMobile={isMobile} />
+          <PostForm
+            threadId={this.props.match.params.id}
+            isMobile={isMobile}
+            quotedPost={this.state.quotedPost}
+            quotedUser={this.state.quotedUser}
+          />
         </Container>
       )
     } else {

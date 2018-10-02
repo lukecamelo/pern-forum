@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 import Form from '../styled/Form'
 
-import ReactMde from 'react-mde'
+import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
@@ -30,6 +30,12 @@ export class PostForm extends Component {
     })
   }
 
+  componentDidUpdate = nextProps => {
+    if (this.props.quotedPost !== nextProps.quotedPost) {
+      this.changeEditorText()
+    }
+  }
+
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -38,6 +44,33 @@ export class PostForm extends Component {
 
   handleValueChange = mdeState => {
     this.setState({ mdeState })
+  }
+
+  // TODO: make this less specific and reusable
+  changeEditorText = () => {
+    const { mdeState } = this.state
+    const newDraftState = DraftUtil.buildNewDraftState(
+      mdeState.draftEditorState,
+      {
+        selection: {
+          start: 0,
+          end: 0
+        },
+        text:
+          '> ' +
+          this.props.quotedUser +
+          ' said \n' +
+          '> ' +
+          this.props.quotedPost
+      }
+    )
+    this.setState({
+      mdeState: {
+        markdown: mdeState.markdown,
+        html: mdeState.html,
+        draftEditorState: newDraftState
+      }
+    })
   }
 
   handleSubmit = () => {
@@ -62,7 +95,7 @@ export class PostForm extends Component {
             style={{ textAlign: 'left' }}
             onChange={this.handleValueChange}
             editorState={this.state.mdeState}
-            placeholder='make a new post!'
+            placeholder="make a new post!"
             generateMarkdownPreview={markdown =>
               Promise.resolve(this.converter.makeHtml(markdown))
             }

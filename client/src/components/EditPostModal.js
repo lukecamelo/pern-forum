@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
+
 import Modal from '../styled/Modal'
-
-import { Button } from '../styled/index'
 import Form from '../styled/Form'
+import { Button } from '../styled/index'
 
-import ReactMde from 'react-mde'
+import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
 import { editPostContent } from '../utils/threadHelpers'
 
-class EditPostModal extends React.Component {
+class EditPostModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,8 +22,38 @@ class EditPostModal extends React.Component {
     })
   }
 
+  componentDidMount = () => {
+    // sort of an inelegant way of dealing with the fact
+    // that mdeState === null on initialization
+    setTimeout(() => {
+      this.changeEditorText()
+    }, 50)
+  }
+
   handleValueChange = mdeState => {
     this.setState({ mdeState })
+  }
+
+  changeEditorText = () => {
+    console.log('am i being called???')
+    const { mdeState } = this.state
+    const newDraftState = DraftUtil.buildNewDraftState(
+      mdeState.draftEditorState,
+      {
+        selection: {
+          start: 0,
+          end: 0
+        },
+        text: this.props.postContent
+      }
+    )
+    this.setState({
+      mdeState: {
+        markdown: mdeState.markdown,
+        html: mdeState.html,
+        draftEditorState: newDraftState
+      }
+    })
   }
 
   render() {
@@ -55,6 +85,7 @@ class EditPostModal extends React.Component {
             Edit
           </Button>
           <Button onClick={this.props.toggleModal}>Cancel</Button>
+          <Button onClick={() => this.changeEditorText()}>Copy text</Button>
         </Modal.Content>
       </Modal>
     )
