@@ -15,6 +15,12 @@ const Card = styled.section`
   background-color: #fff;
   box-shadow: ${props => props.theme.largeShadow};
   margin: 1em 25% 0 25%;
+    @media screen and (max-width: 900px) {
+      margin: 1em 4em 0 4em;
+    }
+    @media screen and (max-width: 532px) {
+      margin: 1em 1em 0 1em;
+    }
 `
 const AvatarEdit = styled.div`
   margin: 0 3em 0 3em;
@@ -41,6 +47,17 @@ export class UserControlPanel extends React.Component {
     await this.setState({ avatarUrl: user.data.avatarUrl })
   }
 
+  editAvatar = async (userId, newAvatarUrl) => {
+    await axios({
+      method: 'post',
+      url: `/api/users/${userId}/avatar`,
+      data: {
+        userId,
+        newAvatarUrl
+      }
+    })
+  }
+
   render() {
     return (
       <Container>
@@ -59,7 +76,7 @@ export class UserControlPanel extends React.Component {
             <form>
               <Button
                 onClick={() =>
-                  editAvatar(this.props.user.userId, this.state.avatarUrl)
+                  this.editAvatar(this.props.user.userId, this.state.avatarUrl)
                 }
               >
                 Edit Avatar
