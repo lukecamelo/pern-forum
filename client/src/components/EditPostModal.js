@@ -85,7 +85,6 @@ class EditPostModal extends Component {
             Edit
           </Button>
           <Button onClick={this.props.toggleModal}>Cancel</Button>
-          <Button onClick={() => this.changeEditorText()}>Copy text</Button>
         </Modal.Content>
       </Modal>
     )
