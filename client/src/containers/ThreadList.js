@@ -15,7 +15,7 @@ export const ListWrapper = styled.main`
   align-items: flex-start;
   width: 75%;
   margin: 0 auto;
-  box-shadow: ${props => props.theme.mediumShadow}
+  box-shadow: ${props => props.theme.largeShadow}
 `
 const ThreadLink = styled.div`
   display: flex;

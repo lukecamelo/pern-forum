@@ -5,8 +5,6 @@ import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
-import { editAvatar } from '../utils/userHelpers'
-
 const Card = styled.section`
   display: flex;
   justify-content: center;

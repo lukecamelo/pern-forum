@@ -5,7 +5,8 @@ const Author = styled.h2`
   font-family: "Roboto", sans-serif;
   font-size: 18px;
     > p {
-      color: #555;
+      font-size: 14px;
+      color: #0266c8;
     }
     @media screen and (max-width: 532px) {
       margin-left: .5em;

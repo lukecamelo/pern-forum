@@ -15,7 +15,7 @@ import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
 import './Thread.css'
 
-import { fetchThreadAndAuthor, getMarkdownText } from '../utils/threadHelpers'
+import { fetchThreadAndAuthor, getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
 
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
@@ -89,6 +89,23 @@ export class Thread extends Component {
     })
   }
 
+  parseIsoDatetime = dtstr => {
+    var dt = dtstr.split(/[: T-]/).map(parseFloat)
+    return new Date(
+      dt[0],
+      dt[1] - 1,
+      dt[2],
+      dt[3] || 0,
+      dt[4] || 0,
+      dt[5] || 0,
+      0
+    )
+      .toString()
+      .split(' ')
+      .slice(1, 4)
+      .join(' ')
+  }
+
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
     const isMobile = this.state.windowWidth < 532 ? true : false
@@ -99,12 +116,14 @@ export class Thread extends Component {
     }
 
     if (threadHasLoaded) {
+      console.log(this.parseIsoDatetime(threadPosts[0].user.createdAt))
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
-          <Post>
+          <Post className='post-wrapper'>
             <Post.User>
               <Post.Author>
                 {post.author}
+                <p>{parseIsoDatetime(post.user.createdAt)}</p>
                 <p>{post.user.postCount} posts</p>
               </Post.Author>
 
@@ -116,6 +135,7 @@ export class Thread extends Component {
             <Post.Body>
               <div
                 className="markdown-shiz"
+                style={{paddingTop: '1em'}}
                 dangerouslySetInnerHTML={getMarkdownText(post.content)}
               />
 
