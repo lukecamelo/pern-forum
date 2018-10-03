@@ -24,7 +24,7 @@ export class App extends Component {
           <Pagination
             data={this.props.threads}
             currentPage={this.props.match.params.page}
-            context='threads'
+            context="threads"
           >
             {data => <ThreadList data={data} />}
           </Pagination>
@@ -45,7 +45,11 @@ export class App extends Component {
         <Container>
           <NavBar />
           <H1>Wow, there's nothing here. Make the first thread!</H1>
-          <Link className="thread-button" to="/newthread">
+          <Link
+            style={{ marginBottom: '1em' }}
+            className="thread-button"
+            to="/newthread"
+          >
             Post Thread
           </Link>
         </Container>

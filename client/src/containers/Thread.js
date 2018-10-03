@@ -15,7 +15,11 @@ import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
 import './Thread.css'
 
-import { fetchThreadAndAuthor, getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
+import {
+  fetchThreadAndAuthor,
+  getMarkdownText,
+  parseIsoDatetime
+} from '../utils/threadHelpers'
 
 const AnimationContainer = styled.div`
   animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
@@ -67,7 +71,7 @@ export class Thread extends Component {
       postBeingEdited: postId,
       postContent
     }))
-  }
+  } 
 
   handleSubmit = () => {
     try {
@@ -89,22 +93,6 @@ export class Thread extends Component {
     })
   }
 
-  parseIsoDatetime = dtstr => {
-    var dt = dtstr.split(/[: T-]/).map(parseFloat)
-    return new Date(
-      dt[0],
-      dt[1] - 1,
-      dt[2],
-      dt[3] || 0,
-      dt[4] || 0,
-      dt[5] || 0,
-      0
-    )
-      .toString()
-      .split(' ')
-      .slice(1, 4)
-      .join(' ')
-  }
 
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
@@ -116,10 +104,9 @@ export class Thread extends Component {
     }
 
     if (threadHasLoaded) {
-      console.log(this.parseIsoDatetime(threadPosts[0].user.createdAt))
       const posts = threadPosts.map(post => (
         <OpAnimation key={post.id}>
-          <Post className='post-wrapper'>
+          <Post className="post-wrapper">
             <Post.User>
               <Post.Author>
                 {post.author}
@@ -135,7 +122,11 @@ export class Thread extends Component {
             <Post.Body>
               <div
                 className="markdown-shiz"
-                style={isMobile ? {paddingTop: '1em', paddingLeft: '1em'} :{paddingTop: '1em'}}
+                style={
+                  isMobile
+                    ? { paddingTop: '1em', paddingLeft: '1em' }
+                    : { paddingTop: '1em' }
+                }
                 dangerouslySetInnerHTML={getMarkdownText(post.content)}
               />
 
