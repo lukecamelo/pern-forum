@@ -20,7 +20,7 @@ const auth = require('./server/routes/auth')
 const index = require('./server/routes/routes')
 const thread = require('./server/routes/thread')
 
-app.use('/static', express.static(path.join(__dirname, 'client/build')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 app.use('/', index)
 app.use('/thread', thread)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
