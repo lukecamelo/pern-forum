@@ -11,7 +11,7 @@ const Post = styled.div`
   font-size: 16px;
   background-color: white;
   text-align: left;
-  padding: 0 1rem 1rem 1rem;
+  // padding: 0 1rem 1rem 1rem;
   margin-bottom: 1rem;
   border: 1px solid ${props => props.theme.primary};
     @media screen and (max-width: 532px) {

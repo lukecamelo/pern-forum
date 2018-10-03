@@ -1,17 +1,17 @@
 import axios from 'axios'
 import marked from 'marked'
 
-export const fetchSingleThread = async (threadId) => {
+export const fetchSingleThread = async threadId => {
   const thread = await axios.get(`/thread/${threadId}`)
   return thread.data
 }
 
-export const fetchThreadAuthor = async (userId) => {
+export const fetchThreadAuthor = async userId => {
   const author = await axios.get(`/api/users/${userId}`)
   return author.data
 }
 
-export const fetchThreadAndAuthor = async (threadId) => {
+export const fetchThreadAndAuthor = async threadId => {
   const thread = await fetchSingleThread(threadId)
   const author = await fetchThreadAuthor(thread.userId)
   return {
@@ -38,4 +38,21 @@ export const editPostContent = (threadId, id, content) => {
 export const getMarkdownText = markdown => {
   const rawMarkup = marked(markdown, { sanitize: false })
   return { __html: rawMarkup }
+}
+
+export const parseIsoDatetime = dtstr => {
+  var dt = dtstr.split(/[: T-]/).map(parseFloat)
+  return new Date(
+    dt[0],
+    dt[1] - 1,
+    dt[2],
+    dt[3] || 0,
+    dt[4] || 0,
+    dt[5] || 0,
+    0
+  )
+    .toString()
+    .split(' ')
+    .slice(1, 4)
+    .join(' ')
 }
