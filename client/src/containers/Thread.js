@@ -135,7 +135,7 @@ export class Thread extends Component {
             <Post.Body>
               <div
                 className="markdown-shiz"
-                style={{paddingTop: '1em'}}
+                style={isMobile ? {paddingTop: '1em', paddingLeft: '1em'} :{paddingTop: '1em'}}
                 dangerouslySetInnerHTML={getMarkdownText(post.content)}
               />
 

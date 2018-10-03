@@ -14,6 +14,7 @@ const User = styled.div`
     }
 
     @media screen and (max-width: 532px) {
+      padding: 1em 1em 1em 1em;
       margin-right: 0;
       flex-direction: row-reverse;
       justify-content: flex-end;
