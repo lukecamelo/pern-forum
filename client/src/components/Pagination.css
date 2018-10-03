@@ -6,7 +6,6 @@
 
 .pagination-controls__button {
   background-color: white;
-  /* border-radius: 0.15em; */
   text-decoration: none;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   cursor: default;
@@ -17,17 +16,20 @@
   transition: .3s;
 }
 
+.pagination-controls__button:visited {
+  color: #0266c8;
+}
+
 .pagination-controls__button:hover {
   cursor: pointer;
   transform: translateY(2px);
 }
 
 .pagination-controls__button--active {
-  background-color: #4d7ea8;
+  background-color: #0266c8;
   color: white;
+}
 
-  /* &:hover,
-  &:hover:not(:active) {
-    transform: none;
-  } */
+.pagination-controls__button--active:visited {
+  color: white;
 }

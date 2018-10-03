@@ -13,6 +13,7 @@ import { Container, Button } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
 import { fadeIn, slideInLeft } from '../styled/keyframes/index'
+import './Thread.css'
 
 import { fetchThreadAndAuthor, getMarkdownText } from '../utils/threadHelpers'
 

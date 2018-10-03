@@ -73,6 +73,7 @@ class EditPostModal extends Component {
               }
             />
           </Form.Markdown>
+          {/* TODO: get this button to refresh the page or otherwise react to being clicked on */}
           <Button
             onClick={() =>
               editPostContent(
