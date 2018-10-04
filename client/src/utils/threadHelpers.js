@@ -56,3 +56,16 @@ export const parseIsoDatetime = dtstr => {
     .slice(1, 4)
     .join(' ')
 }
+
+export const checkForPosts = threads => {
+  let increment = 0
+  threads.forEach(thread => {
+    if (thread.Post.length > 0) {
+      increment++
+    }
+  })
+  if (increment === threads.length) {
+    return true
+  }
+  return false
+}

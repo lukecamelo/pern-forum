@@ -35,7 +35,6 @@ class EditPostModal extends Component {
   }
 
   changeEditorText = () => {
-    console.log('am i being called???')
     const { mdeState } = this.state
     const newDraftState = DraftUtil.buildNewDraftState(
       mdeState.draftEditorState,

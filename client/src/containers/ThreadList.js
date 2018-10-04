@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchData, fetchThreads } from '../actions/threadActions'
-import { filterAuthor } from '../utils/threadHelpers'
+import { filterAuthor, checkForPosts } from '../utils/threadHelpers'
 import styled from 'styled-components'
 import './ThreadList.css'
 
 import { Container } from '../styled/index'
 
 export const ListWrapper = styled.main`
-  background-color: #f4afc2;
+  background-color: #f4f4f4;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -31,24 +31,10 @@ export class ThreadList extends Component {
     this.props.fetchThreads()
   }
 
-  // most likely extremely naïve and inefficient 
-  checkForPosts = () => {
-    const { data: threads } = this.props
-    let increment = 0
-    threads.forEach(thread => {
-      if (thread.Post.length > 0) {
-        increment++
-      }
-    })
-    if (increment === threads.length) {
-      return true
-    }
-    return false
-  }
-
   render() {
     const { data: threads, users } = this.props
-    if (threads.length && users.length && this.checkForPosts()) {
+    if (threads.length && users.length && checkForPosts(threads)) {
+      // TODO: load page numbers for individual threads.. a large undertaking
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>
@@ -67,7 +53,7 @@ export class ThreadList extends Component {
               </div>
 
               <div className="item">
-                <p>Killed by</p>
+                <p>Latest</p>
                 {thread.Post[0].author}
               </div>
             </div>

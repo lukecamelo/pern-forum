@@ -18,8 +18,9 @@
 .title {
   display: flex;
   text-decoration: none;
-  color: #2e262e;
+  color: #0266c8; 
   padding: .5em 1em;
+  width: 100%;
   font-size: 1.5em;
   justify-self: flex-start;
   font-family: 'Roboto', sans-serif;
@@ -27,7 +28,7 @@
 }
 
 .title:hover {
-  color: white;
+  color: #00a8ff;
 }
 
 .author {
@@ -40,7 +41,7 @@
   display: flex;
   flex-direction: column;
   padding: 0 .5em 0 .5em;
-  color: #fff;
+  color: #00a8ff;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   font-style: italic;
