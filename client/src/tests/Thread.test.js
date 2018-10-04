@@ -4,6 +4,7 @@ import Pagination from '../components/Pagination'
 import { Container } from '../styled/index'
 import Post from '../styled/Post'
 import { shallow } from 'enzyme'
+import { parseIsoDatetime } from '../utils/threadHelpers'
 
 describe('<Thread />', () => {
   let wrapper
@@ -23,50 +24,63 @@ describe('<Thread />', () => {
           author: 'rediscover',
           content: 'hello',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z'
+          }
         },
         {
           id: 2,
           author: 'bradley',
           content: 'arigato',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z'
+          }
         },
         {
           id: 3,
           author: 'john',
           content: 'bye bye',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z'
+          }
         }
       ],
       threadHasLoaded: true
     })
+    wrapper.update()
     expect(wrapper.find(Pagination).length).toEqual(1)
     wrapper.setState({ threadPosts: [] })
     expect(wrapper.find(Pagination).length).toEqual(0)
   })
 
-  it("renders each posts' postCount ", () => {
+  it("renders each posts' postCount and reg date", () => {
     wrapper.setState({
       threadPosts: [
         {
           author: 'rediscover',
           content: 'hello',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
         },
         {
           author: 'bradley',
           content: 'arigato',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
         },
         {
           author: 'john',
           content: 'bye bye',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com' }
+          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
         }
       ],
       threadHasLoaded: true
@@ -77,9 +91,11 @@ describe('<Thread />', () => {
       .at(0)
       .childAt(0)
 
-    expect(post.find('p').text()).toEqual(
+    expect(post.find('p').at(1).text()).toEqual(
       wrapper.state('threadPosts')[0].user.postCount + ' posts'
     )
+    expect(post.find('p').at(0).text()).toEqual(
+      parseIsoDatetime(wrapper.state('threadPosts')[0].user.createdAt)
+    )
   })
-
 })
