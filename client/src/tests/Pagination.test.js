@@ -20,6 +20,15 @@ describe('<Pagination />', () => {
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
+        { title: 'hello', content: 'hello hello', userId: 1, id: 1 },
         { title: 'hello', content: 'hello hello', userId: 1, id: 1 }
       ],
       match: {
