@@ -70,7 +70,7 @@ class Pagination extends Component {
 }
 
 Pagination.defaultProps = {
-  pageSize: 10,
+  pageSize: 20,
   startingPage: 1
 }
 

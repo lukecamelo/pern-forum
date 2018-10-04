@@ -93,7 +93,6 @@ export class Thread extends Component {
     })
   }
 
-
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
     const isMobile = this.state.windowWidth < 532 ? true : false

@@ -21,5 +21,4 @@ store.subscribe(() => {
   localStorage.setItem('state', JSON.stringify(store.getState()))
 })
 
-console.log(store.getState().auth)
 export default store
