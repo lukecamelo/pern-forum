@@ -17,7 +17,7 @@ describe('<NavBar />', () => {
   it('renders without crashing', () => {
     expect(wrapper.find(Link).length).toEqual(3)
     wrapper.setProps({ isLoggedIn: true })
-    expect(wrapper.find(Link).length).toEqual(2)
+    expect(wrapper.find(Link).length).toEqual(3)
   })
 
 })

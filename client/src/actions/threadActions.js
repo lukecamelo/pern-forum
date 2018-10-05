@@ -6,6 +6,9 @@ import {
   FETCH_POSTS
 } from './types'
 
+import store from '../store'
+const auth = store.getState().auth.token
+
 export const fetchData = () => dispatch => {
   return fetch('/api/users', {
     headers: {
@@ -24,7 +27,11 @@ export const fetchData = () => dispatch => {
 }
 
 export const fetchThreads = () => dispatch => {
-  return fetch('/thread/threads')
+  return fetch('/thread/threads', {
+    headers: {
+      'Authorization': "Bearer " + auth
+    }
+  })
     .then(res => res.json())
     .then(threads => {
       dispatch({
@@ -39,7 +46,8 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
   return fetch('/thread/threads', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': "Bearer " + auth
     },
     body: JSON.stringify({ title, content, userId, author })
   })
@@ -62,7 +70,8 @@ export const makeNewPost = (
   return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer " + auth
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })

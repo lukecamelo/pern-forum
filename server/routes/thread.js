@@ -1,86 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const models = require('../models')
-
-const makeThreadAndOp = async (req, res, next) => {
-  const body = req.body
-
-  let post = {
-    author: body.author,
-    content: body.content,
-    userId: body.userId,
-    thread: {
-      title: body.title,
-      content: body.content,
-      userId: body.userId
-    }
-  }
-
-  post = await models.post.create(post, { include: [models.thread] })
-  post = await models.post.findOne({
-    where: { id: post.id },
-    include: [models.user, models.thread]
-  })
-  // let user = await models.user.findOne({ where: { id: body.userId } })
-  // await user.updateAttributes({ postCount: user.postCount + 1 })
-  req.data = post
-  next()
-}
-
-const makePost = async (req, res, next) => {
-  const body = req.body
-  console.log(res.json(body))
-
-  let post = {
-    author: body.username,
-    content: body.content,
-    userId: body.userId,
-    threadId: body.threadId
-  }
-
-  post = await models.post.create(post)
-  post = await models.post.findOne({
-    where: { id: post.id },
-    include: [models.user, models.thread]
-  })
-  let user = await models.user.findOne({ where: { id: body.userId } })
-  await user.updateAttributes({ postCount: user.postCount + 1 })
-  req.data = post
-  next()
-}
-
-const getThreadPosts = async (req, res, next) => {
-  let posts = models.post.findAll({
-    where: { threadId: req.params.id },
-    include: [models.user]
-  })
-  req.data = posts
-  next()
-}
-
-const getThreads = async (req, res, next) => {
-  let threads = await models.thread.findAll({
-    include: [
-      {
-        model: models.post,
-        as: 'Post'
-      }
-    ],
-    order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
-  })
-  req.data = threads
-  next()
-}
+const threadController = require('../controllers/thread.controller')
 
 // Creates thread
-router.post('/threads', makeThreadAndOp, (req, res) => {
+router.post('/threads', threadController.makeThreadAndOp, (req, res) => {
   return req.data
 })
 
 // Returns all threads
-// Using the async/await middleware causes threads not to sort properly
-// as well as not reporting their postcounts on the list ???
-router.get('/threads', (req, res) => {
+router.get('/threads',(req, res) => {
   models.thread
     .findAll({
       include: [
@@ -93,7 +22,6 @@ router.get('/threads', (req, res) => {
     })
     .then(posts => res.json(posts))
     .catch(err => console.log(err))
-  // return req.data
 })
 
 // Returns all posts in a thread
@@ -103,11 +31,10 @@ router.get('/:id/posts', (req, res) => {
       where: { threadId: req.params.id }
     })
     .then(post => res.json(post))
-  // return req.data
 })
 
 // Makes post in thread
-router.post('/:id/posts', makePost, (req, res) => {
+router.post('/:id/posts', threadController.makePost, (req, res) => {
   return req.data
 })
 

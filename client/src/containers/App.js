@@ -59,9 +59,9 @@ export class App extends Component {
         <Container>
           <NavBar />
           <H1>Weird... nothing here.</H1>
-            <Link className="thread-button" to="/newthread">
-              Post Thread
-            </Link>
+          <Link className="thread-button" to="/newthread">
+            Post Thread
+          </Link>
         </Container>
       )
     }
