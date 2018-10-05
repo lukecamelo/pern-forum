@@ -1,8 +1,14 @@
 import axios from 'axios'
 import marked from 'marked'
+import store from '../store'
+const auth = store.getState().auth.token
 
 export const fetchSingleThread = async threadId => {
-  const thread = await axios.get(`/thread/${threadId}`)
+  const thread = await axios.get(`/thread/${threadId}`, {
+    headers: {
+      "Authorization": "Bearer " + auth
+    }
+  })
   return thread.data
 }
 

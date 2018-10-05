@@ -12,15 +12,17 @@ const thread = require('./thread')
 const post = require('./post')
 const url =
   'postgres://ixokdhlskmpphx:c9ad01e9c20556fc75242e5b2b6e600539b805dde77ab33b3a14d670bd61c9d7@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcbbl2rbe22bj6'
+  // TEST DB
+  // 'postgres://uyebwslsddifoh:4526fe1ec0111715e1c0a273f2b643d3dd8a5293c1e6ac27b2b81d3885834c9e@ec2-54-83-29-34.compute-1.amazonaws.com:5432/dehbi7ag50lkf'
 
 // if(process.env.NODE_ENV === 'production') {
-//   const sequelize = new Sequelize(url, {
-//     dialect: 'postgres',
-//     protocol: 'postgres',
-//     dialectOptions: {
-//       ssl: true
-//     }
-//   })
+  // const sequelize = new Sequelize(url, {
+  //   dialect: 'postgres',
+  //   protocol: 'postgres',
+  //   dialectOptions: {
+  //     ssl: true
+  //   }
+  // })
 // }
 
 const sequelize = new Sequelize(
