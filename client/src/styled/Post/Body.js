@@ -4,7 +4,7 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 0 1em 0 0;
+  // padding: 0 1em 0 0;
   width: 100%;
 
     @media screen and (max-width: 532px) {

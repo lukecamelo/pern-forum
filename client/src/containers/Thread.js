@@ -71,7 +71,7 @@ export class Thread extends Component {
       postBeingEdited: postId,
       postContent
     }))
-  } 
+  }
 
   handleSubmit = () => {
     try {
@@ -123,14 +123,34 @@ export class Thread extends Component {
                 className="markdown-shiz"
                 style={
                   isMobile
-                    ? { paddingTop: '1em', paddingLeft: '1em' }
+                    ? {
+                        paddingTop: '1em',
+                        paddingLeft: '1em',
+                        paddingRight: '1em'
+                      }
                     : { paddingTop: '1em' }
                 }
                 dangerouslySetInnerHTML={getMarkdownText(post.content)}
               />
 
               <Post.Controls>
-                {this.props.loggedInUserId === post.user.id ? (
+                <p>{parseIsoDatetime(post.createdAt)}</p>
+                <div className="buttons">
+                  {this.props.loggedInUserId === post.user.id ? (
+                    <Button
+                      style={
+                        isMobile
+                          ? mobileEditStyle
+                          : {
+                              marginBottom: '0',
+                              marginLeft: '0'
+                            }
+                      }
+                      onClick={() => this.toggleModal(post.id, post.content)}
+                    >
+                      Edit
+                    </Button>
+                  ) : null}
                   <Button
                     style={
                       isMobile
@@ -140,26 +160,13 @@ export class Thread extends Component {
                             marginLeft: '0'
                           }
                     }
-                    onClick={() => this.toggleModal(post.id, post.content)}
+                    onClick={() =>
+                      this.quotePost(post.content, post.user.username)
+                    }
                   >
-                    Edit
+                    Quote
                   </Button>
-                ) : null}
-                <Button
-                  style={
-                    isMobile
-                      ? mobileEditStyle
-                      : {
-                          marginBottom: '0',
-                          marginLeft: '0'
-                        }
-                  }
-                  onClick={() =>
-                    this.quotePost(post.content, post.user.username)
-                  }
-                >
-                  Quote
-                </Button>
+                </div>
               </Post.Controls>
             </Post.Body>
           </Post>
