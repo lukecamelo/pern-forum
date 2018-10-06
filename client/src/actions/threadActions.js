@@ -29,7 +29,7 @@ export const fetchData = () => dispatch => {
 export const fetchThreads = () => dispatch => {
   return fetch('/thread/threads', {
     headers: {
-      'Authorization': "Bearer " + auth
+      Authorization: 'Bearer ' + auth
     }
   })
     .then(res => res.json())
@@ -47,7 +47,7 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': "Bearer " + auth
+      Authorization: 'Bearer ' + auth
     },
     body: JSON.stringify({ title, content, userId, author })
   })
@@ -71,7 +71,7 @@ export const makeNewPost = (
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      "Authorization": "Bearer " + auth
+      Authorization: 'Bearer ' + auth
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })

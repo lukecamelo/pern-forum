@@ -81,7 +81,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'this_is_my_big_fantastic_jwt_secret'
+      secretOrKey: process.env.JWTSECRET
     },
     function(jwtPayload, cb) {
       return models.user.findById(jwtPayload.id)
