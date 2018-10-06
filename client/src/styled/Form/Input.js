@@ -13,7 +13,7 @@ const Input = styled.input.attrs({
   font-size: 18px;
 
   &::placeholder {
-    color: white;
+    color: #034f9b;
   }
 `
 

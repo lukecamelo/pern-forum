@@ -5,7 +5,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
-const Card = styled.section`
+export const Card = styled.section`
   display: flex;
   justify-content: center;
   justify-self: center;
