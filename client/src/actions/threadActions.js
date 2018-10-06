@@ -46,9 +46,9 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
   return fetch('/thread/threads', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
-      'Authorization': `Bearer ${auth}`
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${auth}`
     },
     body: JSON.stringify({ title, content, userId, author })
   })
@@ -71,8 +71,8 @@ export const makeNewPost = (
   return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
       Authorization: `Bearer ${auth}`
     },
     body: JSON.stringify({ content, username, userId, threadId })
