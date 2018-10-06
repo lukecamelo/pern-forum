@@ -6,7 +6,8 @@ const auth = store.getState().auth.token
 export const fetchSingleThread = async threadId => {
   const thread = await axios.get(`/thread/${threadId}`, {
     headers: {
-      "Authorization": "Bearer " + auth
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth}`
     }
   })
   return thread.data
@@ -35,9 +36,13 @@ export const filterAuthor = (threadArray, userId) => {
 }
 
 export const editPostContent = (threadId, id, content) => {
-  axios.post(`/thread/${threadId}/editpost`, {
-    content,
-    id
+  axios({
+    method: 'post',
+    headers: {
+      Authorization: `Bearer ${auth}`
+    },
+    url: `/thread/${threadId}/editpost`,
+    data: { content, id }
   })
 }
 
