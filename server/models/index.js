@@ -15,25 +15,23 @@ const url =
   // TEST DB
   // 'postgres://uyebwslsddifoh:4526fe1ec0111715e1c0a273f2b643d3dd8a5293c1e6ac27b2b81d3885834c9e@ec2-54-83-29-34.compute-1.amazonaws.com:5432/dehbi7ag50lkf'
 
-// if(process.env.NODE_ENV === 'production') {
-  // const sequelize = new Sequelize(url, {
-  //   dialect: 'postgres',
-  //   protocol: 'postgres',
-  //   dialectOptions: {
-  //     ssl: true
-  //   }
-  // })
-// }
-
-const sequelize = new Sequelize(
-  'pern_forum',
-  process.env.DBUSER,
-  process.env.DBPASS,
-  {
-    dialect: 'postgres',
-    host: 'localhost'
+const sequelize = new Sequelize(url, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: true
   }
-)
+})
+
+// const sequelize = new Sequelize(
+//   'pern_forum',
+//   process.env.DBUSER,
+//   process.env.DBPASS,
+//   {
+//     dialect: 'postgres',
+//     host: 'localhost'
+//   }
+// )
 
 // Read through this folder and join the contents (the models) into the db object
 fs.readdirSync(__dirname)
