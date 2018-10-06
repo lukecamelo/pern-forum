@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userLogout } from '../actions/authActions'
 
+import ResponsiveMenu from 'react-responsive-navbar'
 import './NavBar.css'
 
 const StyledNav = styled.nav`
@@ -11,6 +12,10 @@ const StyledNav = styled.nav`
   justify-content: flex-end;
   padding: 15px;
   background-color: ${props => props.theme.primary};
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `
 const Logo = styled.div`
   display: flex;
@@ -19,16 +24,17 @@ const Logo = styled.div`
   margin-left: 1em;
   color: white;
   font-size: 1.5rem;
-  font-family: "Lato", sans-serif;
+  font-family: 'Lato', sans-serif;
 
-    @media screen and (max-width: 600px) {
-      display: none;
-    }
+  @media screen and (max-width: 701px) {
+    display: none;
+  }
 `
 
 export const NavBar = ({ isLoggedIn, user, ...props }) => {
+  let navigation
   if (isLoggedIn) {
-    return (
+    navigation = (
       <StyledNav>
         <Logo>imp.zone</Logo>
         <Link to="/threads/1" className="navlink">
@@ -37,27 +43,49 @@ export const NavBar = ({ isLoggedIn, user, ...props }) => {
         <Link to="/usercontrolpanel" className="navlink">
           Control Panel
         </Link>
-        <Link to='/' className="logout" onClick={() => props.userLogout()}>
+        <Link to="/" className="logout" onClick={() => props.userLogout()}>
           Logout ({user})
         </Link>
       </StyledNav>
     )
+    return (
+      <ResponsiveMenu
+        menuOpenButton={<i class="fas fa-bars fa-4x" />}
+        menuCloseButton={<i class="fas fa-times-circle" />}
+        changeMenuOn="700px"
+        menu={navigation}
+        largeMenuClassName="large-menu"
+        smallMenuClassName="small-menu"
+      />
+    )
+  } else {
+    navigation = (
+      <StyledNav>
+        <Logo>imp.zone</Logo>
+        <Link to="/threads/1" className="navlink">
+          Home
+        </Link>
+
+        <Link to="/login" className="navlink">
+          Login
+        </Link>
+
+        <Link to="/signup" className="navlink">
+          Signup
+        </Link>
+      </StyledNav>
+    )
+    return (
+      <ResponsiveMenu
+        menuOpenButton={<i class="fas fa-bars fa-4x" />}
+        menuCloseButton={<i class="fas fa-times-circle" />}
+        changeMenuOn="700px"
+        menu={navigation}
+        largeMenuClassName="large-menu"
+        smallMenuClassName="small-menu"
+      />
+    )
   }
-  return (
-    <StyledNav>
-      <Link to="/threads/1" className="navlink">
-        Home
-      </Link>
-
-      <Link to="/login" className="navlink">
-        Login
-      </Link>
-
-      <Link to="/signup" className="navlink">
-        Signup
-      </Link>
-    </StyledNav>
-  )
 }
 
 const mapStateToProps = state => ({
