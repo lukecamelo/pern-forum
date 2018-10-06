@@ -6,6 +6,13 @@ import NavBar from './NavBar'
 
 import { Container, Button, Input } from '../styled/index'
 import { Card } from './UserControlPanel'
+import {
+  FadeIn,
+  SlideLeft,
+  SlideRight,
+  SlideBottom,
+  SlideTop
+} from '../styled/animations'
 
 export const FormWrapper = styled.section`
   display: flex;
@@ -19,7 +26,6 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
 `
-
 export const H1 = styled.h1`
   color: ${props => props.theme.primary};
 `
@@ -54,37 +60,47 @@ export class Login extends Component {
     return (
       <Container>
         <NavBar />
-        <Card>
-          {this.props.auth.isLoggedIn ? (
-            <H1>greetings, {this.props.auth.username}</H1>
-          ) : (
-            <H1>Please enter your username and password.</H1>
-          )}
+        <FadeIn>
+          <Card>
+            <SlideTop>
+              {this.props.auth.isLoggedIn ? (
+                <H1>greetings, {this.props.auth.username}</H1>
+              ) : (
+                <H1>Please enter your username and password.</H1>
+              )}
+            </SlideTop>
 
-          {!this.props.auth.isLoggedIn ? (
-            <FormWrapper>
-              <Input
-                name="usernameInput"
-                type="text"
-                value={this.state.usernameInput}
-                onChange={this.changeHandler}
-                placeholder="enter your username"
-                data-testid="username-input"
-              />
-              <Input
-                name="passwordInput"
-                type="password"
-                value={this.state.passwordInput}
-                onChange={this.changeHandler}
-                placeholder="enter your password"
-                data-testid="password-input"
-              />
-              <ButtonWrapper>
-                <Button onClick={e => this.handleSubmit(e)}>Login</Button>
-              </ButtonWrapper>
-            </FormWrapper>
-          ) : null}
-        </Card>
+            {!this.props.auth.isLoggedIn ? (
+              <FormWrapper>
+                <SlideLeft>
+                  <Input
+                    name="usernameInput"
+                    type="text"
+                    value={this.state.usernameInput}
+                    onChange={this.changeHandler}
+                    placeholder="enter your username"
+                    data-testid="username-input"
+                  />
+                </SlideLeft>
+                <SlideRight>
+                  <Input
+                    name="passwordInput"
+                    type="password"
+                    value={this.state.passwordInput}
+                    onChange={this.changeHandler}
+                    placeholder="enter your password"
+                    data-testid="password-input"
+                  />
+                </SlideRight>
+                <SlideBottom>
+                  <ButtonWrapper>
+                    <Button onClick={e => this.handleSubmit(e)}>Login</Button>
+                  </ButtonWrapper>
+                </SlideBottom>
+              </FormWrapper>
+            ) : null}
+          </Card>
+        </FadeIn>
       </Container>
     )
   }

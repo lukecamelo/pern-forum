@@ -48,3 +48,6 @@ export const StyledLink = styled(Link)`
     cursor: pointer;
   }
 `
+export const H1 = styled.h1`
+  color: ${props => props.theme.primary};
+`

@@ -5,7 +5,9 @@ import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
 import { H1 } from '../components/Login'
+import { Card } from '../components/UserControlPanel'
 import { Container } from '../styled/index'
+import { FadeIn, SlideTop, SlideLeft } from '../styled/animations'
 import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
@@ -32,44 +34,58 @@ export class App extends Component {
       return (
         <Container>
           <NavBar />
-          <H1>General Discussion</H1>
-          <Pagination
-            data={this.props.threads}
-            currentPage={this.props.match.params.page}
-            context="threads"
-          >
-            {data => <ThreadList data={data} />}
-          </Pagination>
-          <div style={{ margin: '1em 0 2em 0' }}>
-            <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
-          </div>
+          <FadeIn>
+            <SlideLeft>
+              <H1>General Discussion</H1>
+              <Pagination
+                data={this.props.threads}
+                currentPage={this.props.match.params.page}
+                context="threads"
+              >
+                {data => <ThreadList data={data} />}
+              </Pagination>
+            </SlideLeft>
+            <div style={{ margin: '1em 0 2em 0' }}>
+              <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
+            </div>
+          </FadeIn>
         </Container>
       )
     } else if (!this.props.isLoggedIn && this.props.threads.length) {
       return (
         <Container>
           <NavBar />
-          <H1>Please log in to view threads.</H1>
+          <FadeIn>
+            <Card>
+              <SlideTop>
+                <H1>Please log in to view threads.</H1>
+              </SlideTop>
+            </Card>
+          </FadeIn>
         </Container>
       )
     } else if (this.props.isLoggedIn && !this.props.threads.length) {
       return (
         <Container>
           <NavBar />
-          <H1>Wow, there's nothing here. Make the first thread!</H1>
-          <NewThreadLink style={{ marginBottom: '1em' }} to="/newthread">
-            Post Thread
-          </NewThreadLink>
+          <Card>
+            <H1>Wow, there's nothing here. Make the first thread!</H1>
+            <NewThreadLink style={{ marginBottom: '1em' }} to="/newthread">
+              Post Thread
+            </NewThreadLink>
+          </Card>
         </Container>
       )
     } else {
       return (
         <Container>
           <NavBar />
-          <H1>Weird... nothing here.</H1>
-          <Link className="thread-button" to="/newthread">
-            Post Thread
-          </Link>
+          <Card>
+            <H1>Weird... nothing here.</H1>
+            <Link className="thread-button" to="/newthread">
+              Post Thread
+            </Link>
+          </Card>
         </Container>
       )
     }

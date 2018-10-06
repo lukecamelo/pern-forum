@@ -7,6 +7,13 @@ import axios from 'axios'
 import { FormWrapper, H1 } from './Login'
 import { Container, Input, Button } from '../styled/index'
 import { Card } from './UserControlPanel'
+import {
+  FadeIn,
+  SlideLeft,
+  SlideRight,
+  SlideBottom,
+  SlideTop
+} from '../styled/animations'
 
 export class Signup extends React.Component {
   state = {
@@ -60,43 +67,55 @@ export class Signup extends React.Component {
       return (
         <Container>
           <NavBar />
-          <Card>
-            <H1>Enter a username and a password to register.</H1>
-            <FormWrapper>
-              <Input
-                name="usernameInput"
-                type="text"
-                value={this.state.usernameInput}
-                onChange={this.changeHandler}
-                placeholder="enter your username"
-              />
-              <Input
-                name="passwordInput"
-                type="password"
-                value={this.state.passwordInput}
-                onChange={this.changeHandler}
-                placeholder="enter your password"
-              />
-              <Input
-                name="avatarUrlInput"
-                type="text"
-                value={this.state.avatarUrlInput}
-                onChange={this.avatarChangeHandler}
-                placeholder="imgur image link"
-              />
-              <Button
-                onClick={() =>
-                  this.props.userSignup(
-                    this.state.usernameInput,
-                    this.state.passwordInput,
-                    this.state.avatarUrlInput
-                  )
-                }
-              >
-                Signup
-              </Button>
-            </FormWrapper>
-          </Card>
+          <FadeIn>
+            <Card>
+              <SlideTop>
+                <H1>Enter a username and a password to register.</H1>
+              </SlideTop>
+              <FormWrapper>
+                <SlideLeft>
+                  <Input
+                    name="usernameInput"
+                    type="text"
+                    value={this.state.usernameInput}
+                    onChange={this.changeHandler}
+                    placeholder="enter your username"
+                  />
+                </SlideLeft>
+                <SlideRight>
+                  <Input
+                    name="passwordInput"
+                    type="password"
+                    value={this.state.passwordInput}
+                    onChange={this.changeHandler}
+                    placeholder="enter your password"
+                  />
+                </SlideRight>
+                <SlideLeft>
+                  <Input
+                    name="avatarUrlInput"
+                    type="text"
+                    value={this.state.avatarUrlInput}
+                    onChange={this.avatarChangeHandler}
+                    placeholder="imgur image link"
+                  />
+                </SlideLeft>
+                <SlideBottom>
+                  <Button
+                    onClick={() =>
+                      this.props.userSignup(
+                        this.state.usernameInput,
+                        this.state.passwordInput,
+                        this.state.avatarUrlInput
+                      )
+                    }
+                  >
+                    Signup
+                  </Button>
+                </SlideBottom>
+              </FormWrapper>
+            </Card>
+          </FadeIn>
         </Container>
       )
     } else {

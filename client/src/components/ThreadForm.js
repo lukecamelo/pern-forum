@@ -11,25 +11,27 @@ import './NavBar.css'
 import styled from 'styled-components'
 import Form from '../styled/Form'
 import { Container, StyledLink } from '../styled/index'
-import {
-  fadeIn,
-  slideInLeft,
-  slideInRight,
-  slideInBottom
-} from '../styled/keyframes/index'
+// import {
+//   fadeIn,
+//   slideInLeft,
+//   slideInRight,
+//   slideInBottom
+// } from '../styled/keyframes/index'
 
-const FormFadeIn = styled.div`
-  animation: 1s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
-`
-const TitleSlide = styled.div`
-  animation: 0.8s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
-`
-const MarkdownSlide = styled.div`
-  animation: 0.8s ${slideInRight} cubic-bezier(0.28, 1, 0.14, 0.99);
-`
-const ButtonSlide = styled.div`
-  animation: 0.8s ${slideInBottom} cubic-bezier(0.28, 1, 0.14, 0.99);
-`
+import { FadeIn, SlideLeft, SlideRight, SlideBottom} from '../styled/animations'
+
+// const FormFadeIn = styled.div`
+//   animation: 1s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
+// `
+// const TitleSlide = styled.div`
+//   animation: 0.8s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
+// `
+// const SlideRight = styled.div`
+//   animation: 0.8s ${slideInRight} cubic-bezier(0.28, 1, 0.14, 0.99);
+// `
+// const SlideBottom = styled.div`
+//   animation: 0.8s ${slideInBottom} cubic-bezier(0.28, 1, 0.14, 0.99);
+// `
 
 export class ThreadForm extends Component {
   constructor(props) {
@@ -80,8 +82,8 @@ export class ThreadForm extends Component {
         <NavBar />
         <h1>Post new thread</h1>
         <Form style={{ width: '100%' }}>
-          <FormFadeIn>
-            <TitleSlide>
+          <FadeIn>
+            <SlideLeft>
               <Form.Input
                 style={{ width: '400px' }}
                 name="title"
@@ -89,8 +91,8 @@ export class ThreadForm extends Component {
                 onChange={this.changeHandler}
                 placeholder="thread title"
               />
-            </TitleSlide>
-            <MarkdownSlide>
+            </SlideLeft>
+            <SlideRight>
               <Form.Markdown>
                 <ReactMde
                   layout={'tabbed'}
@@ -101,9 +103,9 @@ export class ThreadForm extends Component {
                   }
                 />
               </Form.Markdown>
-            </MarkdownSlide>
+            </SlideRight>
             <form onSubmit={this.handleSubmit} style={{padding: '1.5em'}}>
-              <ButtonSlide>
+              <SlideBottom>
                 <StyledLink
                   to="/threads/1"
                   type="submit"
@@ -118,9 +120,9 @@ export class ThreadForm extends Component {
                 >
                   Submit Thread
                 </StyledLink>
-              </ButtonSlide>
+              </SlideBottom>
             </form>
-          </FormFadeIn>
+          </FadeIn>
         </Form>
       </Container>
     )
