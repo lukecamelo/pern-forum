@@ -21,7 +21,7 @@ router.post('/login', (req, res, next) => {
         if (err) {
           res.send(err)
         }
-        const token = jwt.sign(user.toJSON(), process.env.JWTSECRET)
+        const token = jwt.sign(user.toJSON(), "my_big_fantastic_jwt_secret")
         return res.json({ user, token, message: 'Success!' })
       })
     }
