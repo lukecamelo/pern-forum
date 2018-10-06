@@ -8,30 +8,9 @@ import { postNewThread, fetchThreads } from '../actions/threadActions'
 
 import NavBar from './NavBar'
 import './NavBar.css'
-import styled from 'styled-components'
 import Form from '../styled/Form'
 import { Container, StyledLink } from '../styled/index'
-// import {
-//   fadeIn,
-//   slideInLeft,
-//   slideInRight,
-//   slideInBottom
-// } from '../styled/keyframes/index'
-
 import { FadeIn, SlideLeft, SlideRight, SlideBottom} from '../styled/animations'
-
-// const FormFadeIn = styled.div`
-//   animation: 1s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
-// `
-// const TitleSlide = styled.div`
-//   animation: 0.8s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
-// `
-// const SlideRight = styled.div`
-//   animation: 0.8s ${slideInRight} cubic-bezier(0.28, 1, 0.14, 0.99);
-// `
-// const SlideBottom = styled.div`
-//   animation: 0.8s ${slideInBottom} cubic-bezier(0.28, 1, 0.14, 0.99);
-// `
 
 export class ThreadForm extends Component {
   constructor(props) {

@@ -9,7 +9,7 @@ router.post('/threads', threadController.makeThreadAndOp, (req, res) => {
 })
 
 // Returns all threads
-router.get('/threads',(req, res) => {
+router.get('/threads', (req, res) => {
   models.thread
     .findAll({
       include: [
@@ -34,14 +34,41 @@ router.get('/:id/posts', (req, res) => {
 })
 
 // Makes post in thread
-router.post('/:id/posts', threadController.makePost, (req, res) => {
-  return req.data
+router.post('/:id/posts', (req, res) => {
+  const body = req.body
+  let post = {
+    author: body.username,
+    content: body.content,
+    userId: body.userId,
+    threadId: body.threadId
+  }
+  models.post
+    .create(post)
+    .then(post => {
+      models.post.findOne({
+        where: { id: post.id },
+        include: [{ model: models.user }, { model: models.thread }]
+      })
+    })
+    .then(post => res.json(post))
+
+  // post = await models.post.create(post)
+  // post = await models.post.findOne({
+  //   where: { id: post.id },
+  //   include: [models.user, models.thread]
+  // })
+  // let user = await models.user.findOne({ where: { id: body.userId } })
+  // await user.updateAttributes({ postCount: user.postCount + 1 })
+  // return req.data
 })
 
 // Edits a post
 router.post('/:id/editpost', (req, res) => {
   models.post
-    .update({ content: req.body.content },{ where: { id: req.body.id, threadId: req.params.id } })
+    .update(
+      { content: req.body.content },
+      { where: { id: req.body.id, threadId: req.params.id } }
+    )
     .then(post => {
       return res.json(post)
     })
