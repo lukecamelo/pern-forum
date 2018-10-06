@@ -4,7 +4,7 @@
   text-decoration: none;
   margin-right: 1em;
   padding: 14px;
-  transition: .2s;
+  transition: 0.2s;
   /* border-radius: 5px; */
   font-family: 'Lato', sans-serif;
 }
@@ -15,7 +15,7 @@
   text-decoration: none;
   margin-right: 1em;
   padding: 14px;
-  transition: .2s;
+  transition: 0.2s;
   /* border-radius: 5px; */
   border: 2px solid #0266c8;
   font-family: 'Lato', sans-serif;
@@ -26,13 +26,14 @@
   background-color: white;
   text-decoration: none;
   padding: 14px;
-  transition: .2s;
+  transition: 0.2s;
   /* border-radius: 5px; */
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
 }
 
-.logout:hover, .thread-button:hover {
+.logout:hover,
+.thread-button:hover {
   color: white;
   background-color: #f195ac;
   border: 2px solid #f195ac;
@@ -43,4 +44,24 @@
   color: white;
   background-color: #f195ac;
   cursor: pointer;
+}
+
+.small-menu {
+  background-color: #00a8ff;
+}
+
+.small-menu div {
+  color: #034f9b;
+  padding: .5em 0;
+}
+
+@media screen and (max-width: 700px) {
+  .navlink {
+    margin-bottom: 1em;
+  }
+  .navlink,
+  .logout {
+    margin-right: 0;
+    width: 200px;
+  }
 }
