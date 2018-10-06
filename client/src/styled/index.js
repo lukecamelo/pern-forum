@@ -8,7 +8,6 @@ export const Input = styled.input.attrs({
   type: 'text'
 })`
   background: ${props => props.theme.primary};
-  // border-radius: 3px;
   border: none;
   color: white;
   padding: 10px 1em;
@@ -17,7 +16,7 @@ export const Input = styled.input.attrs({
   font-size: 18px;
 
   &::placeholder {
-    color: white;
+    color: ${props => props.theme.secondary};
   }
 `
 export const Button = styled.button`
@@ -26,7 +25,6 @@ export const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   padding: 0.5em 1.5em;
-  // border-radius: 3px;
   border: 2px solid ${props => props.theme.primary};
   transition: 0.2s;
   &:hover {
@@ -42,7 +40,6 @@ export const StyledLink = styled(Link)`
   margin: 1em;
   text-decoration: none;
   padding: 0.5em 1.5em;
-  // border-radius: 3px;
   border: 2px solid ${props => props.theme.primary};
   transition: 0.2s;
   &:hover {

@@ -102,7 +102,7 @@ export class ThreadForm extends Component {
                 />
               </Form.Markdown>
             </MarkdownSlide>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} style={{padding: '1.5em'}}>
               <ButtonSlide>
                 <StyledLink
                   to="/threads/1"

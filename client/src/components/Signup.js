@@ -2,10 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
 import NavBar from './NavBar'
-import axios from 'axios';
+import axios from 'axios'
 
 import { FormWrapper, H1 } from './Login'
 import { Container, Input, Button } from '../styled/index'
+import { Card } from './UserControlPanel'
 
 export class Signup extends React.Component {
   state = {
@@ -49,7 +50,7 @@ export class Signup extends React.Component {
     })
   }
 
-  async checkUrlExists (testUrl) {
+  async checkUrlExists(testUrl) {
     const request = await axios.get(testUrl, { mode: 'cors' })
     return request.status
   }
@@ -59,43 +60,43 @@ export class Signup extends React.Component {
       return (
         <Container>
           <NavBar />
-          <H1>Enter a username and a password to register.</H1>
-          <H1>{this.props.message}</H1>
-          <FormWrapper>
-            <Input
-              name="usernameInput"
-              type="text"
-              value={this.state.usernameInput}
-              onChange={this.changeHandler}
-              placeholder="enter your username"
-            />
-            <Input
-              name="passwordInput"
-              type="password"
-              value={this.state.passwordInput}
-              onChange={this.changeHandler}
-              placeholder="enter your password"
-            />
-            <Input
-              name="avatarUrlInput"
-              type="text"
-              value={this.state.avatarUrlInput}
-              onChange={this.avatarChangeHandler}
-              placeholder="imgur image link"
-            />
-            <H1>{this.state.validationMessage}</H1>
-            <Button
-              onClick={() =>
-                this.props.userSignup(
-                  this.state.usernameInput,
-                  this.state.passwordInput,
-                  this.state.avatarUrlInput
-                )
-              }
-            >
-              Signup
-            </Button>
-          </FormWrapper>
+          <Card>
+            <H1>Enter a username and a password to register.</H1>
+            <FormWrapper>
+              <Input
+                name="usernameInput"
+                type="text"
+                value={this.state.usernameInput}
+                onChange={this.changeHandler}
+                placeholder="enter your username"
+              />
+              <Input
+                name="passwordInput"
+                type="password"
+                value={this.state.passwordInput}
+                onChange={this.changeHandler}
+                placeholder="enter your password"
+              />
+              <Input
+                name="avatarUrlInput"
+                type="text"
+                value={this.state.avatarUrlInput}
+                onChange={this.avatarChangeHandler}
+                placeholder="imgur image link"
+              />
+              <Button
+                onClick={() =>
+                  this.props.userSignup(
+                    this.state.usernameInput,
+                    this.state.passwordInput,
+                    this.state.avatarUrlInput
+                  )
+                }
+              >
+                Signup
+              </Button>
+            </FormWrapper>
+          </Card>
         </Container>
       )
     } else {

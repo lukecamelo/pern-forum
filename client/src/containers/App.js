@@ -9,6 +9,17 @@ import { Container } from '../styled/index'
 import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
+import styled from 'styled-components'
+
+const NewThreadLink = styled(Link)`
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  padding: 14px;
+  transition: 0.2s;
+  border: 2px solid #0266c8;
+  font-family: 'Roboto', sans-serif;
+`
 
 export class App extends Component {
   componentDidMount() {
@@ -21,6 +32,7 @@ export class App extends Component {
       return (
         <Container>
           <NavBar />
+          <H1>General Discussion</H1>
           <Pagination
             data={this.props.threads}
             currentPage={this.props.match.params.page}
@@ -28,9 +40,9 @@ export class App extends Component {
           >
             {data => <ThreadList data={data} />}
           </Pagination>
-          <Link className="thread-button" to="/newthread">
-            Post Thread
-          </Link>
+          <div style={{ margin: '1em 0 2em 0' }}>
+            <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
+          </div>
         </Container>
       )
     } else if (!this.props.isLoggedIn && this.props.threads.length) {
@@ -45,13 +57,9 @@ export class App extends Component {
         <Container>
           <NavBar />
           <H1>Wow, there's nothing here. Make the first thread!</H1>
-          <Link
-            style={{ marginBottom: '1em' }}
-            className="thread-button"
-            to="/newthread"
-          >
+          <NewThreadLink style={{ marginBottom: '1em' }} to="/newthread">
             Post Thread
-          </Link>
+          </NewThreadLink>
         </Container>
       )
     } else {

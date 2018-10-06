@@ -14,6 +14,9 @@ export const ListWrapper = styled.main`
   flex-direction: column;
   align-items: flex-start;
   width: 75%;
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
   margin: 0 auto;
   box-shadow: ${props => props.theme.largeShadow}
 `
