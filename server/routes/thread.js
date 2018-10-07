@@ -36,7 +36,6 @@ router.get('/:id/posts', (req, res) => {
 
 // Makes post in thread
 router.post('/:id/posts', threadController.makePost, (req, res) => {
-  console.log('making post in thread')
   return req.data
 })
 
@@ -54,7 +53,6 @@ router.post('/:id/editpost', (req, res) => {
 
 // Get single thread
 router.get('/:id', (req, res) => {
-  console.log('getting posts from thread')
   models.thread
     .findOne({
       where: { id: req.params.id },

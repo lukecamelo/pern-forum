@@ -31,9 +31,9 @@ app.get('*', (req, res) => {
 })
 
 // models.sequelize.sync({ force: true }).then(() => {
-  // app.listen(port, () => {
-  //   console.log(`Running on http://localhost:${port}`)
-  // })
+//   app.listen(port, () => {
+//     console.log(`Running on http://localhost:${port}`)
+//   })
 // })
 
 module.exports = app
