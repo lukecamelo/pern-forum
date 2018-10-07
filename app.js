@@ -22,7 +22,7 @@ const thread = require('./server/routes/thread')
 
 app.use(express.static(path.join(__dirname, 'client/build')))
 app.use('/', index)
-app.use('/thread', passport.authenticate('jwt', { session: false }), thread)
+app.use('/thread', thread)
 app.use('/user', passport.authenticate('jwt', { session: false }), user)
 app.use('/auth', auth)
 
