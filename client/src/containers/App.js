@@ -21,10 +21,10 @@ const NewThreadLink = styled(Link)`
   transition: 0.2s;
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
-    &:hover {
-      background-color: #0266c8;
-      color: white;
-    }
+  &:hover {
+    background-color: #0266c8;
+    color: white;
+  }
 `
 
 export class App extends Component {
@@ -73,10 +73,12 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Card>
-            <H1>Wow, there's nothing here. Make the first thread!</H1>
-            <NewThreadLink style={{ marginBottom: '1em' }} to="/newthread">
-              Post Thread
-            </NewThreadLink>
+            <div style={{ padding: '1em' }}>
+              <H1>Wow, there's nothing here. Make the first thread!</H1>
+              <div style={{ padding: '1em' }}>
+                <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
+              </div>
+            </div>
           </Card>
         </Container>
       )
@@ -85,10 +87,7 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Card>
-            <H1>Weird... nothing here.</H1>
-            <Link className="thread-button" to="/newthread">
-              Post Thread
-            </Link>
+            <H1>Ah.. a fresh start. Log in and make the first thread!</H1>
           </Card>
         </Container>
       )

@@ -89,6 +89,7 @@ export const checkForPosts = threads => {
   return false
 }
 
+// Still unsure of whether to use this or the Redux action
 export const makeNewPost = (content, username, userId, threadId) => {
   return axios({
     url: `/thread/${threadId}/posts`,
