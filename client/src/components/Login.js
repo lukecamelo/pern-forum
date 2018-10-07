@@ -6,6 +6,7 @@ import NavBar from './NavBar'
 
 import { Container, Button, Input } from '../styled/index'
 import { Card } from './UserControlPanel'
+import Form from '../styled/Form'
 import {
   FadeIn,
   SlideLeft,
@@ -14,13 +15,13 @@ import {
   SlideTop
 } from '../styled/animations'
 
-export const FormWrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 250px;
-  margin: 0 auto;
-`
+// export const Form = styled.section`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 250px;
+//   margin: 0 auto;
+// `
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
@@ -63,17 +64,15 @@ export class Login extends Component {
         <FadeIn>
           <Card>
             <SlideTop>
-              {this.props.auth.isLoggedIn ? (
-                <H1>greetings, {this.props.auth.username}</H1>
-              ) : (
-                <H1>Please enter your username and password.</H1>
-              )}
+              <H1 style={{ padding: '0 1em' }}>
+                Please enter your username and password.
+              </H1>
             </SlideTop>
 
             {!this.props.auth.isLoggedIn ? (
-              <FormWrapper>
+              <Form>
                 <SlideLeft>
-                  <Input
+                  <Form.Input
                     name="usernameInput"
                     type="text"
                     value={this.state.usernameInput}
@@ -83,7 +82,7 @@ export class Login extends Component {
                   />
                 </SlideLeft>
                 <SlideRight>
-                  <Input
+                  <Form.Input
                     name="passwordInput"
                     type="password"
                     value={this.state.passwordInput}
@@ -97,7 +96,7 @@ export class Login extends Component {
                     <Button onClick={e => this.handleSubmit(e)}>Login</Button>
                   </ButtonWrapper>
                 </SlideBottom>
-              </FormWrapper>
+              </Form>
             ) : null}
           </Card>
         </FadeIn>

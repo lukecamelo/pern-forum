@@ -8,7 +8,6 @@ import {
 
 import store from '../store'
 const auth = store.getState().auth.token
-console.log(auth)
 
 export const fetchData = () => dispatch => {
   return fetch('/api/users', {

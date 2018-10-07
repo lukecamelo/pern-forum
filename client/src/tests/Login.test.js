@@ -1,6 +1,7 @@
 import React from 'react'
 import { Login } from '../components/Login'
-import { Input, Button } from '../styled/index'
+import { Button } from '../styled/index'
+import Form from '../styled/Form'
 import { shallow } from 'enzyme'
 
 describe('<Login />', () => {
@@ -21,7 +22,7 @@ describe('<Login />', () => {
   })
 
   it('have the correct number of inputs (dummy test, really)', () => {
-    expect(wrapper.find(Input).length).toEqual(2)
+    expect(wrapper.find(Form.Input).length).toEqual(2)
   })
 
   it('calls userLogin on Login button click', () => {

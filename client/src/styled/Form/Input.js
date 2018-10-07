@@ -4,7 +4,6 @@ const Input = styled.input.attrs({
   type: 'text'
 })`
   background: ${props => props.theme.primary};
-  // border-radius: 3px;
   border: none;
   color: white;
   padding: 10px 1em;
@@ -13,7 +12,7 @@ const Input = styled.input.attrs({
   font-size: 18px;
 
   &::placeholder {
-    color: #034f9b;
+    color: white;
   }
 `
 

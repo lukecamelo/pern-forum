@@ -9,8 +9,14 @@ import { postNewThread, fetchThreads } from '../actions/threadActions'
 import NavBar from './NavBar'
 import './NavBar.css'
 import Form from '../styled/Form'
-import { Container, StyledLink } from '../styled/index'
-import { FadeIn, SlideLeft, SlideRight, SlideBottom} from '../styled/animations'
+import { Card } from './UserControlPanel'
+import { Container, StyledLink, H1 } from '../styled/index'
+import {
+  FadeIn,
+  SlideLeft,
+  SlideRight,
+  SlideBottom
+} from '../styled/animations'
 
 export class ThreadForm extends Component {
   constructor(props) {
@@ -59,50 +65,51 @@ export class ThreadForm extends Component {
     return (
       <Container>
         <NavBar />
-        <h1>Post new thread</h1>
-        <Form style={{ width: '100%' }}>
-          <FadeIn>
-            <SlideLeft>
-              <Form.Input
-                style={{ width: '400px' }}
-                name="title"
-                value={this.state.title}
-                onChange={this.changeHandler}
-                placeholder="thread title"
-              />
-            </SlideLeft>
-            <SlideRight>
-              <Form.Markdown>
-                <ReactMde
-                  layout={'tabbed'}
-                  onChange={this.handleValueChange}
-                  editorState={this.state.mdeState}
-                  generateMarkdownPreview={markdown =>
-                    Promise.resolve(this.converter.makeHtml(markdown))
-                  }
+        <Card>
+          <H1>Post new thread</H1>
+          <Form style={{ padding: '0 1em 1em 1em' }}>
+            <FadeIn>
+              <SlideLeft>
+                <Form.Input
+                  name="title"
+                  value={this.state.title}
+                  onChange={this.changeHandler}
+                  placeholder="thread title"
                 />
-              </Form.Markdown>
-            </SlideRight>
-            <form onSubmit={this.handleSubmit} style={{padding: '1.5em'}}>
-              <SlideBottom>
-                <StyledLink
-                  to="/threads/1"
-                  type="submit"
-                  onClick={() =>
-                    this.props.postNewThread(
-                      this.state.title,
-                      this.state.mdeState.html,
-                      this.props.loggedInUserId,
-                      this.props.username
-                    )
-                  }
-                >
-                  Submit Thread
-                </StyledLink>
-              </SlideBottom>
-            </form>
-          </FadeIn>
-        </Form>
+              </SlideLeft>
+              <SlideRight>
+                <Form.Markdown>
+                  <ReactMde
+                    layout={'tabbed'}
+                    onChange={this.handleValueChange}
+                    editorState={this.state.mdeState}
+                    generateMarkdownPreview={markdown =>
+                      Promise.resolve(this.converter.makeHtml(markdown))
+                    }
+                  />
+                </Form.Markdown>
+              </SlideRight>
+              <form onSubmit={this.handleSubmit} style={{ padding: '1.5em' }}>
+                <SlideBottom>
+                  <StyledLink
+                    to="/threads/1"
+                    type="submit"
+                    onClick={() =>
+                      this.props.postNewThread(
+                        this.state.title,
+                        this.state.mdeState.html,
+                        this.props.loggedInUserId,
+                        this.props.username
+                      )
+                    }
+                  >
+                    Submit Thread
+                  </StyledLink>
+                </SlideBottom>
+              </form>
+            </FadeIn>
+          </Form>
+        </Card>
       </Container>
     )
   }

@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import axios from 'axios'
 
 import { FormWrapper, H1 } from './Login'
+import Form from '../styled/Form'
 import { Container, Input, Button } from '../styled/index'
 import { Card } from './UserControlPanel'
 import {
@@ -72,9 +73,9 @@ export class Signup extends React.Component {
               <SlideTop>
                 <H1>Enter a username and a password to register.</H1>
               </SlideTop>
-              <FormWrapper>
+              <Form>
                 <SlideLeft>
-                  <Input
+                  <Form.Input
                     name="usernameInput"
                     type="text"
                     value={this.state.usernameInput}
@@ -83,7 +84,7 @@ export class Signup extends React.Component {
                   />
                 </SlideLeft>
                 <SlideRight>
-                  <Input
+                  <Form.Input
                     name="passwordInput"
                     type="password"
                     value={this.state.passwordInput}
@@ -92,7 +93,7 @@ export class Signup extends React.Component {
                   />
                 </SlideRight>
                 <SlideLeft>
-                  <Input
+                  <Form.Input
                     name="avatarUrlInput"
                     type="text"
                     value={this.state.avatarUrlInput}
@@ -113,7 +114,7 @@ export class Signup extends React.Component {
                     Signup
                   </Button>
                 </SlideBottom>
-              </FormWrapper>
+              </Form>
             </Card>
           </FadeIn>
         </Container>
