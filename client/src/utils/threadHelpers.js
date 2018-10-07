@@ -4,9 +4,10 @@ import store from '../store'
 const auth = store.getState().auth.token
 
 export const fetchSingleThread = async threadId => {
-  const thread = await axios.get(`/thread/${threadId}`, {
+  const thread = await fetch(`/thread/${threadId}`, {
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       Authorization: `Bearer ${auth}`
     }
   })
@@ -14,9 +15,10 @@ export const fetchSingleThread = async threadId => {
 }
 
 export const fetchThreadAuthor = async userId => {
-  const author = await axios.get(`/api/users/${userId}`, {
+  const author = await fetch(`/api/users/${userId}`, {
     headers: {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
       Authorization: `Bearer ${auth}`
     }
   })
