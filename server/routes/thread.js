@@ -26,7 +26,6 @@ router.get('/threads', (req, res) => {
 
 // Returns all posts in a thread
 router.get('/:id/posts', (req, res) => {
-  console.log('getting posts from the thread')
   models.post
     .findAll({
       where: { threadId: req.params.id }
@@ -55,6 +54,7 @@ router.post('/:id/editpost', (req, res) => {
 
 // Get single thread
 router.get('/:id', (req, res) => {
+  console.log('getting posts from thread')
   models.thread
     .findOne({
       where: { id: req.params.id },
@@ -69,6 +69,7 @@ router.get('/:id', (req, res) => {
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'ASC']]
     })
     .then(thread => res.json(thread))
+    .catch(err => console.log('error getting posts, ', err))
 })
 
 module.exports = router
