@@ -5,6 +5,14 @@ import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
+import {
+  FadeIn,
+  SlideLeft,
+  SlideRight,
+  SlideBottom,
+  SlideTop
+} from '../styled/animations'
+
 export const Card = styled.section`
   display: flex;
   justify-content: center;
@@ -60,28 +68,45 @@ export class UserControlPanel extends React.Component {
     return (
       <Container>
         <NavBar />
-        <Card>
-          <H1>Welcome, {this.props.user.username}</H1>
-          <AvatarEdit>
-            <h2 style={{ margin: '0 0 10px 0', color: '#0266c8' }}>Change avatar</h2>
-            {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
-            <Input
-              id="avatar-url-input"
-              name="avatarUrl"
-              value={this.state.avatarUrl}
-              onChange={this.handleChange}
-            />
-            <form>
-              <Button
-                onClick={() =>
-                  this.editAvatar(this.props.user.userId, this.state.avatarUrl)
-                }
-              >
-                Edit Avatar
-              </Button>
-            </form>
-          </AvatarEdit>
-        </Card>
+        <FadeIn>
+          <Card>
+            <SlideTop>
+              <H1>Welcome, {this.props.user.username}</H1>
+            </SlideTop>
+            <AvatarEdit>
+              <SlideLeft>
+                <h2 style={{ margin: '0 0 10px 0', color: '#0266c8' }}>
+                  Change avatar
+                </h2>
+                {this.state.message !== '' ? (
+                  <h1>{this.state.message}</h1>
+                ) : null}
+              </SlideLeft>
+              <SlideRight>
+                <Input
+                  id="avatar-url-input"
+                  name="avatarUrl"
+                  value={this.state.avatarUrl}
+                  onChange={this.handleChange}
+                />
+              </SlideRight>
+              <SlideBottom>
+                <form>
+                  <Button
+                    onClick={() =>
+                      this.editAvatar(
+                        this.props.user.userId,
+                        this.state.avatarUrl
+                      )
+                    }
+                  >
+                    Edit Avatar
+                  </Button>
+                </form>
+              </SlideBottom>
+            </AvatarEdit>
+          </Card>
+        </FadeIn>
       </Container>
     )
   }

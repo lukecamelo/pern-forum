@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import NavBar from './NavBar'
 
-import { Container, Button, Input } from '../styled/index'
+import { Container, Button } from '../styled/index'
 import { Card } from './UserControlPanel'
 import Form from '../styled/Form'
 import {
@@ -15,13 +15,6 @@ import {
   SlideTop
 } from '../styled/animations'
 
-// export const Form = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   width: 250px;
-//   margin: 0 auto;
-// `
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;

@@ -95,7 +95,7 @@ export class Thread extends Component {
 
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
-    const isMobile = this.state.windowWidth < 532 ? true : false
+    const isMobile = this.state.windowWidth < 700 ? true : false
     const mobileEditStyle = {
       margin: '1em 4px 4px 4px',
       padding: '2px 2px',

@@ -4,9 +4,8 @@ import { userSignup } from '../actions/authActions'
 import NavBar from './NavBar'
 import axios from 'axios'
 
-import { FormWrapper, H1 } from './Login'
 import Form from '../styled/Form'
-import { Container, Input, Button } from '../styled/index'
+import { Container, Button, H1 } from '../styled/index'
 import { Card } from './UserControlPanel'
 import {
   FadeIn,
