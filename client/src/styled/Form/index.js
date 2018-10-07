@@ -7,7 +7,6 @@ const Form = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px;
   margin: 0 auto;
 `
 

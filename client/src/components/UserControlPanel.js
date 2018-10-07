@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Input, Button } from '../styled/index'
+import { Container, Input, Button, H1 } from '../styled/index'
 import axios from 'axios'
 import styled from 'styled-components'
 import NavBar from './NavBar'
@@ -13,15 +13,15 @@ export const Card = styled.section`
   background-color: #fff;
   box-shadow: ${props => props.theme.largeShadow};
   margin: 1em 25% 0 25%;
-    @media screen and (max-width: 900px) {
-      margin: 1em 4em 0 4em;
-    }
-    @media screen and (max-width: 532px) {
-      margin: 1em 1em 0 1em;
-    }
+  @media screen and (max-width: 900px) {
+    margin: 1em 4em 0 4em;
+  }
+  @media screen and (max-width: 532px) {
+    margin: 1em 1em 0 1em;
+  }
 `
 const AvatarEdit = styled.div`
-  margin: 0 3em 0 3em;
+  margin: 0 3em;
 `
 
 export class UserControlPanel extends React.Component {
@@ -61,10 +61,10 @@ export class UserControlPanel extends React.Component {
       <Container>
         <NavBar />
         <Card>
-          <h1>Welcome, {this.props.user.username}</h1>
-          <h1>Change avatar: </h1>
-          {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
+          <H1>Welcome, {this.props.user.username}</H1>
           <AvatarEdit>
+            <h2 style={{ margin: '0 0 10px 0', color: '#0266c8' }}>Change avatar</h2>
+            {this.state.message !== '' ? <h1>{this.state.message}</h1> : null}
             <Input
               id="avatar-url-input"
               name="avatarUrl"

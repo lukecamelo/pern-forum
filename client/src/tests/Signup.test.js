@@ -1,6 +1,7 @@
 import React from 'react'
 import { Signup } from '../components/Signup'
-import { Input, Button } from '../styled/index'
+import { Button } from '../styled/index'
+import Form from '../styled/Form'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
@@ -19,7 +20,7 @@ describe('<Signup />', () => {
   })
   
   it('renders without crashing', () => {
-    expect(wrapper.find(Input).length).toEqual(3)
+    expect(wrapper.find(Form.Input).length).toEqual(3)
   })
   
   it('calls userSignup on button click', () => {

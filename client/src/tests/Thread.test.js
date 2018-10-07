@@ -24,6 +24,7 @@ describe('<Thread />', () => {
           author: 'rediscover',
           content: 'hello',
           threadId: 1,
+          createdAt: '2018-09-30T21:02:37.951Z',
           user: {
             postCount: 2,
             avatarUrl: 'avatar.com',
@@ -35,6 +36,7 @@ describe('<Thread />', () => {
           author: 'bradley',
           content: 'arigato',
           threadId: 1,
+          createdAt: '2018-09-30T21:02:37.951Z',
           user: {
             postCount: 2,
             avatarUrl: 'avatar.com',
@@ -46,6 +48,7 @@ describe('<Thread />', () => {
           author: 'john',
           content: 'bye bye',
           threadId: 1,
+          createdAt: '2018-09-30T21:02:37.951Z',
           user: {
             postCount: 2,
             avatarUrl: 'avatar.com',
@@ -68,19 +71,34 @@ describe('<Thread />', () => {
           author: 'rediscover',
           content: 'hello',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
+          createdAt: '2018-09-30T21:02:37.951Z',
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z',
+          }
         },
         {
           author: 'bradley',
           content: 'arigato',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
+          createdAt: '2018-09-30T21:02:37.951Z',
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z',
+          }
         },
         {
           author: 'john',
           content: 'bye bye',
           threadId: 1,
-          user: { postCount: 2, avatarUrl: 'avatar.com', createdAt: "2018-09-30T21:02:37.951Z" }
+          createdAt: '2018-09-30T21:02:37.951Z',
+          user: {
+            postCount: 2,
+            avatarUrl: 'avatar.com',
+            createdAt: '2018-09-30T21:02:37.951Z',
+          }
         }
       ],
       threadHasLoaded: true
@@ -91,11 +109,17 @@ describe('<Thread />', () => {
       .at(0)
       .childAt(0)
 
-    expect(post.find('p').at(1).text()).toEqual(
-      wrapper.state('threadPosts')[0].user.postCount + ' posts'
-    )
-    expect(post.find('p').at(0).text()).toEqual(
-      parseIsoDatetime(wrapper.state('threadPosts')[0].user.createdAt)
-    )
+    expect(
+      post
+        .find('p')
+        .at(1)
+        .text()
+    ).toEqual(wrapper.state('threadPosts')[0].user.postCount + ' posts')
+    expect(
+      post
+        .find('p')
+        .at(0)
+        .text()
+    ).toEqual(parseIsoDatetime(wrapper.state('threadPosts')[0].user.createdAt))
   })
 })
