@@ -21,7 +21,7 @@ passport.use(
 
       models.user.findOne({ where: { username } }).then(user => {
         if (!user) {
-          return cb(null, false, { message: 'Incorrect username or password.' })
+          return cb(null, false)
         }
 
         if (!isValidPassword(user.password, password)) {
@@ -29,7 +29,7 @@ passport.use(
             message: 'Incorrect password.'
           })
         }
-        return cb(null, user, { message: 'Logged in successfully' })
+        return cb(null, user)
       })
     }
   )
@@ -81,10 +81,11 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: "my_big_fantastic_jwt_secret"
+      secretOrKey: 'my_big_fantastic_jwt_secret'
     },
     function(jwtPayload, cb) {
-      return models.user.findById(jwtPayload.id)
+      return models.user
+        .findById(jwtPayload.id)
         .then(user => {
           return cb(null, user)
         })

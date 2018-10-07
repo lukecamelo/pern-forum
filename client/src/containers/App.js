@@ -21,6 +21,10 @@ const NewThreadLink = styled(Link)`
   transition: 0.2s;
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
+    &:hover {
+      background-color: #0266c8;
+      color: white;
+    }
 `
 
 export class App extends Component {

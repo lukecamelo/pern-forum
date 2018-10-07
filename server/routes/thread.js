@@ -26,40 +26,19 @@ router.get('/threads', (req, res) => {
 
 // Returns all posts in a thread
 router.get('/:id/posts', (req, res) => {
+  console.log('getting posts from the thread')
   models.post
     .findAll({
       where: { threadId: req.params.id }
     })
     .then(post => res.json(post))
+    .catch('error getting posts: ', console.log(err))
 })
 
 // Makes post in thread
-router.post('/:id/posts', (req, res) => {
-  const body = req.body
-  let post = {
-    author: body.username,
-    content: body.content,
-    userId: body.userId,
-    threadId: body.threadId
-  }
-  models.post
-    .create(post)
-    .then(post => {
-      models.post.findOne({
-        where: { id: post.id },
-        include: [{ model: models.user }, { model: models.thread }]
-      })
-    })
-    .then(post => res.json(post))
-
-  // post = await models.post.create(post)
-  // post = await models.post.findOne({
-  //   where: { id: post.id },
-  //   include: [models.user, models.thread]
-  // })
-  // let user = await models.user.findOne({ where: { id: body.userId } })
-  // await user.updateAttributes({ postCount: user.postCount + 1 })
-  // return req.data
+router.post('/:id/posts', threadController.makePost, (req, res) => {
+  console.log('making post in thread')
+  return req.data
 })
 
 // Edits a post
