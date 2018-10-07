@@ -39,8 +39,10 @@ export class App extends Component {
         <Container>
           <NavBar />
           <FadeIn>
-            <SlideLeft>
+            <SlideTop>
               <H1>General Discussion</H1>
+            </SlideTop>
+            <SlideLeft>
               <Pagination
                 data={this.props.threads}
                 currentPage={this.props.match.params.page}
@@ -74,7 +76,7 @@ export class App extends Component {
           <NavBar />
           <Card>
             <div style={{ padding: '1em' }}>
-              <H1>Wow, there's nothing here. Make the first thread!</H1>
+              <H1>There's nothing here. Make the first thread!</H1>
               <div style={{ padding: '1em' }}>
                 <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
               </div>

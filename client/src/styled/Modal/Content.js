@@ -18,7 +18,7 @@ const Content = styled.div`
       right: 100px;
     }
 
-    @media screen and (max-width: 532px) {
+    @media screen and (max-width: 700px) {
       top: 40px;
       left: 40px;
       right: 40px;

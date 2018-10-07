@@ -58,11 +58,11 @@ export class PostForm extends Component {
           end: 0
         },
         text:
-          '> ' +
+          '<blockquote>' +
           this.props.quotedUser +
           ' said \n' +
-          '> ' +
-          this.props.quotedPost
+          this.props.quotedPost +
+          '</blockquote>'
       }
     )
     this.setState({
@@ -74,8 +74,7 @@ export class PostForm extends Component {
     })
   }
 
-  handleSubmit = e => {
-    // e.preventDefault()
+  handleSubmit = () => {
     try {
       this.props.makeNewPost(
         this.state.mdeState.html,
