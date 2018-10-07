@@ -19,6 +19,7 @@ export const userLogin = (username, password) => dispatch => {
       if (res.token) {
         localStorage.setItem('Authorization', JSON.stringify(res.token))
         localStorage.setItem('User', JSON.stringify(res.user))
+        console.log('userLogin action: ', localStorage.Authorization)
         dispatch({
           type: USER_LOGIN_SUCCESS,
           payload: res

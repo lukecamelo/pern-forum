@@ -3,6 +3,7 @@ import { Container, Button } from '../styled/index'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
+// import { makeNewPost } from '../utils/threadHelpers'
 import styled from 'styled-components'
 
 import Form from '../styled/Form'
@@ -73,7 +74,8 @@ export class PostForm extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = e => {
+    // e.preventDefault()
     try {
       this.props.makeNewPost(
         this.state.mdeState.html,

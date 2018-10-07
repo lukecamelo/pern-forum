@@ -26,8 +26,10 @@ async function makeThreadAndOp (req, res, next) {
     where: { id: post.id },
     include: [models.user, models.thread]
   })
+
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
+
   req.data = post
   next()
 }
@@ -47,6 +49,7 @@ async function makePost (req, res, next) {
     where: { id: post.id },
     include: [models.user, models.thread]
   })
+  console.log('in makePost controller')
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
   req.data = post

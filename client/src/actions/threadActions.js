@@ -8,6 +8,7 @@ import {
 
 import store from '../store'
 const auth = store.getState().auth.token
+console.log(auth)
 
 export const fetchData = () => dispatch => {
   return fetch('/api/users', {
@@ -62,6 +63,7 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
     .catch(err => console.log('POST_NEW_THREAD ERROR: ', err))
 }
 
+/* ----- Not sure if actions below this line are strictly necessary ----- */
 export const makeNewPost = (
   content,
   username,
@@ -70,6 +72,7 @@ export const makeNewPost = (
 ) => dispatch => {
   return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -77,7 +80,12 @@ export const makeNewPost = (
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })
-    .then(res => res.json())
+    .then(res => {
+      if(res.ok) {
+        return res.json()
+      }
+      throw new Error('the response was not okay')
+    })
     .then(post => {
       dispatch({
         type: MAKE_NEW_POST,

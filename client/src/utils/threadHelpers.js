@@ -14,7 +14,12 @@ export const fetchSingleThread = async threadId => {
 }
 
 export const fetchThreadAuthor = async userId => {
-  const author = await axios.get(`/api/users/${userId}`)
+  const author = await axios.get(`/api/users/${userId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${auth}`
+    }
+  })
   return author.data
 }
 
@@ -39,6 +44,7 @@ export const editPostContent = (threadId, id, content) => {
   axios({
     method: 'post',
     headers: {
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${auth}`
     },
     url: `/thread/${threadId}/editpost`,
@@ -79,4 +85,23 @@ export const checkForPosts = threads => {
     return true
   }
   return false
+}
+
+export const makeNewPost = (content, username, userId, threadId) => {
+  return axios({
+    url: `/thread/${threadId}/posts`,
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${auth}`
+    },
+    data: JSON.stringify({ content, username, userId, threadId })
+  })
+    .then(res => res.json())
+    .then(post => {
+      console.log(post)
+    })
+    .catch(err => console.log('error making post: ', err))
 }
