@@ -30,7 +30,7 @@ class Pagination extends Component {
     for (let i = 1; i <= pageCount; i++) {
       const baseClassName = 'pagination-controls__button'
       const activeClassName =
-        i === this.state.currentPage ? `${baseClassName}--active` : ''
+        i === parseInt(this.props.currentPage, 10) ? `${baseClassName}--active` : ''
       controls.push(
         <Link
           to={
