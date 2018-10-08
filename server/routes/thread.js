@@ -36,7 +36,6 @@ router.get('/:id/posts', (req, res) => {
 
 // Makes post in thread
 router.post('/:id/posts', threadController.makePost, (req, res) => {
-  console.log(req.data)
   return req.data
 })
 

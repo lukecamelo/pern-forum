@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
     case MAKE_NEW_POST:
       return {
         ...state,
-        // posts: [...state.posts, action.payload]
+        posts: [...state.posts, action.payload]
       }
     case FETCH_POSTS:
       return {

@@ -11,7 +11,7 @@ const models = require('./server/models')
 
 const app = express()
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({ credentials: true, origin: true }))
 
 const port = process.env.PORT || 8090
 

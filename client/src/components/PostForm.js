@@ -74,9 +74,9 @@ export class PostForm extends Component {
     })
   }
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     try {
-      this.props.makeNewPost(
+      await this.props.makeNewPost(
         this.state.mdeState.html,
         this.props.auth.username,
         this.props.auth.userId,
