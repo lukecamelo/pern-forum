@@ -13,7 +13,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors({ credentials: true, origin: true }))
 
-const port = process.env.PORT || 8090
+const port = process.env.PORT || 8080
 
 const user = require('./server/routes/user')
 const auth = require('./server/routes/auth')

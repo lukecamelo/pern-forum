@@ -1,23 +1,14 @@
 import React, { Component } from 'react'
-import { Container, Button } from '../styled/index'
-
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 // import { makeNewPost } from '../utils/threadHelpers'
-import styled from 'styled-components'
 
 import Form from '../styled/Form'
+import { Button } from '../styled/index'
 
 import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-
-const PostFormContainer = styled(Container)`
-  margin-top: 2em;
-  margin-bottom: 2em;
-  margin-left: 2em;
-  margin-right: 2em;
-`
 
 export class PostForm extends Component {
   constructor(props) {
@@ -89,7 +80,7 @@ export class PostForm extends Component {
 
   render() {
     return (
-      <PostFormContainer>
+      <Form style={{ margin: '2em', display: 'block' }}>
         <Form.Markdown>
           <ReactMde
             layout={this.props.isMobile ? 'vertical' : 'tabbed'}
@@ -105,7 +96,7 @@ export class PostForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <Button type="submit">Submit Post</Button>
         </form>
-      </PostFormContainer>
+      </Form>
     )
   }
 }

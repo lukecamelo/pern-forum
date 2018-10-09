@@ -98,13 +98,13 @@ export const makeNewPost = (content, username, userId, threadId) => {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${auth}`
+      // Authorization: `Bearer ${auth}`
     },
     data: JSON.stringify({ content, username, userId, threadId })
   })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(post => {
-      console.log(post)
+      console.log('post got made, ', post)
     })
     .catch(err => console.log('error making post: ', err))
 }

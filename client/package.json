@@ -30,7 +30,7 @@
     "eject": "react-scripts eject",
     "flow": "flow"
   },
-  "proxy": "http://localhost:8090",
+  "proxy": "http://localhost:8080",
   "devDependencies": {
     "axios-mock-adapter": "^1.15.0",
     "cypress": "^3.1.0",
