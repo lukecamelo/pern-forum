@@ -71,14 +71,14 @@ export const makeNewPost = (
 ) => dispatch => {
   return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
-    mode: 'cors',
+    // mode: 'cors',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth}`
+      // Authorization: `Bearer ${auth}`
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(post => {
       dispatch({
         type: MAKE_NEW_POST,
