@@ -7,7 +7,7 @@ import {
 } from './types'
 
 import store from '../store'
-import axios from 'axios'
+// import axios from 'axios'
 const auth = store.getState().auth.token
 
 export const fetchData = () => dispatch => {
@@ -64,14 +64,14 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
 }
 
 /* ----- Not sure if actions below this line are strictly necessary ----- */
-function fetchWithTimeout (url, options, timeout = 7000) {
-  return Promise.race([
-      fetch(url, options),
-      new Promise((_, reject) =>
-          setTimeout(() => reject(new Error('timeout')), timeout)
-      )
-  ]);
-}
+// function fetchWithTimeout (url, options, timeout = 7000) {
+//   return Promise.race([
+//       fetch(url, options),
+//       new Promise((_, reject) =>
+//           setTimeout(() => reject(new Error('timeout')), timeout)
+//       )
+//   ]);
+// }
 
 export const makeNewPost = (
   content,
@@ -79,8 +79,9 @@ export const makeNewPost = (
   userId,
   threadId
 ) => dispatch => {
-  return fetch(`http://localhost:3000/thread/${threadId}/posts`, {
+  return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
+    credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json; charset=utf-8'
@@ -88,15 +89,9 @@ export const makeNewPost = (
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })
-    .then(res => {
-      if(res.status === 'OK') {
-        console.log('YAYAYAYAYAYAYAYAYAYAYAYAYAYAYA')
-      }
-    })
-    .then(post => {
+    .then(() => {
       dispatch({
         type: MAKE_NEW_POST,
-        payload: post
       })
     })
     .catch(err => console.log('error making post: ', err))

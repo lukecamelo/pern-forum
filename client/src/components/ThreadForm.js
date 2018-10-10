@@ -89,24 +89,21 @@ export class ThreadForm extends Component {
                   />
                 </Form.Markdown>
               </SlideRight>
-              <form onSubmit={this.handleSubmit} style={{ padding: '1.5em' }}>
-                <SlideBottom>
-                  <StyledLink
-                    to="/threads/1"
-                    type="submit"
-                    onClick={() =>
-                      this.props.postNewThread(
-                        this.state.title,
-                        this.state.mdeState.html,
-                        this.props.loggedInUserId,
-                        this.props.username
-                      )
-                    }
-                  >
-                    Submit Thread
-                  </StyledLink>
-                </SlideBottom>
-              </form>
+              <SlideBottom style={{ padding: '1.5em' }}>
+                <StyledLink
+                  to="/threads/1"
+                  onClick={() =>
+                    this.props.postNewThread(
+                      this.state.title,
+                      this.state.mdeState.html,
+                      this.props.loggedInUserId,
+                      this.props.username
+                    )
+                  }
+                >
+                  Submit Thread
+                </StyledLink>
+              </SlideBottom>
             </FadeIn>
           </Form>
         </Card>
