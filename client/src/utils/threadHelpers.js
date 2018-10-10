@@ -91,8 +91,7 @@ export const checkForPosts = threads => {
 
 // Still unsure of whether to use this or the Redux action
 export const makeNewPost = (content, username, userId, threadId) => {
-  return axios({
-    url: `/thread/${threadId}/posts`,
+  return fetch(`/thread/${threadId}/posts`, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -102,7 +101,7 @@ export const makeNewPost = (content, username, userId, threadId) => {
     },
     data: JSON.stringify({ content, username, userId, threadId })
   })
-    // .then(res => res.json())
+    .then(res => res.json())
     .then(post => {
       console.log('post got made, ', post)
     })

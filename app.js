@@ -11,8 +11,13 @@ const models = require('./server/models')
 
 const app = express()
 app.use(bodyParser.json())
-app.use(cors({ credentials: true, origin: true }))
-
+app.use(cors())
+// app.use((req, res, next) => {
+//   res.append('Access-Control-Allow-Origin', ['*'])
+//   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+//   res.append('Access-Control-Allow-Headers', 'Content-Type')
+//   next()
+// })
 const port = process.env.PORT || 8080
 
 const user = require('./server/routes/user')
