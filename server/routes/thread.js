@@ -31,12 +31,40 @@ router.get('/:id/posts', (req, res) => {
       where: { threadId: req.params.id }
     })
     .then(post => res.json(post))
-    .catch('error getting posts: ', console.log(err))
+    .catch(err => console.log(err))
 })
 
 // Makes post in thread
-router.post('/:id/posts', threadController.makePost, (req, res) => {
-  return req.data
+// router.post('/:id/posts', threadController.makePost, (req, res) => {
+//   console.log('in route')
+//   return req.data
+// })
+
+router.post('/:id/posts', async (req, res, next) => {
+  try {
+    console.log('in async route')
+    let body = req.body
+
+    let post = {
+      author: body.username,
+      content: body.content,
+      userId: body.userId,
+      threadId: parseInt(body.threadId, 10)
+    }
+  
+    post = await models.post.create(post)
+    post = await models.post.findOne({
+      where: { id: post.id },
+      include: [models.user, models.thread]
+    })
+
+    let user = await models.user.findOne({ where: { id: body.userId } })
+    await user.updateAttributes({ postCount: user.postCount + 1 })
+
+    return res.json({ post: post })
+  } catch (e) {
+    next(e)
+  }
 })
 
 // Edits a post

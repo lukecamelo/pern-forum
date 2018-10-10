@@ -7,7 +7,7 @@ module.exports = {
   getThreads
 }
 
-async function makeThreadAndOp (req, res, next) {
+async function makeThreadAndOp(req, res, next) {
   const body = req.body
 
   let post = {
@@ -30,7 +30,7 @@ async function makeThreadAndOp (req, res, next) {
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
 
-  req.data = post
+  req.data = res.json(post)
   next()
 }
 
@@ -49,14 +49,14 @@ async function makePost (req, res, next) {
     where: { id: post.id },
     include: [models.user, models.thread]
   })
-  console.log('in makePost controller')
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
-  req.data = post
+  console.log('in controller data:', res.json({ data: post }))
+  req.data = res.json({ post })
   next()
 }
 
-async function getThreadPosts (req, res, next) {
+async function getThreadPosts(req, res, next) {
   let posts = models.post.findAll({
     where: { threadId: req.params.id },
     include: [models.user]
@@ -66,7 +66,7 @@ async function getThreadPosts (req, res, next) {
 }
 
 // DOESN'T WORK ???
-async function getThreads (req, res, next) {
+async function getThreads(req, res, next) {
   let threads = await models.thread.findAll({
     include: [
       {

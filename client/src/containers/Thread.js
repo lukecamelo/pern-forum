@@ -44,15 +44,17 @@ export class Thread extends Component {
   }
 
   componentDidMount = async () => {
-    const result = await fetchThreadAndAuthor(this.props.match.params.id)
-    await this.setState({
-      title: result.title,
-      content: result.content,
-      author: result.author,
-      threadPosts: result.threadPosts,
-      userId: result.userId,
-      threadHasLoaded: result.threadHasLoaded
-    })
+    if (!this.state.threadHasLoaded || !this.state.threadPosts.length) {
+      const result = await fetchThreadAndAuthor(this.props.match.params.id)
+      await this.setState({
+        title: result.title,
+        content: result.content,
+        author: result.author,
+        threadPosts: result.threadPosts,
+        userId: result.userId,
+        threadHasLoaded: result.threadHasLoaded
+      })
+    }
     this.updateWindowDimensions()
     window.addEventListener('resize', this.updateWindowDimensions)
   }
