@@ -35,9 +35,22 @@ router.get('/:id/posts', (req, res) => {
 })
 
 // Makes post in thread
-// router.post('/:id/posts', threadController.makePost, (req, res) => {
-//   console.log('in route')
-//   return req.data
+// router.post('/:id/posts', (req, res) => {
+//   let body = req.body
+//   let post = {
+//     author: body.username,
+//     content: body.content,
+//     userId: body.userId,
+//     threadId: parseInt(body.threadId, 10)
+//   }
+//   models.post.create(post).then(post => {
+//     models.post.findOne({
+//       where: { id: post.id },
+//       include: [models.thread, models.user]
+//     })
+//   })
+//   .then(post => res.json(post))
+//   .catch(err => console.log(err))
 // })
 
 router.post('/:id/posts', async (req, res, next) => {
@@ -51,7 +64,7 @@ router.post('/:id/posts', async (req, res, next) => {
       userId: body.userId,
       threadId: parseInt(body.threadId, 10)
     }
-  
+
     post = await models.post.create(post)
     post = await models.post.findOne({
       where: { id: post.id },

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
@@ -8,25 +7,21 @@ import PostList from '../components/PostList'
 import Avatar from 'react-avatar'
 
 import { connect } from 'react-redux'
+import { makeNewPost } from '../actions/threadActions'
 
 import { Container, Button } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
-import { fadeIn, slideInLeft } from '../styled/keyframes/index'
+import { FadeIn, SlideLeft } from '../styled/animations'
 import './Thread.css'
 
 import {
   fetchThreadAndAuthor,
+  fetchSingleThread,
   getMarkdownText,
   parseIsoDatetime
 } from '../utils/threadHelpers'
 
-const AnimationContainer = styled.div`
-  animation: 0.6s ${fadeIn} cubic-bezier(0.52, 0.79, 0.3, 0.98);
-`
-const OpAnimation = styled.div`
-  animation: 0.6s ${slideInLeft} cubic-bezier(0.28, 1, 0.14, 0.99);
-`
 export class Thread extends Component {
   state = {
     title: '',
@@ -75,17 +70,12 @@ export class Thread extends Component {
     }))
   }
 
-  handleSubmit = () => {
-    try {
-      this.props.makeNewPost(
-        this.state.mdeState.html,
-        this.props.auth.username,
-        this.props.auth.userId,
-        this.props.threadId
-      )
-    } catch (e) {
-      alert(e.message)
-    }
+  handleSubmit = async (content, username, userId, threadId) => {
+    await this.props.makeNewPost(content, username, userId, threadId)
+    let thread = await fetchSingleThread(threadId)
+    this.setState({
+      threadPosts: thread.Post
+    })
   }
 
   quotePost = (postContent, quotedUser) => {
@@ -105,8 +95,9 @@ export class Thread extends Component {
     }
 
     if (threadHasLoaded) {
+      // TODO: eventually move this stuff into PostList for better modularity
       const posts = threadPosts.map(post => (
-        <OpAnimation key={post.id}>
+        <SlideLeft key={post.id}>
           <Post className="post-wrapper">
             <Post.User>
               <Post.Author>
@@ -172,20 +163,17 @@ export class Thread extends Component {
               </Post.Controls>
             </Post.Body>
           </Post>
-        </OpAnimation>
+        </SlideLeft>
       ))
-      const op = posts.shift()
 
       return (
         <Container>
           <NavBar />
-          <AnimationContainer>
+          <FadeIn>
             <StyledThread>
               <StyledThread.Header>
                 {title} / {author}
               </StyledThread.Header>
-
-              <OpAnimation>{op}</OpAnimation>
 
               {posts.length ? (
                 <Pagination
@@ -210,12 +198,13 @@ export class Thread extends Component {
                 postContent={this.state.postContent}
               />
             ) : null}
-          </AnimationContainer>
+          </FadeIn>
           <PostForm
             threadId={this.props.match.params.id}
             isMobile={isMobile}
             quotedPost={this.state.quotedPost}
             quotedUser={this.state.quotedUser}
+            submit={this.handleSubmit}
           />
         </Container>
       )
@@ -236,5 +225,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { makeNewPost }
 )(Thread)

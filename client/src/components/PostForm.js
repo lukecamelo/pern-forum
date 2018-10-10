@@ -65,19 +65,6 @@ export class PostForm extends Component {
     })
   }
 
-  handleSubmit = () => {
-    try {
-      this.props.makeNewPost(
-        this.state.mdeState.html,
-        this.props.auth.username,
-        this.props.auth.userId,
-        this.props.threadId
-      )
-    } catch (e) {
-      alert(e.message)
-    }
-  }
-
   render() {
     return (
       <Form style={{ margin: '2em', display: 'block' }}>
@@ -93,9 +80,18 @@ export class PostForm extends Component {
             }
           />
         </Form.Markdown>
-        <form onSubmit={this.handleSubmit}>
-          <Button type="submit">Submit Post</Button>
-        </form>
+        <Button
+          onClick={() =>
+            this.props.submit(
+              this.state.mdeState.html,
+              this.props.auth.username,
+              this.props.auth.userId,
+              this.props.threadId
+            )
+          }
+        >
+          Submit Post
+        </Button>
       </Form>
     )
   }
