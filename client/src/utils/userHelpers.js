@@ -10,3 +10,14 @@ export const editAvatar = async (userId, newAvatarUrl) => {
     }
   })
 }
+
+export const checkUrlExists = async testUrl => {
+  const request = await axios.get(testUrl, {
+    mode: 'cors',
+    withCredentials: false,
+    validateStatus: status => status >= 200
+  })
+
+  let result = request.headers['content-type']
+  return result.includes('image')
+}
