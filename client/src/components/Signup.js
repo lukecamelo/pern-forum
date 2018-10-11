@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
-import axios from 'axios'
+import { checkUrlExists } from '../utils/userHelpers'
 
 import Form from '../styled/Form'
 import { Container, Button, H1 } from '../styled/index'
@@ -26,12 +26,6 @@ export class Signup extends React.Component {
     hasSignedUp: false
   }
 
-  componentDidMount = () => {
-    // this.checkUrlExists('https://i.imgur.com/F6JK5tM.jpg').then(res =>
-    //   console.log(res)
-    // )
-  }
-
   changeHandler = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -42,12 +36,17 @@ export class Signup extends React.Component {
     await this.setState({
       avatarUrlInput: e.target.value
     })
-    this.checkUrlExists(this.state.avatarUrlInput)
+    checkUrlExists(this.state.avatarUrlInput)
       .then(res => {
         if (res) {
           this.setState({
             urlIsValid: true,
             validationMessage: 'that image exists :)'
+          })
+        } else {
+          this.setState({
+            urlIsValid: false,
+            validationMessage: 'not a valid avatar url :('
           })
         }
       })
@@ -55,30 +54,9 @@ export class Signup extends React.Component {
         console.log('error ', err)
         this.setState({
           urlIsValid: false,
-          validationMessage: 'not a valid url :('
+          validationMessage: 'not a valid avatar url :('
         })
       })
-  }
-
-  async checkUrlExists(testUrl) {
-    const request = await axios.get(testUrl, {
-      mode: 'cors',
-      withCredentials: false,
-      validateStatus: status => status >= 200
-    })
-    let result
-
-    if (request.status >= 200 && request.status < 300) {
-      console.log('running that code')
-      result = request.headers['content-type']
-      if (result.includes('image')) {
-        return true
-      }
-    }
-    if (!request) {
-      console.log('running this code')
-      return false
-    }
   }
 
   render() {
@@ -111,7 +89,7 @@ export class Signup extends React.Component {
                   />
                 </SlideRight>
                 <SlideLeft>
-                  <p>{this.state.validationMessage}</p>
+                  <p style={{ paddingTop: '5px', marginBottom: '0'}}>{this.state.validationMessage}</p>
                   <Form.Input
                     name="avatarUrlInput"
                     type="text"
