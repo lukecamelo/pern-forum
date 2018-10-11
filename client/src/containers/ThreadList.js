@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchData, fetchThreads } from '../actions/threadActions'
 import { filterAuthor, checkForPosts } from '../utils/threadHelpers'
+import Loader from '../components/Loader'
 import styled from 'styled-components'
 import './ThreadList.css'
 
@@ -29,14 +30,21 @@ const ThreadLink = styled.div`
 `
 
 export class ThreadList extends Component {
-  componentDidMount() {
-    this.props.fetchData()
-    this.props.fetchThreads()
+  state = {
+    hasLoaded: false
+  }
+  
+  async componentDidMount() {
+    await this.props.fetchData()
+    await this.props.fetchThreads()
+    this.setState({
+      hasLoaded: true
+    })
   }
 
   render() {
     const { data: threads, users } = this.props
-    if (threads.length && users.length && checkForPosts(threads)) {
+    if (this.state.hasLoaded) {
       // TODO: load page numbers for individual threads.. a large undertaking
       const threadLinks = threads.map(thread => {
         return (
@@ -47,7 +55,7 @@ export class ThreadList extends Component {
             <div className="author">
               <div className="item thread-author">
                 <p>Author</p>
-                {filterAuthor(this.props.users, thread.userId)}
+                {filterAuthor(users, thread.userId)}
               </div>
 
               <div className="item">
@@ -69,7 +77,7 @@ export class ThreadList extends Component {
         </Container>
       )
     } else {
-      return <h1 id="loading-header">Loading threads...</h1>
+      return <Loader />
     }
   }
 }

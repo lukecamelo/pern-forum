@@ -48,11 +48,11 @@ export class PostForm extends Component {
           end: 0
         },
         text:
-          '<blockquote>' +
+          '<blockquote>\n' +
           this.props.quotedUser +
           ' said \n' +
           this.props.quotedPost +
-          '</blockquote>'
+          '\n</blockquote>'
       }
     )
     this.setState({
@@ -62,6 +62,32 @@ export class PostForm extends Component {
         draftEditorState: newDraftState
       }
     })
+  }
+
+  clearEditor = () => {
+    const { mdeState } = this.state
+    const newDraftState = DraftUtil.buildNewDraftState(
+      mdeState.draftEditorState,
+      {
+        selection: {
+          start: 0,
+          end: 0
+        },
+        text: ''
+      }
+    )
+    this.setState({
+      mdeState: {
+        markdown: mdeState.markdown,
+        html: mdeState.html,
+        draftEditorState: newDraftState
+      }
+    })
+  }
+
+  submitAndClearEditor = async (content, username, userId, threadId) => {
+    await this.props.submit(content, username, userId, threadId)
+    this.clearEditor()
   }
 
   render() {
@@ -82,7 +108,7 @@ export class PostForm extends Component {
         <div style={{ textAlign: 'center' }}>
           <Button
             onClick={() =>
-              this.props.submit(
+              this.submitAndClearEditor(
                 this.state.mdeState.html,
                 this.props.auth.username,
                 this.props.auth.userId,

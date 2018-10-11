@@ -29,7 +29,8 @@ const sequelize = new Sequelize(
   process.env.DBPASS,
   {
     dialect: 'postgres',
-    host: 'localhost'
+    host: 'localhost',
+    operatorsAliases: false
   }
 )
 

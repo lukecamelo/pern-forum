@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { userSignup } from '../actions/authActions'
+import { Link } from 'react-router-dom'
 import NavBar from './NavBar'
 import axios from 'axios'
 
@@ -37,29 +38,47 @@ export class Signup extends React.Component {
     })
   }
 
-  avatarChangeHandler = e => {
-    this.setState({
+  avatarChangeHandler = async e => {
+    await this.setState({
       avatarUrlInput: e.target.value
     })
-    this.checkUrlExists(this.state.avatarUrlInput).then(res => {
-      console.log('interval check')
-      if (res === 200) {
-        this.setState({
-          urlIsValid: true,
-          validationMessage: 'that image exists :)'
-        })
-      } else {
+    this.checkUrlExists(this.state.avatarUrlInput)
+      .then(res => {
+        if (res) {
+          this.setState({
+            urlIsValid: true,
+            validationMessage: 'that image exists :)'
+          })
+        }
+      })
+      .catch(err => {
+        console.log('error ', err)
         this.setState({
           urlIsValid: false,
           validationMessage: 'not a valid url :('
         })
-      }
-    })
+      })
   }
 
   async checkUrlExists(testUrl) {
-    const request = await axios.get(testUrl, { mode: 'cors' })
-    return request.status
+    const request = await axios.get(testUrl, {
+      mode: 'cors',
+      withCredentials: false,
+      validateStatus: status => status >= 200
+    })
+    let result
+
+    if (request.status >= 200 && request.status < 300) {
+      console.log('running that code')
+      result = request.headers['content-type']
+      if (result.includes('image')) {
+        return true
+      }
+    }
+    if (!request) {
+      console.log('running this code')
+      return false
+    }
   }
 
   render() {
@@ -92,6 +111,7 @@ export class Signup extends React.Component {
                   />
                 </SlideRight>
                 <SlideLeft>
+                  <p>{this.state.validationMessage}</p>
                   <Form.Input
                     name="avatarUrlInput"
                     type="text"
@@ -122,7 +142,19 @@ export class Signup extends React.Component {
       return (
         <Container>
           <NavBar />
-          <H1>{this.props.message}</H1>
+          <Card>
+            <H1>{this.props.message}</H1>
+            <p style={{ marginTop: 0 }}>Nice.. now to log in!</p>
+            <div style={{ padding: '1.5em', textAlign: 'center' }}>
+              <Link
+                className="navlink"
+                style={{ width: '200px', marginRight: 0 }}
+                to="/login"
+              >
+                Log in
+              </Link>
+            </div>
+          </Card>
         </Container>
       )
     }
