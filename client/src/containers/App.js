@@ -59,7 +59,7 @@ export class App extends Component {
                 {data => <ThreadList data={data} />}
               </Pagination>
             </SlideLeft>
-            <div style={{ margin: '1em 0 2em 0' }}>
+            <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
               <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
             </div>
           </FadeIn>

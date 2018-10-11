@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import * as Scroll from 'react-scroll'
 import { Link } from 'react-router-dom'
 import './Pagination.css'
 
@@ -22,7 +23,15 @@ class Pagination extends Component {
     })
   }
 
-  setCurrentPage = num => this.setState({ currentPage: num })
+  setCurrentPage = num => {
+    let scroll = Scroll.animateScroll
+    if(this.props.context === 'threads') {
+      scroll.scrollToTop({ duration: 300, smooth: 'easeInOutQuint' })
+    } else {
+      scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuint' })
+    }
+    this.setState({ currentPage: num })
+  }
 
   createControls = () => {
     let controls = []

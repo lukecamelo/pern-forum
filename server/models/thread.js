@@ -6,7 +6,6 @@ module.exports = (sequelize, type) => {
       autoIncrement: true
     },
     title: type.STRING,
-    content: type.TEXT
   }, {
     classMethods: {
       associate: function(models) {
