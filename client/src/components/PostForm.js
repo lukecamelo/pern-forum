@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-// import { makeNewPost } from '../utils/threadHelpers'
 
 import Form from '../styled/Form'
 import { Button } from '../styled/index'
@@ -80,18 +79,20 @@ export class PostForm extends Component {
             }
           />
         </Form.Markdown>
-        <Button
-          onClick={() =>
-            this.props.submit(
-              this.state.mdeState.html,
-              this.props.auth.username,
-              this.props.auth.userId,
-              this.props.threadId
-            )
-          }
-        >
-          Submit Post
-        </Button>
+        <div style={{ textAlign: 'center' }}>
+          <Button
+            onClick={() =>
+              this.props.submit(
+                this.state.mdeState.html,
+                this.props.auth.username,
+                this.props.auth.userId,
+                this.props.threadId
+              )
+            }
+          >
+            Submit Post
+          </Button>
+        </div>
       </Form>
     )
   }

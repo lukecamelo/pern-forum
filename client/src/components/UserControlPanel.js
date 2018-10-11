@@ -15,6 +15,7 @@ import {
 
 export const Card = styled.section`
   display: flex;
+  text-align: center;
   justify-content: center;
   justify-self: center;
   flex-direction: column;

@@ -4,6 +4,7 @@ import PostForm from '../components/PostForm'
 import Pagination from '../components/Pagination'
 import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
+import Loader from '../components/Loader'
 import Avatar from 'react-avatar'
 
 import { connect } from 'react-redux'
@@ -212,7 +213,7 @@ export class Thread extends Component {
       return (
         <Container>
           <NavBar />
-          <h1>Loading thread...</h1>
+          <Loader />
         </Container>
       )
     }

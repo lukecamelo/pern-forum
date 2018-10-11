@@ -12,6 +12,7 @@ import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 import styled from 'styled-components'
+import Loader from '../components/Loader';
 
 const NewThreadLink = styled(Link)`
   color: #0266c8;
@@ -28,18 +29,25 @@ const NewThreadLink = styled(Link)`
 `
 
 export class App extends Component {
-  componentDidMount() {
-    this.props.fetchData()
-    this.props.fetchThreads()
+  state = {
+    hasLoaded: false
+  }
+  
+  async componentDidMount() {
+    await this.props.fetchData()
+    await this.props.fetchThreads()
+    this.setState({
+      hasLoaded: true
+    })
   }
 
   render() {
-    if (this.props.isLoggedIn && this.props.threads.length) {
+    if (this.props.isLoggedIn && this.state.hasLoaded) {
       return (
         <Container>
           <NavBar />
           <FadeIn>
-            <SlideTop>
+            <SlideTop style={{ textAlign: 'center' }}>
               <H1>General Discussion</H1>
             </SlideTop>
             <SlideLeft>
@@ -57,7 +65,7 @@ export class App extends Component {
           </FadeIn>
         </Container>
       )
-    } else if (!this.props.isLoggedIn && this.props.threads.length) {
+    } else if (!this.props.isLoggedIn && this.state.hasLoaded) {
       return (
         <Container>
           <NavBar />
@@ -70,27 +78,18 @@ export class App extends Component {
           </FadeIn>
         </Container>
       )
-    } else if (this.props.isLoggedIn && !this.props.threads.length) {
+    } else if (this.props.isLoggedIn && !this.state.hasLoaded) {
       return (
         <Container>
           <NavBar />
-          <Card>
-            <div style={{ padding: '1em' }}>
-              <H1>There's nothing here. Make the first thread!</H1>
-              <div style={{ padding: '1em' }}>
-                <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
-              </div>
-            </div>
-          </Card>
+          <Loader />
         </Container>
       )
     } else {
       return (
         <Container>
           <NavBar />
-          <Card>
-            <H1>Ah.. a fresh start. Log in and make the first thread!</H1>
-          </Card>
+          <Loader />
         </Container>
       )
     }
