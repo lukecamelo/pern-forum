@@ -28,12 +28,11 @@ export default (state = initialState, action) => {
     case POST_NEW_THREAD:
       return {
         ...state,
-        threads: [...state.threads, action.payload],
+        threads: [...state.threads, action.payload]
       }
     case MAKE_NEW_POST:
       return {
-        ...state,
-        posts: [...state.posts, action.payload]
+        ...state
       }
     case FETCH_POSTS:
       return {
