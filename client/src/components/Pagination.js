@@ -83,9 +83,9 @@ class Pagination extends Component {
             </div>
           ) : null}
           {context === 'threads' ? (
-            <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
-              <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
-            </div>
+            // <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
+              <NewThreadLink style={{ padding: '.5em 1em', height: '35px' }} to="/newthread">Post Thread</NewThreadLink>
+            // </div>
           ) : null}
         </div>
       </div>

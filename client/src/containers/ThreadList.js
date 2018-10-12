@@ -10,7 +10,6 @@ import './ThreadList.css'
 import { Container } from '../styled/index'
 
 export const ListWrapper = styled.main`
-  // background-color: #f4f4f4;
   background-color: white;
   display: flex;
   flex-direction: column;
