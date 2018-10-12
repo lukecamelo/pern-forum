@@ -88,22 +88,3 @@ export const checkForPosts = threads => {
   }
   return false
 }
-
-// Still unsure of whether to use this or the Redux action
-export const makeNewPost = (content, username, userId, threadId) => {
-  return fetch(`/thread/${threadId}/posts`, {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      // Authorization: `Bearer ${auth}`
-    },
-    data: JSON.stringify({ content, username, userId, threadId })
-  })
-    .then(res => res.json())
-    .then(post => {
-      console.log('post got made, ', post)
-    })
-    .catch(err => console.log('error making post: ', err))
-}
