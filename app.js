@@ -1,24 +1,15 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { User, Thread } = require('./server/sequelize')
 require('./server/passport')
 require('dotenv').config()
 const passport = require('passport')
 const cors = require('cors')
 const path = require('path')
 
-const models = require('./server/models')
 
 const app = express()
 app.use(bodyParser.json())
 app.use(cors())
-// app.use((req, res, next) => {
-//   res.append('Access-Control-Allow-Origin', ['*'])
-//   res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-//   res.append('Access-Control-Allow-Headers', 'Content-Type')
-//   next()
-// })
-const port = process.env.PORT || 8080
 
 const user = require('./server/routes/user')
 const auth = require('./server/routes/auth')

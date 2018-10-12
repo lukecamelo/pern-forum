@@ -3,7 +3,6 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
-  FETCH_POSTS
 } from './types'
 
 import store from '../store'
@@ -63,7 +62,6 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
     .catch(err => console.log('POST_NEW_THREAD ERROR: ', err))
 }
 
-/* ----- Not sure if actions below this line are strictly necessary ----- */
 export const makeNewPost = (
   content,
   username,
@@ -86,15 +84,4 @@ export const makeNewPost = (
       })
     })
     .catch(err => console.log('error making post: ', err))
-}
-
-export const fetchPosts = threadId => dispatch => {
-  return fetch(`/thread/${threadId}/posts`)
-    .then(res => res.json())
-    .then(posts => {
-      dispatch({
-        type: FETCH_POSTS,
-        payload: posts
-      })
-    })
 }
