@@ -1,27 +1,19 @@
 import React, { Component } from 'react'
 import NavBar from '../components/NavBar'
 import PostForm from '../components/PostForm'
-import Pagination from '../components/Pagination'
 import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
 import Loader from '../components/Loader'
-import Avatar from 'react-avatar'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 
-import { Container, Button, H1 } from '../styled/index'
-import Post from '../styled/Post'
+import { Container, H1 } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
-import { FadeIn, SlideLeft, SlideTop } from '../styled/animations'
+import { FadeIn, SlideTop } from '../styled/animations'
 import './Thread.css'
 
-import {
-  fetchThreadAndAuthor,
-  fetchSingleThread,
-  getMarkdownText,
-  parseIsoDatetime
-} from '../utils/threadHelpers'
+import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
 
 export class Thread extends Component {
   state = {
@@ -97,79 +89,6 @@ export class Thread extends Component {
     }
 
     if (threadHasLoaded) {
-      // TODO: eventually move this stuff into PostList for better modularity
-      const posts = threadPosts.map(post => (
-        <SlideLeft key={post.id}>
-          <Post className="post-wrapper">
-            <Post.User>
-              <Post.Author>
-                {post.author}
-                <p>{parseIsoDatetime(post.user.createdAt)}</p>
-                <p>{post.user.postCount} posts</p>
-              </Post.Author>
-
-              <Avatar
-                size={isMobile ? '75' : '150'}
-                src={post.user.avatarUrl}
-              />
-            </Post.User>
-            <Post.Body>
-              <div
-                className="markdown-shiz"
-                style={
-                  isMobile
-                    ? {
-                        paddingTop: '1em',
-                        paddingLeft: '1em',
-                        paddingRight: '1em'
-                      }
-                    : { paddingTop: '1em' }
-                }
-                dangerouslySetInnerHTML={getMarkdownText(post.content)}
-              />
-
-              <Post.Controls>
-                <p>{parseIsoDatetime(post.createdAt)}</p>
-                <div className="buttons">
-                  {this.props.loggedInUserId === post.user.id ? (
-                    <Button
-                      style={
-                        isMobile
-                          ? mobileEditStyle
-                          : {
-                              marginBottom: '0',
-                              marginLeft: '0',
-                              boxShadow: 'none'
-                            }
-                      }
-                      onClick={() => this.toggleModal(post.id, post.content)}
-                    >
-                      Edit
-                    </Button>
-                  ) : null}
-                  <Button
-                    style={
-                      isMobile
-                        ? mobileEditStyle
-                        : {
-                            marginBottom: '0',
-                            marginLeft: '0',
-                            boxShadow: 'none'
-                          }
-                    }
-                    onClick={() =>
-                      this.quotePost(post.content, post.user.username)
-                    }
-                  >
-                    Quote
-                  </Button>
-                </div>
-              </Post.Controls>
-            </Post.Body>
-          </Post>
-        </SlideLeft>
-      ))
-
       return (
         <Container>
           <NavBar />
@@ -183,19 +102,18 @@ export class Thread extends Component {
                 </StyledThread.Header>
               </SlideTop>
 
-              {posts.length ? (
-                <Pagination
-                  data={posts}
+              {threadPosts.length ? (
+                <PostList
+                  data={this.state.threadPosts}
                   currentPage={this.props.match.params.page}
                   threadId={this.props.match.params.id}
                   context="posts"
-                >
-                  {data => <PostList data={data} />}
-                </Pagination>
-              ) : (
-                <h1>make the first post!</h1>
-              )}
-              
+                  windowWidth={this.state.windowWidth}
+                  quotePost={this.quotePost}
+                  toggleModal={this.toggleModal}
+                  loggedInUserId={this.props.loggedInUserId}
+                />
+              ) : null}
             </StyledThread>
 
             {this.state.openModal ? (
