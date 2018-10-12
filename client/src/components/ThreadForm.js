@@ -21,7 +21,7 @@ import {
 
 const ThreadFormCard = styled(Card)`
   margin: 2em auto 0 auto;
-  width: 75vw;
+  width: 50vw;
   @media screen and (max-width: 700px) {
     width: 90vw;
   }
