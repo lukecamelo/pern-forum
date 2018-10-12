@@ -63,9 +63,9 @@ describe('<ThreadList />', () => {
   })
 
   it('shows loading header if threads not loaded', () => {
-    expect(wrapper.find('#loading-header').length).toEqual(0)
+    expect(wrapper.find('.loading').length).toEqual(0)
     wrapper.setProps({ data: [] })
-    expect(wrapper.find('#loading-header').length).toEqual(1)
+    expect(wrapper.find('.loading').length).toEqual(1)
   })
 
   it('fetches data on componentDidMount', () => {

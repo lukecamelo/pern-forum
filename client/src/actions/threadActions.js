@@ -64,15 +64,6 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
 }
 
 /* ----- Not sure if actions below this line are strictly necessary ----- */
-// function fetchWithTimeout (url, options, timeout = 7000) {
-//   return Promise.race([
-//       fetch(url, options),
-//       new Promise((_, reject) =>
-//           setTimeout(() => reject(new Error('timeout')), timeout)
-//       )
-//   ]);
-// }
-
 export const makeNewPost = (
   content,
   username,
