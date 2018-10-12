@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as Scroll from 'react-scroll'
 import { Link } from 'react-router-dom'
+import { NewThreadLink } from '../containers/App'
 import './Pagination.css'
 
 class Pagination extends Component {
@@ -69,13 +70,23 @@ class Pagination extends Component {
   }
 
   render() {
+    const { context } = this.props
     return (
       <div className="pagination">
         <div className="pagination-results">
           {this.props.children(this.createPaginatedData())}
         </div>
-        <div className="pagination-controls">
-          <span>{this.createControls()}</span>
+        <div className={context === 'threads' ? 'bottom' : 'posts-bottom'}>
+          {this.state.pageCount > 1 ? (
+            <div className="pagination-controls">
+              <span>{this.createControls()}</span>
+            </div>
+          ) : null}
+          {context === 'threads' ? (
+            <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
+              <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
+            </div>
+          ) : null}
         </div>
       </div>
     )

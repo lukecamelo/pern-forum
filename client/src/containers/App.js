@@ -14,7 +14,7 @@ import Pagination from '../components/Pagination'
 import styled from 'styled-components'
 import Loader from '../components/Loader';
 
-const NewThreadLink = styled(Link)`
+export const NewThreadLink = styled(Link)`
   color: #0266c8;
   background-color: white;
   text-decoration: none;
@@ -55,13 +55,14 @@ export class App extends Component {
                 data={this.props.threads}
                 currentPage={this.props.match.params.page}
                 context="threads"
+                pageSize={15}
               >
                 {data => <ThreadList data={data} />}
               </Pagination>
             </SlideLeft>
-            <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
+            {/* <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
               <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
-            </div>
+            </div> */}
           </FadeIn>
         </Container>
       )

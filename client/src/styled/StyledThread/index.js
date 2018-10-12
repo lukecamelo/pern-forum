@@ -3,9 +3,13 @@ import Header from './Header';
 import Body from './Body';
 
 const StyledThread = styled.section`
-  background-color: #dff4ff;
+  background-color: rgb(229, 235, 247);
   color: #564154;
-  padding: 2em 2em 0 2em;
+  margin: 0 auto;
+  width: 75vw;
+  @media screen and (max-width: 800px) {
+    width: 90vw;
+  }
 `
 
 StyledThread.Header = Header

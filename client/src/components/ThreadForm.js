@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ReactMde from 'react-mde'
 import Showdown from 'showdown'
+import styled from 'styled-components'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
 import { connect } from 'react-redux'
@@ -17,6 +18,14 @@ import {
   SlideRight,
   SlideBottom
 } from '../styled/animations'
+
+const ThreadFormCard = styled(Card)`
+  margin: 2em auto 0 auto;
+  width: 75vw;
+  @media screen and (max-width: 700px) {
+    width: 90vw;
+  }
+`
 
 export class ThreadForm extends Component {
   constructor(props) {
@@ -65,9 +74,9 @@ export class ThreadForm extends Component {
     return (
       <Container>
         <NavBar />
-        <Card>
+        <ThreadFormCard>
           <H1>Post new thread</H1>
-          <Form style={{ padding: '0 1em 1em 1em' }}>
+          <Form style={{ margin: '0 1em', width: 'auto' }}>
             <FadeIn>
               <SlideLeft>
                 <Form.Input
@@ -78,7 +87,7 @@ export class ThreadForm extends Component {
                 />
               </SlideLeft>
               <SlideRight>
-                <Form.Markdown>
+                <Form.Markdown style={{ boxShadow: '0 0 0 white' }}>
                   <ReactMde
                     layout={'tabbed'}
                     onChange={this.handleValueChange}
@@ -106,7 +115,7 @@ export class ThreadForm extends Component {
               </SlideBottom>
             </FadeIn>
           </Form>
-        </Card>
+        </ThreadFormCard>
       </Container>
     )
   }
