@@ -11,7 +11,7 @@ import Signup from './components/Signup'
 import Thread from './containers/Thread'
 import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
-import EditPostModal from './components/EditPostModal';
+import EditPostModal from './components/EditPostModal'
 
 const theme = {
   primary: '#00a8ff',
@@ -23,6 +23,9 @@ const theme = {
   mediumShadow: `
     0 4px 8px 0 rgba(0,0,0,0.12),
     0 2px 4px 0 rgba(0,0,0,0.08)
+  `,
+  smallShadow: `
+    0 2px 4px 0 rgba(0,0,0,0.10)
   `,
   fadeInBezier: 'cubic-bezier(0.52, 0.79, 0.3, 0.98)',
   slideInBezier: 'cubic-bezier(0.28, 1, 0.14, 0.99)'
@@ -37,7 +40,7 @@ ReactDOM.render(
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id/page/:page" component={Thread} />
-          <Route exact path="/editpost" component={EditPostModal}/>
+          <Route exact path="/editpost" component={EditPostModal} />
           <Route exact path="/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />

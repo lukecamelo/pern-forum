@@ -34,6 +34,7 @@ export const Banner = styled.div`
   color: white;
   margin: 2em auto 0 auto;
   padding: 1em 0 1em 1em;
+  box-shadow: ${props => props.theme.largeShadow};
   @media screen and (max-width: 700px) {
     width: 90%;
   }
