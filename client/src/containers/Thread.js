@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
+import { editPostContent } from '../utils/threadHelpers'
 
 import { Container, H1 } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
@@ -71,6 +72,15 @@ export class Thread extends Component {
     })
   }
 
+  handleEdit = async (threadId, postId, content) => {
+    await editPostContent(threadId, postId, content)
+    let thread = await fetchSingleThread(threadId)
+    this.setState({
+      threadPosts: thread.Post
+    })
+    this.toggleModal()
+  }
+
   quotePost = (postContent, quotedUser) => {
     this.setState({
       quotedPost: postContent,
@@ -117,6 +127,7 @@ export class Thread extends Component {
                 postId={this.state.postBeingEdited}
                 threadId={this.props.match.params.id}
                 postContent={this.state.postContent}
+                handleEdit={this.handleEdit}
               />
             ) : null}
           </FadeIn>

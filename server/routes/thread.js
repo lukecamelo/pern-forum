@@ -20,7 +20,7 @@ router.get('/threads', (req, res) => {
       ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
     })
-    .then(posts => res.json(posts))
+    .then(threads => res.json(threads))
     .catch(err => console.log(err))
 })
 

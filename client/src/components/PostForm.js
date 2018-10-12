@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
+import { quotePostInEditor, clearEditor } from '../utils/markdownHelpers'
 
 import Form from '../styled/Form'
 import { Button } from '../styled/index'
@@ -23,7 +24,7 @@ export class PostForm extends Component {
 
   componentDidUpdate = nextProps => {
     if (this.props.quotedPost !== nextProps.quotedPost) {
-      this.changeEditorText()
+      this.changeEditorText(quotePostInEditor(this.props.quotedUser, this.props.quotedPost))
     }
   }
 
@@ -37,8 +38,7 @@ export class PostForm extends Component {
     this.setState({ mdeState })
   }
 
-  // TODO: make this less specific and reusable
-  changeEditorText = () => {
+  changeEditorText = (fn) => {
     const { mdeState } = this.state
     const newDraftState = DraftUtil.buildNewDraftState(
       mdeState.draftEditorState,
@@ -47,33 +47,7 @@ export class PostForm extends Component {
           start: 0,
           end: 0
         },
-        text:
-          '<blockquote>\n' +
-          this.props.quotedUser +
-          ' said \n' +
-          this.props.quotedPost +
-          '\n</blockquote>'
-      }
-    )
-    this.setState({
-      mdeState: {
-        markdown: mdeState.markdown,
-        html: mdeState.html,
-        draftEditorState: newDraftState
-      }
-    })
-  }
-
-  clearEditor = () => {
-    const { mdeState } = this.state
-    const newDraftState = DraftUtil.buildNewDraftState(
-      mdeState.draftEditorState,
-      {
-        selection: {
-          start: 0,
-          end: 0
-        },
-        text: ''
+        text: fn
       }
     )
     this.setState({
@@ -87,7 +61,7 @@ export class PostForm extends Component {
 
   submitAndClearEditor = async (content, username, userId, threadId) => {
     await this.props.submit(content, username, userId, threadId)
-    this.clearEditor()
+    this.changeEditorText(clearEditor())
   }
 
   render() {
@@ -99,7 +73,6 @@ export class PostForm extends Component {
             style={{ textAlign: 'left' }}
             onChange={this.handleValueChange}
             editorState={this.state.mdeState}
-            placeholder="make a new post!"
             generateMarkdownPreview={markdown =>
               Promise.resolve(this.converter.makeHtml(markdown))
             }

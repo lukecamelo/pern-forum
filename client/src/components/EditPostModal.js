@@ -8,8 +8,6 @@ import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
-import { editPostContent } from '../utils/threadHelpers'
-
 class EditPostModal extends Component {
   constructor(props) {
     super(props)
@@ -26,7 +24,7 @@ class EditPostModal extends Component {
     // sort of an inelegant way of dealing with the fact
     // that mdeState === null on initialization
     setTimeout(() => {
-      this.changeEditorText()
+      this.changeEditorText(this.props.postContent)
     }, 50)
   }
 
@@ -34,7 +32,7 @@ class EditPostModal extends Component {
     this.setState({ mdeState })
   }
 
-  changeEditorText = () => {
+  changeEditorText = postContent => {
     const { mdeState } = this.state
     const newDraftState = DraftUtil.buildNewDraftState(
       mdeState.draftEditorState,
@@ -43,7 +41,7 @@ class EditPostModal extends Component {
           start: 0,
           end: 0
         },
-        text: this.props.postContent
+        text: postContent
       }
     )
     this.setState({
@@ -72,11 +70,10 @@ class EditPostModal extends Component {
               }
             />
           </Form.Markdown>
-          {/* TODO: get this button to refresh the page or otherwise react to being clicked on */}
           <div style={{ textAlign: 'center' }}>
             <Button
               onClick={() =>
-                editPostContent(
+                this.props.handleEdit(
                   this.props.threadId,
                   this.props.postId,
                   this.state.mdeState.html

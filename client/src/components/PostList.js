@@ -96,6 +96,7 @@ const PostList = ({
       currentPage={currentPage}
       threadId={threadId}
       context="posts"
+      pageSize={10}
     >
       {data => <React.Fragment>{data}</React.Fragment>}
     </Pagination>
