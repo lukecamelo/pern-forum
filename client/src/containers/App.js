@@ -22,7 +22,10 @@ export const NewThreadLink = styled(Link)`
   transition: 0.2s;
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
+  box-shadow: ${props => props.theme.mediumShadow};
   &:hover {
+    box-shadow: none;
+    transform: translateY(2px);
     background-color: #0266c8;
     color: white;
   }
