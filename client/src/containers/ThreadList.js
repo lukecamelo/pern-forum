@@ -15,7 +15,7 @@ export const ListWrapper = styled.main`
   flex-direction: column;
   align-items: flex-start;
   width: 75%;
-  height: 100%;
+  // height: 100%;
   margin: 0 auto;
   box-shadow: ${props => props.theme.largeShadow};
   @media screen and (max-width: 700px) {
@@ -30,20 +30,40 @@ const ThreadLink = styled.div`
   flex-grow: 1;
   width: 100%;
   border-bottom: solid 1px hsla(270, 7%, 92%, 1);
-  transition: .2s;
+  transition: 0.2s;
 `
 
 export class ThreadList extends Component {
   state = {
     hasLoaded: false
   }
-  
+
   async componentDidMount() {
     await this.props.fetchData()
     await this.props.fetchThreads()
     this.setState({
       hasLoaded: true
     })
+  }
+
+  showPageNumbers = thread => {
+    let pageCount = parseInt(thread.Post.length / 10, 10)
+    if (thread.Post.length % 10 > 0) {
+      pageCount++
+    }
+    let controls = []
+    for (let i = 1; i <= pageCount; i++) {
+      controls.push(
+        <Link
+          to={`/thread/${thread.id}/page/${i}`}
+          key={i}
+          className="page-button"
+        >
+          {i}
+        </Link>
+      )
+    }
+    return controls
   }
 
   render() {
@@ -54,9 +74,14 @@ export class ThreadList extends Component {
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>
-            <Link className="title" to={`/thread/${thread.id}/page/1`}>
-              {thread.title}
-            </Link>
+            <div className="title-pages">
+              <Link className="title" to={`/thread/${thread.id}/page/1`}>
+                {thread.title}
+              </Link>
+              <div className="page-controls">
+                {thread.Post.length > 10 ? this.showPageNumbers(thread) : null}
+              </div>
+            </div>
             <div className="author">
               <div className="item thread-author">
                 <p>Author</p>

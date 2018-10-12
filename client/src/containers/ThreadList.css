@@ -19,13 +19,35 @@
   display: flex;
   text-decoration: none;
   color: #3d4852; 
-  padding: .5em 1em;
+  padding: .5em 1em 0 1em;
   width: 100%;
   font-size: 1.5em;
   justify-self: flex-start;
   align-self: center;
   font-family: 'Roboto', sans-serif;
   /* font-weight: 300; */
+}
+
+.title-pages {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-controls {
+  padding: 0 0 0 1.3em;
+}
+
+.page-button {
+  display: inline-block;
+  text-decoration: none;
+  color: #0266c8;
+  padding: 0.5em 0.75em;
+  transition: .2s;
+}
+
+.page-button:hover {
+  color: #fff;
+  background-color: #0266c8;
 }
 
 .title:hover {
@@ -69,6 +91,12 @@
     font-size: 1em;
   }
   .title {
+    font-size: 1em;
+  }
+  .page-controls {
+    padding-left: .5em;
+  }
+  .page-button {
     font-size: 1em;
   }
   .item {
