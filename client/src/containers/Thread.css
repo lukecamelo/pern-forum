@@ -5,3 +5,7 @@ blockquote {
   color: #3f83c7;
   border-left: 0.25em solid #0266c8;
 }
+
+img {
+  width: 100%;
+}
