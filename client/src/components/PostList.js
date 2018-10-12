@@ -1,71 +1,105 @@
-const PostList = ({ data }) => {
-  // const posts = data.map(post => (
-  //   <SlideLeft key={post.id}>
-  //     <Post className="post-wrapper">
-  //       <Post.User>
-  //         <Post.Author>
-  //           {post.author}
-  //           <p>{parseIsoDatetime(post.user.createdAt)}</p>
-  //           <p>{post.user.postCount} posts</p>
-  //         </Post.Author>
+import Pagination from './Pagination'
+import React from 'react'
+import { Button } from '../styled/index'
+import Post from '../styled/Post'
+import Avatar from 'react-avatar'
+import { SlideLeft } from '../styled/animations'
+import '../containers/Thread.css'
 
-  //         <Avatar size={isMobile ? '75' : '150'} src={post.user.avatarUrl} />
-  //       </Post.User>
-  //       <Post.Body>
-  //         <div
-  //           className="markdown-shiz"
-  //           style={
-  //             isMobile
-  //               ? {
-  //                   paddingTop: '1em',
-  //                   paddingLeft: '1em',
-  //                   paddingRight: '1em'
-  //                 }
-  //               : { paddingTop: '1em' }
-  //           }
-  //           dangerouslySetInnerHTML={getMarkdownText(post.content)}
-  //         />
+import { getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
 
-  //         <Post.Controls>
-  //           <p>{parseIsoDatetime(post.createdAt)}</p>
-  //           <div className="buttons">
-  //             {this.props.loggedInUserId === post.user.id ? (
-  //               <Button
-  //                 style={
-  //                   isMobile
-  //                     ? mobileEditStyle
-  //                     : {
-  //                         marginBottom: '0',
-  //                         marginLeft: '0',
-  //                         boxShadow: 'none'
-  //                       }
-  //                 }
-  //                 onClick={() => this.toggleModal(post.id, post.content)}
-  //               >
-  //                 Edit
-  //               </Button>
-  //             ) : null}
-  //             <Button
-  //               style={
-  //                 isMobile
-  //                   ? mobileEditStyle
-  //                   : {
-  //                       marginBottom: '0',
-  //                       marginLeft: '0',
-  //                       boxShadow: 'none'
-  //                     }
-  //               }
-  //               onClick={() => this.quotePost(post.content, post.user.username)}
-  //             >
-  //               Quote
-  //             </Button>
-  //           </div>
-  //         </Post.Controls>
-  //       </Post.Body>
-  //     </Post>
-  //   </SlideLeft>
-  // ))
-  return data
+const PostList = ({
+  data,
+  windowWidth,
+  loggedInUserId,
+  toggleModal,
+  quotePost,
+  currentPage,
+  threadId
+}) => {
+  const isMobile = windowWidth < 700 ? true : false
+  const mobileButtonStyle = {
+    margin: '1em 4px 4px 4px',
+    padding: '2px 2px',
+    justifySelf: 'flex-end',
+    boxShadow: 'none'
+  }
+  const posts = data.map(post => (
+    <SlideLeft key={post.id}>
+      <Post className="post-wrapper">
+        <Post.User>
+          <Post.Author>
+            {post.author}
+            <p>{parseIsoDatetime(post.user.createdAt)}</p>
+            <p>{post.user.postCount} posts</p>
+          </Post.Author>
+
+          <Avatar size={isMobile ? '75' : '150'} src={post.user.avatarUrl} />
+        </Post.User>
+        <Post.Body>
+          <div
+            className="markdown-shiz"
+            style={
+              isMobile
+                ? {
+                    paddingTop: '1em',
+                    paddingLeft: '1em',
+                    paddingRight: '1em'
+                  }
+                : { paddingTop: '1em' }
+            }
+            dangerouslySetInnerHTML={getMarkdownText(post.content)}
+          />
+
+          <Post.Controls>
+            <p>{parseIsoDatetime(post.createdAt)}</p>
+            <div className="buttons">
+              {loggedInUserId === post.user.id ? (
+                <Button
+                  style={
+                    isMobile
+                      ? mobileButtonStyle
+                      : {
+                          marginBottom: '0',
+                          marginLeft: '0',
+                          boxShadow: 'none'
+                        }
+                  }
+                  onClick={() => toggleModal(post.id, post.content)}
+                >
+                  Edit
+                </Button>
+              ) : null}
+              <Button
+                style={
+                  isMobile
+                    ? mobileButtonStyle
+                    : {
+                        marginBottom: '0',
+                        marginLeft: '0',
+                        boxShadow: 'none'
+                      }
+                }
+                onClick={() => quotePost(post.content, post.user.username)}
+              >
+                Quote
+              </Button>
+            </div>
+          </Post.Controls>
+        </Post.Body>
+      </Post>
+    </SlideLeft>
+  ))
+  return (
+    <Pagination
+      data={posts}
+      currentPage={currentPage}
+      threadId={threadId}
+      context="posts"
+    >
+      {data => <React.Fragment>{data}</React.Fragment>}
+    </Pagination>
+  )
 }
 
 export default PostList

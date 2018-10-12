@@ -59,8 +59,8 @@ class EditPostModal extends Component {
     return (
       <Modal>
         <Modal.Content>
-          <h1>Fix your mistakes</h1>
-          <Form.Markdown>
+          <h1 style={{ textAlign: 'center' }}>Fix your mistakes</h1>
+          <Form.Markdown style={{ boxShadow: 'none' }}>
             <ReactMde
               layout={this.props.isMobile ? 'vertical' : 'tabbed'}
               style={{ textAlign: 'left' }}
@@ -73,18 +73,20 @@ class EditPostModal extends Component {
             />
           </Form.Markdown>
           {/* TODO: get this button to refresh the page or otherwise react to being clicked on */}
-          <Button
-            onClick={() =>
-              editPostContent(
-                this.props.threadId,
-                this.props.postId,
-                this.state.mdeState.html
-              )
-            }
-          >
-            Edit
-          </Button>
-          <Button onClick={this.props.toggleModal}>Cancel</Button>
+          <div style={{ textAlign: 'center' }}>
+            <Button
+              onClick={() =>
+                editPostContent(
+                  this.props.threadId,
+                  this.props.postId,
+                  this.state.mdeState.html
+                )
+              }
+            >
+              Edit
+            </Button>
+            <Button onClick={this.props.toggleModal}>Cancel</Button>
+          </div>
         </Modal.Content>
       </Modal>
     )
