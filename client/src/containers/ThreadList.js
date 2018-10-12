@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchData, fetchThreads } from '../actions/threadActions'
-import { filterAuthor } from '../utils/threadHelpers'
+import { filterAuthor, checkForPosts } from '../utils/threadHelpers'
 import Loader from '../components/Loader'
 import styled from 'styled-components'
 import './ThreadList.css'
@@ -10,7 +10,7 @@ import './ThreadList.css'
 import { Container } from '../styled/index'
 
 export const ListWrapper = styled.main`
-  background-color: white;
+  // background-color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -23,12 +23,14 @@ export const ListWrapper = styled.main`
   }
 `
 const ThreadLink = styled.div`
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-grow: 1;
   width: 100%;
   border-bottom: solid 1px hsla(270, 7%, 92%, 1);
+  transition: .2s;
 `
 
 export class ThreadList extends Component {
@@ -46,8 +48,9 @@ export class ThreadList extends Component {
 
   render() {
     const { data: threads, users } = this.props
-    if (this.state.hasLoaded) {
+    if (this.state.hasLoaded && checkForPosts(threads)) {
       // TODO: load page numbers for individual threads.. a large undertaking
+      console.log(threads[0].Post.length)
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>

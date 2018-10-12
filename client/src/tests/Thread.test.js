@@ -1,10 +1,8 @@
 import React from 'react'
 import { Thread } from '../containers/Thread'
-import Pagination from '../components/Pagination'
 import { Container } from '../styled/index'
-import Post from '../styled/Post'
 import { shallow } from 'enzyme'
-import { parseIsoDatetime } from '../utils/threadHelpers'
+import PostList from '../components/PostList'
 
 describe('<Thread />', () => {
   let wrapper
@@ -59,67 +57,8 @@ describe('<Thread />', () => {
       threadHasLoaded: true
     })
     wrapper.update()
-    expect(wrapper.find(Pagination).length).toEqual(1)
+    expect(wrapper.find(PostList).length).toEqual(1)
     wrapper.setState({ threadPosts: [] })
-    expect(wrapper.find(Pagination).length).toEqual(0)
-  })
-
-  it("renders each posts' postCount and reg date", () => {
-    wrapper.setState({
-      threadPosts: [
-        {
-          author: 'rediscover',
-          content: 'hello',
-          threadId: 1,
-          createdAt: '2018-09-30T21:02:37.951Z',
-          user: {
-            postCount: 2,
-            avatarUrl: 'avatar.com',
-            createdAt: '2018-09-30T21:02:37.951Z',
-          }
-        },
-        {
-          author: 'bradley',
-          content: 'arigato',
-          threadId: 1,
-          createdAt: '2018-09-30T21:02:37.951Z',
-          user: {
-            postCount: 2,
-            avatarUrl: 'avatar.com',
-            createdAt: '2018-09-30T21:02:37.951Z',
-          }
-        },
-        {
-          author: 'john',
-          content: 'bye bye',
-          threadId: 1,
-          createdAt: '2018-09-30T21:02:37.951Z',
-          user: {
-            postCount: 2,
-            avatarUrl: 'avatar.com',
-            createdAt: '2018-09-30T21:02:37.951Z',
-          }
-        }
-      ],
-      threadHasLoaded: true
-    })
-
-    let post = wrapper
-      .find(Post)
-      .at(0)
-      .childAt(0)
-
-    expect(
-      post
-        .find('p')
-        .at(1)
-        .text()
-    ).toEqual(wrapper.state('threadPosts')[0].user.postCount + ' posts')
-    expect(
-      post
-        .find('p')
-        .at(0)
-        .text()
-    ).toEqual(parseIsoDatetime(wrapper.state('threadPosts')[0].user.createdAt))
+    expect(wrapper.find(PostList).length).toEqual(0)
   })
 })

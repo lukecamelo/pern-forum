@@ -22,7 +22,7 @@ export const NewThreadLink = styled(Link)`
   transition: 0.2s;
   border: 2px solid #0266c8;
   font-family: 'Roboto', sans-serif;
-  box-shadow: ${props => props.theme.mediumShadow};
+  box-shadow: ${props => props.theme.smallShadow};
   &:hover {
     box-shadow: none;
     transform: translateY(2px);
@@ -77,9 +77,6 @@ export class App extends Component {
                 {data => <ThreadList data={data} />}
               </Pagination>
             </SlideLeft>
-            {/* <div style={{ margin: '1em 0 2em 0', textAlign: 'center' }}>
-              <NewThreadLink to="/newthread">Post Thread</NewThreadLink>
-            </div> */}
           </FadeIn>
         </Container>
       )

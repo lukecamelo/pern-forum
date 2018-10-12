@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
 import ReactMde from 'react-mde'
+import Form from '../styled/Form'
 import { shallow } from 'enzyme'
 
 describe('<ThreadForm />', () => {
@@ -26,7 +27,7 @@ describe('<ThreadForm />', () => {
   it('posts thread on button click', () => {
     wrapper.instance().handleSubmit = jest.fn()
     wrapper.instance().setState({ mdeState: { html: '<p>this is a test</p>' } })
-    wrapper.find('form').simulate('submit', { preventDefault: () => {} })
+    wrapper.find(Form).simulate('submit', { preventDefault: () => {} })
     expect(wrapper.instance().handleSubmit).toBeCalled()
   })
   
