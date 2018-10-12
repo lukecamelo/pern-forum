@@ -13,7 +13,8 @@ const Post = styled.div`
   text-align: left;
   padding: 0 1em 0 0;
   margin-bottom: 1rem;
-  border: 1px solid ${props => props.theme.primary};
+  box-shadow: ${props => props.theme.mediumShadow};
+  // border: 1px solid ${props => props.theme.primary};
     @media screen and (max-width: 532px) {
       flex-direction: column;
       padding: 0;

@@ -50,7 +50,7 @@ export const NavBar = ({ isLoggedIn, user, ...props }) => {
     )
     return (
       <ResponsiveMenu
-        menuOpenButton={<i className="fas fa-bars fa-4x" />}
+        menuOpenButton={<i className="fas fa-bars fa-3x" />}
         menuCloseButton={<i className="fas fa-times-circle" />}
         changeMenuOn="700px"
         menu={navigation}
@@ -77,7 +77,7 @@ export const NavBar = ({ isLoggedIn, user, ...props }) => {
     )
     return (
       <ResponsiveMenu
-        menuOpenButton={<i className="fas fa-bars fa-4x" />}
+        menuOpenButton={<i className="fas fa-bars fa-2x" />}
         menuCloseButton={<i className="fas fa-times-circle" />}
         changeMenuOn="700px"
         menu={navigation}

@@ -25,7 +25,7 @@ class Pagination extends Component {
 
   setCurrentPage = num => {
     let scroll = Scroll.animateScroll
-    if(this.props.context === 'threads') {
+    if (this.props.context === 'threads') {
       scroll.scrollToTop({ duration: 300, smooth: 'easeInOutQuint' })
     } else {
       scroll.scrollToTop({ duration: 500, smooth: 'easeInOutQuint' })
@@ -39,7 +39,9 @@ class Pagination extends Component {
     for (let i = 1; i <= pageCount; i++) {
       const baseClassName = 'pagination-controls__button'
       const activeClassName =
-        i === parseInt(this.props.currentPage, 10) ? `${baseClassName}--active` : ''
+        i === parseInt(this.props.currentPage, 10)
+          ? `${baseClassName}--active`
+          : ''
       controls.push(
         <Link
           to={
@@ -72,7 +74,9 @@ class Pagination extends Component {
         <div className="pagination-results">
           {this.props.children(this.createPaginatedData())}
         </div>
-        <div className="pagination-controls">{this.createControls()}</div>
+        <div className="pagination-controls">
+          <span>{this.createControls()}</span>
+        </div>
       </div>
     )
   }
