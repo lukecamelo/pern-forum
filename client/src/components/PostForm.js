@@ -92,7 +92,7 @@ export class PostForm extends Component {
 
   render() {
     return (
-      <Form style={{ margin: '2em', display: 'block' }}>
+      <Form style={{}}>
         <Form.Markdown>
           <ReactMde
             layout={this.props.isMobile ? 'vertical' : 'tabbed'}
