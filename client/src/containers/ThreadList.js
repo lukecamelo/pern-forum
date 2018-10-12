@@ -10,7 +10,8 @@ import './ThreadList.css'
 import { Container } from '../styled/index'
 
 export const ListWrapper = styled.main`
-  background-color: #f4f4f4;
+  // background-color: #f4f4f4;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,9 +29,7 @@ const ThreadLink = styled.div`
   justify-content: space-between;
   flex-grow: 1;
   width: 100%;
-  // max-height: 100px;
-  // min-height: 70px;
-  border-bottom: 1px solid #2e262e;
+  border-bottom: solid 1px hsla(270, 7%, 92%, 1);
 `
 
 export class ThreadList extends Component {

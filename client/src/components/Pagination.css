@@ -50,3 +50,9 @@
 .pagination-controls__button--active:visited {
   color: white;
 }
+
+@media screen and (max-width: 700px) {
+  .bottom {
+    width: 90%;
+  }
+}
