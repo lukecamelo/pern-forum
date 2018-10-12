@@ -15,17 +15,21 @@ export const ListWrapper = styled.main`
   flex-direction: column;
   align-items: flex-start;
   width: 75%;
+  height: 100%;
+  margin: 0 auto;
+  box-shadow: ${props => props.theme.largeShadow};
   @media screen and (max-width: 700px) {
     width: 90%;
   }
-  margin: 0 auto;
-  box-shadow: ${props => props.theme.largeShadow}
 `
 const ThreadLink = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-grow: 1;
   width: 100%;
+  // max-height: 100px;
+  // min-height: 70px;
   border-bottom: 1px solid #2e262e;
 `
 

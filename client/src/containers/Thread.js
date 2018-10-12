@@ -10,7 +10,7 @@ import Avatar from 'react-avatar'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 
-import { Container, Button } from '../styled/index'
+import { Container, Button, H1 } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
 import { FadeIn, SlideLeft } from '../styled/animations'
@@ -173,7 +173,7 @@ export class Thread extends Component {
           <FadeIn>
             <StyledThread>
               <StyledThread.Header>
-                {title} / {author}
+                <H1 style={{ fontSize: '1.5em' }}>{title} / {author}</H1>
               </StyledThread.Header>
 
               {posts.length ? (
