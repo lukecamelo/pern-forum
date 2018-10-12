@@ -12,7 +12,7 @@ import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 import styled from 'styled-components'
-import Loader from '../components/Loader';
+import Loader from '../components/Loader'
 
 export const NewThreadLink = styled(Link)`
   color: #0266c8;
@@ -27,12 +27,23 @@ export const NewThreadLink = styled(Link)`
     color: white;
   }
 `
+export const Banner = styled.div`
+  width: 75%;
+  margin: 0 auto;
+  background-color: #0266c8;
+  color: white;
+  margin: 2em auto 0 auto;
+  padding: 1em 0 1em 1em;
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
+`
 
 export class App extends Component {
   state = {
     hasLoaded: false
   }
-  
+
   async componentDidMount() {
     await this.props.fetchData()
     await this.props.fetchThreads()
@@ -47,8 +58,10 @@ export class App extends Component {
         <Container>
           <NavBar />
           <FadeIn>
-            <SlideTop style={{ textAlign: 'center' }}>
-              <H1>General Discussion</H1>
+            <SlideTop>
+              <Banner>
+                <H1 style={{ margin: '0 auto', color: 'white' }}>General Discussion</H1>
+              </Banner>
             </SlideTop>
             <SlideLeft>
               <Pagination

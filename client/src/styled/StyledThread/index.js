@@ -7,7 +7,7 @@ const StyledThread = styled.section`
   color: #564154;
   margin: 0 auto;
   width: 75vw;
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 700px) {
     width: 90vw;
   }
 `

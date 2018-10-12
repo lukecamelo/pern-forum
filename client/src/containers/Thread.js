@@ -13,7 +13,7 @@ import { makeNewPost } from '../actions/threadActions'
 import { Container, Button, H1 } from '../styled/index'
 import Post from '../styled/Post'
 import StyledThread from '../styled/StyledThread'
-import { FadeIn, SlideLeft } from '../styled/animations'
+import { FadeIn, SlideLeft, SlideTop } from '../styled/animations'
 import './Thread.css'
 
 import {
@@ -172,9 +172,13 @@ export class Thread extends Component {
           <NavBar />
           <FadeIn>
             <StyledThread>
-              <StyledThread.Header>
-                <H1 style={{ fontSize: '1.5em' }}>{title} / {author}</H1>
-              </StyledThread.Header>
+              <SlideTop>
+                <StyledThread.Header>
+                  <H1 style={{ margin: '0', color: 'white' }}>
+                    {title} / {author}
+                  </H1>
+                </StyledThread.Header>
+              </SlideTop>
 
               {posts.length ? (
                 <Pagination

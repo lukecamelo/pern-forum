@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 
-const Author = styled.h2`
+const Author = styled.div`
   color: ${props => props.theme.primary}
   font-family: "Roboto", sans-serif;
+  margin: .5em 0;
   font-size: 18px;
     > p {
       font-size: 14px;

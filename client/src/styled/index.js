@@ -49,5 +49,7 @@ export const StyledLink = styled(Link)`
   }
 `
 export const H1 = styled.h1`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
   color: ${props => props.theme.primary};
 `
