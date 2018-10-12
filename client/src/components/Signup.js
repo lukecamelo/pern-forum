@@ -69,7 +69,7 @@ export class Signup extends React.Component {
               <SlideTop>
                 <H1>Enter a username and a password to register.</H1>
               </SlideTop>
-              <Form>
+              <Form style={{ width: 'auto' }}>
                 <SlideLeft>
                   <Form.Input
                     name="usernameInput"
