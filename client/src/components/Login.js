@@ -63,7 +63,7 @@ export class Login extends Component {
             </SlideTop>
 
             {!this.props.auth.isLoggedIn ? (
-              <Form>
+              <Form style={{ width: 'auto' }}>
                 <SlideLeft>
                   <Form.Input
                     name="usernameInput"
