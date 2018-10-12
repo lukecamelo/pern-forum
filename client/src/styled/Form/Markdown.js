@@ -5,10 +5,10 @@ const Markdown = styled.div`
   margin: 0;
   padding: 0;
   transition: .4s;
-  box-shadow: 0 0 0 white;
+  box-shadow: ${props => props.theme.mediumShadow};
   :focus-within {
-    box-shadow: ${props => props.theme.largeShadow};
-    transform: translateY(-2px)
+    box-shadow: 0 0 0 white;
+    transform: translateY(2px)
   }
 `
 

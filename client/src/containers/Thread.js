@@ -92,7 +92,8 @@ export class Thread extends Component {
     const mobileEditStyle = {
       margin: '1em 4px 4px 4px',
       padding: '2px 2px',
-      justifySelf: 'flex-end'
+      justifySelf: 'flex-end',
+      boxShadow: 'none'
     }
 
     if (threadHasLoaded) {
@@ -137,7 +138,8 @@ export class Thread extends Component {
                           ? mobileEditStyle
                           : {
                               marginBottom: '0',
-                              marginLeft: '0'
+                              marginLeft: '0',
+                              boxShadow: 'none'
                             }
                       }
                       onClick={() => this.toggleModal(post.id, post.content)}
@@ -151,7 +153,8 @@ export class Thread extends Component {
                         ? mobileEditStyle
                         : {
                             marginBottom: '0',
-                            marginLeft: '0'
+                            marginLeft: '0',
+                            boxShadow: 'none'
                           }
                     }
                     onClick={() =>
@@ -192,6 +195,7 @@ export class Thread extends Component {
               ) : (
                 <h1>make the first post!</h1>
               )}
+              
             </StyledThread>
 
             {this.state.openModal ? (

@@ -20,6 +20,7 @@ export const Input = styled.input.attrs({
   }
 `
 export const Button = styled.button`
+  display: inline-block;
   color: ${props => props.theme.primary};
   background-color: #fff;
   font-size: 1em;
@@ -27,7 +28,10 @@ export const Button = styled.button`
   padding: 0.5em 1.5em;
   border: 2px solid ${props => props.theme.primary};
   transition: 0.2s;
+  box-shadow: ${props => props.theme.smallShadow};
   &:hover {
+    box-shadow: none;
+    transform: translateY(2px);
     background-color: ${props => props.theme.primary};
     color: #fff;
     cursor: pointer;
