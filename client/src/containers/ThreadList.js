@@ -69,8 +69,6 @@ export class ThreadList extends Component {
   render() {
     const { data: threads, users } = this.props
     if (this.state.hasLoaded && checkForPosts(threads)) {
-      // TODO: load page numbers for individual threads.. a large undertaking
-      console.log(threads[0].Post.length)
       const threadLinks = threads.map(thread => {
         return (
           <ThreadLink key={thread.id}>
