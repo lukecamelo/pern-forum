@@ -15,7 +15,6 @@ import { FadeIn, SlideTop } from '../styled/animations'
 import './Thread.css'
 
 import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
-import Footer from '../components/Footer'
 
 export class Thread extends Component {
   state = {
@@ -116,7 +115,7 @@ export class Thread extends Component {
                   windowWidth={this.state.windowWidth}
                   quotePost={this.quotePost}
                   toggleModal={this.toggleModal}
-                  loggedInUserId={this.props.loggedInUserId}
+                  auth={this.props.auth}
                 />
               ) : null}
             </StyledThread>
@@ -139,7 +138,6 @@ export class Thread extends Component {
             quotedUser={this.state.quotedUser}
             submit={this.handleSubmit}
           />
-          <Footer />
         </Container>
       )
     } else {
@@ -154,7 +152,7 @@ export class Thread extends Component {
 }
 
 const mapStateToProps = state => ({
-  loggedInUserId: state.auth.userId
+  auth: state.auth
 })
 
 export default connect(

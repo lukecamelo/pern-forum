@@ -11,7 +11,7 @@ import { getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
 const PostList = ({
   data,
   windowWidth,
-  loggedInUserId,
+  auth,
   toggleModal,
   quotePost,
   currentPage,
@@ -54,7 +54,7 @@ const PostList = ({
           <Post.Controls>
             <p>{parseIsoDatetime(post.createdAt)}</p>
             <div className="buttons">
-              {loggedInUserId === post.user.id ? (
+              {auth.loggedInUserId === post.user.id && auth.isLoggedIn ? (
                 <Button
                   style={
                     isMobile
@@ -70,20 +70,22 @@ const PostList = ({
                   Edit
                 </Button>
               ) : null}
-              <Button
-                style={
-                  isMobile
-                    ? mobileButtonStyle
-                    : {
-                        marginBottom: '0',
-                        marginLeft: '0',
-                        boxShadow: 'none'
-                      }
-                }
-                onClick={() => quotePost(post.content, post.user.username)}
-              >
-                Quote
-              </Button>
+              {auth.isLoggedIn ? (
+                <Button
+                  style={
+                    isMobile
+                      ? mobileButtonStyle
+                      : {
+                          marginBottom: '0',
+                          marginLeft: '0',
+                          boxShadow: 'none'
+                        }
+                  }
+                  onClick={() => quotePost(post.content, post.user.username)}
+                >
+                  Quote
+                </Button>
+              ) : null}
             </div>
           </Post.Controls>
         </Post.Body>

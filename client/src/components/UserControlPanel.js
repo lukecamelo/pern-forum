@@ -12,7 +12,6 @@ import {
   SlideBottom,
   SlideTop
 } from '../styled/animations'
-import Footer from './Footer'
 
 export const Card = styled.section`
   display: flex;

@@ -58,7 +58,8 @@ export class App extends Component {
   }
 
   render() {
-    if (this.props.isLoggedIn && this.state.hasLoaded) {
+    const { isLoggedIn } = this.props
+    if (this.state.hasLoaded) {
       return (
         <Container>
           <NavBar />
@@ -74,6 +75,7 @@ export class App extends Component {
                 currentPage={this.props.match.params.page}
                 context="threads"
                 pageSize={15}
+                isLoggedIn={isLoggedIn}
               >
                 {data => <ThreadList data={data} />}
               </Pagination>
