@@ -15,6 +15,7 @@ import {
   SlideBottom,
   SlideTop
 } from '../styled/animations'
+import Footer from './Footer'
 
 export class Signup extends React.Component {
   state = {
@@ -89,7 +90,9 @@ export class Signup extends React.Component {
                   />
                 </SlideRight>
                 <SlideLeft>
-                  <p style={{ paddingTop: '5px', marginBottom: '0'}}>{this.state.validationMessage}</p>
+                  <p style={{ paddingTop: '5px', marginBottom: '0' }}>
+                    {this.state.validationMessage}
+                  </p>
                   <Form.Input
                     name="avatarUrlInput"
                     type="text"
@@ -114,6 +117,7 @@ export class Signup extends React.Component {
               </Form>
             </Card>
           </FadeIn>
+          <Footer />
         </Container>
       )
     } else {
@@ -133,6 +137,7 @@ export class Signup extends React.Component {
               </Link>
             </div>
           </Card>
+          <Footer />
         </Container>
       )
     }

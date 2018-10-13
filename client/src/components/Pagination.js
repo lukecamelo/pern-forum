@@ -78,7 +78,10 @@ class Pagination extends Component {
         </div>
         <div className={context === 'threads' ? 'bottom' : 'posts-bottom'}>
           {this.state.pageCount > 1 ? (
-            <div className="pagination-controls">
+            <div
+              className="pagination-controls"
+              style={context === 'threads' ? { marginBottom: '3em' } : null}
+            >
               <span>{this.createControls()}</span>
             </div>
           ) : null}

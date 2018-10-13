@@ -15,6 +15,7 @@ import { FadeIn, SlideTop } from '../styled/animations'
 import './Thread.css'
 
 import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
+import Footer from '../components/Footer'
 
 export class Thread extends Component {
   state = {
@@ -138,6 +139,7 @@ export class Thread extends Component {
             quotedUser={this.state.quotedUser}
             submit={this.handleSubmit}
           />
+          <Footer />
         </Container>
       )
     } else {
@@ -145,6 +147,7 @@ export class Thread extends Component {
         <Container>
           <NavBar />
           <Loader />
+          <Footer />
         </Container>
       )
     }

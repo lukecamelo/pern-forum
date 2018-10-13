@@ -11,8 +11,9 @@ import { FadeIn, SlideTop, SlideLeft } from '../styled/animations'
 import NavBar from '../components/NavBar'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
-import styled from 'styled-components'
 import Loader from '../components/Loader'
+import Footer from '../components/Footer'
+import styled from 'styled-components'
 
 export const NewThreadLink = styled(Link)`
   color: #0266c8;
@@ -78,6 +79,7 @@ export class App extends Component {
               </Pagination>
             </SlideLeft>
           </FadeIn>
+          <Footer />
         </Container>
       )
     } else if (!this.props.isLoggedIn && this.state.hasLoaded) {
@@ -91,6 +93,7 @@ export class App extends Component {
               </SlideTop>
             </Card>
           </FadeIn>
+          <Footer />
         </Container>
       )
     } else if (this.props.isLoggedIn && !this.state.hasLoaded) {
@@ -98,6 +101,7 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Loader />
+          <Footer />
         </Container>
       )
     } else {
@@ -105,6 +109,7 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Loader />
+          <Footer />
         </Container>
       )
     }
