@@ -71,7 +71,14 @@
   font-style: italic;
 }
 
-.item p {
+.item p.username {
+  margin: 0;
+  width: 100px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.item p.tag {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;

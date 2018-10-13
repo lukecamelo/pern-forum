@@ -82,18 +82,20 @@ export class ThreadList extends Component {
             </div>
             <div className="author">
               <div className="item thread-author">
-                <p>Author</p>
-                {filterAuthor(users, thread.userId)}
+                <p className='tag'>Author</p>
+                <p className="username">
+                  {filterAuthor(users, thread.userId)}
+                </p>
               </div>
 
               <div className="item">
-                <p>Posts</p>
+                <p className='tag'>Posts</p>
                 {thread.Post.length}
               </div>
 
               <div className="item">
-                <p>Latest</p>
-                {thread.Post[0].author}
+                <p className='tag'>Latest</p>
+                <p className="username">{thread.Post[0].author}</p>
               </div>
             </div>
           </ThreadLink>
