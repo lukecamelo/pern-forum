@@ -80,6 +80,7 @@ export class PostForm extends Component {
         </Form.Markdown>
         <div style={{ textAlign: 'center' }}>
           <Button
+            style={{ marginBottom: '4em' }}
             onClick={() =>
               this.submitAndClearEditor(
                 this.state.mdeState.html,

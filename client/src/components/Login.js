@@ -14,6 +14,7 @@ import {
   SlideBottom,
   SlideTop
 } from '../styled/animations'
+import Footer from './Footer';
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -93,6 +94,7 @@ export class Login extends Component {
             ) : null}
           </Card>
         </FadeIn>
+        <Footer />
       </Container>
     )
   }

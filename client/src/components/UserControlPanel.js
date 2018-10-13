@@ -12,6 +12,7 @@ import {
   SlideBottom,
   SlideTop
 } from '../styled/animations'
+import Footer from './Footer'
 
 export const Card = styled.section`
   display: flex;
@@ -108,6 +109,7 @@ export class UserControlPanel extends React.Component {
             </AvatarEdit>
           </Card>
         </FadeIn>
+        <Footer />
       </Container>
     )
   }
