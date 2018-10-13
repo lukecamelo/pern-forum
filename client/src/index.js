@@ -12,6 +12,7 @@ import Thread from './containers/Thread'
 import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
 import EditPostModal from './components/EditPostModal'
+import Landing from './components/Landing'
 
 const theme = {
   primary: '#00a8ff',
@@ -36,7 +37,7 @@ ReactDOM.render(
     <Provider store={store}>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={App} />
+          <Route exact path="/" component={Landing} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id/page/:page" component={Thread} />
