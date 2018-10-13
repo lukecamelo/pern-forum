@@ -18,7 +18,7 @@ const InnerFooter = styled.div`
   }
   > p {
     color: #3d4852;
-    padding: 1em;
+    padding: 1em 10px;
   }
 `
 const SocialIcon = styled.a`
