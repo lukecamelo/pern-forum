@@ -2,10 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Foot = styled.footer`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
   background-color: rgb(162, 167, 177);
   display: flex;
   margin: 0;

@@ -94,7 +94,6 @@ export class Login extends Component {
             ) : null}
           </Card>
         </FadeIn>
-        <Footer />
       </Container>
     )
   }

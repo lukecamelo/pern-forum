@@ -101,7 +101,6 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Loader />
-          <Footer />
         </Container>
       )
     } else {
@@ -109,7 +108,6 @@ export class App extends Component {
         <Container>
           <NavBar />
           <Loader />
-          <Footer />
         </Container>
       )
     }

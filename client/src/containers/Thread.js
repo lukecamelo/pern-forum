@@ -147,7 +147,6 @@ export class Thread extends Component {
         <Container>
           <NavBar />
           <Loader />
-          <Footer />
         </Container>
       )
     }

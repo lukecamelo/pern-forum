@@ -11,9 +11,7 @@ html {
 
 body {
   background-color: rgb(229, 235, 247);
-  position: relative;
   margin: 0;
-  padding-bottom: 6em;
   min-height: 100%;
   font-family: "Lato", sans-serif;
 }

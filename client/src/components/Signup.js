@@ -117,7 +117,6 @@ export class Signup extends React.Component {
               </Form>
             </Card>
           </FadeIn>
-          <Footer />
         </Container>
       )
     } else {
@@ -137,7 +136,6 @@ export class Signup extends React.Component {
               </Link>
             </div>
           </Card>
-          <Footer />
         </Container>
       )
     }
