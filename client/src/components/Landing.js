@@ -6,10 +6,13 @@ import styled from 'styled-components'
 
 const Header = styled.h1`
   font-size: 2em;
-  color: ${props => props.theme.primary}
+  color: rgb(61, 72, 82);
   margin-bottom: 0;
   font-family: 'Roboto', sans-serif;
   font-weight: 600;
+  > strong {
+    color: #0266c8;
+  }
 `
 const Li = styled.li`
   width: 75%;
@@ -39,7 +42,7 @@ const Landing = () => {
     <React.Fragment>
       <NavBar />
       <Card style={{ color: '#3d4852' }}>
-        <Header>Welcome to the imp zone.</Header>
+        <Header>Welcome to the <strong>imp zone</strong>.</Header>
         <Ul>
           <Li>
             <I className="fas fa-gamepad fa-2x" />
