@@ -15,7 +15,6 @@ import {
   SlideBottom,
   SlideTop
 } from '../styled/animations'
-import Footer from './Footer'
 
 export class Signup extends React.Component {
   state = {

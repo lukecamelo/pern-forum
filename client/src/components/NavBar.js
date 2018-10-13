@@ -43,7 +43,7 @@ export const NavBar = ({ isLoggedIn, user, ...props }) => {
         <Link to="/usercontrolpanel" className="navlink">
           Control Panel
         </Link>
-        <Link to="/" className="logout" onClick={() => props.userLogout()}>
+        <Link to="/threads/1" className="logout" onClick={() => props.userLogout()}>
           Logout ({user})
         </Link>
       </StyledNav>

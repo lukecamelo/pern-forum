@@ -73,9 +73,12 @@ class Pagination extends Component {
     const { context } = this.props
     return (
       <div className="pagination">
+        {/* Paginated Content */}
         <div className="pagination-results">
           {this.props.children(this.createPaginatedData())}
         </div>
+
+        {/* Different styles for thread list and thread */}
         <div className={context === 'threads' ? 'bottom' : 'posts-bottom'}>
           {this.state.pageCount > 1 ? (
             <div
@@ -85,7 +88,9 @@ class Pagination extends Component {
               <span>{this.createControls()}</span>
             </div>
           ) : null}
-          {context === 'threads' ? (
+
+          {/* Showing post button only if logged in */}
+          {context === 'threads' && this.props.isLoggedIn ? (
             <NewThreadLink
               style={{ padding: '.5em 1em', height: '35px' }}
               to="/newthread"

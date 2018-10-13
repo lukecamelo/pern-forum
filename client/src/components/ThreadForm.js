@@ -55,76 +55,71 @@ export class ThreadForm extends Component {
     this.setState({ mdeState })
   }
 
-  handleSubmit = async e => {
-    e.preventDefault()
-    try {
-      await this.props.postNewThread(
-        this.state.title,
-        this.state.mdeState.html,
-        this.props.loggedInUserId,
-        this.props.username
-      )
-      this.props.history.push('/threads/1')
-    } catch (e) {
-      alert(e.message)
-    }
-  }
-
   render() {
-    return (
-      <Container>
-        <NavBar />
-        <ThreadFormCard>
-          <H1>Post new thread</H1>
-          <Form style={{ margin: '0 1em', width: 'auto' }}>
-            <FadeIn>
-              <SlideLeft>
-                <Form.Input
-                  name="title"
-                  value={this.state.title}
-                  onChange={this.changeHandler}
-                  placeholder="thread title"
-                />
-              </SlideLeft>
-              <SlideRight>
-                <Form.Markdown style={{ boxShadow: '0 0 0 white' }}>
-                  <ReactMde
-                    layout={'tabbed'}
-                    onChange={this.handleValueChange}
-                    editorState={this.state.mdeState}
-                    generateMarkdownPreview={markdown =>
-                      Promise.resolve(this.converter.makeHtml(markdown))
-                    }
+    if (this.props.auth.isLoggedIn) {
+      return (
+        <Container>
+          <NavBar />
+          <ThreadFormCard>
+            <H1>Post new thread</H1>
+            <Form style={{ margin: '0 1em', width: 'auto' }}>
+              <FadeIn>
+                <SlideLeft>
+                  <Form.Input
+                    name="title"
+                    value={this.state.title}
+                    onChange={this.changeHandler}
+                    placeholder="thread title"
                   />
-                </Form.Markdown>
-              </SlideRight>
-              <SlideBottom style={{ padding: '1.5em' }}>
-                <StyledLink
-                  to="/threads/1"
-                  onClick={() =>
-                    this.props.postNewThread(
-                      this.state.title,
-                      this.state.mdeState.html,
-                      this.props.loggedInUserId,
-                      this.props.username
-                    )
-                  }
-                >
-                  Submit Thread
-                </StyledLink>
-              </SlideBottom>
-            </FadeIn>
-          </Form>
-        </ThreadFormCard>
-      </Container>
-    )
+                </SlideLeft>
+                <SlideRight>
+                  <Form.Markdown style={{ boxShadow: '0 0 0 white', textAlign: 'left' }}>
+                    <ReactMde
+                      layout={'tabbed'}
+                      onChange={this.handleValueChange}
+                      editorState={this.state.mdeState}
+                      generateMarkdownPreview={markdown =>
+                        Promise.resolve(this.converter.makeHtml(markdown))
+                      }
+                    />
+                  </Form.Markdown>
+                </SlideRight>
+                <SlideBottom style={{ padding: '1.5em' }}>
+                  <StyledLink
+                    to="/threads/1"
+                    onClick={() =>
+                      this.props.postNewThread(
+                        this.state.title,
+                        this.state.mdeState.html,
+                        this.props.auth.userId,
+                        this.props.auth.username
+                      )
+                    }
+                  >
+                    Submit Thread
+                  </StyledLink>
+                </SlideBottom>
+              </FadeIn>
+            </Form>
+          </ThreadFormCard>
+        </Container>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <NavBar />
+          <Card>
+            <H1>Please log in to make threads.</H1>
+          </Card>
+        </React.Fragment>
+      )
+    }
   }
 }
 
 const mapStateToProps = state => ({
   users: state.threadData.users,
-  loggedInUserId: state.auth.userId,
-  username: state.auth.username
+  auth: state.auth
 })
 
 export default connect(
