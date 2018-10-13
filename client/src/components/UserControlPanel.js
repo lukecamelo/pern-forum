@@ -109,7 +109,6 @@ export class UserControlPanel extends React.Component {
             </AvatarEdit>
           </Card>
         </FadeIn>
-        <Footer />
       </Container>
     )
   }
