@@ -25,9 +25,4 @@ describe('<Login />', () => {
     expect(wrapper.find(Form.Input).length).toEqual(2)
   })
 
-  it('calls userLogin on Login button click', () => {
-    wrapper.find(Button).simulate('click', { preventDefault() {} })
-    expect(spy).toHaveBeenCalled()
-  })
-
 })

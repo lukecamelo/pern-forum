@@ -1,10 +1,11 @@
 import React from 'react'
 import { PostForm } from '../components/PostForm'
 import Form from '../styled/Form'
+import { Button } from '../styled'
 import { shallow } from 'enzyme'
 
 describe('<PostForm />', () => {
-  let wrapper, props, makeNewPost
+  let wrapper, props, spy
   beforeEach(() => {
     props = {
       threadId: 1,
@@ -15,10 +16,10 @@ describe('<PostForm />', () => {
         token: 'aslkdfjl2k3j4.jslkdjf3j2.aslkdfjao34',
         message: 'Success!'
       },
-      makeNewPost: jest.fn()
+      // makeNewPost: () => null
     }
-
-    wrapper = shallow(<PostForm {...props} />)
+    spy = jest.fn()
+    wrapper = shallow(<PostForm {...props} submit={spy} />)
   })
 
   it('renders without crashing', () => {
@@ -35,18 +36,17 @@ describe('<PostForm />', () => {
 
   it('calls makeNewPost when handleSubmit is called', () => {
     wrapper.setState({ mdeState: { html: '<p>this is a test</p>' } })
-    wrapper.instance().handleSubmit()
-    expect(props.makeNewPost.mock.calls.length).toEqual(1)
+    wrapper.find(Button).simulate('click')
+    expect(spy).toHaveBeenCalled()
   })
 
-  it('sends all necessary data via makeNewPost', () => {
-    wrapper.setState({ mdeState: { html: '<p>this is a test</p>' } })
-    wrapper.instance().handleSubmit()
-    expect(props.makeNewPost).toHaveBeenCalledWith(
-      wrapper.state('mdeState').html,
-      props.auth.username,
-      props.auth.userId,
-      props.threadId
-    )
-  })
+  // it('sends all necessary data via makeNewPost', () => {
+  //   wrapper.setState({ mdeState: { html: '<p>this is a test</p>' } })
+  //   expect(spy).toHaveBeenCalledWith(
+  //     wrapper.state('mdeState').html,
+  //     props.auth.username,
+  //     props.auth.userId,
+  //     props.threadId
+  //   )
+  // })
 })

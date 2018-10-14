@@ -13,40 +13,6 @@ describe('thread actions', () => {
     fetchMock.restore()
   })
 
-  it('fetches the threads', () => {
-    const store = mockStore({})
-    fetchMock.getOnce('/thread/1/posts', {
-      threadPosts: [
-        {
-          author: 'rediscover',
-          content: 'whats up',
-          userId: 1,
-          id: 1,
-          threadId: 1
-        }
-      ]
-    })
-
-    return store.dispatch(threadActions.fetchPosts(1)).then(() => {
-      const actions = store.getActions()
-      const expectedActions = {
-        type: types.FETCH_POSTS,
-        payload: {
-          threadPosts: [
-            {
-              author: 'rediscover',
-              content: 'whats up',
-              userId: 1,
-              id: 1,
-              threadId: 1
-            }
-          ]
-        }
-      }
-      expect(actions).toEqual([expectedActions])
-    })
-  })
-
   it('posts new threads', () => {
     const store = mockStore({})
     const reqBody = {
@@ -124,12 +90,6 @@ describe('thread actions', () => {
         const actions = store.getActions()
         const expectedActions = {
           type: types.MAKE_NEW_POST,
-          payload: {
-            content: 'hello',
-            username: 'rediscover',
-            userId: 1,
-            threadId: 1
-          }
         }
         expect(actions).toEqual([expectedActions])
       })

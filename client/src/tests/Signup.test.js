@@ -23,11 +23,6 @@ describe('<Signup />', () => {
     expect(wrapper.find(Form.Input).length).toEqual(3)
   })
   
-  it('calls userSignup on button click', () => {
-    wrapper.find(Button).simulate('click')
-    expect(userSignup.calledOnce).toBe(true)
-  })
-  
   it('checks avatar validity onChange', () => {
     wrapper.instance().avatarChangeHandler = jest.fn()
     wrapper.instance().checkUrlExists = jest.fn()

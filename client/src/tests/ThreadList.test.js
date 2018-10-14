@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ThreadList } from '../containers/ThreadList'
-import { shallow, mount } from 'enzyme'
+import Loader from '../components/Loader'
+import { mount } from 'enzyme'
 import sinon from 'sinon'
 
 describe('<ThreadList />', () => {
@@ -52,6 +53,7 @@ describe('<ThreadList />', () => {
   })
 
   it('renders the correct number of thread links', () => {
+    wrapper.setState({ hasLoaded: true })
     expect(wrapper.find('main').children().length).toEqual(6)
   })
 
@@ -63,9 +65,10 @@ describe('<ThreadList />', () => {
   })
 
   it('shows loading header if threads not loaded', () => {
-    expect(wrapper.find('.loading').length).toEqual(0)
-    wrapper.setProps({ data: [] })
-    expect(wrapper.find('.loading').length).toEqual(1)
+    wrapper.setState({ hasLoaded: false })
+    expect(wrapper.find(Loader).length).toEqual(1)
+    wrapper.setState({ hasLoaded: true })
+    expect(wrapper.find(Loader).length).toEqual(0)
   })
 
   it('fetches data on componentDidMount', () => {

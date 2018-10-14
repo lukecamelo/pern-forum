@@ -50,12 +50,6 @@ describe('renders without crashing', () => {
     expect(wrapper.find(NavBar).length).toEqual(1)
   })
 
-  it('only renders posts if isLoggedIn equals true', () => {
-    expect(wrapper.find(Pagination).length).toEqual(1)
-    wrapper.setProps({ isLoggedIn: false })
-    expect(wrapper.find(Pagination).length).toEqual(0)
-  })
-
   // it('matches snapshot', () => {
   //   const store = setupStore({})
   //   wrapper = mount(
