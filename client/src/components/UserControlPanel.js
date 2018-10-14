@@ -101,7 +101,7 @@ export class UserControlPanel extends React.Component {
                       )
                     }
                   >
-                    Edit Avatar
+                    Apply
                   </Button>
                 </form>
               </SlideBottom>

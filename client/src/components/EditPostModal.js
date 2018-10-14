@@ -80,7 +80,7 @@ class EditPostModal extends Component {
                 )
               }
             >
-              Edit
+              Apply
             </Button>
             <Button onClick={this.props.toggleModal}>Cancel</Button>
           </div>
