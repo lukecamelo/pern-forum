@@ -44,6 +44,9 @@ const I = styled.i`
   min-width: 50px;
   margin-right: 0.5em;
   color: #0266c8;
+  @media screen and (max-width: 532px) {
+    margin-right: 0;
+  }
 `
 const P = styled.p`
   font-size: 18px;
