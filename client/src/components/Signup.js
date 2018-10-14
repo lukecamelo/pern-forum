@@ -59,6 +59,16 @@ export class Signup extends React.Component {
       })
   }
 
+  handleKeyPress = e => {
+    if (e.key === 'Enter') {
+      this.props.userSignup(
+        this.state.usernameInput,
+        this.state.passwordInput,
+        this.state.avatarUrlInput
+      )
+    }
+  }
+
   render() {
     if (this.props.message !== 'User created!') {
       return (
@@ -85,11 +95,18 @@ export class Signup extends React.Component {
                     type="password"
                     value={this.state.passwordInput}
                     onChange={this.changeHandler}
+                    onKeyPress={this.handleKeyPress}
                     placeholder="enter your password"
                   />
                 </SlideRight>
                 <SlideLeft>
-                  <p style={{ paddingTop: '5px', marginBottom: '0' }}>
+                  <p
+                    style={{
+                      paddingTop: '5px',
+                      marginBottom: '0',
+                      color: '#bb0000'
+                    }}
+                  >
                     {this.state.validationMessage}
                   </p>
                   <Form.Input
@@ -97,6 +114,7 @@ export class Signup extends React.Component {
                     type="text"
                     value={this.state.avatarUrlInput}
                     onChange={this.avatarChangeHandler}
+                    onKeyPress={this.handleKeyPress}
                     placeholder="imgur image link"
                   />
                 </SlideLeft>

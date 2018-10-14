@@ -36,6 +36,12 @@ export class Login extends Component {
     })
   }
 
+  handleKeyPress = e => {
+    if(e.key === 'Enter') {
+      this.handleSubmit(e)
+    }
+  }
+
   handleSubmit = async e => {
     e.preventDefault()
 
@@ -80,6 +86,7 @@ export class Login extends Component {
                     type="password"
                     value={this.state.passwordInput}
                     onChange={this.changeHandler}
+                    onKeyPress={this.handleKeyPress}
                     placeholder="enter your password"
                     data-testid="password-input"
                   />
