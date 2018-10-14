@@ -59,13 +59,16 @@ export class Signup extends React.Component {
       })
   }
 
-  handleKeyPress = e => {
-    if (e.key === 'Enter') {
+  handleSubmit = e => {
+    e.preventDefault()
+    try {
       this.props.userSignup(
         this.state.usernameInput,
         this.state.passwordInput,
         this.state.avatarUrlInput
       )
+    } catch (e) {
+      console.log('oops')
     }
   }
 
@@ -80,57 +83,47 @@ export class Signup extends React.Component {
                 <H1>Enter a username and a password to register.</H1>
               </SlideTop>
               <Form style={{ width: 'auto' }}>
-                <SlideLeft>
-                  <Form.Input
-                    name="usernameInput"
-                    type="text"
-                    value={this.state.usernameInput}
-                    onChange={this.changeHandler}
-                    placeholder="enter your username"
-                  />
-                </SlideLeft>
-                <SlideRight>
-                  <Form.Input
-                    name="passwordInput"
-                    type="password"
-                    value={this.state.passwordInput}
-                    onChange={this.changeHandler}
-                    onKeyPress={this.handleKeyPress}
-                    placeholder="enter your password"
-                  />
-                </SlideRight>
-                <SlideLeft>
-                  <p
-                    style={{
-                      paddingTop: '5px',
-                      marginBottom: '0',
-                      color: '#bb0000'
-                    }}
-                  >
-                    {this.state.validationMessage}
-                  </p>
-                  <Form.Input
-                    name="avatarUrlInput"
-                    type="text"
-                    value={this.state.avatarUrlInput}
-                    onChange={this.avatarChangeHandler}
-                    onKeyPress={this.handleKeyPress}
-                    placeholder="imgur image link"
-                  />
-                </SlideLeft>
-                <SlideBottom>
-                  <Button
-                    onClick={() =>
-                      this.props.userSignup(
-                        this.state.usernameInput,
-                        this.state.passwordInput,
-                        this.state.avatarUrlInput
-                      )
-                    }
-                  >
-                    Signup
-                  </Button>
-                </SlideBottom>
+                <form onSubmit={this.handleSubmit}>
+                  <SlideLeft>
+                    <Form.Input
+                      name="usernameInput"
+                      type="text"
+                      value={this.state.usernameInput}
+                      onChange={this.changeHandler}
+                      placeholder="enter your username"
+                    />
+                  </SlideLeft>
+                  <SlideRight>
+                    <Form.Input
+                      name="passwordInput"
+                      type="password"
+                      value={this.state.passwordInput}
+                      onChange={this.changeHandler}
+                      placeholder="enter your password"
+                    />
+                  </SlideRight>
+                  <SlideLeft>
+                    <p
+                      style={{
+                        paddingTop: '5px',
+                        marginBottom: '0',
+                        color: '#bb0000'
+                      }}
+                    >
+                      {this.state.validationMessage}
+                    </p>
+                    <Form.Input
+                      name="avatarUrlInput"
+                      type="text"
+                      value={this.state.avatarUrlInput}
+                      onChange={this.avatarChangeHandler}
+                      placeholder="imgur image link"
+                    />
+                  </SlideLeft>
+                  <SlideBottom>
+                    <Button type="submit">Signup</Button>
+                  </SlideBottom>
+                </form>
               </Form>
             </Card>
           </FadeIn>
