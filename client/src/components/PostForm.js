@@ -101,7 +101,7 @@ export class PostForm extends Component {
     } else {
       return (
         <div style={{ textAlign: 'center', marginTop: '0' }}>
-          <H1>Log in to make posts.</H1>
+          <H1 style={{ marginBottom: '1em' }}>Log in to make posts.</H1>
         </div>
       )
     }

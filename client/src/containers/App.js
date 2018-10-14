@@ -61,28 +61,32 @@ export class App extends Component {
     const { isLoggedIn } = this.props
     if (this.state.hasLoaded) {
       return (
-        <Container>
-          <NavBar />
-          <FadeIn>
-            <SlideTop>
-              <Banner>
-                <H1 style={{ margin: '0 auto', color: 'white' }}>General Discussion</H1>
-              </Banner>
-            </SlideTop>
-            <SlideLeft>
-              <Pagination
-                data={this.props.threads}
-                currentPage={this.props.match.params.page}
-                context="threads"
-                pageSize={15}
-                isLoggedIn={isLoggedIn}
-              >
-                {data => <ThreadList data={data} />}
-              </Pagination>
-            </SlideLeft>
-          </FadeIn>
+        <React.Fragment>
+          <Container>
+            <NavBar />
+            <FadeIn>
+              <SlideTop>
+                <Banner>
+                  <H1 style={{ margin: '0 auto', color: 'white' }}>
+                    General Discussion
+                  </H1>
+                </Banner>
+              </SlideTop>
+              <SlideLeft>
+                <Pagination
+                  data={this.props.threads}
+                  currentPage={this.props.match.params.page}
+                  context="threads"
+                  pageSize={15}
+                  isLoggedIn={isLoggedIn}
+                >
+                  {data => <ThreadList data={data} />}
+                </Pagination>
+              </SlideLeft>
+            </FadeIn>
+          </Container>
           <Footer />
-        </Container>
+        </React.Fragment>
       )
     } else if (!this.props.isLoggedIn && this.state.hasLoaded) {
       return (

@@ -15,6 +15,7 @@ import { FadeIn, SlideTop } from '../styled/animations'
 import './Thread.css'
 
 import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
+import Footer from '../components/Footer';
 
 export class Thread extends Component {
   state = {
@@ -94,51 +95,54 @@ export class Thread extends Component {
 
     if (threadHasLoaded) {
       return (
-        <Container>
-          <NavBar />
-          <FadeIn>
-            <StyledThread>
-              <SlideTop>
-                <StyledThread.Header>
-                  <H1 style={{ margin: '0', color: 'white' }}>
-                    {title} / {author}
-                  </H1>
-                </StyledThread.Header>
-              </SlideTop>
+        <React.Fragment>
+          <Container>
+            <NavBar />
+            <FadeIn>
+              <StyledThread>
+                <SlideTop>
+                  <StyledThread.Header>
+                    <H1 style={{ margin: '0', color: 'white' }}>
+                      {title} / {author}
+                    </H1>
+                  </StyledThread.Header>
+                </SlideTop>
 
-              {threadPosts.length ? (
-                <PostList
-                  data={this.state.threadPosts}
-                  currentPage={this.props.match.params.page}
-                  threadId={this.props.match.params.id}
-                  context="posts"
-                  windowWidth={this.state.windowWidth}
-                  quotePost={this.quotePost}
+                {threadPosts.length ? (
+                  <PostList
+                    data={this.state.threadPosts}
+                    currentPage={this.props.match.params.page}
+                    threadId={this.props.match.params.id}
+                    context="posts"
+                    windowWidth={this.state.windowWidth}
+                    quotePost={this.quotePost}
+                    toggleModal={this.toggleModal}
+                    auth={this.props.auth}
+                  />
+                ) : null}
+              </StyledThread>
+
+              {this.state.openModal ? (
+                <EditPostModal
+                  isMobile={isMobile}
                   toggleModal={this.toggleModal}
-                  auth={this.props.auth}
+                  postId={this.state.postBeingEdited}
+                  threadId={this.props.match.params.id}
+                  postContent={this.state.postContent}
+                  handleEdit={this.handleEdit}
                 />
               ) : null}
-            </StyledThread>
-
-            {this.state.openModal ? (
-              <EditPostModal
-                isMobile={isMobile}
-                toggleModal={this.toggleModal}
-                postId={this.state.postBeingEdited}
-                threadId={this.props.match.params.id}
-                postContent={this.state.postContent}
-                handleEdit={this.handleEdit}
-              />
-            ) : null}
-          </FadeIn>
-          <PostForm
-            threadId={this.props.match.params.id}
-            isMobile={isMobile}
-            quotedPost={this.state.quotedPost}
-            quotedUser={this.state.quotedUser}
-            submit={this.handleSubmit}
-          />
-        </Container>
+            </FadeIn>
+            <PostForm
+              threadId={this.props.match.params.id}
+              isMobile={isMobile}
+              quotedPost={this.state.quotedPost}
+              quotedUser={this.state.quotedUser}
+              submit={this.handleSubmit}
+            />
+          </Container>
+          <Footer />
+        </React.Fragment>
       )
     } else {
       return (
