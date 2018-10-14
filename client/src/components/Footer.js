@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Foot = styled.footer`
+  height: 128px
+  width: 100%;
   background-color: rgb(162, 167, 177);
   display: flex;
-  margin: 0;
   justify-content: center;
+  flex-shrink: 0;
 `
 const InnerFooter = styled.div`
   display: flex;

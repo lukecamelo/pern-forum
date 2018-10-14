@@ -7,15 +7,11 @@ import Loader from '../components/Loader'
 import styled from 'styled-components'
 import './ThreadList.css'
 
-import { Container } from '../styled/index'
-
 export const ListWrapper = styled.main`
-  // background-color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 75%;
-  // height: 100%;
   margin: 0 auto;
   box-shadow: ${props => props.theme.largeShadow};
   @media screen and (max-width: 700px) {
@@ -102,9 +98,9 @@ export class ThreadList extends Component {
         )
       })
       return (
-        <Container>
+        <React.Fragment>
           <ListWrapper>{threadLinks}</ListWrapper>
-        </Container>
+        </React.Fragment>
       )
     } else {
       return <Loader />

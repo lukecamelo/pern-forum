@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
-  // ...
+  min-height: calc(100vh - 160px);
 `
 export const Input = styled.input.attrs({
   type: 'text'
