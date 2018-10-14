@@ -36,12 +36,6 @@ export class Login extends Component {
     })
   }
 
-  handleKeyPress = e => {
-    if(e.key === 'Enter') {
-      this.handleSubmit(e)
-    }
-  }
-
   handleSubmit = async e => {
     e.preventDefault()
 
@@ -70,32 +64,33 @@ export class Login extends Component {
 
             {!this.props.auth.isLoggedIn ? (
               <Form style={{ width: 'auto' }}>
-                <SlideLeft>
-                  <Form.Input
-                    name="usernameInput"
-                    type="text"
-                    value={this.state.usernameInput}
-                    onChange={this.changeHandler}
-                    placeholder="enter your username"
-                    data-testid="username-input"
-                  />
-                </SlideLeft>
-                <SlideRight>
-                  <Form.Input
-                    name="passwordInput"
-                    type="password"
-                    value={this.state.passwordInput}
-                    onChange={this.changeHandler}
-                    onKeyPress={this.handleKeyPress}
-                    placeholder="enter your password"
-                    data-testid="password-input"
-                  />
-                </SlideRight>
-                <SlideBottom>
-                  <ButtonWrapper>
-                    <Button onClick={e => this.handleSubmit(e)}>Login</Button>
-                  </ButtonWrapper>
-                </SlideBottom>
+                <form onSubmit={this.handleSubmit}>
+                  <SlideLeft>
+                    <Form.Input
+                      name="usernameInput"
+                      type="text"
+                      value={this.state.usernameInput}
+                      onChange={this.changeHandler}
+                      placeholder="enter your username"
+                      data-testid="username-input"
+                    />
+                  </SlideLeft>
+                  <SlideRight>
+                    <Form.Input
+                      name="passwordInput"
+                      type="password"
+                      value={this.state.passwordInput}
+                      onChange={this.changeHandler}
+                      placeholder="enter your password"
+                      data-testid="password-input"
+                    />
+                  </SlideRight>
+                  <SlideBottom>
+                    <ButtonWrapper>
+                      <Button type="submit">Login</Button>
+                    </ButtonWrapper>
+                  </SlideBottom>
+                </form>
               </Form>
             ) : null}
           </Card>
