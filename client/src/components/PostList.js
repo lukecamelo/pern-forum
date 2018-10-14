@@ -54,7 +54,7 @@ const PostList = ({
           <Post.Controls>
             <p>{parseIsoDatetime(post.createdAt)}</p>
             <div className="buttons">
-              {auth.loggedInUserId === post.user.id && auth.isLoggedIn ? (
+              {auth.userId === post.user.id && auth.isLoggedIn ? (
                 <Button
                   style={
                     isMobile
