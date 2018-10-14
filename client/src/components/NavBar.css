@@ -47,9 +47,13 @@
   background-color: #00a8ff;
 }
 
+.fa-3x {
+  font-size: 3em;
+}
+
 .small-menu div {
   color: white;
-  padding: .5em 0;
+  padding: 1em 0;
 }
 
 @media screen and (max-width: 700px) {
