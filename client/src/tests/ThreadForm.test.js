@@ -1,11 +1,11 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
 import ReactMde from 'react-mde'
-import Form from '../styled/Form'
+import { StyledLink } from '../styled'
 import { shallow } from 'enzyme'
 
 describe('<ThreadForm />', () => {
-  let props, wrapper
+  let props, wrapper, spy
   beforeEach(() => {
     props = {
       users: [
@@ -15,20 +15,24 @@ describe('<ThreadForm />', () => {
         { username: 'user4', password: 'passgew', id: 4 },
         { username: 'user5', password: 'passqqq', id: 5 }
       ],
+      auth: {
+        username: 'rediscover',
+        userId: 1,
+        isLoggedIn: true,
+      },
       loggedInUserId: 1,
       username: 'rediscover',
-      postNewThread: (title, content, userId, author) => null,
+      // postNewThread: (title, content, userId, author) => null,
       fetchThreads: () => null
     }
-
-    wrapper = shallow(<ThreadForm {...props} />)
+    spy = jest.fn()
+    wrapper = shallow(<ThreadForm {...props} postNewThread={spy} />)
   })
 
   it('posts thread on button click', () => {
-    wrapper.instance().handleSubmit = jest.fn()
     wrapper.instance().setState({ mdeState: { html: '<p>this is a test</p>' } })
-    wrapper.find(Form).simulate('submit', { preventDefault: () => {} })
-    expect(wrapper.instance().handleSubmit).toBeCalled()
+    wrapper.find(StyledLink).simulate('click')
+    expect(spy).toHaveBeenCalled()
   })
   
   it('changes state onChange', () => {

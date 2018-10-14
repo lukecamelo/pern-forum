@@ -59,21 +59,17 @@ describe('<Pagination />', () => {
 
   it('renders the correct number of page buttons', () => {
     // given 12 items
-    expect(wrapper.find('div.pagination-controls').children().length).toEqual(2)
+    expect(wrapper.find('div.pagination-controls').children().length).toEqual(1)
   })
 
   it('changes active page on click', () => {
+    wrapper.instance().setCurrentPage = jest.fn()
     wrapper
-      .find(Link)
-      .last()
-      .simulate('click')
-
-    expect(
-      wrapper
-        .find(Link)
-        .last()
-        .hasClass('pagination-controls__button--active')
-    ).toEqual(true)
+    .find(Link)
+    .last()
+    .simulate('click')
+    
+    expect(wrapper.instance().setCurrentPage).toHaveBeenCalled()
   })
 
   it('renders post links for Threads and thread links for ThreadList', () => {
