@@ -5,6 +5,7 @@ import Footer from './Footer'
 import NavBar from './NavBar'
 import styled from 'styled-components'
 import { Container } from '../styled'
+import { FadeIn, SlideLeft, SlideTop } from '../styled/animations'
 
 const Header = styled.h1`
   font-size: 2em;
@@ -63,43 +64,49 @@ const Landing = () => {
     <React.Fragment>
       <Container>
         <NavBar />
-        <Card style={{ color: '#3d4852', marginBottom: '2em' }}>
-          <Header>
-            Welcome to <strong>imp.zone</strong>
-          </Header>
-          <Ul>
-            <Li>
-              <I className="fas fa-gamepad fa-2x" />
-              <P>
-                The greatest video game discussion forum on the internet is now{' '}
-                <Strong>stand alone</Strong>. We won't be posting on 20 year old
-                software anymore.
-              </P>
-            </Li>
-            <Li>
-              <I className="fas fa-ban fa-2x" />
-              <P>
-                Completely <Strong>lowtax free</Strong>. imp.zone will not
-                stagnate like SA. Web 3.0 here we come
-              </P>
-            </Li>
-            <Li>
-              <I className="fas fa-users fa-2x" />
-              <P>
-                It is also <Strong>regular free</Strong>. you don't have to pay
-                10bux to post here. We only ask that you are chill and love
-                video games. Welcome.
-              </P>
-            </Li>
-          </Ul>
-          <Link
-            to="/threads/1"
-            className="navlink"
-            style={{ width: '150px', margin: '1em auto' }}
-          >
-            Check it out
-          </Link>
-        </Card>
+        <FadeIn>
+          <Card style={{ color: '#3d4852', marginBottom: '2em' }}>
+            <SlideTop>
+              <Header>
+                Welcome to <strong>imp.zone</strong>
+              </Header>
+            </SlideTop>
+            <SlideLeft>
+              <Ul>
+                <Li>
+                  <I className="fas fa-gamepad fa-2x" />
+                  <P>
+                    The greatest video game discussion forum on the internet is
+                    now <Strong>stand alone</Strong>. We won't be posting on 20
+                    year old software anymore.
+                  </P>
+                </Li>
+                <Li>
+                  <I className="fas fa-ban fa-2x" />
+                  <P>
+                    Completely <Strong>lowtax free</Strong>. imp.zone will not
+                    stagnate like SA. Web 3.0 here we come
+                  </P>
+                </Li>
+                <Li>
+                  <I className="fas fa-users fa-2x" />
+                  <P>
+                    It is also <Strong>regular free</Strong>. you don't have to
+                    pay 10bux to post here. We only ask that you are chill and
+                    love video games. Welcome.
+                  </P>
+                </Li>
+              </Ul>
+            </SlideLeft>
+            <Link
+              to="/threads/1"
+              className="navlink"
+              style={{ width: '150px', margin: '1em auto' }}
+            >
+              Check it out
+            </Link>
+          </Card>
+        </FadeIn>
       </Container>
       <Footer />
     </React.Fragment>
