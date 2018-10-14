@@ -4,6 +4,7 @@ import PostForm from '../components/PostForm'
 import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
 import Loader from '../components/Loader'
+import * as Scroll from 'react-scroll'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
@@ -83,10 +84,12 @@ export class Thread extends Component {
   }
 
   quotePost = (postContent, quotedUser) => {
+    let scroller = Scroll.animateScroll
     this.setState({
       quotedPost: postContent,
       quotedUser
     })
+    scroller.scrollToBottom({ duration: 400, smooth: true })
   }
 
   render() {
@@ -96,7 +99,7 @@ export class Thread extends Component {
     if (threadHasLoaded) {
       return (
         <React.Fragment>
-          <Container>
+          <Container id='container'>
             <NavBar />
             <FadeIn>
               <StyledThread>
@@ -134,6 +137,7 @@ export class Thread extends Component {
               ) : null}
             </FadeIn>
             <PostForm
+              name="postForm"
               threadId={this.props.match.params.id}
               isMobile={isMobile}
               quotedPost={this.state.quotedPost}
