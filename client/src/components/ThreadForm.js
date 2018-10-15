@@ -85,7 +85,7 @@ export class ThreadForm extends Component {
                   </Form.Markdown>
                 </SlideRight>
                 <SlideBottom style={{ padding: '1.5em' }}>
-                  <StyledLink
+                  {this.state.title !== '' ? <StyledLink
                     to="/threads/1"
                     onClick={() =>
                       this.props.postNewThread(
@@ -97,7 +97,7 @@ export class ThreadForm extends Component {
                     }
                   >
                     Submit Thread
-                  </StyledLink>
+                  </StyledLink> : <H1 style={{ margin: '0' }}>title cannot be empty.</H1>}
                 </SlideBottom>
               </FadeIn>
             </Form>
