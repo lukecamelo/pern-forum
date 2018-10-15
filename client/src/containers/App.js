@@ -63,7 +63,7 @@ export class App extends Component {
       return (
         <React.Fragment>
           <Container>
-            <NavBar />
+            <NavBar isHome={true} />
             <FadeIn>
               <SlideTop>
                 <Banner>
