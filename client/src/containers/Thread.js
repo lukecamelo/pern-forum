@@ -8,7 +8,7 @@ import * as Scroll from 'react-scroll'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-import { editPostContent } from '../utils/threadHelpers'
+import { editPostContent, deletePost } from '../utils/threadHelpers'
 
 import { Container, H1 } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
@@ -74,6 +74,14 @@ export class Thread extends Component {
     })
   }
 
+  handleDelete = async (postId, threadId) => {
+    deletePost(postId)
+    let thread = await fetchSingleThread(threadId)
+    this.setState({
+      threadPosts: thread.Post
+    })
+  }
+
   handleEdit = async (threadId, postId, content) => {
     await editPostContent(threadId, postId, content)
     let thread = await fetchSingleThread(threadId)
@@ -121,6 +129,7 @@ export class Thread extends Component {
                     quotePost={this.quotePost}
                     toggleModal={this.toggleModal}
                     auth={this.props.auth}
+                    deletePost={this.handleDelete}
                   />
                 ) : null}
               </StyledThread>

@@ -74,6 +74,14 @@ router.post('/:id/editpost', (req, res) => {
     })
 })
 
+router.get('/:id/deletepost', (req, res) => {
+  models.post
+    .destroy({
+      where: { id: req.params.id }
+    })
+    .then(post => res.json(post))
+})
+
 // Get single thread
 router.get('/:id', (req, res) => {
   models.thread

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userLogout } from '../actions/authActions'
+import { fetchThreads } from '../actions/threadActions'
 
 import ResponsiveMenu from 'react-responsive-navbar'
 import './NavBar.css'
@@ -30,7 +31,6 @@ const Logo = styled.div`
     display: none;
   }
 `
-
 export const NavBar = ({ isLoggedIn, user, ...props }) => {
   let navigation
   if (isLoggedIn) {
@@ -43,7 +43,11 @@ export const NavBar = ({ isLoggedIn, user, ...props }) => {
         <Link to="/usercontrolpanel" className="navlink">
           Control Panel
         </Link>
-        <Link to="/threads/1" className="logout" onClick={() => props.userLogout()}>
+        <Link
+          to="/threads/1"
+          className="logout"
+          onClick={() => props.userLogout()}
+        >
           Logout ({user})
         </Link>
       </StyledNav>
@@ -95,5 +99,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { userLogout }
+  { userLogout, fetchThreads }
 )(NavBar)

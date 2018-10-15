@@ -88,3 +88,8 @@ export const checkForPosts = threads => {
   }
   return false
 }
+
+export const deletePost = async postId => {
+  let post = await axios.get(`/thread/${postId}/deletepost`)
+  return post.data
+}
