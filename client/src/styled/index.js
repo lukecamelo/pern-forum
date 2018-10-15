@@ -57,3 +57,10 @@ export const H1 = styled.h1`
   font-weight: 300;
   color: ${props => props.theme.primary};
 `
+export const DeleteButton = styled(Button)`
+  color: #bb0000;
+  border: 2px solid #bb0000;
+  &:hover {
+    background-color: #bb0000
+  }
+`

@@ -1,6 +1,6 @@
 import Pagination from './Pagination'
 import React from 'react'
-import { Button } from '../styled/index'
+import { Button, DeleteButton } from '../styled/index'
 import Post from '../styled/Post'
 import Avatar from 'react-avatar'
 import { SlideLeft } from '../styled/animations'
@@ -15,7 +15,8 @@ const PostList = ({
   toggleModal,
   quotePost,
   currentPage,
-  threadId
+  threadId,
+  deletePost
 }) => {
   const isMobile = windowWidth < 700 ? true : false
   const mobileButtonStyle = {
@@ -86,6 +87,18 @@ const PostList = ({
                   Quote
                 </Button>
               ) : null}
+              {auth.userId === 1 ? <DeleteButton
+                style={
+                  isMobile
+                    ? mobileButtonStyle
+                    : {
+                        marginBottom: '0',
+                        marginLeft: '0',
+                        boxShadow: 'none',
+                      }
+                }
+                onClick={() => deletePost(post.id, threadId)}
+              >Delete</DeleteButton> : null}
             </div>
           </Post.Controls>
         </Post.Body>
