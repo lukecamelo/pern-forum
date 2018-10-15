@@ -14,7 +14,8 @@ export class PostForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mdeState: null
+      mdeState: null,
+      message: ''
     }
     this.converter = new Showdown.Converter({
       tables: true,
@@ -37,7 +38,7 @@ export class PostForm extends Component {
   }
 
   handleValueChange = mdeState => {
-    this.setState({ mdeState })
+    this.setState({ mdeState, message: '' })
   }
 
   changeEditorText = fn => {
@@ -62,14 +63,21 @@ export class PostForm extends Component {
   }
 
   submitAndClearEditor = async (content, username, userId, threadId) => {
-    await this.props.submit(content, username, userId, threadId)
-    this.changeEditorText(clearEditor())
+    if (this.state.mdeState.html !== '') {
+      await this.props.submit(content, username, userId, threadId)
+      this.changeEditorText(clearEditor())
+    } else {
+      this.setState({
+        message: 'posts cannot be blank!'
+      })
+    }
   }
 
   render() {
     if (this.props.auth.isLoggedIn) {
       return (
-        <Form style={{}}>
+        <Form>
+          <H1 style={{ margin: '0' }}>{this.state.message}</H1>
           <Form.Markdown>
             <ReactMde
               layout={this.props.isMobile ? 'vertical' : 'tabbed'}
