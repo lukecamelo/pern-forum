@@ -63,7 +63,10 @@ export class PostForm extends Component {
   }
 
   submitAndClearEditor = async (content, username, userId, threadId) => {
-    if (this.state.mdeState.html !== '') {
+    // prevent people from typing weird html strings to bypass empty post filter
+    let span = document.createElement('span')
+    span.innerHTML = this.state.mdeState.html
+    if (span.textContent !== '') {
       await this.props.submit(content, username, userId, threadId)
       this.changeEditorText(clearEditor())
     } else {
