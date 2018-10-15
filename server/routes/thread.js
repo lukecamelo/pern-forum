@@ -16,6 +16,10 @@ router.get('/threads', (req, res) => {
         {
           model: models.post,
           as: 'Post'
+        },
+        {
+          model: models.subforum,
+          as: 'subforum'
         }
       ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]

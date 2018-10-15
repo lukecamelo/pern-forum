@@ -10,6 +10,7 @@ const config = require(__dirname + '/../config/config.js')[env]
 const user = require('./user')
 const thread = require('./thread')
 const post = require('./post')
+const subforum = require('./subforum')
 const url =
   'postgres://ixokdhlskmpphx:c9ad01e9c20556fc75242e5b2b6e600539b805dde77ab33b3a14d670bd61c9d7@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcbbl2rbe22bj6'
 // TEST DB
@@ -64,6 +65,8 @@ db.user.hasMany(db.post)
 db.post.belongsTo(db.user)
 db.post.belongsTo(db.thread)
 db.thread.hasMany(db.post, { as: 'Post' })
+db.subforum.hasMany(db.thread)
+db.thread.belongsTo(db.subforum)
 
 // aliases
 db.sequelize = sequelize
