@@ -11,7 +11,7 @@ import NavBar from './NavBar'
 import './NavBar.css'
 import Form from '../styled/Form'
 import { Card } from './UserControlPanel'
-import { Container, StyledLink, H1 } from '../styled/index'
+import { Container, H1, Button } from '../styled/index'
 import {
   FadeIn,
   SlideLeft,
@@ -47,12 +47,33 @@ export class ThreadForm extends Component {
 
   changeHandler = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      message: ''
     })
   }
 
   handleValueChange = mdeState => {
-    this.setState({ mdeState })
+    this.setState({ mdeState, message: '' })
+  }
+
+  handleSubmit = () => {
+    let span = document.createElement('span')
+    let span2 = document.createElement('span')
+    span.innerHTML = this.state.mdeState.html
+    span2.innerHTML = this.state.title
+    if (span.textContent === '' || span2.textContent === '') {
+      this.setState({
+        message: 'title/content cannot be blank'
+      })
+    } else {
+      this.props.postNewThread(
+        this.state.title,
+        this.state.mdeState.html,
+        this.props.auth.userId,
+        this.props.auth.username
+      )
+      this.props.history.push('/threads/1')
+    }
   }
 
   render() {
@@ -73,7 +94,9 @@ export class ThreadForm extends Component {
                   />
                 </SlideLeft>
                 <SlideRight>
-                  <Form.Markdown style={{ boxShadow: '0 0 0 white', textAlign: 'left' }}>
+                  <Form.Markdown
+                    style={{ boxShadow: '0 0 0 white', textAlign: 'left' }}
+                  >
                     <ReactMde
                       layout={'tabbed'}
                       onChange={this.handleValueChange}
@@ -85,19 +108,10 @@ export class ThreadForm extends Component {
                   </Form.Markdown>
                 </SlideRight>
                 <SlideBottom style={{ padding: '1.5em' }}>
-                  {this.state.title !== '' ? <StyledLink
-                    to="/threads/1"
-                    onClick={() =>
-                      this.props.postNewThread(
-                        this.state.title,
-                        this.state.mdeState.html,
-                        this.props.auth.userId,
-                        this.props.auth.username
-                      )
-                    }
-                  >
+                  <Button to="/threads/1" onClick={() => this.handleSubmit()}>
                     Submit Thread
-                  </StyledLink> : <H1 style={{ margin: '0' }}>title cannot be empty.</H1>}
+                  </Button>
+                  <H1 style={{ color: '#bb0000' }}>{this.state.message}</H1>
                 </SlideBottom>
               </FadeIn>
             </Form>
