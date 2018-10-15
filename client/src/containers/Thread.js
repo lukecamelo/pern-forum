@@ -4,7 +4,6 @@ import PostForm from '../components/PostForm'
 import EditPostModal from '../components/EditPostModal'
 import PostList from '../components/PostList'
 import Loader from '../components/Loader'
-import * as Scroll from 'react-scroll'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
@@ -92,12 +91,11 @@ export class Thread extends Component {
   }
 
   quotePost = (postContent, quotedUser) => {
-    let scroller = Scroll.animateScroll
     this.setState({
       quotedPost: postContent,
       quotedUser
     })
-    scroller.scrollToBottom({ duration: 400, smooth: true })
+    this.el.scrollIntoView({ behavior: 'smooth' })
   }
 
   render() {
@@ -153,7 +151,8 @@ export class Thread extends Component {
               quotedUser={this.state.quotedUser}
               submit={this.handleSubmit}
             />
-          </Container>
+            <div ref={el => { this.el = el }} />
+          </Container> 
           <Footer />
         </React.Fragment>
       )
