@@ -77,22 +77,20 @@ const Landing = () => {
                   <I className="fas fa-gamepad fa-2x" />
                   <P>
                     The greatest video game discussion forum on the internet is
-                    now <Strong>stand alone</Strong>. We won't be posting on 20
-                    year old software anymore.
+                    now <Strong>stand alone</Strong>. No more 20 year old software.
                   </P>
                 </Li>
                 <Li>
                   <I className="fas fa-ban fa-2x" />
                   <P>
-                    Completely <Strong>lowtax free</Strong>. imp.zone will not
-                    stagnate like SA. Web 3.0 here we come
+                    Completely <Strong>lowtax free</Strong>. Free of his poor judgment, the world is our oyster
                   </P>
                 </Li>
                 <Li>
                   <I className="fas fa-users fa-2x" />
                   <P>
                     It is also <Strong>regular free</Strong>. you don't have to
-                    pay 10bux to post here. We only ask that you are chill and
+                    pay 10 bucks to post here. I only ask that you are chill and
                     love video games. Welcome.
                   </P>
                 </Li>
