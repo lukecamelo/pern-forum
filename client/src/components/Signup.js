@@ -104,11 +104,19 @@ export class Signup extends React.Component {
                   </SlideRight>
                   <SlideLeft>
                     <p
-                      style={{
-                        paddingTop: '5px',
-                        marginBottom: '0',
-                        color: '#bb0000'
-                      }}
+                      style={
+                        this.state.urlIsValid
+                          ? {
+                              paddingTop: '5px',
+                              marginBottom: '0',
+                              color: '#3c763d'
+                            }
+                          : {
+                              paddingTop: '5px',
+                              marginBottom: '0',
+                              color: '#bb0000'
+                            }
+                      }
                     >
                       {this.state.validationMessage}
                     </p>
