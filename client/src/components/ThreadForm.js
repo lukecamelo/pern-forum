@@ -108,7 +108,10 @@ export class ThreadForm extends Component {
                   </Form.Markdown>
                 </SlideRight>
                 <SlideBottom style={{ padding: '1.5em' }}>
-                  <Button to="/threads/1" onClick={() => this.handleSubmit()}>
+                  <Button
+                    style={{ margin: '0' }}
+                    onClick={() => this.handleSubmit()}
+                  >
                     Submit Thread
                   </Button>
                   <H1 style={{ color: '#bb0000' }}>{this.state.message}</H1>
