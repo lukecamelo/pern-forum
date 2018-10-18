@@ -18,7 +18,7 @@ const PostList = ({
   threadId,
   deletePost
 }) => {
-  const isMobile = windowWidth < 700 ? true : false
+  const isMobile = windowWidth < 768 ? true : false
   const mobileButtonStyle = {
     margin: '1em 4px 4px 4px',
     padding: '2px 2px',
