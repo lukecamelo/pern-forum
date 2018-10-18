@@ -57,11 +57,12 @@ export class ThreadForm extends Component {
   }
 
   handleSubmit = () => {
-    let span = document.createElement('span')
-    let span2 = document.createElement('span')
-    span.innerHTML = this.state.mdeState.html
-    span2.innerHTML = this.state.title
-    if (span.textContent === '' || span2.textContent === '') {
+    // to ensure no html string nonsense
+    let title = document.createElement('span')
+    let content = document.createElement('span')
+    title.innerHTML = this.state.title
+    content.innerHTML = this.state.mdeState.html
+    if (title.textContent === '' || content.textContent === '') {
       this.setState({
         message: 'title/content cannot be blank'
       })
@@ -95,7 +96,7 @@ export class ThreadForm extends Component {
                 </SlideLeft>
                 <SlideRight>
                   <Form.Markdown
-                    style={{ boxShadow: '0 0 0 white', textAlign: 'left' }}
+                    style={{ boxShadow: 'none', textAlign: 'left' }}
                   >
                     <ReactMde
                       layout={'tabbed'}
