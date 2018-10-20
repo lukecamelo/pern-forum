@@ -7,10 +7,6 @@ export const quotePostInEditor = (quotedUser, quotedPost) => {
   )
 }
 
-export const clearEditor = () => {
-  return ''
-}
-
 const removeNestedQuotes = string => {
   let regex = /<blockquote>[\s\S]*<\/blockquote>/
   let new_str = string.replace(regex, '')

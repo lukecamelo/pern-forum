@@ -51,7 +51,7 @@ export class ThreadForm extends Component {
       message: ''
     })
   }
-
+  
   handleValueChange = mdeState => {
     this.setState({ mdeState, message: '' })
   }

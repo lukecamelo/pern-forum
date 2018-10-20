@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-import { quotePostInEditor, clearEditor } from '../utils/markdownHelpers'
+import { quotePostInEditor } from '../utils/markdownHelpers'
 
 import Form from '../styled/Form'
 import { Button, H1 } from '../styled/index'
@@ -68,7 +68,7 @@ export class PostForm extends Component {
     span.innerHTML = this.state.mdeState.html
     if (span.textContent !== '') {
       await this.props.submit(content, username, userId, threadId)
-      this.changeEditorText(clearEditor())
+      this.changeEditorText('')
     } else {
       this.setState({
         message: 'posts cannot be blank!'
