@@ -12,7 +12,7 @@ import { editPostContent, deletePost } from '../utils/threadHelpers'
 import { Container, H1 } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
 import { FadeIn, SlideTop } from '../styled/animations'
-import './Thread.css'
+import '../css/Thread.css'
 
 import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
 import Footer from '../components/Footer';

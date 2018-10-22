@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import * as Scroll from 'react-scroll'
 import { Link } from 'react-router-dom'
 import { NewThreadLink } from '../containers/App'
-import './Pagination.css'
+import '../css/Pagination.css'
 
 class Pagination extends Component {
   state = {

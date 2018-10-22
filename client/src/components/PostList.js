@@ -4,7 +4,7 @@ import { Button, DeleteButton } from '../styled/index'
 import Post from '../styled/Post'
 import Avatar from 'react-avatar'
 import { SlideLeft } from '../styled/animations'
-import '../containers/Thread.css'
+import '../css/Thread.css'
 
 import { getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
 

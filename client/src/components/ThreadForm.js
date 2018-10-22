@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { postNewThread, fetchThreads } from '../actions/threadActions'
 
 import NavBar from './NavBar'
-import './NavBar.css'
+import '../css/NavBar.css'
 import Form from '../styled/Form'
 import { Card } from './UserControlPanel'
 import { Container, H1, Button } from '../styled/index'

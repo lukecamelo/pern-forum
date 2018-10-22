@@ -5,7 +5,7 @@ import { fetchData, fetchThreads } from '../actions/threadActions'
 import { filterAuthor, checkForPosts } from '../utils/threadHelpers'
 import Loader from '../components/Loader'
 import styled from 'styled-components'
-import './ThreadList.css'
+import '../css/ThreadList.css'
 
 export const ListWrapper = styled.main`
   display: flex;

@@ -6,7 +6,7 @@ import { userLogout } from '../actions/authActions'
 import { fetchThreads } from '../actions/threadActions'
 
 import ResponsiveMenu from 'react-responsive-navbar'
-import './NavBar.css'
+import '../css/NavBar.css'
 
 const StyledNav = styled.nav`
   display: flex;
