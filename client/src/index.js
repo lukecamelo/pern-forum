@@ -13,6 +13,7 @@ import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
 import EditPostModal from './components/EditPostModal'
 import Landing from './components/Landing'
+import SubforumList from './containers/SubforumList';
 
 const theme = {
   primary: '#00a8ff',
@@ -45,6 +46,7 @@ ReactDOM.render(
           <Route exact path="/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />
+          <Route path="/subforumtest" component={SubforumList} />
         </Switch>
       </BrowserRouter>
     </Provider>

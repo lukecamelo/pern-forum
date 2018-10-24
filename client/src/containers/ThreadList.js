@@ -18,7 +18,7 @@ export const ListWrapper = styled.main`
     width: 90%;
   }
 `
-const ThreadLink = styled.div`
+export const ThreadLink = styled.div`
   background-color: white;
   display: flex;
   flex-direction: row;
