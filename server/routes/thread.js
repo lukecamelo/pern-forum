@@ -28,6 +28,15 @@ router.get('/threads', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.get('/subforum/:id', (req, res) => {
+  models.thread.findAll({
+    where: { subforumId: req.params.id },
+    include: [{ model: models.subforum, as: 'subforum' }]
+  })
+  .then(threads => res.json(threads))
+  .catch(err => console.log(err))
+})
+
 // Returns all posts in a thread
 router.get('/:id/posts', (req, res) => {
   models.post

@@ -42,6 +42,17 @@ export const fetchThreads = () => dispatch => {
     .catch(err => console.log('FETCH_THREADS ERROR: ', err))
 }
 
+// TODO: write this route
+export const fetchSubforumThreads = (subforumId) => dispatch => {
+  return fetch(`/thread/subforum/${subforumId}`)
+    .then(res => res.json())
+    .then(threads => {
+      dispatch({
+        // ...
+      })
+    })
+}
+
 export const postNewThread = (title, content, userId, author) => dispatch => {
   return fetch('/thread/threads', {
     method: 'POST',
