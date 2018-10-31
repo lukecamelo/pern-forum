@@ -3,7 +3,8 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
-  FETCH_POSTS
+  FETCH_POSTS,
+  FETCH_SUBFORUM_THREADS
 } from '../actions/types'
 
 const initialState = {
@@ -24,6 +25,11 @@ export default (state = initialState, action) => {
         ...state,
         threads: action.payload,
         posts: []
+      }
+    case FETCH_SUBFORUM_THREADS:
+      return {
+        ...state,
+        threads: action.payload
       }
     case POST_NEW_THREAD:
       return {

@@ -17,10 +17,6 @@ router.get('/threads', (req, res) => {
           model: models.post,
           as: 'Post'
         },
-        {
-          model: models.subforum,
-          as: 'subforum'
-        }
       ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
     })
@@ -29,12 +25,14 @@ router.get('/threads', (req, res) => {
 })
 
 router.get('/subforum/:id', (req, res) => {
-  models.thread.findAll({
-    where: { subforumId: req.params.id },
-    include: [{ model: models.subforum, as: 'subforum' }]
-  })
-  .then(threads => res.json(threads))
-  .catch(err => console.log(err))
+  models.thread
+    .findAll({
+      where: { subforumId: req.params.id },
+      include: [{ model: models.subforum, as: 'subforum' }],
+      order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
+    })
+    .then(threads => res.json(threads))
+    .catch(err => console.log(err))
 })
 
 // Returns all posts in a thread
