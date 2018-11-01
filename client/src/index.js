@@ -46,6 +46,7 @@ ReactDOM.render(
           <Route exact path="/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />
+          <Route path="/subforum/:id/page/:page" component={SubforumList}/>
           <Route path="/subforumtest" component={SubforumList} />
         </Switch>
       </BrowserRouter>

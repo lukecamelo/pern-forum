@@ -28,7 +28,7 @@ router.get('/subforum/:id', (req, res) => {
   models.thread
     .findAll({
       where: { subforumId: req.params.id },
-      include: [{ model: models.subforum, as: 'subforum' }],
+      include: [{ model: models.subforum, as: 'subforum' }, { model: models.post, as: 'Post' }],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
     })
     .then(threads => res.json(threads))
