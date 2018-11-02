@@ -3,6 +3,7 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
+  FETCH_SUBFORUM_THREADS,
 } from './types'
 
 import store from '../store'
@@ -48,7 +49,8 @@ export const fetchSubforumThreads = (subforumId) => dispatch => {
     .then(res => res.json())
     .then(threads => {
       dispatch({
-        // ...
+        type: FETCH_SUBFORUM_THREADS,
+        payload: threads
       })
     })
 }

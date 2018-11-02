@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchSubforumThreads } from '../actions/threadActions'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 
 class Subforum extends Component {
+  componentDidMount = () => {
+    this.props.fetchSubforumThreads(2)
+  }
+  
   render() {
     return (
       <React.Fragment>
@@ -15,4 +21,11 @@ class Subforum extends Component {
   }
 }
 
-export default Subforum
+const mapStateToProps = state => ({
+  threads: state.threadData.threads
+})
+
+export default connect(
+  mapStateToProps,
+  { fetchSubforumThreads }
+)(Subforum)
