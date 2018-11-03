@@ -36,7 +36,7 @@ export class ThreadList extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    await this.props.fetchThreads()
+    // await this.props.fetchThreads()
     this.setState({
       hasLoaded: true
     })
