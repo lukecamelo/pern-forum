@@ -15,7 +15,7 @@ class Subforum extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    await this.props.fetchSubforumThreads(2)
+    await this.props.fetchSubforumThreads(1)
     this.setState({
       hasLoaded: true
     })
@@ -29,7 +29,7 @@ class Subforum extends Component {
           <NavBar />
           <Banner>
             <H1 style={{ margin: '0 auto', color: 'white' }}>
-              General Discussion
+              {this.props.threads[0].subforum.name}
             </H1>
           </Banner>
           <Pagination
