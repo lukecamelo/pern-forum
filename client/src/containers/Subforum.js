@@ -15,7 +15,7 @@ class Subforum extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    await this.props.fetchSubforumThreads(1)
+    await this.props.fetchSubforumThreads(this.props.match.params.id)
     this.setState({
       hasLoaded: true
     })
@@ -34,7 +34,7 @@ class Subforum extends Component {
           </Banner>
           <Pagination
             data={this.props.threads}
-            currentPage={1}
+            currentPage={this.props.match.params.page}
             context="threads"
             pageSize={15}
             isLoggedIn={this.props.auth.isLoggedIn}
