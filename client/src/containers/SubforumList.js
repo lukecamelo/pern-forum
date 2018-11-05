@@ -22,8 +22,11 @@ class SubforumList extends Component {
           <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
         </Banner>
         <SubforumContainer>
-          <Link className="title" to="/">
+          <Link className="title" to="/subforum/1/page/1">
             General Discussion
+          </Link>
+          <Link className="title" to="/subforum/2/page/1">
+            Video Games
           </Link>
         </SubforumContainer>
       </React.Fragment>
