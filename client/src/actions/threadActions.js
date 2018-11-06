@@ -3,7 +3,7 @@ import {
   FETCH_THREADS,
   POST_NEW_THREAD,
   MAKE_NEW_POST,
-  FETCH_SUBFORUM_THREADS,
+  FETCH_SUBFORUM_THREADS
 } from './types'
 
 import store from '../store'
@@ -44,7 +44,7 @@ export const fetchThreads = () => dispatch => {
 }
 
 // TODO: write this route
-export const fetchSubforumThreads = (subforumId) => dispatch => {
+export const fetchSubforumThreads = subforumId => dispatch => {
   return fetch(`/thread/subforum/${subforumId}`)
     .then(res => res.json())
     .then(threads => {
@@ -86,14 +86,14 @@ export const makeNewPost = (
     credentials: 'same-origin',
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json; charset=utf-8'
+      Accept: 'application/json; charset=utf-8'
       // Authorization: `Bearer ${auth}`
     },
     body: JSON.stringify({ content, username, userId, threadId })
   })
     .then(() => {
       dispatch({
-        type: MAKE_NEW_POST,
+        type: MAKE_NEW_POST
       })
     })
     .catch(err => console.log('error making post: ', err))

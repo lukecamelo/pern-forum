@@ -30,7 +30,7 @@ async function makeThreadAndOp(req, res, next) {
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
 
-  req.data = res.json(post)
+  // req.data = res.json(post)
   next()
 }
 
