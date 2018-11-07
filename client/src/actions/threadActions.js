@@ -55,7 +55,7 @@ export const fetchSubforumThreads = subforumId => dispatch => {
     })
 }
 
-export const postNewThread = (title, content, userId, author) => dispatch => {
+export const postNewThread = (title, content, userId, author, subforumId = 1) => dispatch => {
   return fetch('/thread/threads', {
     method: 'POST',
     headers: {
@@ -63,7 +63,7 @@ export const postNewThread = (title, content, userId, author) => dispatch => {
       Accept: 'application/json',
       Authorization: `Bearer ${auth}`
     },
-    body: JSON.stringify({ title, content, userId, author })
+    body: JSON.stringify({ title, content, userId, author, subforumId })
   })
     .then(res => res.json())
     .then(thread => {

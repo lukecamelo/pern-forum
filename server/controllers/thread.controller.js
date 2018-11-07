@@ -17,7 +17,8 @@ async function makeThreadAndOp(req, res, next) {
     thread: {
       title: body.title,
       content: body.content,
-      userId: body.userId
+      userId: body.userId,
+      subforumId: body.subforumId
     }
   }
 
@@ -29,8 +30,8 @@ async function makeThreadAndOp(req, res, next) {
 
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
-
-  // req.data = res.json(post)
+  // console.log(post.thread)
+  req.data = res.json(post.thread)
   next()
 }
 

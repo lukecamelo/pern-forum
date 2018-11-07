@@ -29,7 +29,8 @@ class Subforum extends Component {
           <NavBar />
           <Banner>
             <H1 style={{ margin: '0 auto', color: 'white' }}>
-              {this.props.threads[0].subforum.name}
+              {this.props.match.params.id === '1' && 'General Discussion'}
+              {this.props.match.params.id === '2' && 'Video Games'}
             </H1>
           </Banner>
           <Pagination
