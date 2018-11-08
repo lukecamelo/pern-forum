@@ -13,7 +13,7 @@ export const ListWrapper = styled.main`
   align-items: flex-start;
   width: 75%;
   margin: 0 auto;
-  box-shadow: ${props => props.theme.largeShadow};
+  box-shadow: ${({ theme }) => theme.largeShadow};
   @media screen and (max-width: 700px) {
     width: 90%;
   }
@@ -78,19 +78,17 @@ export class ThreadList extends Component {
             </div>
             <div className="author">
               <div className="item thread-author">
-                <p className='tag'>Author</p>
-                <p className="username">
-                  {filterAuthor(users, thread.userId)}
-                </p>
+                <p className="tag">Author</p>
+                <p className="username">{filterAuthor(users, thread.userId)}</p>
               </div>
 
               <div className="item">
-                <p className='tag'>Posts</p>
+                <p className="tag">Posts</p>
                 {thread.Post.length}
               </div>
 
               <div className="item">
-                <p className='tag'>Latest</p>
+                <p className="tag">Latest</p>
                 <p className="username">{thread.Post[0].author}</p>
               </div>
             </div>

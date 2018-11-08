@@ -15,7 +15,7 @@ import { FadeIn, SlideTop } from '../styled/animations'
 import '../css/Thread.css'
 
 import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
-import Footer from '../components/Footer';
+import Footer from '../components/Footer'
 
 export class Thread extends Component {
   state = {
@@ -58,8 +58,8 @@ export class Thread extends Component {
   }
 
   toggleModal = (postId, postContent) => {
-    this.setState(prevState => ({
-      openModal: !prevState.openModal,
+    this.setState(({ openModal }) => ({
+      openModal: !openModal,
       postBeingEdited: postId,
       postContent
     }))
@@ -105,7 +105,7 @@ export class Thread extends Component {
     if (threadHasLoaded) {
       return (
         <React.Fragment>
-          <Container id='container'>
+          <Container id="container">
             <NavBar />
             <FadeIn>
               <StyledThread>
@@ -151,8 +151,12 @@ export class Thread extends Component {
               quotedUser={this.state.quotedUser}
               submit={this.handleSubmit}
             />
-            <div ref={el => { this.el = el }} />
-          </Container> 
+            <div
+              ref={el => {
+                this.el = el
+              }}
+            />
+          </Container>
           <Footer />
         </React.Fragment>
       )

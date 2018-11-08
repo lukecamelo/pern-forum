@@ -18,6 +18,14 @@ const SubforumContainer = styled.div`
   background-color: white;
   box-shadow: ${props => props.theme.mediumShadow};
 `
+const LatestThread = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  white-space: nowrap;
+  display: block;
+  width: 250px;
+`
 
 class SubforumList extends Component {
   state = {
@@ -50,10 +58,11 @@ class SubforumList extends Component {
                   General Discussion
                 </Link>
               </div>
-              <div className="author">
-                <div className="item">
+
+              <div className="author" style={{ justifyContent: 'center' }}>
+                <div className="item thread-author">
                   <p className="tag">Latest Thread</p>
-                  {this.state.latestGeneral}
+                  <LatestThread>{this.state.latestGeneral}</LatestThread>
                 </div>
               </div>
             </ThreadLink>
@@ -63,10 +72,10 @@ class SubforumList extends Component {
                   Video Games
                 </Link>
               </div>
-              <div className="author">
-                <div className="item">
+              <div className="author" style={{ justifyContent: 'center' }}>
+                <div className="item thread-author">
                   <p className="tag">Latest Thread</p>
-                  {this.state.latestGames}
+                  <LatestThread>{this.state.latestGames}</LatestThread>
                 </div>
               </div>
             </ThreadLink>
