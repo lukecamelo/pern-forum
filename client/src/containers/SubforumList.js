@@ -16,22 +16,28 @@ const SubforumContainer = styled.div`
   // padding: 0 1em 1em 1em;
   margin: 0 auto 2em auto;
   background-color: white;
-  box-shadow: ${props => props.theme.mediumShadow};
+  box-shadow: ${({ theme }) => theme.mediumShadow};
 `
-const LatestThread = styled.p`
+const LatestThread = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.primary};
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
   white-space: nowrap;
   display: block;
   width: 250px;
+  transition: 0.2s;
+  &:hover {
+    color: ${({ theme }) => theme.secondary};
+    text-decoration: underline;
+  }
 `
 
 class SubforumList extends Component {
   state = {
     latestGeneral: '',
     latestGames: '',
-    dumpy: 'fuck'
   }
 
   componentDidMount = async () => {
@@ -62,7 +68,11 @@ class SubforumList extends Component {
               <div className="author" style={{ justifyContent: 'center' }}>
                 <div className="item thread-author">
                   <p className="tag">Latest Thread</p>
-                  <LatestThread>{this.state.latestGeneral}</LatestThread>
+                  <LatestThread
+                    to={`/thread/${this.state.latestGeneral.id}/page/1`}
+                  >
+                    {this.state.latestGeneral.title}
+                  </LatestThread>
                 </div>
               </div>
             </ThreadLink>
@@ -75,7 +85,11 @@ class SubforumList extends Component {
               <div className="author" style={{ justifyContent: 'center' }}>
                 <div className="item thread-author">
                   <p className="tag">Latest Thread</p>
-                  <LatestThread>{this.state.latestGames}</LatestThread>
+                  <LatestThread
+                    to={`/thread/${this.state.latestGames.id}/page/1`}
+                  >
+                    {this.state.latestGames.title}
+                  </LatestThread>
                 </div>
               </div>
             </ThreadLink>

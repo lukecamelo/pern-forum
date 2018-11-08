@@ -96,6 +96,6 @@ export const deletePost = async postId => {
 
 export const getLatestSubforumThread = async subforumId => {
   let threads = await axios.get(`/thread/subforum/${subforumId}`)
-  console.log('hello! ', threads.data[0].title)
-  return threads.data[0].title
+  console.log('hello! ', threads.data[0])
+  return threads.data[0]
 }
