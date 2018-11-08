@@ -14,7 +14,7 @@ import Pagination from '../components/Pagination'
 import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 import styled from 'styled-components'
-import SubforumList from './SubforumList'
+// import SubforumList from './SubforumList'
 
 export const NewThreadLink = styled(Link)`
   color: #0266c8;

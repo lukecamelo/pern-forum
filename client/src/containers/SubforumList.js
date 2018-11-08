@@ -2,10 +2,14 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import { getLatestSubforumThread } from '../utils/threadHelpers'
+
 import { Banner } from './App'
 import { H1, Container } from '../styled'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import '../css/SubforumList.css'
+import { ThreadLink } from './ThreadList'
 
 const SubforumContainer = styled.div`
   width: 75vw;
@@ -16,6 +20,21 @@ const SubforumContainer = styled.div`
 `
 
 class SubforumList extends Component {
+  state = {
+    latestGeneral: '',
+    latestGames: '',
+    dumpy: 'fuck'
+  }
+
+  componentDidMount = async () => {
+    let latestGeneral = await getLatestSubforumThread(1)
+    let latestGames = await getLatestSubforumThread(2)
+    this.setState({
+      latestGeneral,
+      latestGames
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -25,12 +44,32 @@ class SubforumList extends Component {
             <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
           </Banner>
           <SubforumContainer>
-            <Link className="title" to="/subforum/1/page/1">
-              General Discussion
-            </Link>
-            <Link className="title" to="/subforum/2/page/1">
-              Video Games
-            </Link>
+            <ThreadLink style={{ fontSize: '1.5em' }}>
+              <div className="title-pages">
+                <Link className="title" to="/subforum/1/page/1">
+                  General Discussion
+                </Link>
+              </div>
+              <div className="author">
+                <div className="item">
+                  <p className="tag">Latest Thread</p>
+                  {this.state.latestGeneral}
+                </div>
+              </div>
+            </ThreadLink>
+            <ThreadLink style={{ fontSize: '1.5em' }}>
+              <div className="title-pages">
+                <Link className="title" to="/subforum/2/page/1">
+                  Video Games
+                </Link>
+              </div>
+              <div className="author">
+                <div className="item">
+                  <p className="tag">Latest Thread</p>
+                  {this.state.latestGames}
+                </div>
+              </div>
+            </ThreadLink>
           </SubforumContainer>
         </Container>
         <Footer />
