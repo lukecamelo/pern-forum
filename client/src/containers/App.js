@@ -7,14 +7,12 @@ import { Link } from 'react-router-dom'
 import { H1 } from '../components/Login'
 import { Card } from '../components/UserControlPanel'
 import { Container } from '../styled/index'
-import { FadeIn, SlideTop, SlideLeft } from '../styled/animations'
+import { FadeIn, SlideTop } from '../styled/animations'
 import NavBar from '../components/NavBar'
-import ThreadList from './ThreadList'
-import Pagination from '../components/Pagination'
 import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 import styled from 'styled-components'
-// import SubforumList from './SubforumList'
+import SubforumList from './SubforumList'
 
 export const NewThreadLink = styled(Link)`
   color: #0266c8;
@@ -52,38 +50,19 @@ export class App extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    await this.props.fetchThreads()
     this.setState({
       hasLoaded: true
     })
   }
 
   render() {
-    const { isLoggedIn } = this.props
     if (this.state.hasLoaded) {
       return (
         <React.Fragment>
           <Container>
             <NavBar isHome={true} />
             <FadeIn>
-              <SlideTop>
-                <Banner>
-                  <H1 style={{ margin: '0 auto', color: 'white' }}>
-                    General Discussion
-                  </H1>
-                </Banner>
-              </SlideTop>
-              <SlideLeft>
-                <Pagination
-                  data={this.props.threads}
-                  currentPage={this.props.match.params.page}
-                  context="threads"
-                  pageSize={15}
-                  isLoggedIn={isLoggedIn}
-                >
-                  {data => <ThreadList data={data} />}
-                </Pagination>
-              </SlideLeft>
+              <SubforumList />
             </FadeIn>
           </Container>
           <Footer />
@@ -105,17 +84,23 @@ export class App extends Component {
       )
     } else if (this.props.isLoggedIn && !this.state.hasLoaded) {
       return (
-        <Container>
-          <NavBar />
-          <Loader />
-        </Container>
+        <React.Fragment>
+          <Container>
+            <NavBar />
+            <Loader />
+          </Container>
+          <Footer />
+        </React.Fragment>
       )
     } else {
       return (
-        <Container>
-          <NavBar />
-          <Loader />
-        </Container>
+        <React.Fragment>
+          <Container>
+            <NavBar />
+            <Loader />
+          </Container>
+          <Footer />
+        </React.Fragment>
       )
     }
   }

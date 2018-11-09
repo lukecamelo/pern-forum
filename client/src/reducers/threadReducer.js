@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
     case POST_NEW_THREAD:
       return {
         ...state,
-        threads: [...state.threads, action.payload]
+        threads: [...state.threads, action.payload.thread]
       }
     case MAKE_NEW_POST:
       return {

@@ -31,33 +31,33 @@ const Logo = styled.div`
     display: none;
   }
 `
-const A = styled.a`
-  color: white;
-  background-color: #0266c8;
-  text-decoration: none;
-  margin-right: 1em;
-  padding: 14px;
-  transition: 0.2s;
-  font-family: 'Lato', sans-serif;
-  &:hover {
-    color: white;
-  background-color: #f195ac;
-  cursor: pointer;
-  }
-`
+// const A = styled.a`
+//   color: white;
+//   background-color: #0266c8;
+//   text-decoration: none;
+//   margin-right: 1em;
+//   padding: 14px;
+//   transition: 0.2s;
+//   font-family: 'Lato', sans-serif;
+//   &:hover {
+//     color: white;
+//   background-color: #f195ac;
+//   cursor: pointer;
+//   }
+// `
 export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   let navigation
   if (isLoggedIn) {
     navigation = (
       <StyledNav>
         <Logo>imp.zone</Logo>
-        {!isHome ? (
-          <Link to="/threads/1" className="navlink">
+        {/* {!isHome ? ( */}
+          <Link to="/subforums" className="navlink">
             Home
           </Link>
-        ) : (
+        {/* ) : (
           <A className="navlink" onClick={() => props.fetchThreads()}>Home</A>
-        )}
+        )} */}
         <Link to="/usercontrolpanel" className="navlink">
           Control Panel
         </Link>

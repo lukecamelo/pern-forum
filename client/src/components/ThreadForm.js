@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
 import { connect } from 'react-redux'
-import { postNewThread, fetchThreads } from '../actions/threadActions'
+import { postNewThread, fetchSubforumThreads } from '../actions/threadActions'
 
 import NavBar from './NavBar'
 import '../css/NavBar.css'
@@ -42,7 +42,7 @@ export class ThreadForm extends Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchThreads()
+    this.props.fetchSubforumThreads(this.props.match.params.id)
   }
 
   changeHandler = e => {
@@ -74,7 +74,7 @@ export class ThreadForm extends Component {
         this.props.auth.username,
         this.props.match.params.id
       )
-      this.props.history.push('/threads/1')
+      this.props.history.push(`/subforum/${this.props.match.params.id}/page/1`)
     }
   }
 
@@ -143,5 +143,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postNewThread, fetchThreads }
+  { postNewThread, fetchSubforumThreads }
 )(ThreadForm)

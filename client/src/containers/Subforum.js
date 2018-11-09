@@ -15,14 +15,12 @@ class Subforum extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    await this.props.fetchSubforumThreads(this.props.match.params.id)
     this.setState({
       hasLoaded: true
     })
   }
 
   render() {
-    console.log(this.props.threads)
     if (this.state.hasLoaded) {
       return (
         <React.Fragment>
@@ -41,7 +39,7 @@ class Subforum extends Component {
             isLoggedIn={this.props.auth.isLoggedIn}
             subforumId={this.props.match.params.id}
           >
-            {data => <ThreadList data={data} />}
+            {data => <ThreadList data={data} subforumId={this.props.match.params.id} />}
           </Pagination>
         </React.Fragment>
       )

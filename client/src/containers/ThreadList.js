@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchData, fetchThreads } from '../actions/threadActions'
+import { fetchData, fetchSubforumThreads } from '../actions/threadActions'
 import { filterAuthor, checkForPosts } from '../utils/threadHelpers'
 import Loader from '../components/Loader'
 import styled from 'styled-components'
@@ -36,7 +36,7 @@ export class ThreadList extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
-    // await this.props.fetchThreads()
+    await this.props.fetchSubforumThreads(this.props.subforumId)
     this.setState({
       hasLoaded: true
     })
@@ -112,5 +112,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchThreads }
+  { fetchData, fetchSubforumThreads }
 )(ThreadList)

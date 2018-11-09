@@ -13,7 +13,6 @@ import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
 import EditPostModal from './components/EditPostModal'
 import Landing from './components/Landing'
-import SubforumList from './containers/SubforumList';
 import Subforum from './containers/Subforum';
 
 const theme = {
@@ -46,9 +45,8 @@ ReactDOM.render(
           <Route exact path="/editpost" component={EditPostModal} />
           <Route exact path="/subforum/:id/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
-          <Route path="/threads/:page" component={App} />
           <Route path="/subforum/:id/page/:page" component={Subforum}/>
-          <Route path="/subforumtest" component={SubforumList} />
+          <Route path="/subforums" component={App} />
         </Switch>
       </BrowserRouter>
     </Provider>
