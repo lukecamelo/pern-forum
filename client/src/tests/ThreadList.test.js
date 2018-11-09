@@ -76,10 +76,4 @@ describe('<ThreadList />', () => {
     expect(fetchData.calledOnce).toBe(true)
     componentDidMountSpy.restore()
   })
-
-  it('fetches threads on componentDidMount', () => {
-    const componentDidMountSpy = sinon.spy(ThreadList.prototype, 'componentDidMount')
-    expect(fetchThreads.calledOnce).toBe(true)
-    componentDidMountSpy.restore()
-  })
 })

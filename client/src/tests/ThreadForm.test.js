@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
 import ReactMde from 'react-mde'
-import { StyledLink } from '../styled'
+import { StyledLink, Button } from '../styled'
 import { shallow } from 'enzyme'
 
 describe('<ThreadForm />', () => {
@@ -31,8 +31,9 @@ describe('<ThreadForm />', () => {
 
   it('posts thread on button click', () => {
     wrapper.instance().setState({ mdeState: { html: '<p>this is a test</p>' } })
-    wrapper.find(StyledLink).simulate('click')
-    expect(spy).toHaveBeenCalled()
+    wrapper.instance().handleSubmit = jest.fn()
+    wrapper.find(Button).simulate('click')
+    expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
   })
   
   it('changes state onChange', () => {
