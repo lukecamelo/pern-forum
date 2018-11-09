@@ -47,7 +47,7 @@ class Pagination extends Component {
         <Link
           to={
             this.props.context === 'threads'
-              ? `/threads/${i}`
+              ? `/subforum/${this.props.subforumId}/page/${i}`
               : `/thread/${this.props.threadId}/page/${i}`
           }
           className={`${baseClassName} ${activeClassName}`}

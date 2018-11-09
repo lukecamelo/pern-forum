@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { getLatestSubforumThread } from '../utils/threadHelpers'
+import moment from 'moment'
 
 import { Banner } from './App'
 import { H1 } from '../styled'
 import '../css/SubforumList.css'
 import { ThreadLink } from './ThreadList'
+import Loader from '../components/Loader'
 
 const SubforumContainer = styled.div`
   width: 75vw;
@@ -36,8 +38,8 @@ const LatestThread = styled(Link)`
 
 class SubforumList extends Component {
   state = {
-    latestGeneral: 'asdkfjalskdjflka',
-    latestGames: 'lkajsfdlkjaslkfj',
+    latestGeneral: '...',
+    latestGames: '...',
     hasLoaded: false
   }
 
@@ -53,51 +55,83 @@ class SubforumList extends Component {
 
   render() {
     const { hasLoaded, latestGeneral, latestGames } = this.state
-    return (
-      <React.Fragment>
-        <Banner>
-          <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
-        </Banner>
-        <SubforumContainer className='subforumsss'>
-          <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
-            <div className="title-pages">
-              <Link className="title" to="/subforum/1/page/1">
-                General Discussion
-              </Link>
-            </div>
-
-            <div className="author" style={{ justifyContent: 'center' }}>
-              <div className="item thread-author">
-                <p className="tag">Latest Thread</p>
-                <LatestThread
-                  to={`/thread/${this.state.latestGeneral.id}/page/1`}
-                >
-                  {hasLoaded ? latestGeneral.title : 'loading...'}
-                </LatestThread>
+    if (hasLoaded) {
+      return (
+        <React.Fragment>
+          <Banner>
+            <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
+          </Banner>
+          <SubforumContainer className="subforumsss">
+            <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
+              <div className="title-pages">
+                <Link className="title" to="/subforum/1/page/1">
+                  General Discussion
+                </Link>
               </div>
-            </div>
-          </ThreadLink>
 
-          <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
-            <div className="title-pages">
-              <Link className="title" to="/subforum/2/page/1">
-                Video Games
-              </Link>
-            </div>
-            <div className="author" style={{ justifyContent: 'center' }}>
-              <div className="item thread-author">
-                <p className="tag">Latest Thread</p>
-                <LatestThread
-                  to={`/thread/${this.state.latestGames.id}/page/1`}
+              <div className="author" style={{ justifyContent: 'center' }}>
+                <div
+                  className="item thread-author"
+                  style={{ textAlign: 'left' }}
                 >
-                  {hasLoaded ? latestGames.title : 'loading...'}
-                </LatestThread>
+                  <LatestThread
+                    to={`/thread/${this.state.latestGeneral.id}/page/1`}
+                  >
+                    {latestGeneral.title}
+                  </LatestThread>
+                  <p
+                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
+                  >
+                    By {latestGeneral.Post[0].author}
+                  </p>
+                  <p
+                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
+                  >
+                    {moment(latestGeneral.Post[0].createdAt).fromNow()}
+                  </p>
+                </div>
               </div>
-            </div>
-          </ThreadLink>
-        </SubforumContainer>
-      </React.Fragment>
-    )
+            </ThreadLink>
+
+            <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
+              <div className="title-pages">
+                <Link className="title" to="/subforum/2/page/1">
+                  Video Games
+                </Link>
+              </div>
+              <div className="author" style={{ justifyContent: 'center' }}>
+                <div
+                  className="item thread-author"
+                  style={{ textAlign: 'left' }}
+                >
+                  <LatestThread
+                    to={`/thread/${this.state.latestGames.id}/page/1`}
+                  >
+                    {latestGames.title}
+                  </LatestThread>
+                  <p
+                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
+                  >
+                    By {latestGames.Post[0].author}
+                  </p>
+                  <p
+                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
+                  >
+                    {moment(latestGames.Post[0].createdAt).fromNow()}
+                  </p>
+                </div>
+              </div>
+            </ThreadLink>
+          </SubforumContainer>
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          <Loader />
+        </React.Fragment>
+      )
+    }
   }
 }
 

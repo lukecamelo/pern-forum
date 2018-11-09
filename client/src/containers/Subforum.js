@@ -4,9 +4,10 @@ import { fetchSubforumThreads, fetchData } from '../actions/threadActions'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 import { Banner } from './App'
-import { H1, SubforumLink } from '../styled'
+import { H1, SubforumLink, Container } from '../styled'
 import NavBar from '../components/NavBar'
 import Loader from '../components/Loader'
+import Footer from '../components/Footer'
 
 class Subforum extends Component {
   state = {
@@ -16,6 +17,8 @@ class Subforum extends Component {
 
   async componentDidMount() {
     await this.props.fetchData()
+
+    // TODO: what is this mess... FIX IT
     switch (this.props.match.params.id) {
       case '1':
         this.setState({ subforumName: 'General Discussion' })
@@ -35,33 +38,39 @@ class Subforum extends Component {
     if (this.state.hasLoaded) {
       return (
         <React.Fragment>
-          <NavBar />
-          <Banner>
-            <div>
-              <SubforumLink
-                to="/subforums"
-                style={{ margin: '0 auto', color: 'white' }}
-              >
-                Forums
-              </SubforumLink>{' '}
-              <H1 style={{ margin: '0 auto', color: 'white', display: 'inline' }}> -> </H1>{' '}
-              <H1 style={{ margin: '0 auto', color: 'white', display: 'inline' }}>
-                {this.state.subforumName}
-              </H1>
-            </div>
-          </Banner>
-          <Pagination
-            data={this.props.threads}
-            currentPage={this.props.match.params.page}
-            context="threads"
-            pageSize={15}
-            isLoggedIn={this.props.auth.isLoggedIn}
-            subforumId={this.props.match.params.id}
-          >
-            {data => (
-              <ThreadList data={data} subforumId={this.props.match.params.id} />
-            )}
-          </Pagination>
+          <Container>
+            <NavBar />
+            <Banner>
+              <div>
+                <SubforumLink
+                  to="/subforums"
+                  style={{ margin: '0 auto', color: 'white' }}
+                >
+                  Forums
+                </SubforumLink>{' '}
+                <i className="fas fa-angle-right fa-2x" style={{ margin: '0 6px' }}></i>
+                <H1 style={{ margin: '0', color: 'white', display: 'inline' }}>
+                  {this.state.subforumName}
+                </H1>
+              </div>
+            </Banner>
+            <Pagination
+              data={this.props.threads}
+              currentPage={this.props.match.params.page}
+              context="threads"
+              pageSize={15}
+              isLoggedIn={this.props.auth.isLoggedIn}
+              subforumId={this.props.match.params.id}
+            >
+              {data => (
+                <ThreadList
+                  data={data}
+                  subforumId={this.props.match.params.id}
+                />
+              )}
+            </Pagination>
+          </Container>
+          <Footer />
         </React.Fragment>
       )
     } else {

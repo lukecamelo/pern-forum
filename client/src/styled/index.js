@@ -63,6 +63,9 @@ export const SubforumLink = styled(Link)`
   text-decoration: none;
   color: white;
   font-size: 2em;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 export const DeleteButton = styled(Button)`
   color: #bb0000;
