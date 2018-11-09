@@ -71,7 +71,8 @@ export class ThreadForm extends Component {
         this.state.title,
         this.state.mdeState.html,
         this.props.auth.userId,
-        this.props.auth.username
+        this.props.auth.username,
+        this.props.match.params.id
       )
       this.props.history.push('/threads/1')
     }

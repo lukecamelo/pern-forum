@@ -44,7 +44,7 @@ ReactDOM.render(
           <Route exact path="/signup" component={Signup} />
           <Route path="/thread/:id/page/:page" component={Thread} />
           <Route exact path="/editpost" component={EditPostModal} />
-          <Route exact path="/newthread" component={ThreadForm} />
+          <Route exact path="/subforum/:id/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/threads/:page" component={App} />
           <Route path="/subforum/:id/page/:page" component={Subforum}/>

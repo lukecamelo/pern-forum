@@ -39,6 +39,7 @@ class Subforum extends Component {
             context="threads"
             pageSize={15}
             isLoggedIn={this.props.auth.isLoggedIn}
+            subforumId={this.props.match.params.id}
           >
             {data => <ThreadList data={data} />}
           </Pagination>

@@ -93,7 +93,7 @@ class Pagination extends Component {
           {context === 'threads' && this.props.isLoggedIn ? (
             <NewThreadLink
               style={{ padding: '.5em 1em', height: '35px' }}
-              to="/newthread"
+              to={`/subforum/${this.props.subforumId}/newthread`}
             >
               Post Thread
             </NewThreadLink>
