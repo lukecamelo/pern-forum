@@ -57,6 +57,13 @@ export const H1 = styled.h1`
   font-weight: 300;
   color: ${props => props.theme.primary};
 `
+export const SubforumLink = styled(Link)`
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  color: white;
+  font-size: 2em;
+`
 export const DeleteButton = styled(Button)`
   color: #bb0000;
   border: 2px solid #bb0000;

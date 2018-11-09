@@ -18,8 +18,8 @@
 .title {
   display: flex;
   text-decoration: none;
-  color: #3d4852; 
-  padding: .5em 1em;
+  color: #3d4852;
+  padding: 0.5em 1em;
   width: 100%;
   font-size: 1.5em;
   justify-self: flex-start;
@@ -43,7 +43,7 @@
   text-decoration: none;
   color: #0266c8;
   padding: 0.5em 0.75em;
-  transition: .2s;
+  transition: 0.2s;
 }
 
 .page-button:hover {
@@ -58,7 +58,7 @@
 .author {
   display: flex;
   flex-direction: row;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
 }
 
 .item {
@@ -66,7 +66,7 @@
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  padding: 0 .5em 0 .5em;
+  padding: 0 0.5em 0 0.5em;
   color: #00a8ff;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
@@ -96,14 +96,8 @@
 }
 
 @media screen and (max-width: 968px) {
-  .link {
-    font-size: 1em;
-  }
-  .title {
-    font-size: 1em;
-  }
   .page-controls {
-    padding-left: .5em;
+    padding-left: 0.5em;
   }
   .page-button {
     font-size: 1em;
@@ -113,6 +107,15 @@
   }
   .thread-author {
     display: flex;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .link {
+    font-size: 1em;
+  }
+  .title {
+    font-size: 1em;
   }
 }
 

@@ -11,10 +11,12 @@ import { ThreadLink } from './ThreadList'
 
 const SubforumContainer = styled.div`
   width: 75vw;
-  // padding: 0 1em 1em 1em;
   margin: 0 auto 2em auto;
   background-color: white;
   box-shadow: ${({ theme }) => theme.mediumShadow};
+  @media screen and (max-width: 700px) {
+    width: 90vw;
+  }
 `
 const LatestThread = styled(Link)`
   text-decoration: none;
@@ -56,8 +58,8 @@ class SubforumList extends Component {
         <Banner>
           <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
         </Banner>
-        <SubforumContainer>
-          <ThreadLink style={{ fontSize: '1.5em' }}>
+        <SubforumContainer className='subforumsss'>
+          <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
             <div className="title-pages">
               <Link className="title" to="/subforum/1/page/1">
                 General Discussion
@@ -75,7 +77,8 @@ class SubforumList extends Component {
               </div>
             </div>
           </ThreadLink>
-          <ThreadLink style={{ fontSize: '1.5em' }}>
+
+          <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
             <div className="title-pages">
               <Link className="title" to="/subforum/2/page/1">
                 Video Games

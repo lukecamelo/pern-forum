@@ -4,17 +4,28 @@ import { fetchSubforumThreads, fetchData } from '../actions/threadActions'
 import ThreadList from './ThreadList'
 import Pagination from '../components/Pagination'
 import { Banner } from './App'
-import { H1 } from '../styled'
+import { H1, SubforumLink } from '../styled'
 import NavBar from '../components/NavBar'
 import Loader from '../components/Loader'
 
 class Subforum extends Component {
   state = {
-    hasLoaded: false
+    hasLoaded: false,
+    subforumName: ''
   }
 
   async componentDidMount() {
     await this.props.fetchData()
+    switch (this.props.match.params.id) {
+      case '1':
+        this.setState({ subforumName: 'General Discussion' })
+        break
+      case '2':
+        this.setState({ subforumName: 'Video Games' })
+        break
+      default:
+        break
+    }
     this.setState({
       hasLoaded: true
     })
@@ -26,10 +37,18 @@ class Subforum extends Component {
         <React.Fragment>
           <NavBar />
           <Banner>
-            <H1 style={{ margin: '0 auto', color: 'white' }}>
-              {this.props.match.params.id === '1' && 'General Discussion'}
-              {this.props.match.params.id === '2' && 'Video Games'}
-            </H1>
+            <div>
+              <SubforumLink
+                to="/subforums"
+                style={{ margin: '0 auto', color: 'white' }}
+              >
+                Forums
+              </SubforumLink>{' '}
+              <H1 style={{ margin: '0 auto', color: 'white', display: 'inline' }}> -> </H1>{' '}
+              <H1 style={{ margin: '0 auto', color: 'white', display: 'inline' }}>
+                {this.state.subforumName}
+              </H1>
+            </div>
           </Banner>
           <Pagination
             data={this.props.threads}
@@ -39,7 +58,9 @@ class Subforum extends Component {
             isLoggedIn={this.props.auth.isLoggedIn}
             subforumId={this.props.match.params.id}
           >
-            {data => <ThreadList data={data} subforumId={this.props.match.params.id} />}
+            {data => (
+              <ThreadList data={data} subforumId={this.props.match.params.id} />
+            )}
           </Pagination>
         </React.Fragment>
       )

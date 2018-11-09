@@ -101,14 +101,15 @@ export class Thread extends Component {
   render() {
     const { title, author, threadHasLoaded, threadPosts = [] } = this.state
     const isMobile = this.state.windowWidth < 700 ? true : false
+    const keepFooterSticky = this.state.windowWidth < 880 ? true : false
 
     if (threadHasLoaded) {
       return (
         <React.Fragment>
-          <Container id="container">
+          <Container id="container" style={keepFooterSticky ? { marginBottom: '2em' } : null}>
             <NavBar />
             <FadeIn>
-              <StyledThread>
+              <StyledThread> 
                 <SlideTop>
                   <StyledThread.Header>
                     <H1 style={{ margin: '0', color: 'white' }}>

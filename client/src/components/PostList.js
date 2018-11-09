@@ -4,6 +4,7 @@ import { Button, DeleteButton } from '../styled/index'
 import Post from '../styled/Post'
 import Avatar from 'react-avatar'
 import { SlideLeft } from '../styled/animations'
+import moment from 'moment'
 import '../css/Thread.css'
 
 import { getMarkdownText, parseIsoDatetime } from '../utils/threadHelpers'
@@ -18,7 +19,7 @@ const PostList = ({
   threadId,
   deletePost
 }) => {
-  const isMobile = windowWidth < 768 ? true : false
+  const isMobile = windowWidth < 880 ? true : false
   const mobileButtonStyle = {
     margin: '1em 4px 4px 4px',
     padding: '2px 2px',
@@ -53,7 +54,7 @@ const PostList = ({
           />
 
           <Post.Controls>
-            <p>{parseIsoDatetime(post.createdAt)}</p>
+            <p>{moment(post.createdAt).fromNow()}</p>
             <div className="buttons">
               {auth.userId === post.user.id && auth.isLoggedIn ? (
                 <Button
