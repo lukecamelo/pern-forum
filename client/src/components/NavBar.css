@@ -1,0 +1,68 @@
+.navlink {
+  color: white;
+  background-color: #0266c8;
+  text-decoration: none;
+  margin-right: 1em;
+  padding: 14px;
+  transition: 0.2s;
+  font-family: 'Lato', sans-serif;
+}
+
+.logout {
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  margin-right: 1em;
+  padding: 14px;
+  transition: 0.2s;
+  border: 2px solid #0266c8;
+  font-family: 'Lato', sans-serif;
+}
+
+.thread-button {
+  color: #0266c8;
+  background-color: white;
+  text-decoration: none;
+  padding: 14px;
+  transition: 0.2s;
+  border: 2px solid #0266c8;
+  font-family: 'Roboto', sans-serif;
+}
+
+.logout:hover,
+.thread-button:hover {
+  color: white;
+  background-color: #f195ac;
+  border: 2px solid #f195ac;
+  cursor: pointer;
+}
+
+.navlink:hover {
+  color: white;
+  background-color: #f195ac;
+  cursor: pointer;
+}
+
+.small-menu {
+  background-color: #00a8ff;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.small-menu div {
+  color: white;
+  padding: 1em 0;
+}
+
+@media screen and (max-width: 700px) {
+  .navlink {
+    margin-bottom: 1em;
+  }
+  .navlink,
+  .logout {
+    margin-right: 0;
+    width: 200px;
+  }
+}
