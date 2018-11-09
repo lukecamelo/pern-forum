@@ -6,10 +6,7 @@
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
     "marked": "^0.5.0",
-<<<<<<< HEAD
     "moment": "^2.22.2",
-=======
->>>>>>> fbae2349cedc6c13d0d0b1259b09ad66ac64aa2a
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-avatar": "^3.2.0",
