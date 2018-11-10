@@ -51,18 +51,14 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
     navigation = (
       <StyledNav>
         <Logo>imp.zone</Logo>
-        {/* {!isHome ? ( */}
-          <Link to="/subforums" className="navlink">
-            Home
-          </Link>
-        {/* ) : (
-          <A className="navlink" onClick={() => props.fetchThreads()}>Home</A>
-        )} */}
+        <Link to="/subforums" className="navlink">
+          Home
+        </Link>
         <Link to="/usercontrolpanel" className="navlink">
           Control Panel
         </Link>
         <Link
-          to="/threads/1"
+          to="/subforums"
           className="logout"
           onClick={() => props.userLogout()}
         >
@@ -84,7 +80,7 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
     navigation = (
       <StyledNav>
         <Logo>imp.zone</Logo>
-        <Link to="/threads/1" className="navlink">
+        <Link to="/subforums" className="navlink">
           Home
         </Link>
 
