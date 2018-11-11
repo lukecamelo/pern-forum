@@ -4,7 +4,7 @@ import { Card } from './UserControlPanel'
 import Footer from './Footer'
 import NavBar from './NavBar'
 import styled from 'styled-components'
-import { Container } from '../styled'
+import { Container, Ul, Li, I, P, Strong } from '../styled'
 import { FadeIn, SlideLeft, SlideTop } from '../styled/animations'
 
 const Header = styled.h1`
@@ -20,45 +20,7 @@ const Header = styled.h1`
     color: #0266c8;
   }
 `
-const Li = styled.li`
-  width: 75%;
-  margin: 0 auto;
-  padding: 1em 0;
-  display: flex;
-  justify-content: flex-start;
-  @media screen and (max-width: 700px) {
-    flex-direction: column;
-    align-items: center;
-    > p {
-      text-align: center;
-      width: 300px;
-    }
-  }
-`
-const Ul = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-`
-const I = styled.i`
-  min-height: 50px;
-  min-width: 50px;
-  margin-right: 0.5em;
-  color: #0266c8;
-  @media screen and (max-width: 532px) {
-    margin-right: 0;
-  }
-`
-const P = styled.p`
-  font-size: 18px;
-  line-height: 1.5;
-  margin: 0;
-  display: inline-block;
-  text-align: left;
-`
-const Strong = styled.strong`
-  color: #0266c8;
-`
+
 const Landing = () => {
   return (
     <React.Fragment>
@@ -97,7 +59,7 @@ const Landing = () => {
               </Ul>
             </SlideLeft>
             <Link
-              to="/threads/1"
+              to="/subforums"
               className="navlink"
               style={{ width: '150px', margin: '1em auto' }}
             >

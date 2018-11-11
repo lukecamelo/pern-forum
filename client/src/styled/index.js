@@ -57,6 +57,45 @@ export const H1 = styled.h1`
   font-weight: 300;
   color: ${props => props.theme.primary};
 `
+export const Li = styled.li`
+  width: 75%;
+  margin: 0 auto;
+  padding: 1em 0;
+  display: flex;
+  justify-content: flex-start;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+    > p {
+      text-align: center;
+      width: 300px;
+    }
+  }
+`
+export const Ul = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+`
+export const I = styled.i`
+  min-height: 50px;
+  min-width: 50px;
+  margin-right: 0.5em;
+  color: #0266c8;
+  @media screen and (max-width: 532px) {
+    margin-right: 0;
+  }
+`
+export const P = styled.p`
+  font-size: 18px;
+  line-height: 1.5;
+  margin: 0;
+  display: inline-block;
+  text-align: left;
+`
+export const Strong = styled.strong`
+  color: #0266c8;
+`
 export const SubforumLink = styled(Link)`
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
