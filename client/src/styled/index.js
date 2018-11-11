@@ -101,7 +101,7 @@ export const SubforumLink = styled(Link)`
   font-weight: 300;
   text-decoration: none;
   color: white;
-  font-size: 2em;
+  font-size: 1em;
   &:hover {
     text-decoration: underline;
   }

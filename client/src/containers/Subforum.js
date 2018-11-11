@@ -58,7 +58,7 @@ class Subforum extends Component {
                   Forums
                 </SubforumLink>
                 <i
-                  className="fas fa-angle-right fa-2x"
+                  className="fas fa-angle-right"
                   style={{ margin: '0 6px' }}
                 />
                 <H1 style={{ margin: '0', color: 'white', display: 'inline' }}>

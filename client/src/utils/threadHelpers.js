@@ -34,7 +34,8 @@ export const fetchThreadAndAuthor = async threadId => {
     threadPosts: thread.Post,
     userId: thread.userId,
     author: author.username,
-    threadHasLoaded: true
+    threadHasLoaded: true,
+    subforum: thread.subforum
   }
 }
 

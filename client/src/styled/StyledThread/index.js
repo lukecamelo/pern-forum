@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Header from './Header';
 import Body from './Body';
+import Navigation from './Navigation'
 
 const StyledThread = styled.section`
   background-color: rgb(229, 235, 247);
@@ -14,5 +15,6 @@ const StyledThread = styled.section`
 
 StyledThread.Header = Header
 StyledThread.Body = Body
+StyledThread.Navigation = Navigation
 
 export default StyledThread

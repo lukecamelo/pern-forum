@@ -104,7 +104,8 @@ router.get('/:id', (req, res) => {
           as: 'Post',
           include: [{ model: models.user }]
         },
-        { model: models.user }
+        { model: models.user },
+        { model: models.subforum }
       ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'ASC']]
     })

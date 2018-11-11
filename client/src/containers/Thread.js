@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 import { editPostContent, deletePost } from '../utils/threadHelpers'
 
-import { Container, H1 } from '../styled/index'
+import { Container, SubforumLink } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
 import { FadeIn, SlideTop } from '../styled/animations'
 import '../css/Thread.css'
@@ -19,6 +19,7 @@ import Footer from '../components/Footer'
 
 export class Thread extends Component {
   state = {
+    subforum: {},
     title: '',
     content: '',
     author: '',
@@ -37,6 +38,7 @@ export class Thread extends Component {
     if (!this.state.threadHasLoaded || !this.state.threadPosts.length) {
       const result = await fetchThreadAndAuthor(this.props.match.params.id)
       await this.setState({
+        subforum: result.subforum,
         title: result.title,
         content: result.content,
         author: result.author,
@@ -99,28 +101,63 @@ export class Thread extends Component {
   }
 
   render() {
-    const { title, author, threadHasLoaded, threadPosts = [] } = this.state
+    const {
+      title,
+      author,
+      subforum,
+      threadHasLoaded,
+      threadPosts = []
+    } = this.state
     const isMobile = this.state.windowWidth < 700 ? true : false
     const keepFooterSticky = this.state.windowWidth < 880 ? true : false
 
     if (threadHasLoaded) {
       return (
         <React.Fragment>
-          <Container id="container" style={keepFooterSticky ? { marginBottom: '2em' } : null}>
+          <Container
+            id="container"
+            style={keepFooterSticky ? { marginBottom: '2em' } : null}
+          >
             <NavBar />
             <FadeIn>
-              <StyledThread> 
+              <StyledThread>
                 <SlideTop>
                   <StyledThread.Header>
-                    <H1 style={{ margin: '0', color: 'white' }}>
-                      {title} / {author}
-                    </H1>
+                    <StyledThread.Navigation>
+                      <SubforumLink
+                        to="/subforums"
+                        style={{ margin: '0', color: 'white' }}
+                      >
+                        Forums
+                      </SubforumLink>
+                      <i
+                        className="fas fa-angle-right"
+                        style={{ margin: '0 6px' }}
+                      />
+                      <SubforumLink
+                        to={`/subforum/${subforum.id}/page/1`}
+                        style={{
+                          margin: '0',
+                          color: 'white',
+                          display: 'inline'
+                        }}
+                      >
+                        {subforum.name}
+                      </SubforumLink>
+                      <i
+                        className="fas fa-angle-right"
+                        style={{ margin: '0 6px' }}
+                      />
+                      <StyledThread.Navigation.Title>
+                        {title}
+                      </StyledThread.Navigation.Title>
+                    </StyledThread.Navigation>
                   </StyledThread.Header>
                 </SlideTop>
 
                 {threadPosts.length ? (
                   <PostList
-                    data={this.state.threadPosts}
+                    data={threadPosts}
                     currentPage={this.props.match.params.page}
                     threadId={this.props.match.params.id}
                     context="posts"
@@ -133,7 +170,7 @@ export class Thread extends Component {
                 ) : null}
               </StyledThread>
 
-              {this.state.openModal ? (
+              {this.state.openModal && (
                 <EditPostModal
                   isMobile={isMobile}
                   toggleModal={this.toggleModal}
@@ -142,7 +179,7 @@ export class Thread extends Component {
                   postContent={this.state.postContent}
                   handleEdit={this.handleEdit}
                 />
-              ) : null}
+              )}
             </FadeIn>
             <PostForm
               name="postForm"
