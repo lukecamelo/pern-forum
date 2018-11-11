@@ -31,20 +31,6 @@ const Logo = styled.div`
     display: none;
   }
 `
-// const A = styled.a`
-//   color: white;
-//   background-color: #0266c8;
-//   text-decoration: none;
-//   margin-right: 1em;
-//   padding: 14px;
-//   transition: 0.2s;
-//   font-family: 'Lato', sans-serif;
-//   &:hover {
-//     color: white;
-//   background-color: #f195ac;
-//   cursor: pointer;
-//   }
-// `
 export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   let navigation
   if (isLoggedIn) {

@@ -35,7 +35,16 @@ class Subforum extends Component {
   }
 
   render() {
-    if (this.state.hasLoaded) {
+    const { hasLoaded, subforumName } = this.state
+    const {
+      threads,
+      match: {
+        params: { page, id }
+      },
+      auth: { isLoggedIn }
+    } = this.props
+
+    if (hasLoaded) {
       return (
         <React.Fragment>
           <Container>
@@ -47,25 +56,28 @@ class Subforum extends Component {
                   style={{ margin: '0 auto', color: 'white' }}
                 >
                   Forums
-                </SubforumLink>{' '}
-                <i className="fas fa-angle-right fa-2x" style={{ margin: '0 6px' }}></i>
+                </SubforumLink>
+                <i
+                  className="fas fa-angle-right fa-2x"
+                  style={{ margin: '0 6px' }}
+                />
                 <H1 style={{ margin: '0', color: 'white', display: 'inline' }}>
-                  {this.state.subforumName}
+                  {subforumName}
                 </H1>
               </div>
             </Banner>
             <Pagination
-              data={this.props.threads}
-              currentPage={this.props.match.params.page}
+              data={threads}
+              currentPage={page}
               context="threads"
               pageSize={15}
-              isLoggedIn={this.props.auth.isLoggedIn}
-              subforumId={this.props.match.params.id}
+              isLoggedIn={isLoggedIn}
+              subforumId={id}
             >
               {data => (
                 <ThreadList
                   data={data}
-                  subforumId={this.props.match.params.id}
+                  subforumId={id}
                 />
               )}
             </Pagination>

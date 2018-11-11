@@ -18,10 +18,10 @@ export const fetchData = () => dispatch => {
     }
   })
     .then(res => res.json())
-    .then(json => {
+    .then(users => {
       dispatch({
         type: FETCH_DATA,
-        payload: json
+        payload: users
       })
     })
     .catch(err => console.log('FETCH_USERS ERROR: ', err))

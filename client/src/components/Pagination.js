@@ -80,14 +80,14 @@ class Pagination extends Component {
 
         {/* Different styles for thread list and thread */}
         <div className={context === 'threads' ? 'bottom' : 'posts-bottom'}>
-          {this.state.pageCount > 1 ? (
+          {this.state.pageCount > 1 && (
             <div
               className="pagination-controls"
               style={context === 'threads' ? { marginBottom: '3em' } : null}
             >
               <span>{this.createControls()}</span>
             </div>
-          ) : null}
+          )}
 
           {/* Showing post button only if logged in */}
           {context === 'threads' && this.props.isLoggedIn ? (

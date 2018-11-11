@@ -15,11 +15,6 @@ import {
   SlideTop
 } from '../styled/animations'
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-`
 export const H1 = styled.h1`
   color: ${props => props.theme.primary};
 `
@@ -86,9 +81,14 @@ export class Login extends Component {
                     />
                   </SlideRight>
                   <SlideBottom>
-                    <ButtonWrapper>
-                      <Button type="submit">Login</Button>
-                    </ButtonWrapper>
+                    {/* <ButtonWrapper> */}
+                    <Button
+                      type="submit"
+                      style={{ margin: '8px 16px 16px 16px' }}
+                    >
+                      Login
+                    </Button>
+                    {/* </ButtonWrapper> */}
                   </SlideBottom>
                 </form>
               </Form>
