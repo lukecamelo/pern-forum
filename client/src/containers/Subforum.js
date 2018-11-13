@@ -57,10 +57,7 @@ class Subforum extends Component {
                 >
                   Forums
                 </SubforumLink>
-                <i
-                  className="fas fa-angle-right"
-                  style={{ margin: '0 6px' }}
-                />
+                <i className="fas fa-angle-right" style={{ margin: '0 6px' }} />
                 <H1 style={{ margin: '0', color: 'white', display: 'inline' }}>
                   {subforumName}
                 </H1>
@@ -74,12 +71,7 @@ class Subforum extends Component {
               isLoggedIn={isLoggedIn}
               subforumId={id}
             >
-              {data => (
-                <ThreadList
-                  data={data}
-                  subforumId={id}
-                />
-              )}
+              {data => <ThreadList data={data} subforumId={id} />}
             </Pagination>
           </Container>
           <Footer />
@@ -91,9 +83,9 @@ class Subforum extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  threads: state.threadData.threads,
-  auth: state.auth
+const mapStateToProps = ({ threadData: { threads }, auth }) => ({
+  threads,
+  auth
 })
 
 export default connect(

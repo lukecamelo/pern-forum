@@ -92,9 +92,9 @@ export class Thread extends Component {
     this.toggleModal()
   }
 
-  quotePost = (postContent, quotedUser) => {
+  quotePost = (quotedPost, quotedUser) => {
     this.setState({
-      quotedPost: postContent,
+      quotedPost,
       quotedUser
     })
     this.el.scrollIntoView({ behavior: 'smooth' })
@@ -103,7 +103,6 @@ export class Thread extends Component {
   render() {
     const {
       title,
-      author,
       subforum,
       threadHasLoaded,
       threadPosts = []

@@ -106,8 +106,8 @@ export class ThreadList extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  users: state.threadData.users
+const mapStateToProps = ({threadData: { users }}) => ({
+  users
 })
 
 export default connect(
