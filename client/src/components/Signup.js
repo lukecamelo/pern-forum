@@ -160,9 +160,9 @@ export class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  message: state.auth.message,
-  isLoggedIn: state.auth.isLoggedIn
+const mapStateToProps = ({auth: { message, isLoggedIn }}) => ({
+  message,
+  isLoggedIn
 })
 
 export default connect(

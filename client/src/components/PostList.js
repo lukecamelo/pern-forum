@@ -88,18 +88,22 @@ const PostList = ({
                   Quote
                 </Button>
               ) : null}
-              {auth.userId === 1 ? <DeleteButton
-                style={
-                  isMobile
-                    ? mobileButtonStyle
-                    : {
-                        marginBottom: '0',
-                        marginLeft: '0',
-                        boxShadow: 'none',
-                      }
-                }
-                onClick={() => deletePost(post.id, threadId)}
-              >Delete</DeleteButton> : null}
+              {auth.userId === 1 ? (
+                <DeleteButton
+                  style={
+                    isMobile
+                      ? mobileButtonStyle
+                      : {
+                          marginBottom: '0',
+                          marginLeft: '0',
+                          boxShadow: 'none'
+                        }
+                  }
+                  onClick={() => deletePost(post.id, threadId)}
+                >
+                  Delete
+                </DeleteButton>
+              ) : null}
             </div>
           </Post.Controls>
         </Post.Body>

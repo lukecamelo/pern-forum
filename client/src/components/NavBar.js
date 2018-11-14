@@ -18,12 +18,13 @@ const StyledNav = styled.nav`
     align-items: center;
   }
 `
-const Logo = styled.div`
+const Logo = styled.a`
   display: flex;
   margin-right: auto;
   align-self: center;
   margin-left: 1em;
   color: white;
+  text-decoration: none;
   font-size: 1.5rem;
   font-family: 'Lato', sans-serif;
 
@@ -36,7 +37,7 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   if (isLoggedIn) {
     navigation = (
       <StyledNav>
-        <Logo>imp.zone</Logo>
+        <Logo href='/subforums'>imp.zone</Logo>
         <Link to="/subforums" className="navlink">
           Home
         </Link>

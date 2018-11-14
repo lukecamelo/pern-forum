@@ -81,14 +81,12 @@ export class Login extends Component {
                     />
                   </SlideRight>
                   <SlideBottom>
-                    {/* <ButtonWrapper> */}
                     <Button
                       type="submit"
                       style={{ margin: '8px 16px 16px 16px' }}
                     >
                       Login
                     </Button>
-                    {/* </ButtonWrapper> */}
                   </SlideBottom>
                 </form>
               </Form>
