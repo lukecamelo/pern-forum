@@ -56,7 +56,8 @@ export class App extends Component {
   }
 
   render() {
-    if (this.state.hasLoaded) {
+    const { hasLoaded, isLoggedIn } = this.state
+    if (hasLoaded) {
       return (
         <React.Fragment>
           <Container>
@@ -68,7 +69,7 @@ export class App extends Component {
           <Footer />
         </React.Fragment>
       )
-    } else if (!this.props.isLoggedIn && this.state.hasLoaded) {
+    } else if (!isLoggedIn && hasLoaded) {
       return (
         <Container>
           <NavBar />
@@ -82,7 +83,7 @@ export class App extends Component {
           <Footer />
         </Container>
       )
-    } else if (this.props.isLoggedIn && !this.state.hasLoaded) {
+    } else if (isLoggedIn && !hasLoaded) {
       return (
         <React.Fragment>
           <Container>
