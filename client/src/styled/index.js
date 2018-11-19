@@ -60,7 +60,7 @@ export const H1 = styled.h1`
 export const Li = styled.li`
   width: 75%;
   margin: 0 auto;
-  padding: 1em 0;
+  padding: .5em 0;
   display: flex;
   justify-content: flex-start;
   @media screen and (max-width: 700px) {
