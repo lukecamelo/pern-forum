@@ -39,21 +39,20 @@ const Landing = () => {
                   <I className="fas fa-gamepad fa-2x" />
                   <P>
                     The greatest video game discussion forum on the internet is
-                    now <Strong>stand alone</Strong>. No more 20 year old software.
+                    now <Strong>stand alone</Strong>
                   </P>
                 </Li>
                 <Li>
                   <I className="fas fa-ban fa-2x" />
                   <P>
-                    Completely <Strong>lowtax free</Strong>. Free of his poor judgment, the world is our oyster
+                    Completely <Strong>lowtax free</Strong>
                   </P>
                 </Li>
                 <Li>
                   <I className="fas fa-users fa-2x" />
                   <P>
-                    It is also <Strong>regular free</Strong>. you don't have to
-                    pay 10 bucks to post here. I only ask that you are chill and
-                    love video games. Welcome.
+                    <Strong>regular free</Strong>. you don't have to
+                    pay 10 bucks to post here. be chill and love games, that's all 
                   </P>
                 </Li>
               </Ul>
