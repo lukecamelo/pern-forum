@@ -35,7 +35,7 @@ if (env == 'production') {
     }
   )
 }
-console.log(process.env.PROD_DB_URL)
+
 // Read through this folder and join the contents (the models) into the db object
 fs.readdirSync(__dirname)
   .filter(function(file) {

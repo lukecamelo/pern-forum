@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { userLogout } from '../actions/authActions'
-import { fetchThreads } from '../actions/threadActions'
 
 import ResponsiveMenu from 'react-responsive-navbar'
 import '../css/NavBar.css'
@@ -100,5 +99,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { userLogout, fetchThreads }
+  { userLogout }
 )(NavBar)

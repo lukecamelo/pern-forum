@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchData, fetchThreads } from '../actions/threadActions'
+import { fetchData } from '../actions/threadActions'
 import { checkUserLoggedIn } from '../actions/authActions'
 import { Link } from 'react-router-dom'
 
@@ -114,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { fetchData, fetchThreads, checkUserLoggedIn }
+  { fetchData, checkUserLoggedIn }
 )(App)

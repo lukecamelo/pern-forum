@@ -1,6 +1,7 @@
 import axios from 'axios'
 import marked from 'marked'
 import store from '../store'
+import api from '../services/api'
 const auth = store.getState().auth.token
 
 export const fetchSingleThread = async threadId => {
@@ -26,8 +27,8 @@ export const fetchThreadAuthor = async userId => {
 }
 
 export const fetchThreadAndAuthor = async threadId => {
-  const thread = await fetchSingleThread(threadId)
-  const author = await fetchThreadAuthor(thread.userId)
+  const thread = await api.thread.getOne(threadId)
+  const author = await api.thread.getAuthor(thread.userId)
   return {
     title: thread.title,
     content: thread.content,
@@ -93,9 +94,4 @@ export const checkForPosts = threads => {
 export const deletePost = async postId => {
   let post = await axios.get(`/thread/${postId}/deletepost`)
   return post.data
-}
-
-export const getLatestSubforumThread = async subforumId => {
-  let threads = await axios.get(`/thread/subforum/${subforumId}`)
-  return threads.data[0]
 }

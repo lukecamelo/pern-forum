@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { getLatestSubforumThread } from '../utils/threadHelpers'
+import api from '../services/api'
 import moment from 'moment'
 
 import { Banner } from './App'
@@ -44,8 +44,8 @@ class SubforumList extends Component {
   }
 
   componentDidMount = async () => {
-    let latestGeneral = await getLatestSubforumThread(1)
-    let latestGames = await getLatestSubforumThread(2)
+    let latestGeneral = await api.threads.getLatestSubforumThread(1)
+    let latestGames = await api.threads.getLatestSubforumThread(2)
     this.setState({
       latestGeneral,
       latestGames,

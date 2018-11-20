@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const models = require('../models')
 const bcrypt = require('bcrypt-nodejs')
+require('dotenv').config()
 
 router.post('/login', (req, res, next) => {
   passport.authenticate(
@@ -21,7 +22,7 @@ router.post('/login', (req, res, next) => {
         if (err) {
           res.send(err)
         }
-        const token = jwt.sign(user.toJSON(), "my_big_fantastic_jwt_secret")
+        const token = jwt.sign(user.toJSON(), process.env.JWTSECRET)
         return res.json({ user, token, message: 'Success!' })
       })
     }

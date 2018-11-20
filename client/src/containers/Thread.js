@@ -7,14 +7,14 @@ import Loader from '../components/Loader'
 
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-import { editPostContent, deletePost } from '../utils/threadHelpers'
 
 import { Container, SubforumLink } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
 import { FadeIn, SlideTop } from '../styled/animations'
 import '../css/Thread.css'
 
-import { fetchThreadAndAuthor, fetchSingleThread } from '../utils/threadHelpers'
+import { fetchThreadAndAuthor } from '../utils/threadHelpers'
+import api from '../services/api'
 import Footer from '../components/Footer'
 
 export class Thread extends Component {
@@ -69,23 +69,23 @@ export class Thread extends Component {
 
   handleSubmit = async (content, username, userId, threadId) => {
     await this.props.makeNewPost(content, username, userId, threadId)
-    let thread = await fetchSingleThread(threadId)
+    let thread = await api.thread.getOne(threadId)
     this.setState({
       threadPosts: thread.Post
     })
   }
 
   handleDelete = async (postId, threadId) => {
-    deletePost(postId)
-    let thread = await fetchSingleThread(threadId)
+    api.post.delete(postId)
+    let thread = await api.thread.getOne(threadId)
     this.setState({
       threadPosts: thread.Post
     })
   }
 
   handleEdit = async (threadId, postId, content) => {
-    await editPostContent(threadId, postId, content)
-    let thread = await fetchSingleThread(threadId)
+    await api.post.edit(threadId, postId, content)
+    let thread = await api.thread.getOne(threadId)
     this.setState({
       threadPosts: thread.Post
     })

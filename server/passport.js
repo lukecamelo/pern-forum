@@ -6,6 +6,7 @@ const JWTStrategy = passportJWT.Strategy
 const ExtractJwt = require('passport-jwt').ExtractJwt
 const bcrypt = require('bcrypt-nodejs')
 const models = require('./models')
+require('dotenv').config()
 
 passport.use(
   'local-login',
@@ -81,7 +82,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: 'my_big_fantastic_jwt_secret'
+      secretOrKey: process.env.JWTSECRET
     },
     function(jwtPayload, cb) {
       return models.user
