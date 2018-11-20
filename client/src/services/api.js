@@ -6,6 +6,31 @@ const headers = {
 }
 
 export default {
+  auth: {
+    login: (username, password) =>
+      axios
+        .post(`/auth/login`, {
+          username,
+          password
+        })
+        .then(res => res.data),
+    signup: (username, password, avatarUrl) =>
+      axios
+        .post(`/auth/signup`, {
+          username,
+          password,
+          avatarUrl
+        })
+        .then(res => res.data),
+    checkLogin: () =>
+      axios
+        .get('/users/profile', {
+          headers: {
+            Authorization: 'Bearer ' + JSON.parse(localStorage.Authorization)
+          }
+        })
+        .then(res => res.data)
+  },
   thread: {
     getOne: id => axios.get(`/thread/${id}`, headers).then(res => res.data),
     getAuthor: id =>
@@ -58,9 +83,11 @@ export default {
     delete: postId =>
       axios.get(`/thread/${postId}/deletepost`).then(res => res.data),
     edit: (threadId, id, content) =>
-      axios.post(`/thread/${threadId}/editpost`, {
-        content,
-        id
-      }).then(res => res.data)
+      axios
+        .post(`/thread/${threadId}/editpost`, {
+          content,
+          id
+        })
+        .then(res => res.data)
   }
 }

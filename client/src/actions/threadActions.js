@@ -9,14 +9,30 @@ import {
 import api from '../services/api'
 // const auth = store.getState().auth.token
 
+const fetchSubforumThreadsSuccess = threads => ({
+  type: FETCH_SUBFORUM_THREADS,
+  payload: threads
+})
+
+const postThreadSuccess = thread => ({
+  type: POST_NEW_THREAD,
+  payload: thread
+})
+
+const makePostSuccess = () => ({
+  type: MAKE_NEW_POST
+})
+
+const fetchUsersSuccess = users => ({
+  type: FETCH_DATA,
+  payload: users
+})
+
 export const fetchData = () => dispatch => {
   api.users
     .getAll()
     .then(users => {
-      dispatch({
-        type: FETCH_DATA,
-        payload: users
-      })
+      dispatch(fetchUsersSuccess(users))
     })
     .catch(err => console.log('FETCH_USERS ERROR: ', err))
 }
@@ -24,10 +40,7 @@ export const fetchData = () => dispatch => {
 // TODO: write this route
 export const fetchSubforumThreads = subforumId => dispatch => {
   api.threads.getAll(subforumId).then(threads => {
-    dispatch({
-      type: FETCH_SUBFORUM_THREADS,
-      payload: threads
-    })
+    dispatch(fetchSubforumThreadsSuccess(threads))
   })
 }
 
@@ -41,10 +54,7 @@ export const postNewThread = (
   api.threads
     .postOne(title, content, userId, author, subforumId)
     .then(thread => {
-      dispatch({
-        type: POST_NEW_THREAD,
-        payload: thread
-      })
+      dispatch(postThreadSuccess(thread))
     })
     .catch(err => console.log('POST_NEW_THREAD ERROR: ', err))
 }
@@ -57,9 +67,7 @@ export const makeNewPost = (
 ) => dispatch => {
   api.post.create(content, username, userId, threadId)
     .then(() => {
-      dispatch({
-        type: MAKE_NEW_POST
-      })
+      dispatch(makePostSuccess())
     })
     .catch(err => console.log('error making post: ', err))
 }
