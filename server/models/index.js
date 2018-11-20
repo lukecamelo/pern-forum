@@ -11,14 +11,12 @@ const user = require('./user')
 const thread = require('./thread')
 const post = require('./post')
 const subforum = require('./subforum')
-const url =
-  'postgres://ixokdhlskmpphx:c9ad01e9c20556fc75242e5b2b6e600539b805dde77ab33b3a14d670bd61c9d7@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcbbl2rbe22bj6'
-// TEST DB
-// 'postgres://uyebwslsddifoh:4526fe1ec0111715e1c0a273f2b643d3dd8a5293c1e6ac27b2b81d3885834c9e@ec2-54-83-29-34.compute-1.amazonaws.com:5432/dehbi7ag50lkf'
+require('dotenv').config()
 console.log(env)
+
 let sequelize
 if (env == 'production') {
-  sequelize = new Sequelize(url, {
+  sequelize = new Sequelize(process.env.PROD_DB_URL, {
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
@@ -37,7 +35,7 @@ if (env == 'production') {
     }
   )
 }
-
+console.log(process.env.PROD_DB_URL)
 // Read through this folder and join the contents (the models) into the db object
 fs.readdirSync(__dirname)
   .filter(function(file) {

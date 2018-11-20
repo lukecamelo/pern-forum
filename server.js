@@ -1,4 +1,3 @@
-// reverting to other app file for heroku troubleshooting
 const models = require('./server/models/')
 const app = require('./app')
 
