@@ -65,7 +65,8 @@ export const makeNewPost = (
   userId,
   threadId
 ) => dispatch => {
-  api.post.create(content, username, userId, threadId)
+  api.post
+    .create(content, username, userId, threadId)
     .then(() => {
       dispatch(makePostSuccess())
     })
