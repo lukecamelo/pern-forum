@@ -8,6 +8,7 @@ const bcrypt = require('bcrypt-nodejs')
 const models = require('./models')
 require('dotenv').config()
 
+// Logs in user
 passport.use(
   'local-login',
   new LocalStrategy(

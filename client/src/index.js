@@ -13,8 +13,9 @@ import ThreadForm from './components/ThreadForm'
 import UserControlPanel from './components/UserControlPanel'
 import EditPostModal from './components/EditPostModal'
 import Landing from './components/Landing'
-import Subforum from './containers/Subforum';
+import Subforum from './containers/Subforum'
 
+// Allows me to pass around predefined CSS properties
 const theme = {
   primary: '#00a8ff',
   secondary: '#0266c8',
@@ -45,7 +46,7 @@ ReactDOM.render(
           <Route exact path="/editpost" component={EditPostModal} />
           <Route exact path="/subforum/:id/newthread" component={ThreadForm} />
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
-          <Route path="/subforum/:id/page/:page" component={Subforum}/>
+          <Route path="/subforum/:id/page/:page" component={Subforum} />
           <Route path="/subforums" component={App} />
         </Switch>
       </BrowserRouter>

@@ -51,7 +51,7 @@ export class ThreadForm extends Component {
       message: ''
     })
   }
-  
+
   handleValueChange = mdeState => {
     this.setState({ mdeState, message: '' })
   }
@@ -74,6 +74,7 @@ export class ThreadForm extends Component {
         this.props.auth.username,
         this.props.match.params.id
       )
+      // Redirect user to main list after thread is posted
       this.props.history.push(`/subforum/${this.props.match.params.id}/page/1`)
     }
   }
@@ -116,6 +117,7 @@ export class ThreadForm extends Component {
                   >
                     Submit Thread
                   </Button>
+                  {/* Holds message to remind user that title/thread content cannot be blank */}
                   <H1 style={{ color: '#bb0000' }}>{this.state.message}</H1>
                 </SlideBottom>
               </FadeIn>

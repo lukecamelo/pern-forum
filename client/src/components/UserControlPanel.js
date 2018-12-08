@@ -49,6 +49,7 @@ export class UserControlPanel extends React.Component {
     })
   }
 
+  // Retrieves logged in user's current avatar url to populate initial input
   getUserAvatarUrl = async userId => {
     const user = await axios.get(`/api/users/${userId}`)
     await this.setState({ avatarUrl: user.data.avatarUrl })

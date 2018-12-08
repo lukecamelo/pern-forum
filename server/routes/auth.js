@@ -33,6 +33,7 @@ function generateHash(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
 }
 
+// Creates new user as long as that user does not already exist
 router.post('/signup', (req, res) => {
   models.user.findOne({ where: { username: req.body.username } }).then(user => {
     if (user) {

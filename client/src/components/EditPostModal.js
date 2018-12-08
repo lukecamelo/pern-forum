@@ -14,6 +14,8 @@ class EditPostModal extends Component {
     this.state = {
       mdeState: null
     }
+
+    // Initializes markdown converter
     this.converter = new Showdown.Converter({
       tables: true,
       simplifiedAutoLink: true
@@ -32,6 +34,7 @@ class EditPostModal extends Component {
     this.setState({ mdeState })
   }
 
+  // Builds new Markdown editor state based on passed string
   changeEditorText = postContent => {
     const { mdeState } = this.state
     const newDraftState = DraftUtil.buildNewDraftState(

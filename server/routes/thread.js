@@ -16,7 +16,7 @@ router.get('/threads', (req, res) => {
         {
           model: models.post,
           as: 'Post'
-        },
+        }
       ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
     })
@@ -24,11 +24,15 @@ router.get('/threads', (req, res) => {
     .catch(err => console.log(err))
 })
 
+// Returns all threads in a subforum
 router.get('/subforum/:id', (req, res) => {
   models.thread
     .findAll({
       where: { subforumId: req.params.id },
-      include: [{ model: models.subforum, as: 'subforum' }, { model: models.post, as: 'Post' }],
+      include: [
+        { model: models.subforum, as: 'subforum' },
+        { model: models.post, as: 'Post' }
+      ],
       order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
     })
     .then(threads => res.json(threads))
@@ -85,6 +89,7 @@ router.post('/:id/editpost', (req, res) => {
     })
 })
 
+// Deletes a post
 router.get('/:id/deletepost', (req, res) => {
   models.post
     .destroy({

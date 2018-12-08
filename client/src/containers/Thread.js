@@ -56,6 +56,7 @@ export class Thread extends Component {
   }
 
   updateWindowDimensions = () => {
+    //
     this.setState({ windowWidth: window.innerWidth })
   }
 
@@ -101,13 +102,11 @@ export class Thread extends Component {
   }
 
   render() {
-    const {
-      title,
-      subforum,
-      threadHasLoaded,
-      threadPosts = []
-    } = this.state
+    const { title, subforum, threadHasLoaded, threadPosts = [] } = this.state
+    // Used to switch markdown editor display layout between tabbed and vertical
     const isMobile = this.state.windowWidth < 700 ? true : false
+    // Used to keep footer at bottom of page. Since this is an issue unique to threads I don't
+    // use a regular media query to deal with it
     const keepFooterSticky = this.state.windowWidth < 880 ? true : false
 
     if (threadHasLoaded) {
@@ -154,6 +153,7 @@ export class Thread extends Component {
                   </StyledThread.Header>
                 </SlideTop>
 
+                {/* Only display posts if they exist */}
                 {threadPosts.length ? (
                   <PostList
                     data={threadPosts}
@@ -188,6 +188,7 @@ export class Thread extends Component {
               quotedUser={this.state.quotedUser}
               submit={this.handleSubmit}
             />
+            {/* Used to bring PostForm into focus when user quotes a post */}
             <div
               ref={el => {
                 this.el = el

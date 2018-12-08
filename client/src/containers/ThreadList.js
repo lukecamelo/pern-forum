@@ -42,6 +42,7 @@ export class ThreadList extends Component {
     })
   }
 
+  // Displays page links if thread has more than 1 page
   showPageNumbers = thread => {
     let pageCount = parseInt(thread.Post.length / 10, 10)
     if (thread.Post.length % 10 > 0) {
@@ -106,7 +107,7 @@ export class ThreadList extends Component {
   }
 }
 
-const mapStateToProps = ({threadData: { users }}) => ({
+const mapStateToProps = ({ threadData: { users } }) => ({
   users
 })
 

@@ -1,3 +1,8 @@
+/*
+  This file used to be used to be config file for sequelize. I only keep it for posterity,
+  there is not much relevant here.
+*/
+
 // const Sequelize = require('sequelize')
 // const bcrypt = require('bcrypt-nodejs')
 // const UserModel = require('./models/user')

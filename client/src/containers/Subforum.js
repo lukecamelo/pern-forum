@@ -63,6 +63,7 @@ class Subforum extends Component {
                 </H1>
               </div>
             </Banner>
+            {/* Takes thread array and uses it to create a paginated ThreadList  */}
             <Pagination
               data={threads}
               currentPage={page}

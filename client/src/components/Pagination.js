@@ -10,6 +10,7 @@ class Pagination extends Component {
     pageCount: null
   }
 
+  // Initializes page count based off of passed in data array
   componentDidMount = () => {
     const startingPage = this.props.startingPage ? this.props.startingPage : 1
     const data = this.props.data
@@ -24,6 +25,7 @@ class Pagination extends Component {
     })
   }
 
+  // Changes page and scrolls user to top of new page
   setCurrentPage = num => {
     let scroll = Scroll.animateScroll
     if (this.props.context === 'threads') {
@@ -34,6 +36,7 @@ class Pagination extends Component {
     this.setState({ currentPage: num })
   }
 
+  // Creates pagination controls based on page count
   createControls = () => {
     let controls = []
     const pageCount = this.state.pageCount
@@ -61,6 +64,7 @@ class Pagination extends Component {
     return controls
   }
 
+  // Creates slices of data to display on each page
   createPaginatedData = () => {
     const { data, pageSize } = this.props
     const currentPage = this.props.currentPage
@@ -78,7 +82,7 @@ class Pagination extends Component {
           {this.props.children(this.createPaginatedData())}
         </div>
 
-        {/* Different styles for thread list and thread */}
+        {/* Different styles for ThreadList and Thread */}
         <div className={context === 'threads' ? 'bottom' : 'posts-bottom'}>
           {this.state.pageCount > 1 && (
             <div

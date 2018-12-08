@@ -35,6 +35,11 @@ const LatestThread = styled(Link)`
     text-decoration: underline;
   }
 `
+const InfoText = styled.p`
+  margin: 0;
+  color: rgb(61, 72, 82);
+  font-size: 18px;
+`
 
 class SubforumList extends Component {
   state = {
@@ -79,16 +84,10 @@ class SubforumList extends Component {
                   >
                     {latestGeneral.title}
                   </LatestThread>
-                  <p
-                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
-                  >
-                    By {latestGeneral.Post[0].author}
-                  </p>
-                  <p
-                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
-                  >
+                  <InfoText>By {latestGeneral.Post[0].author}</InfoText>
+                  <InfoText>
                     {moment(latestGeneral.Post[0].createdAt).fromNow()}
-                  </p>
+                  </InfoText>
                 </div>
               </div>
             </ThreadLink>
@@ -109,16 +108,10 @@ class SubforumList extends Component {
                   >
                     {latestGames.title}
                   </LatestThread>
-                  <p
-                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
-                  >
-                    By {latestGames.Post[0].author}
-                  </p>
-                  <p
-                    style={{ margin: '0', color: '#3d4852', fontSize: '18px' }}
-                  >
+                  <InfoText>By {latestGames.Post[0].author}</InfoText>
+                  <InfoText>
                     {moment(latestGames.Post[0].createdAt).fromNow()}
-                  </p>
+                  </InfoText>
                 </div>
               </div>
             </ThreadLink>

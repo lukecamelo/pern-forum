@@ -20,6 +20,7 @@ router.get('/api/users/:id/posts', (req, res) => {
     .then(posts => res.json(posts))
 })
 
+// Edits users avatarUrl
 const editAvatarUrl = async (req, res, next) => {
   const body = req.body
   const user = await models.user.findOne({ where: { id: body.userId } })

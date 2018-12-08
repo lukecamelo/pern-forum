@@ -56,6 +56,7 @@ export const editPostContent = (threadId, id, content) => {
   })
 }
 
+// Takes markdown and returns it as raw markup to be displayed within posts/threads
 export const getMarkdownText = markdown => {
   const rawMarkup = marked(markdown, { sanitize: false })
   return { __html: rawMarkup }
@@ -78,6 +79,7 @@ export const parseIsoDatetime = dtstr => {
     .join(' ')
 }
 
+// Checks to see if post array != null to avoid errors on ThreadList refresh
 export const checkForPosts = threads => {
   let increment = 0
   threads.forEach(thread => {

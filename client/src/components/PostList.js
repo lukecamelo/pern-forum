@@ -26,6 +26,8 @@ const PostList = ({
     justifySelf: 'flex-end',
     boxShadow: 'none'
   }
+
+  // Building array of Post components using the post data passed via props
   const posts = data.map(post => (
     <SlideLeft key={post.id}>
       <Post className="post-wrapper">
@@ -53,6 +55,10 @@ const PostList = ({
             dangerouslySetInnerHTML={getMarkdownText(post.content)}
           />
 
+          {/*
+           Edit/Quote/Delete buttons being rendered based on certain conditions,
+           such as if the logged in user is the one who made the post 
+          */}
           <Post.Controls>
             <p>{moment(post.createdAt).fromNow()}</p>
             <div className="buttons">
@@ -110,6 +116,8 @@ const PostList = ({
       </Post>
     </SlideLeft>
   ))
+
+  // Returns a paginated list of post components
   return (
     <Pagination
       data={posts}

@@ -11,6 +11,7 @@ export const editAvatar = async (userId, newAvatarUrl) => {
   })
 }
 
+// Checks to see if img url provided is valid
 export const checkUrlExists = async testUrl => {
   const request = await axios.get(testUrl, {
     mode: 'cors',
