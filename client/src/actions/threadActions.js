@@ -37,7 +37,6 @@ export const fetchData = () => dispatch => {
     .catch(err => console.log('FETCH_USERS ERROR: ', err))
 }
 
-// TODO: write this route
 export const fetchSubforumThreads = subforumId => dispatch => {
   api.threads.getAll(subforumId).then(threads => {
     dispatch(fetchSubforumThreadsSuccess(threads))

@@ -56,6 +56,7 @@ Object.keys(db).forEach(function(modelName) {
   }
 })
 
+// Creating model associations
 db.thread.belongsTo(db.user)
 db.user.hasMany(db.thread)
 

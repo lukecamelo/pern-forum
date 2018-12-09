@@ -10,10 +10,12 @@ module.exports = {
 async function makeThreadAndOp(req, res, next) {
   const body = req.body
 
+  // Builds post object with data sent from the client
   let post = {
     author: body.author,
     content: body.content,
     userId: body.userId,
+    // Sort of retroactively includes the thread that the post lives in
     thread: {
       title: body.title,
       content: body.content,
@@ -22,21 +24,22 @@ async function makeThreadAndOp(req, res, next) {
     }
   }
 
+  // Creates post model and the user/thread associations
   post = await models.post.create(post, { include: [models.thread] })
   post = await models.post.findOne({
     where: { id: post.id },
     include: [models.user, models.thread]
   })
 
+  // Updates the post creators post count
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
-  // await models.thread.findOne({ where: {  } })
-  // console.log(post.thread)
+
   req.data = res.json(post)
   next()
 }
 
-async function makePost (req, res, next) {
+async function makePost(req, res, next) {
   const body = req.body
 
   let post = {
@@ -51,9 +54,10 @@ async function makePost (req, res, next) {
     where: { id: post.id },
     include: [models.user, models.thread]
   })
+
   let user = await models.user.findOne({ where: { id: body.userId } })
   await user.updateAttributes({ postCount: user.postCount + 1 })
-  console.log('in controller data:', res.json({ data: post }))
+
   req.data = res.json({ post })
   next()
 }
@@ -63,6 +67,7 @@ async function getThreadPosts(req, res, next) {
     where: { threadId: req.params.id },
     include: [models.user]
   })
+
   req.data = posts
   next()
 }
@@ -79,5 +84,6 @@ async function getThreads(req, res, next) {
     order: [[{ model: models.post, as: 'Post' }, 'createdAt', 'DESC']]
   })
   req.data = threads
+
   next()
 }

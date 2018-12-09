@@ -59,14 +59,7 @@ export const userSignup = (username, password, avatarUrl) => dispatch => {
     .catch(err => console.log(err))
 }
 
+// Not really used in the application
 export const checkUserLoggedIn = () => dispatch => {
-  console.log(localStorage.Authorization)
-  // fetch('/user/profile', {
-  //   headers: {
-  //     Authorization: 'Bearer ' + JSON.parse(localStorage.Authorization)
-  //   }
-  // })
-  //   .then(res => res.json())
-  api.auth.checkLogin()
-    .then(res => dispatch(checkLogin(res)))
+  api.auth.checkLogin().then(res => dispatch(checkLogin(res)))
 }
