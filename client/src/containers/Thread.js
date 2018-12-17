@@ -16,6 +16,7 @@ import '../css/Thread.css'
 import { fetchThreadAndAuthor } from '../utils/threadHelpers'
 import api from '../services/api'
 import Footer from '../components/Footer'
+import { CurrentSub } from './Subforum'
 
 export class Thread extends Component {
   state = {
@@ -146,9 +147,9 @@ export class Thread extends Component {
                         className="fas fa-angle-right"
                         style={{ margin: '0 6px' }}
                       />
-                      <StyledThread.Navigation.Title>
+                      <CurrentSub style={{ color: 'white', margin: '0' }}>
                         {title}
-                      </StyledThread.Navigation.Title>
+                      </CurrentSub>
                     </StyledThread.Navigation>
                   </StyledThread.Header>
                 </SlideTop>

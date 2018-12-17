@@ -9,6 +9,14 @@ import NavBar from '../components/NavBar'
 import Loader from '../components/Loader'
 import Footer from '../components/Footer'
 
+import styled from 'styled-components'
+
+export const CurrentSub = styled(H1)`
+  @media screen and (max-width: 568px) {
+    font-size: 1em;
+  }
+`
+
 class Subforum extends Component {
   state = {
     hasLoaded: false,
@@ -58,9 +66,11 @@ class Subforum extends Component {
                   Forums
                 </SubforumLink>
                 <i className="fas fa-angle-right" style={{ margin: '0 6px' }} />
-                <H1 style={{ margin: '0', color: 'white', display: 'inline' }}>
+                <CurrentSub
+                  style={{ margin: '0', color: 'white', display: 'inline' }}
+                >
                   {subforumName}
-                </H1>
+                </CurrentSub>
               </div>
             </Banner>
             {/* Takes thread array and uses it to create a paginated ThreadList  */}

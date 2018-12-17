@@ -78,6 +78,7 @@ class SubforumList extends Component {
               </div>
 
               <div
+                className="latest-thread"
                 style={{
                   justifyContent: 'center',
                   padding: '0.5em 1em',
@@ -109,6 +110,7 @@ class SubforumList extends Component {
                 </Link>
               </div>
               <div
+                className="latest-thread"
                 style={{
                   justifyContent: 'center',
                   padding: '0.5em 1em',
