@@ -1,12 +1,10 @@
 import React from 'react'
 import { Signup } from '../components/Signup'
-import { Button } from '../styled/index'
 import Form from '../styled/Form'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
 
 describe('<Signup />', () => {
-
   let wrapper, props, userSignup, mockStore
   beforeEach(() => {
     props = {
@@ -18,11 +16,11 @@ describe('<Signup />', () => {
     userSignup = sinon.stub(props, 'userSignup')
     wrapper = shallow(<Signup {...props} />)
   })
-  
+
   it('renders without crashing', () => {
     expect(wrapper.find(Form.Input).length).toEqual(3)
   })
-  
+
   it('checks avatar validity onChange', () => {
     wrapper.instance().avatarChangeHandler = jest.fn()
     wrapper.instance().checkUrlExists = jest.fn()
@@ -30,9 +28,10 @@ describe('<Signup />', () => {
     wrapper.update()
 
     const event = { target: { name: 'avatarUrl', value: 'fuggedaboudit' } }
-    wrapper.instance().avatarChangeHandler.call({ state: {avatarUrlInput: ''}  }, event)
+    wrapper
+      .instance()
+      .avatarChangeHandler.call({ state: { avatarUrlInput: '' } }, event)
 
     expect(wrapper.instance().avatarChangeHandler).toBeCalled()
-    
   })
 })

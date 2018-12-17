@@ -4,6 +4,17 @@ import { Container } from '../styled/index'
 import { shallow } from 'enzyme'
 import PostList from '../components/PostList'
 
+// axios mock stuff that does not work
+// const mockNoop = () => new Promise(() => {})
+// jest.mock('axios', () => ({
+//   default: mockNoop,
+//   get: mockNoop,
+//   post: mockNoop,
+//   put: mockNoop,
+//   delete: mockNoop,
+//   patch: mockNoop
+// }))
+
 describe('<Thread />', () => {
   let wrapper
   beforeEach(() => {

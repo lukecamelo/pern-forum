@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { App } from '../containers/App'
 import { shallow } from 'enzyme'
 import NavBar from '../components/NavBar'
-import Pagination from '../components/Pagination'
+import SubforumList from '../containers/SubforumList'
 
 // Stuff for future integration testing
 // import setupStore from './testUtils/utils'
@@ -46,7 +46,7 @@ describe('renders without crashing', () => {
   })
 
   it('renders children', () => {
-    expect(wrapper.find(Pagination).length).toEqual(1)
+    expect(wrapper.find(SubforumList).length).toEqual(1)
     expect(wrapper.find(NavBar).length).toEqual(1)
   })
 

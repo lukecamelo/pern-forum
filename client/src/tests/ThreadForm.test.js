@@ -1,11 +1,11 @@
 import React from 'react'
 import { ThreadForm } from '../components/ThreadForm'
 import ReactMde from 'react-mde'
-import { StyledLink, Button } from '../styled'
+import { Button } from '../styled'
 import { shallow } from 'enzyme'
 
 describe('<ThreadForm />', () => {
-  let props, wrapper, spy
+  let props, wrapper, spy, fetchSubforumSpy
   beforeEach(() => {
     props = {
       users: [
@@ -18,15 +18,26 @@ describe('<ThreadForm />', () => {
       auth: {
         username: 'rediscover',
         userId: 1,
-        isLoggedIn: true,
+        isLoggedIn: true
       },
       loggedInUserId: 1,
       username: 'rediscover',
-      // postNewThread: (title, content, userId, author) => null,
-      fetchThreads: () => null
+      fetchThreads: () => null,
+      match: {
+        params: {
+          id: 1
+        }
+      }
     }
     spy = jest.fn()
-    wrapper = shallow(<ThreadForm {...props} postNewThread={spy} />)
+    fetchSubforumSpy = jest.fn()
+    wrapper = shallow(
+      <ThreadForm
+        {...props}
+        postNewThread={spy}
+        fetchSubforumThreads={fetchSubforumSpy}
+      />
+    )
   })
 
   it('posts thread on button click', () => {
@@ -35,11 +46,10 @@ describe('<ThreadForm />', () => {
     wrapper.find(Button).simulate('click')
     expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
   })
-  
+
   it('changes state onChange', () => {
     const newState = '<h1>no i mean it!</h1>'
     wrapper.find(ReactMde).simulate('change', newState)
     expect(wrapper.instance().state.mdeState).toEqual(newState)
   })
-  
 })

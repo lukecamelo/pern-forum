@@ -6,7 +6,7 @@ import { mount } from 'enzyme'
 import sinon from 'sinon'
 
 describe('<ThreadList />', () => {
-  let props, wrapper, fetchData, fetchThreads
+  let props, wrapper, fetchData, fetchSubforumThreads, spy
 
   beforeEach(() => {
     props = {
@@ -18,21 +18,87 @@ describe('<ThreadList />', () => {
         { username: 'user5', password: 'passqqq', id: 5 }
       ],
       data: [
-        { title: 'ohaio', content: 'moshi moshi', id: 1, userId: 1, Post: [{}] },
-        { title: 'i am a pirate', content: 'arrrr', id: 2, userId: 3, Post: [{}] },
-        { title: 'ftw', content: 'motorcycle man', id: 3, userId: 4, Post: [{}] },
-        { title: 'rainbow', content: 'pencil shavings', id: 4, userId: 5, Post: [{}] },
-        { title: 'carrot stick', content: 'i am a monster', id: 5, userId: 4, Post: [{}] },
-        { title: 'i eat gravy', content: 'its really bad for me', id: 6, userId: 3, Post: [{}] }
+        {
+          title: 'ohaio',
+          content: 'moshi moshi',
+          id: 1,
+          userId: 1,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        },
+        {
+          title: 'i am a pirate',
+          content: 'arrrr',
+          id: 2,
+          userId: 3,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        },
+        {
+          title: 'ftw',
+          content: 'motorcycle man',
+          id: 3,
+          userId: 4,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        },
+        {
+          title: 'rainbow',
+          content: 'pencil shavings',
+          id: 4,
+          userId: 5,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        },
+        {
+          title: 'carrot stick',
+          content: 'i am a monster',
+          id: 5,
+          userId: 4,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        },
+        {
+          title: 'i eat gravy',
+          content: 'its really bad for me',
+          id: 6,
+          userId: 3,
+          Post: [{}],
+          subforumId: 1,
+          subforum: {
+            id: 1,
+            name: 'General Discussion'
+          }
+        }
       ],
-      fetchData: () => [],
-      fetchThreads: () => []
+      fetchData: () => []
     }
 
+    spy = jest.fn()
     fetchData = sinon.stub(props, 'fetchData')
-    fetchThreads = sinon.stub(props, 'fetchThreads')
+    // fetchSubforumThreads = sinon.stub(props, 'fetchSubforumThreads')
 
-    wrapper = mount(<ThreadList {...props} />, {
+    wrapper = mount(<ThreadList {...props} fetchSubforumThreads={spy} />, {
       context: {
         router: {
           history: {
@@ -44,7 +110,7 @@ describe('<ThreadList />', () => {
       },
       childContextTypes: {
         router: PropTypes.object.isRequired
-      },
+      }
     })
   })
 
@@ -72,7 +138,10 @@ describe('<ThreadList />', () => {
   })
 
   it('fetches data on componentDidMount', () => {
-    const componentDidMountSpy = sinon.spy(ThreadList.prototype, 'componentDidMount')
+    const componentDidMountSpy = sinon.spy(
+      ThreadList.prototype,
+      'componentDidMount'
+    )
     expect(fetchData.calledOnce).toBe(true)
     componentDidMountSpy.restore()
   })

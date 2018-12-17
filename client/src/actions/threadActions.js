@@ -29,7 +29,7 @@ const fetchUsersSuccess = users => ({
 })
 
 export const fetchData = () => dispatch => {
-  api.users
+  return api.users
     .getAll()
     .then(users => {
       dispatch(fetchUsersSuccess(users))
@@ -38,7 +38,7 @@ export const fetchData = () => dispatch => {
 }
 
 export const fetchSubforumThreads = subforumId => dispatch => {
-  api.threads.getAll(subforumId).then(threads => {
+  return api.threads.getAll(subforumId).then(threads => {
     dispatch(fetchSubforumThreadsSuccess(threads))
   })
 }
@@ -50,7 +50,7 @@ export const postNewThread = (
   author,
   subforumId = 1
 ) => dispatch => {
-  api.threads
+  return api.threads
     .postOne(title, content, userId, author, subforumId)
     .then(thread => {
       dispatch(postThreadSuccess(thread))
@@ -64,7 +64,7 @@ export const makeNewPost = (
   userId,
   threadId
 ) => dispatch => {
-  api.post
+  return api.post
     .create(content, username, userId, threadId)
     .then(() => {
       dispatch(makePostSuccess())
