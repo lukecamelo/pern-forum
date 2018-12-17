@@ -66,15 +66,25 @@ class SubforumList extends Component {
           <Banner>
             <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
           </Banner>
-          <SubforumContainer className="subforumsss">
-            <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
+          <SubforumContainer
+            className="subforums"
+            style={{ overflow: 'hidden' }}
+          >
+            <ThreadLink style={{ fontSize: '1.5em' }}>
               <div className="title-pages">
                 <Link className="title" to="/subforum/1/page/1">
                   General Discussion
                 </Link>
               </div>
 
-              <div className="author" style={{ justifyContent: 'center' }}>
+              <div
+                style={{
+                  justifyContent: 'center',
+                  padding: '0.5em 1em',
+                  width: '200px',
+                  textOverflow: 'ellipsis'
+                }}
+              >
                 <div
                   className="item thread-author"
                   style={{ textAlign: 'left' }}
@@ -92,13 +102,20 @@ class SubforumList extends Component {
               </div>
             </ThreadLink>
 
-            <ThreadLink style={{ fontSize: '1.5em', overflow: 'hidden' }}>
+            <ThreadLink style={{ fontSize: '1.5em' }}>
               <div className="title-pages">
                 <Link className="title" to="/subforum/2/page/1">
                   Video Games
                 </Link>
               </div>
-              <div className="author" style={{ justifyContent: 'center' }}>
+              <div
+                style={{
+                  justifyContent: 'center',
+                  padding: '0.5em 1em',
+                  width: '200px',
+                  textOverflow: 'ellipsis'
+                }}
+              >
                 <div
                   className="item thread-author"
                   style={{ textAlign: 'left' }}

@@ -34,6 +34,13 @@
   justify-content: center;
 }
 
+.latest-thread-link {
+  width: 100px;
+  overflow: scroll;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
 .page-controls {
   padding: 0 0 0 1.3em;
 }
