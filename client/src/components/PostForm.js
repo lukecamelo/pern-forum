@@ -23,8 +23,8 @@ export class PostForm extends Component {
     })
   }
 
-  componentDidUpdate = nextProps => {
-    if (this.props.quotedPost !== nextProps.quotedPost) {
+  componentDidUpdate = prevProps => {
+    if (this.props.quotedPost !== prevProps.quotedPost) {
       this.changeEditorText(
         quotePostInEditor(this.props.quotedUser, this.props.quotedPost)
       )

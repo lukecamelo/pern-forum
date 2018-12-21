@@ -40,6 +40,12 @@ const InfoText = styled.p`
   color: rgb(61, 72, 82);
   font-size: 18px;
 `
+/*
+ ************* 
+ This whole component is a big mess
+ TODO: fix the mess
+ ************* 
+*/
 
 class SubforumList extends Component {
   state = {

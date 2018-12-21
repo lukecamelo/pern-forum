@@ -62,6 +62,7 @@ export class ThreadForm extends Component {
     let content = document.createElement('span')
     title.innerHTML = this.state.title
     content.innerHTML = this.state.mdeState.html
+
     if (title.textContent === '' || content.textContent === '') {
       this.setState({
         message: 'title/content cannot be blank'
@@ -74,6 +75,7 @@ export class ThreadForm extends Component {
         this.props.auth.username,
         this.props.match.params.id
       )
+
       // Redirect user to main list after thread is posted
       this.props.history.push(`/subforum/${this.props.match.params.id}/page/1`)
     }

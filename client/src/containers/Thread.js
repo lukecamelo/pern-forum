@@ -69,6 +69,10 @@ export class Thread extends Component {
     }))
   }
 
+  // All of these handlers fetch the thread after handling their respective tasks,
+  // this was the best way I could think of at the time to rerender the thread
+  // after making the submission/edit/deletion. maybe there's a cleaner way of doing this?
+
   handleSubmit = async (content, username, userId, threadId) => {
     await this.props.makeNewPost(content, username, userId, threadId)
     let thread = await api.thread.getOne(threadId)
@@ -154,7 +158,11 @@ export class Thread extends Component {
                   </StyledThread.Header>
                 </SlideTop>
 
-                {/* Only display posts if they exist */}
+                {/*
+                  Perhaps there's a way to break the PostList
+                  component into smaller pieces to avoid the crazy
+                  amount of props it requires?
+                */}
                 {threadPosts.length ? (
                   <PostList
                     data={threadPosts}

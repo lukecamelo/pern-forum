@@ -36,6 +36,10 @@ export class Signup extends React.Component {
     await this.setState({
       avatarUrlInput: e.target.value
     })
+
+    // Makes network calls to the URL given by the user
+    // If the status is 200 the image link is (probably) valid
+    // If it isn't, well, it's an invalid URL
     checkUrlExists(this.state.avatarUrlInput)
       .then(res => {
         if (res) {
@@ -160,7 +164,7 @@ export class Signup extends React.Component {
   }
 }
 
-const mapStateToProps = ({auth: { message, isLoggedIn }}) => ({
+const mapStateToProps = ({ auth: { message, isLoggedIn } }) => ({
   message,
   isLoggedIn
 })

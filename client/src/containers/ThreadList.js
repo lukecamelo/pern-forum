@@ -43,6 +43,10 @@ export class ThreadList extends Component {
   }
 
   // Displays page links if thread has more than 1 page
+  // very similar to the method used in Pagination for
+  // rendering page numbers/links.
+
+  // TODO: write a version of this method that can be used in both cases
   showPageNumbers = thread => {
     let pageCount = parseInt(thread.Post.length / 10, 10)
     if (thread.Post.length % 10 > 0) {
