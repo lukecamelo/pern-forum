@@ -36,7 +36,7 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   if (isLoggedIn) {
     navigation = (
       <StyledNav>
-        <Logo href='/subforums'>imp.zone</Logo>
+        <Logo href="/subforums">[forum]</Logo>
         <Link to="/subforums" className="navlink">
           Home
         </Link>
@@ -65,7 +65,7 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   } else {
     navigation = (
       <StyledNav>
-        <Logo>imp.zone</Logo>
+        <Logo>[forum]</Logo>
         <Link to="/subforums" className="navlink">
           Home
         </Link>

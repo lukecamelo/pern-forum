@@ -30,7 +30,7 @@ const Landing = () => {
           <Card style={{ color: '#3d4852', marginBottom: '2em' }}>
             <SlideTop>
               <Header>
-                Welcome to <strong>imp.zone</strong>
+                Welcome to <strong>[forum]</strong>
               </Header>
             </SlideTop>
             <SlideLeft>
@@ -46,13 +46,17 @@ const Landing = () => {
                     It took a lot of time and a lot of effort, but here it is.
                     If you're interested about the rest of my work, you can find
                     it on my{' '}
-                    <a href="https://github.com/lukecamelo" style={{ color: '#00a8ff' }}>GitHub page</a>.
+                    <a
+                      href="https://github.com/lukecamelo"
+                      style={{ color: '#00a8ff' }}
+                    >
+                      GitHub page
+                    </a>
+                    .
                   </P>
                 </Li>
                 <Li>
-                  <P>
-                    Enjoy the forums, thanks.
-                  </P>
+                  <P>Enjoy the forums, thanks.</P>
                 </Li>
               </Ul>
             </SlideLeft>
