@@ -30,7 +30,7 @@ const Landing = () => {
           <Card style={{ color: '#3d4852', marginBottom: '2em' }}>
             <SlideTop>
               <Header>
-                Welcome to <strong>[forum]</strong>
+                Welcome to <strong>[s_rank]</strong>
               </Header>
             </SlideTop>
             <SlideLeft>

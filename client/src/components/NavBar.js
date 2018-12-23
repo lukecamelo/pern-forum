@@ -36,7 +36,7 @@ export const NavBar = ({ isLoggedIn, user, isHome, ...props }) => {
   if (isLoggedIn) {
     navigation = (
       <StyledNav>
-        <Logo href="/subforums">[forum]</Logo>
+        <Logo href="/subforums">[s_rank]</Logo>
         <Link to="/subforums" className="navlink">
           Home
         </Link>

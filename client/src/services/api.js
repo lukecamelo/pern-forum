@@ -5,6 +5,9 @@ const headers = {
   Accept: 'application/json'
 }
 
+// Centralizes API calls, simultaneously cleaning up many different components and
+// making it more obvious as to what is being requested in any given context
+
 export default {
   auth: {
     login: (username, password) =>
