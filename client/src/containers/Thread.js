@@ -57,7 +57,6 @@ export class Thread extends Component {
   }
 
   updateWindowDimensions = () => {
-    //
     this.setState({ windowWidth: window.innerWidth })
   }
 
