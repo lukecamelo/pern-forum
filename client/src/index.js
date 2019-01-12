@@ -14,6 +14,7 @@ import UserControlPanel from './components/UserControlPanel'
 import EditPostModal from './components/EditPostModal'
 import Landing from './components/Landing'
 import Subforum from './containers/Subforum'
+import MarkdownEditor from './components/MarkdownEditor'
 
 // Allows me to pass around predefined CSS properties
 const theme = {
@@ -48,6 +49,7 @@ ReactDOM.render(
           <Route exact path="/usercontrolpanel" component={UserControlPanel} />
           <Route path="/subforum/:id/page/:page" component={Subforum} />
           <Route path="/subforums" component={App} />
+          <Route path="/markdowntest" component={MarkdownEditor} />
         </Switch>
       </BrowserRouter>
     </Provider>
