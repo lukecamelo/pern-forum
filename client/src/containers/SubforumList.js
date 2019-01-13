@@ -8,18 +8,10 @@ import moment from 'moment'
 import { Banner } from './App'
 import { H1 } from '../styled'
 import '../css/SubforumList.css'
+import StyledSubList from '../styled/StyledSubList'
 import { ThreadLink } from './ThreadList'
 import Loader from '../components/Loader'
 
-const SubforumContainer = styled.div`
-  width: 75vw;
-  margin: 0 auto 2em auto;
-  background-color: white;
-  box-shadow: ${({ theme }) => theme.mediumShadow};
-  @media screen and (max-width: 700px) {
-    width: 90vw;
-  }
-`
 const LatestThread = styled(Link)`
   text-decoration: none;
   color: ${({ theme }) => theme.primary};
@@ -72,16 +64,13 @@ class SubforumList extends Component {
           <Banner>
             <H1 style={{ margin: '0 auto', color: 'white' }}>Forums</H1>
           </Banner>
-          <SubforumContainer
-            className="subforums"
-            style={{ overflow: 'hidden' }}
-          >
-            <ThreadLink style={{ fontSize: '1.5em' }}>
-              <div className="title-pages">
-                <Link className="title" to="/subforum/1/page/1">
+          <StyledSubList>
+            <StyledSubList.SubContainer>
+              <StyledSubList.LinkContainer>
+                <StyledSubList.SubLink to="/subforum/1/page/1">
                   General Discussion
-                </Link>
-              </div>
+                </StyledSubList.SubLink>
+              </StyledSubList.LinkContainer>
 
               <div
                 className="latest-thread"
@@ -107,7 +96,7 @@ class SubforumList extends Component {
                   </InfoText>
                 </div>
               </div>
-            </ThreadLink>
+            </StyledSubList.SubContainer>
 
             <ThreadLink style={{ fontSize: '1.5em' }}>
               <div className="title-pages">
@@ -140,7 +129,7 @@ class SubforumList extends Component {
                 </div>
               </div>
             </ThreadLink>
-          </SubforumContainer>
+          </StyledSubList>
         </React.Fragment>
       )
     } else {
