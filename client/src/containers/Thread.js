@@ -8,7 +8,7 @@ import Loader from '../components/Loader'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 
-import { Container, SubforumLink } from '../styled/index'
+import { Container } from '../styled/index'
 import StyledThread from '../styled/StyledThread'
 import { FadeIn, SlideTop } from '../styled/animations'
 import '../css/Thread.css'
@@ -16,7 +16,7 @@ import '../css/Thread.css'
 import { fetchThreadAndAuthor } from '../utils/threadHelpers'
 import api from '../services/api'
 import Footer from '../components/Footer'
-import { CurrentSub } from './Subforum'
+import Breadcrumb from '../styled/Breadcrumb'
 
 export class Thread extends Component {
   state = {
@@ -125,35 +125,28 @@ export class Thread extends Component {
               <StyledThread>
                 <SlideTop>
                   <StyledThread.Header>
-                    <StyledThread.Navigation>
-                      <SubforumLink
-                        to="/subforums"
-                        style={{ margin: '0', color: 'white' }}
-                      >
+                    <Breadcrumb>
+                      <Breadcrumb.CrumbLink to="/subforums">
                         Forums
-                      </SubforumLink>
-                      <i
-                        className="fas fa-angle-right"
-                        style={{ margin: '0 6px' }}
-                      />
-                      <SubforumLink
+                      </Breadcrumb.CrumbLink>
+                      <Breadcrumb.Chevron className="fas fa-angle-right" />
+                      <Breadcrumb.CrumbLink
                         to={`/subforum/${subforum.id}/page/1`}
-                        style={{
-                          margin: '0',
-                          color: 'white',
-                          display: 'inline'
-                        }}
                       >
                         {subforum.name}
-                      </SubforumLink>
-                      <i
-                        className="fas fa-angle-right"
-                        style={{ margin: '0 6px' }}
-                      />
-                      <CurrentSub style={{ color: 'white', margin: '0' }}>
-                        {title}
-                      </CurrentSub>
-                    </StyledThread.Navigation>
+                      </Breadcrumb.CrumbLink>
+                      <Breadcrumb.MobileLink
+                        to={`/subforum/${subforum.id}/page/1`}
+                      >
+                        <i
+                          className="fas fa-angle-left"
+                          style={{ display: 'inline', margin: '0 6px' }}
+                        />
+                        {subforum.name}
+                      </Breadcrumb.MobileLink>
+                      <Breadcrumb.Chevron className="fas fa-angle-right" />
+                      <Breadcrumb.Title>{title}</Breadcrumb.Title>
+                    </Breadcrumb>
                   </StyledThread.Header>
                 </SlideTop>
 
