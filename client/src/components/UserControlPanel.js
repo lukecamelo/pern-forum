@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Container, Input, Button, H1 } from '../styled/index'
 import axios from 'axios'
@@ -33,29 +33,16 @@ const AvatarEdit = styled.div`
   margin: 0 3em;
 `
 
-export class UserControlPanel extends React.Component {
-  state = {
-    avatarUrl: '',
-    message: ''
-  }
+export const UserControlPanel = ({ user }) => {
+  const [message, setMessage] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState('')
 
-  componentDidMount = () => {
-    this.getUserAvatarUrl(this.props.user.userId)
-  }
-
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  // Retrieves logged in user's current avatar url to populate initial input
-  getUserAvatarUrl = async userId => {
+  async function useUserAvatarUrl(userId) {
     const user = await axios.get(`/api/users/${userId}`)
-    await this.setState({ avatarUrl: user.data.avatarUrl })
+    await setAvatarUrl(user.data.avatarUrl)
   }
 
-  editAvatar = async (userId, newAvatarUrl) => {
+  async function editAvatar(userId, newAvatarUrl) {
     await axios({
       method: 'post',
       url: `/api/users/${userId}/avatar`,
@@ -66,52 +53,55 @@ export class UserControlPanel extends React.Component {
     })
   }
 
-  render() {
-    return (
-      <Container>
-        <NavBar />
-        <FadeIn>
-          <Card>
-            <SlideTop>
-              <H1>Welcome, {this.props.user.username}</H1>
-            </SlideTop>
-            <AvatarEdit>
-              <SlideLeft>
-                <h2 style={{ margin: '0 0 10px 0', color: '#0266c8' }}>
-                  Change avatar
-                </h2>
-                {this.state.message !== '' ? (
-                  <h1>{this.state.message}</h1>
-                ) : null}
-              </SlideLeft>
-              <SlideRight>
-                <Input
-                  id="avatar-url-input"
-                  name="avatarUrl"
-                  value={this.state.avatarUrl}
-                  onChange={this.handleChange}
-                />
-              </SlideRight>
-              <SlideBottom>
-                <form>
-                  <Button
-                    onClick={() =>
-                      this.editAvatar(
-                        this.props.user.userId,
-                        this.state.avatarUrl
-                      )
-                    }
-                  >
-                    Apply
-                  </Button>
-                </form>
-              </SlideBottom>
-            </AvatarEdit>
-          </Card>
-        </FadeIn>
-      </Container>
-    )
+  function useAvatarInput(initialValue) {
+    function handleChange(e) {
+      setAvatarUrl(e.target.value)
+    }
+    return {
+      value: avatarUrl,
+      onChange: handleChange
+    }
   }
+
+  const avatar = useAvatarInput('')
+
+  useEffect(
+    () => {
+      useUserAvatarUrl(user.userId)
+    },
+    [user.userId]
+  )
+
+  return (
+    <Container>
+      <NavBar />
+      <FadeIn>
+        <Card>
+          <SlideTop>
+            <H1>Welcome, {user.username}</H1>
+          </SlideTop>
+          <AvatarEdit>
+            <SlideLeft>
+              <h2 style={{ margin: '0 0 10px 0', color: '#0266c8' }}>
+                Change avatar
+              </h2>
+              {message !== '' ? <h1>{message}</h1> : null}
+            </SlideLeft>
+            <SlideRight>
+              <Input id="avatar-url-input" name="avatarUrl" {...avatar} />
+            </SlideRight>
+            <SlideBottom>
+              <form>
+                <Button onClick={() => editAvatar(user.userId, avatarUrl)}>
+                  Apply
+                </Button>
+              </form>
+            </SlideBottom>
+          </AvatarEdit>
+        </Card>
+      </FadeIn>
+    </Container>
+  )
 }
 
 const mapStateToProps = state => ({
