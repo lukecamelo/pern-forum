@@ -3,6 +3,8 @@ import ReactMde from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 
+import { useWindowWidth } from '../utils/hooks'
+
 function useMarkdownInput(initialValue) {
   const [value, setValue] = useState(initialValue)
   function handleChange(value) {
@@ -21,10 +23,13 @@ const MarkdownEditor = () => {
   })
 
   const editorState = useMarkdownInput('')
+  const width = useWindowWidth()
+  let isMobile = width < 700 ? true : false
+
   return (
     <React.Fragment>
       <ReactMde
-        layout={'tabbed'}
+        layout={isMobile ? 'vertical' : 'tabbed'}
         style={{ textAlign: 'left' }}
         {...editorState}
         generateMarkdownPreview={markdown =>
