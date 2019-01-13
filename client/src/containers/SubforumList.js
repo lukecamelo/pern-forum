@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
 import api from '../services/api'
 import moment from 'moment'
@@ -9,29 +7,9 @@ import { Banner } from './App'
 import { H1 } from '../styled'
 import '../css/SubforumList.css'
 import StyledSubList from '../styled/StyledSubList'
-import { ThreadLink } from './ThreadList'
+import LatestThread from '../styled/StyledSubList/LatestThread'
 import Loader from '../components/Loader'
 
-const LatestThread = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.primary};
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
-  white-space: nowrap;
-  display: block;
-  width: 250px;
-  transition: 0.2s;
-  &:hover {
-    color: ${({ theme }) => theme.secondary};
-    text-decoration: underline;
-  }
-`
-const InfoText = styled.p`
-  margin: 0;
-  color: rgb(61, 72, 82);
-  font-size: 18px;
-`
 /*
  ************* 
  This whole component is a big mess
@@ -72,63 +50,42 @@ class SubforumList extends Component {
                 </StyledSubList.SubLink>
               </StyledSubList.LinkContainer>
 
-              <div
-                className="latest-thread"
-                style={{
-                  justifyContent: 'center',
-                  padding: '0.5em 1em',
-                  width: '200px',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <div
-                  className="item thread-author"
-                  style={{ textAlign: 'left' }}
+              <LatestThread style={{ textAlign: 'left' }}>
+                <LatestThread.LatestLink
+                  to={`/thread/${this.state.latestGeneral.id}/page/1`}
                 >
-                  <LatestThread
-                    to={`/thread/${this.state.latestGeneral.id}/page/1`}
-                  >
-                    {latestGeneral.title}
-                  </LatestThread>
-                  <InfoText>By {latestGeneral.Post[0].author}</InfoText>
-                  <InfoText>
-                    {moment(latestGeneral.Post[0].createdAt).fromNow()}
-                  </InfoText>
-                </div>
-              </div>
+                  {latestGeneral.title}
+                </LatestThread.LatestLink>
+
+                <LatestThread.InfoText>
+                  By {latestGeneral.Post[0].author}
+                </LatestThread.InfoText>
+                <LatestThread.InfoText>
+                  {moment(latestGeneral.Post[0].createdAt).fromNow()}
+                </LatestThread.InfoText>
+              </LatestThread>
             </StyledSubList.SubContainer>
 
-            <ThreadLink style={{ fontSize: '1.5em' }}>
-              <div className="title-pages">
-                <Link className="title" to="/subforum/2/page/1">
+            <StyledSubList.SubContainer>
+              <StyledSubList.LinkContainer>
+                <StyledSubList.SubLink to="/subforum/2/page/1">
                   Video Games
-                </Link>
-              </div>
-              <div
-                className="latest-thread"
-                style={{
-                  justifyContent: 'center',
-                  padding: '0.5em 1em',
-                  width: '200px',
-                  textOverflow: 'ellipsis'
-                }}
-              >
-                <div
-                  className="item thread-author"
-                  style={{ textAlign: 'left' }}
+                </StyledSubList.SubLink>
+              </StyledSubList.LinkContainer>
+              <LatestThread>
+                <LatestThread.LatestLink
+                  to={`/thread/${this.state.latestGames.id}/page/1`}
                 >
-                  <LatestThread
-                    to={`/thread/${this.state.latestGames.id}/page/1`}
-                  >
-                    {latestGames.title}
-                  </LatestThread>
-                  <InfoText>By {latestGames.Post[0].author}</InfoText>
-                  <InfoText>
-                    {moment(latestGames.Post[0].createdAt).fromNow()}
-                  </InfoText>
-                </div>
-              </div>
-            </ThreadLink>
+                  {latestGames.title}
+                </LatestThread.LatestLink>
+                <LatestThread.InfoText>
+                  By {latestGames.Post[0].author}
+                </LatestThread.InfoText>
+                <LatestThread.InfoText>
+                  {moment(latestGames.Post[0].createdAt).fromNow()}
+                </LatestThread.InfoText>
+              </LatestThread>
+            </StyledSubList.SubContainer>
           </StyledSubList>
         </React.Fragment>
       )

@@ -14,6 +14,10 @@ const SubLink = styled(Link)`
   &:hover {
     color: #00a8ff;
   }
+
+  @media screen and (max-width: 700px) {
+    font-size: 20px;
+  }
 `
 
 export default SubLink
