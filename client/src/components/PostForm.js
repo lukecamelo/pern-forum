@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
 import { quotePostInEditor } from '../utils/markdownHelpers'
@@ -9,7 +9,7 @@ import { Button, H1 } from '../styled/index'
 import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-import MarkdownEditor from './MarkdownEditor'
+// import MarkdownEditor from './MarkdownEditor'
 
 export class PostForm extends Component {
   constructor(props) {
