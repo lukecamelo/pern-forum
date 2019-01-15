@@ -1,41 +1,84 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMde from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
+import { Button } from '../styled'
+import Form from '../styled/Form'
 
 import { useWindowWidth } from '../utils/hooks'
+import { quotePostInEditor } from '../utils/markdownHelpers'
 
-function useMarkdownInput(initialValue) {
-  const [value, setValue] = useState(initialValue)
-  function handleChange(value) {
-    setValue(value)
-  }
-  return {
-    editorState: value,
-    onChange: handleChange
-  }
-}
+const MarkdownEditor = props => {
+  const [markdown, setMarkdown] = useState('')
 
-const MarkdownEditor = () => {
   this.converter = new Showdown.Converter({
     tables: true,
     simplifiedAutoLink: true
   })
 
-  const editorState = useMarkdownInput('')
+  function useMarkdownInput() {
+    function handleChange(value) {
+      setMarkdown(value)
+    }
+    return {
+      editorState: markdown,
+      onChange: handleChange
+    }
+  }
+
+  function useQuotedPost() {
+    console.log(markdown)
+    setMarkdown(quotePostInEditor(props.quotedPost, props.quotedUser))
+  }
+
+  useEffect(
+    () => {
+      if (props.quotedPost.length > 0) {
+        useQuotedPost()
+      }
+    },
+    [props.quotedPost]
+  )
+
+  function clearAndSubmit(content, username, userId, threadId) {
+    props.submit(content, username, userId, threadId)
+    setMarkdown('')
+  }
+
+  let editorState = useMarkdownInput()
   const width = useWindowWidth()
   let isMobile = width < 700 ? true : false
 
   return (
     <React.Fragment>
-      <ReactMde
-        layout={isMobile ? 'vertical' : 'tabbed'}
-        style={{ textAlign: 'left' }}
-        {...editorState}
-        generateMarkdownPreview={markdown =>
-          Promise.resolve(this.converter.makeHtml(markdown))
-        }
-      />
+      <Form.Markdown>
+        <ReactMde
+          layout={isMobile ? 'vertical' : 'tabbed'}
+          {...editorState}
+          generateMarkdownPreview={markdown =>
+            Promise.resolve(this.converter.makeHtml(markdown))
+          }
+        />
+      </Form.Markdown>
+      <div
+        style={{
+          textAlign: 'center'
+        }}
+      >
+        <Button
+          style={{ marginBottom: '4em' }}
+          onClick={() =>
+            clearAndSubmit(
+              editorState,
+              props.username,
+              props.userId,
+              props.threadId
+            )
+          }
+        >
+          Submit Post
+        </Button>
+      </div>
     </React.Fragment>
   )
 }

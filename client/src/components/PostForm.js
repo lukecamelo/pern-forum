@@ -9,7 +9,7 @@ import { Button, H1 } from '../styled/index'
 import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
-// import MarkdownEditor from './MarkdownEditor'
+import MarkdownEditor from './MarkdownEditor'
 
 export class PostForm extends Component {
   constructor(props) {
@@ -24,13 +24,13 @@ export class PostForm extends Component {
     })
   }
 
-  componentDidUpdate = prevProps => {
-    if (this.props.quotedPost !== prevProps.quotedPost) {
-      this.changeEditorText(
-        quotePostInEditor(this.props.quotedUser, this.props.quotedPost)
-      )
-    }
-  }
+  // componentDidUpdate = prevProps => {
+  //   if (this.props.quotedPost !== prevProps.quotedPost) {
+  //     this.changeEditorText(
+  //       quotePostInEditor(this.props.quotedUser, this.props.quotedPost)
+  //     )
+  //   }
+  // }
 
   changeHandler = e => {
     this.setState({
@@ -42,34 +42,40 @@ export class PostForm extends Component {
     this.setState({ mdeState, message: '' })
   }
 
-  changeEditorText = fn => {
-    const { mdeState } = this.state
-    const newDraftState = DraftUtil.buildNewDraftState(
-      mdeState.draftEditorState,
-      {
-        selection: {
-          start: 0,
-          end: 0
-        },
-        text: fn
-      }
-    )
-    this.setState({
-      mdeState: {
-        markdown: mdeState.markdown,
-        html: mdeState.html,
-        draftEditorState: newDraftState
-      }
-    })
-  }
+  // changeEditorText = (fn, editorState) => {
+  //   const { mdeState } = this.state
+  //   console.log('changeEditorText editorState: ', editorState)
+  //   const newDraftState = DraftUtil.buildNewDraftState(
+  //     editorState.editorState.draftEditorState,
+  //     {
+  //       selection: {
+  //         start: 0,
+  //         end: 0
+  //       },
+  //       text: fn
+  //     }
+  //   )
+  //   // this.setState({
+  //   //   mdeState: {
+  //   //     markdown: editorState.markdown,
+  //   //     html: editorState.html,
+  //   //     draftEditorState: newDraftState
+  //   //   }
+  //   // })
+  // }
 
   submitAndClearEditor = async (content, username, userId, threadId) => {
     // prevent people from typing weird html strings to bypass empty post filter
     let span = document.createElement('span')
-    span.innerHTML = this.state.mdeState.html
+    span.innerHTML = content.editorState.html
     if (span.textContent !== '') {
-      await this.props.submit(content, username, userId, threadId)
-      this.changeEditorText('')
+      await this.props.submit(
+        content.editorState.html,
+        username,
+        userId,
+        threadId
+      )
+      // this.changeEditorText('', content)
     } else {
       this.setState({
         message: 'posts cannot be blank!'
@@ -82,33 +88,14 @@ export class PostForm extends Component {
       return (
         <Form>
           <H1 style={{ margin: '0' }}>{this.state.message}</H1>
-          <Form.Markdown>
-            <ReactMde
-              layout={this.props.isMobile ? 'vertical' : 'tabbed'}
-              style={{ textAlign: 'left' }}
-              onChange={this.handleValueChange}
-              editorState={this.state.mdeState}
-              generateMarkdownPreview={markdown =>
-                Promise.resolve(this.converter.makeHtml(markdown))
-              }
-            />
-            {/* <MarkdownEditor submit={this.props.submit} /> */}
-          </Form.Markdown>
-          <div style={{ textAlign: 'center' }}>
-            <Button
-              style={{ marginBottom: '4em' }}
-              onClick={() =>
-                this.submitAndClearEditor(
-                  this.state.mdeState.html,
-                  this.props.auth.username,
-                  this.props.auth.userId,
-                  this.props.threadId
-                )
-              }
-            >
-              Submit Post
-            </Button>
-          </div>
+          <MarkdownEditor
+            submit={this.submitAndClearEditor}
+            username={this.props.auth.username}
+            userId={this.props.auth.userId}
+            threadId={this.props.threadId}
+            quotedPost={this.props.quotedPost}
+            quotedUser={this.props.quotedUser}
+          />
         </Form>
       )
     } else {
