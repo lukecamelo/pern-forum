@@ -10,6 +10,7 @@ import { quotePostInEditor } from '../utils/markdownHelpers'
 
 const MarkdownEditor = props => {
   const [markdown, setMarkdown] = useState('')
+  // const [mdeState, setMdeState] = useState({})
 
   this.converter = new Showdown.Converter({
     tables: true,
@@ -17,6 +18,7 @@ const MarkdownEditor = props => {
   })
 
   function useMarkdownInput() {
+    console.log('useMarkdownInput firing')
     function handleChange(value) {
       setMarkdown(value)
     }
@@ -27,18 +29,24 @@ const MarkdownEditor = props => {
   }
 
   function useQuotedPost() {
+    function handleChange(value) {
+      setMarkdown(value)
+    }
     console.log(markdown)
-    setMarkdown(quotePostInEditor(props.quotedPost, props.quotedUser))
+    return {
+      editorState: quotePostInEditor(props.quotedUser, props.quotedPost),
+      onChange: handleChange
+    }
   }
 
-  useEffect(
-    () => {
-      if (props.quotedPost.length > 0) {
-        useQuotedPost()
-      }
-    },
-    [props.quotedPost]
-  )
+  // useEffect(
+  //   () => {
+  //     if (props.quotedPost.length > 0) {
+  //       useQuotedPost()
+  //     }
+  //   },
+  //   [props.quotedPost]
+  // )
 
   function clearAndSubmit(content, username, userId, threadId) {
     props.submit(content, username, userId, threadId)
@@ -46,6 +54,7 @@ const MarkdownEditor = props => {
   }
 
   let editorState = useMarkdownInput()
+
   const width = useWindowWidth()
   let isMobile = width < 700 ? true : false
 

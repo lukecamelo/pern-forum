@@ -6,7 +6,6 @@ import { quotePostInEditor } from '../utils/markdownHelpers'
 import Form from '../styled/Form'
 import { Button, H1 } from '../styled/index'
 
-import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 import MarkdownEditor from './MarkdownEditor'
@@ -31,12 +30,6 @@ export class PostForm extends Component {
   //     )
   //   }
   // }
-
-  changeHandler = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
 
   handleValueChange = mdeState => {
     this.setState({ mdeState, message: '' })

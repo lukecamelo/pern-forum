@@ -163,9 +163,9 @@ export class Thread extends Component {
                     context="posts"
                     windowWidth={this.state.windowWidth}
                     quotePost={this.quotePost}
+                    deletePost={this.handleDelete}
                     toggleModal={this.toggleModal}
                     auth={this.props.auth}
-                    deletePost={this.handleDelete}
                   />
                 ) : null}
               </StyledThread>
