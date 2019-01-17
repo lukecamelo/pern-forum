@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ReactMde from 'react-mde'
+import ReactMde, { DraftUtil } from 'react-mde'
 import Showdown from 'showdown'
 import 'react-mde/lib/styles/css/react-mde-all.css'
 import { Button } from '../styled'
@@ -10,15 +10,33 @@ import { quotePostInEditor } from '../utils/markdownHelpers'
 
 const MarkdownEditor = props => {
   const [markdown, setMarkdown] = useState('')
-  // const [mdeState, setMdeState] = useState({})
+  let editorState
 
   this.converter = new Showdown.Converter({
     tables: true,
     simplifiedAutoLink: true
   })
 
+  const changeEditorText = (fn, editorState) => {
+    const newDraftState = DraftUtil.buildNewDraftState(
+      editorState.draftEditorState,
+      {
+        selection: {
+          start: 0,
+          end: 0
+        },
+        text: fn
+      }
+    )
+
+    setMarkdown({
+      markdown: editorState.markdown,
+      html: editorState.html,
+      draftEditorState: newDraftState
+    })
+  }
+
   function useMarkdownInput() {
-    console.log('useMarkdownInput firing')
     function handleChange(value) {
       setMarkdown(value)
     }
@@ -28,32 +46,25 @@ const MarkdownEditor = props => {
     }
   }
 
-  function useQuotedPost() {
-    function handleChange(value) {
-      setMarkdown(value)
-    }
-    console.log(markdown)
-    return {
-      editorState: quotePostInEditor(props.quotedUser, props.quotedPost),
-      onChange: handleChange
-    }
-  }
-
-  // useEffect(
-  //   () => {
-  //     if (props.quotedPost.length > 0) {
-  //       useQuotedPost()
-  //     }
-  //   },
-  //   [props.quotedPost]
-  // )
+  useEffect(
+    () => {
+      if (props.quotedPost.length > 0) {
+        changeEditorText(
+          quotePostInEditor(props.quotedUser, props.quotedPost),
+          markdown
+        )
+        console.log('this is editorState: ', editorState)
+      }
+    },
+    [props.quotedPost]
+  )
 
   function clearAndSubmit(content, username, userId, threadId) {
     props.submit(content, username, userId, threadId)
     setMarkdown('')
   }
 
-  let editorState = useMarkdownInput()
+  editorState = useMarkdownInput()
 
   const width = useWindowWidth()
   let isMobile = width < 700 ? true : false

@@ -1,61 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { makeNewPost } from '../actions/threadActions'
-import { quotePostInEditor } from '../utils/markdownHelpers'
 
 import Form from '../styled/Form'
-import { Button, H1 } from '../styled/index'
+import { H1 } from '../styled/index'
 
-import Showdown from 'showdown'
-import 'react-mde/lib/styles/css/react-mde-all.css'
 import MarkdownEditor from './MarkdownEditor'
 
 export class PostForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      mdeState: null,
-      message: ''
-    }
-    this.converter = new Showdown.Converter({
-      tables: true,
-      simplifiedAutoLink: true
-    })
+  state = {
+    message: ''
   }
-
-  // componentDidUpdate = prevProps => {
-  //   if (this.props.quotedPost !== prevProps.quotedPost) {
-  //     this.changeEditorText(
-  //       quotePostInEditor(this.props.quotedUser, this.props.quotedPost)
-  //     )
-  //   }
-  // }
-
-  handleValueChange = mdeState => {
-    this.setState({ mdeState, message: '' })
-  }
-
-  // changeEditorText = (fn, editorState) => {
-  //   const { mdeState } = this.state
-  //   console.log('changeEditorText editorState: ', editorState)
-  //   const newDraftState = DraftUtil.buildNewDraftState(
-  //     editorState.editorState.draftEditorState,
-  //     {
-  //       selection: {
-  //         start: 0,
-  //         end: 0
-  //       },
-  //       text: fn
-  //     }
-  //   )
-  //   // this.setState({
-  //   //   mdeState: {
-  //   //     markdown: editorState.markdown,
-  //   //     html: editorState.html,
-  //   //     draftEditorState: newDraftState
-  //   //   }
-  //   // })
-  // }
 
   submitAndClearEditor = async (content, username, userId, threadId) => {
     // prevent people from typing weird html strings to bypass empty post filter
@@ -68,7 +23,6 @@ export class PostForm extends Component {
         userId,
         threadId
       )
-      // this.changeEditorText('', content)
     } else {
       this.setState({
         message: 'posts cannot be blank!'
