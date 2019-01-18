@@ -38,6 +38,9 @@ const MarkdownEditor = props => {
 
   function useMarkdownInput() {
     function handleChange(value) {
+      if (props.message == 'Posts cannot be blank!') {
+        props.setMessage('')
+      }
       setMarkdown(value)
     }
     return {
@@ -53,15 +56,18 @@ const MarkdownEditor = props => {
           quotePostInEditor(props.quotedUser, props.quotedPost),
           markdown
         )
-        console.log('this is editorState: ', editorState)
       }
     },
     [props.quotedPost]
   )
 
   function clearAndSubmit(content, username, userId, threadId) {
-    props.submit(content, username, userId, threadId)
-    setMarkdown('')
+    if (content.editorState.html.length > 0) {
+      props.submit(content, username, userId, threadId)
+      setMarkdown('')
+    } else {
+      props.setMessage('Posts cannot be blank!')
+    }
   }
 
   editorState = useMarkdownInput()
