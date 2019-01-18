@@ -38,7 +38,7 @@ const MarkdownEditor = props => {
 
   function useMarkdownInput() {
     function handleChange(value) {
-      if (props.message == 'Posts cannot be blank!') {
+      if (props.message === 'Posts cannot be blank!') {
         props.setMessage('')
       }
       setMarkdown(value)
