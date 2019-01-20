@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchSubforumThreads, fetchData } from '../actions/threadActions'
 import ThreadList from './ThreadList'
@@ -17,99 +17,74 @@ export const CurrentSub = styled(H1)`
   }
 `
 
-class Subforum extends Component {
-  state = {
-    hasLoaded: false,
-    subforumName: ''
-  }
-  // const [hasLoaded, setHasLoaded] = useState(false)
-  // const [subforumName, setSubforumName] = useState('')
+const Subforum = props => {
+  const [hasLoaded, setHasLoaded] = useState(false)
+  const [subforumName, setSubforumName] = useState('')
 
-  /* 
-  useEffect(() => {
-    this.props.fetchData()
+  useEffect(
+    () => {
+      console.log('hello')
+      switch (props.match.params.id) {
+        case '1':
+          setSubforumName('General Discussion')
+          break
+        case '2':
+          setSubforumName('Video Games')
+          break
+        default:
+          break
+      }
+      setHasLoaded(true)
+    },
+    [props.match.params.id]
+  )
 
-    switch (this.props.match.params.id) {
-      case '1':
-        setSubforumName('General Discussion)
-        break
-      case '2':
-        setSubforumName('Video Games')
-        break
-      default:
-        break
-    }
-    setHasLoaded(true)
-  })
-  */
-  async componentDidMount() {
-    await this.props.fetchData()
+  const {
+    threads,
+    match: {
+      params: { page, id }
+    },
+    auth: { isLoggedIn }
+  } = props
 
-    // TODO: what is this mess... FIX IT
-    switch (this.props.match.params.id) {
-      case '1':
-        this.setState({ subforumName: 'General Discussion' })
-        break
-      case '2':
-        this.setState({ subforumName: 'Video Games' })
-        break
-      default:
-        break
-    }
-    this.setState({
-      hasLoaded: true
-    })
-  }
-
-  render() {
-    const { hasLoaded, subforumName } = this.state
-    const {
-      threads,
-      match: {
-        params: { page, id }
-      },
-      auth: { isLoggedIn }
-    } = this.props
-
-    if (hasLoaded) {
-      return (
-        <React.Fragment>
-          <Container>
-            <NavBar />
-            <Banner>
-              <div>
-                <SubforumLink
-                  to="/subforums"
-                  style={{ margin: '0 auto', color: 'white' }}
-                >
-                  Forums
-                </SubforumLink>
-                <i className="fas fa-angle-right" style={{ margin: '0 6px' }} />
-                <CurrentSub
-                  style={{ margin: '0', color: 'white', display: 'inline' }}
-                >
-                  {subforumName}
-                </CurrentSub>
-              </div>
-            </Banner>
-            {/* Takes thread array and uses it to create a paginated ThreadList  */}
-            <Pagination
-              data={threads}
-              currentPage={page}
-              context="threads"
-              pageSize={15}
-              isLoggedIn={isLoggedIn}
-              subforumId={id}
-            >
-              {data => <ThreadList data={data} subforumId={id} />}
-            </Pagination>
-          </Container>
-          <Footer />
-        </React.Fragment>
-      )
-    } else {
-      return <Loader />
-    }
+  if (hasLoaded) {
+    return (
+      <React.Fragment>
+        <Container>
+          <NavBar />
+          <Banner>
+            <div>
+              <SubforumLink
+                to="/subforums"
+                style={{ margin: '0 auto', color: 'white' }}
+              >
+                Forums
+              </SubforumLink>
+              <i className="fas fa-angle-right" style={{ margin: '0 6px' }} />
+              <CurrentSub
+                style={{ margin: '0', color: 'white', display: 'inline' }}
+              >
+                {subforumName}
+              </CurrentSub>
+            </div>
+          </Banner>
+          {/* Takes thread array and uses it to create a paginated ThreadList  */}
+          <Pagination
+            data={threads}
+            currentPage={page}
+            context="threads"
+            pageSize={15}
+            isLoggedIn={isLoggedIn}
+            subforumId={id}
+          >
+            {data => <ThreadList data={data} subforumId={id} />}
+          </Pagination>
+        </Container>
+        <Footer />
+      </React.Fragment>
+    )
+  } else {
+    return <Loader />
   }
 }
 
