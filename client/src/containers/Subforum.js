@@ -22,7 +22,26 @@ class Subforum extends Component {
     hasLoaded: false,
     subforumName: ''
   }
+  // const [hasLoaded, setHasLoaded] = useState(false)
+  // const [subforumName, setSubforumName] = useState('')
 
+  /* 
+  useEffect(() => {
+    this.props.fetchData()
+
+    switch (this.props.match.params.id) {
+      case '1':
+        setSubforumName('General Discussion)
+        break
+      case '2':
+        setSubforumName('Video Games')
+        break
+      default:
+        break
+    }
+    setHasLoaded(true)
+  })
+  */
   async componentDidMount() {
     await this.props.fetchData()
 
