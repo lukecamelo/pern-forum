@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchData } from '../actions/threadActions'
 import { checkUserLoggedIn } from '../actions/authActions'
@@ -43,67 +43,64 @@ export const Banner = styled.div`
   }
 `
 
-export class App extends Component {
-  state = {
-    hasLoaded: false
+export const App = props => {
+  const [hasLoaded, setHasLoaded] = useState(false)
+
+  function useUserData() {
+    props.fetchData()
+    setHasLoaded(true)
   }
 
-  async componentDidMount() {
-    await this.props.fetchData()
-    this.setState({
-      hasLoaded: true
-    })
-  }
+  useEffect(() => {
+    useUserData()
+  }, [])
 
-  render() {
-    const { hasLoaded, isLoggedIn } = this.state
-    if (hasLoaded) {
-      return (
-        <React.Fragment>
-          <Container>
-            <NavBar isHome={true} />
-            <FadeIn>
-              <SubforumList />
-            </FadeIn>
-          </Container>
-          <Footer />
-        </React.Fragment>
-      )
-    } else if (!isLoggedIn && hasLoaded) {
-      return (
+  if (hasLoaded) {
+    return (
+      <React.Fragment>
+        <Container>
+          <NavBar isHome={true} />
+          <FadeIn>
+            <SubforumList />
+          </FadeIn>
+        </Container>
+        <Footer />
+      </React.Fragment>
+    )
+  } else if (!props.isLoggedIn && hasLoaded) {
+    return (
+      <Container>
+        <NavBar />
+        <FadeIn>
+          <Card>
+            <SlideTop>
+              <H1>Please log in to view threads.</H1>
+            </SlideTop>
+          </Card>
+        </FadeIn>
+        <Footer />
+      </Container>
+    )
+  } else if (props.isLoggedIn && !hasLoaded) {
+    return (
+      <React.Fragment>
         <Container>
           <NavBar />
-          <FadeIn>
-            <Card>
-              <SlideTop>
-                <H1>Please log in to view threads.</H1>
-              </SlideTop>
-            </Card>
-          </FadeIn>
-          <Footer />
+          <Loader />
         </Container>
-      )
-    } else if (isLoggedIn && !hasLoaded) {
-      return (
-        <React.Fragment>
-          <Container>
-            <NavBar />
-            <Loader />
-          </Container>
-          <Footer />
-        </React.Fragment>
-      )
-    } else {
-      return (
-        <React.Fragment>
-          <Container>
-            <NavBar />
-            <Loader />
-          </Container>
-          <Footer />
-        </React.Fragment>
-      )
-    }
+        <Footer />
+      </React.Fragment>
+    )
+  } else {
+    return (
+      <React.Fragment>
+        <Container>
+          <NavBar />
+          <Loader />
+        </Container>
+        <Footer />
+      </React.Fragment>
+    )
   }
 }
 

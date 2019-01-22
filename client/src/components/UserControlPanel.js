@@ -42,6 +42,7 @@ export const UserControlPanel = ({ user }) => {
     await setAvatarUrl(user.data.avatarUrl)
   }
 
+  // TODO: add image validity check, utilize message
   async function editAvatar(userId, newAvatarUrl) {
     await axios({
       method: 'post',
