@@ -43,7 +43,7 @@ export const Banner = styled.div`
   }
 `
 
-export const App = props => {
+export const App = ({ isLoggedIn, ...props }) => {
   const [hasLoaded, setHasLoaded] = useState(false)
 
   function useUserData() {
@@ -67,7 +67,7 @@ export const App = props => {
         <Footer />
       </React.Fragment>
     )
-  } else if (!props.isLoggedIn && hasLoaded) {
+  } else if (!isLoggedIn && hasLoaded) {
     return (
       <Container>
         <NavBar />
@@ -81,7 +81,7 @@ export const App = props => {
         <Footer />
       </Container>
     )
-  } else if (props.isLoggedIn && !hasLoaded) {
+  } else if (isLoggedIn && !hasLoaded) {
     return (
       <React.Fragment>
         <Container>
